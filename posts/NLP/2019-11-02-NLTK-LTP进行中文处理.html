@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="NLTK,LTP," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="安装NLTKNLTK是一个NLP工作平台，可以和一些NLP库配合使用。 激活虚拟环境，因为原本已经安装了 pyltp ，不想再开新的环境了… 继续安装： 1234pip install numpyconda install scipypip install Tornadopip install nltk 前两个是高性能数学计算软件包，第三个是网络包 作为一个非洲人，果然安装nltk的过程并不顺利">
+<meta name="keywords" content="NLTK,LTP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NLTK+LTP进行中文处理">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/NLP/2019-11-02-NLTK-LTP进行中文处理.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="安装NLTKNLTK是一个NLP工作平台，可以和一些NLP库配合使用。 激活虚拟环境，因为原本已经安装了 pyltp ，不想再开新的环境了… 继续安装： 1234pip install numpyconda install scipypip install Tornadopip install nltk 前两个是高性能数学计算软件包，第三个是网络包 作为一个非洲人，果然安装nltk的过程并不顺利">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-02T01:09:36.905Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NLTK+LTP进行中文处理">
+<meta name="twitter:description" content="安装NLTKNLTK是一个NLP工作平台，可以和一些NLP库配合使用。 激活虚拟环境，因为原本已经安装了 pyltp ，不想再开新的环境了… 继续安装： 1234pip install numpyconda install scipypip install Tornadopip install nltk 前两个是高性能数学计算软件包，第三个是网络包 作为一个非洲人，果然安装nltk的过程并不顺利">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/NLP/2019-11-02-NLTK-LTP进行中文处理.html"/>
+
+
+
+
+
+  <title>NLTK+LTP进行中文处理 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/NLP/2019-11-02-NLTK-LTP进行中文处理.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">NLTK+LTP进行中文处理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-02T09:08:09+08:00">
+                2019-11-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/" itemprop="url" rel="index">
+                    <span itemprop="name">NLP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,157
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h5 id="安装NLTK"><a href="#安装NLTK" class="headerlink" title="安装NLTK"></a>安装NLTK</h5><p>NLTK是一个NLP工作平台，可以和一些NLP库配合使用。</p>
+<p>激活虚拟环境，因为原本已经安装了 pyltp ，不想再开新的环境了…</p>
+<p>继续安装：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pip install numpy</span><br><span class="line">conda install scipy</span><br><span class="line">pip install Tornado</span><br><span class="line">pip install nltk</span><br></pre></td></tr></table></figure>
+<p>前两个是高性能数学计算软件包，第三个是网络包</p>
+<p>作为一个非洲人，果然安装<code>nltk</code>的过程并不顺利</p>
+<p>报错信息：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Could <span class="keyword">not</span> find a version that satisfies the requirement <span class="title">nltk</span> <span class="params">(from versions: )</span></span></span><br><span class="line"><span class="function">No matching distribution found <span class="keyword">for</span> nltk</span></span><br></pre></td></tr></table></figure>
+<p>切换成 conda 命令，居然好了…本非颇为不适</p>
+<a id="more"></a>
+<p>在pycharm新建一个项目，指定解释器，新建py文件，执行如下代码：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> nltk</span><br><span class="line"><span class="keyword">from</span> importlib <span class="keyword">import</span> reload</span><br><span class="line"></span><br><span class="line">reload(sys)</span><br><span class="line">nltk.download()</span><br></pre></td></tr></table></figure>
+<p>然后出现了 WinError10060错误 ，血统纯正。</p>
+<p>只能手动下数据包了，<a href="https://github.com/nltk/nltk_data" target="_blank" rel="noopener">git地址</a></p>
+<p>后面的过程老是导入出错，卡了好久，把网上所有的方法试了一遍，最后居然是因为。。没有重启pycharm试试，之前一直在解释器中运行的，后来用脚本就可以了。也不知道是重启还是脚本的原因，反正<strong>数据本身是没有问题的，如果导入出错，一定是路径设置的不对！</strong></p>
+<p>把packages中的文件解压，文件件重命名为<code>nltk_data</code> ,  放在C 盘根目录下…是的，就是这么粗暴…</p>
+<p>设置用户变量<code>NLTK_DATA</code>  <code>C:\nltk_data</code></p>
+<p>运行脚本</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> nltk</span><br><span class="line">nltk.data.find(<span class="string">'C:\\'</span>)  <span class="comment"># 设置路径</span></span><br><span class="line"><span class="keyword">from</span> nltk.book <span class="keyword">import</span> *</span><br></pre></td></tr></table></figure>
+<p><a href="http://www.nltk.org/data.html" target="_blank" rel="noopener">解决方法参考</a></p>
+<hr>
+<h5 id="导入LTP语言处理模型"><a href="#导入LTP语言处理模型" class="headerlink" title="导入LTP语言处理模型"></a>导入LTP语言处理模型</h5><p>之前已经安装过pyltp自然语言处理库,   这里只需要导入模型。 <a href="https://vergessenwang.github.io/posts/NLP/2019-10-12-Anaconda、py2neo和Neo4j搭建KG简单环境.html">安装可参看之前写的</a> </p>
+<p>在<a href="http://ltp.ai/download.html" target="_blank" rel="noopener">ltp模型</a>  下载v3.4.0.zip版本,   在KGQA目录下，修改ltp.py里的ltp模型文件的存放目录</p>
+<h5 id="分词"><a href="#分词" class="headerlink" title="分词"></a>分词</h5><p>实现用的是CRF模型</p>
+<p>测试代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> importlib <span class="keyword">import</span> reload</span><br><span class="line"><span class="keyword">from</span> pyltp <span class="keyword">import</span> Segmentor</span><br><span class="line"></span><br><span class="line">reload(sys)</span><br><span class="line">model_path = <span class="string">"C:\\Users\\18771\\Desktop\\data\\ltp_data_v3.4.0\\cws.model"</span></span><br><span class="line"></span><br><span class="line">segmentor = Segmentor()  <span class="comment"># 实例化分词模块</span></span><br><span class="line">segmentor.load(model_path)  <span class="comment"># 加载分词库</span></span><br><span class="line"></span><br><span class="line">words = segmentor.segment(<span class="string">"晚秋的哀牢山宛如一个成熟的睡美人，轻柔的晨风从身边掠过，拂遍林海奇峰，挽起霞霭，任南迁的候鸟洗礼，猿啸与松涛齐鸣，青山共斜阳万里。"</span>)</span><br><span class="line"></span><br><span class="line">print(<span class="string">"|"</span>.join(words))</span><br></pre></td></tr></table></figure>
+<p>输出结果</p>
+<figure class="highlight py"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">晚秋|的|哀牢山|宛如|一个|成熟|的|睡美人|，|轻柔|的|晨风|从|身边|掠过|，|拂|遍|林海|奇峰|，|挽|起|霞霭|，|任|南迁|的|候鸟|洗礼|，|猿啸|与|松涛|齐鸣|，|青山|共|斜阳|万|里|。</span><br></pre></td></tr></table></figure>
+<h5 id="词性标注及命名实体识别"><a href="#词性标注及命名实体识别" class="headerlink" title="词性标注及命名实体识别"></a>词性标注及命名实体识别</h5><p>词性标注依旧用的是CRF算法，遵从北大词性标注规范。</p>
+<p>测试代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> importlib <span class="keyword">import</span> reload</span><br><span class="line"><span class="keyword">from</span> pyltp <span class="keyword">import</span> *</span><br><span class="line"></span><br><span class="line">reload(sys)</span><br><span class="line"></span><br><span class="line">sent = <span class="string">"晚秋|的|哀牢山|宛如|一个|成熟|的|睡美人|，|轻柔|的|晨风|从|身边|掠过|，|拂|遍|林海|奇峰|，|挽|起|霞霭|，|任|南迁|的|候鸟|洗礼|，|猿啸|与|松涛|齐鸣|，|青山|共|斜阳|万|里|。"</span></span><br><span class="line">model_path = <span class="string">"C:\\Users\\18771\\Desktop\\data\\ltp_data_v3.4.0\\pos.model"</span></span><br><span class="line">model_path2 = <span class="string">"C:\\Users\\18771\\Desktop\\data\\ltp_data_v3.4.0\\ner.model"</span></span><br><span class="line">words = sent.split(<span class="string">"|"</span>)</span><br><span class="line"></span><br><span class="line">postagger = Postagger() <span class="comment">#  实例化词性标注类</span></span><br><span class="line">postagger.load(model_path)</span><br><span class="line">postags = postagger.postag(words)</span><br><span class="line"></span><br><span class="line">recongnizer = NamedEntityRecognizer() <span class="comment"># 实例化命名实体识别类</span></span><br><span class="line">recongnizer.load(model_path2)</span><br><span class="line">netags = recongnizer.recognize(words,postags)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> word,postag,netag <span class="keyword">in</span> zip(words,postags,netags):</span><br><span class="line">    print(word+<span class="string">"/"</span>+postag + <span class="string">"/"</span> + netag)</span><br></pre></td></tr></table></figure>
+<p>识别出：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">哀牢山/ns/S-Ns</span><br></pre></td></tr></table></figure>
+<h5 id="依存句法树"><a href="#依存句法树" class="headerlink" title="依存句法树"></a>依存句法树</h5><p>结合使用NLTK和LTP可以构造依存句法树</p>
+<p>测试代码</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> sys</span><br><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">from</span> importlib <span class="keyword">import</span> reload</span><br><span class="line"><span class="keyword">from</span> pyltp <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> nltk</span><br><span class="line"><span class="keyword">from</span> nltk.tree <span class="keyword">import</span> Tree <span class="comment"># 导入nltk tree</span></span><br><span class="line"><span class="keyword">from</span> nltk.grammar <span class="keyword">import</span> DependencyGrammar  <span class="comment"># 导入依存句法包</span></span><br><span class="line"><span class="keyword">from</span> nltk.parse <span class="keyword">import</span> *</span><br><span class="line"><span class="keyword">import</span> re</span><br><span class="line"></span><br><span class="line">reload(sys)</span><br><span class="line"></span><br><span class="line">words = <span class="string">"苏州 的 拙政园 是 旅游胜地 。"</span>.split(<span class="string">" "</span>)</span><br><span class="line"></span><br><span class="line">model_path = <span class="string">"C:\\Users\\18771\\Desktop\\data\\ltp_data_v3.4.0\\pos.model"</span></span><br><span class="line">model_path2 = <span class="string">"C:\\Users\\18771\\Desktop\\data\\ltp_data_v3.4.0\\parser.model"</span></span><br><span class="line"></span><br><span class="line">postagger = Postagger() <span class="comment">#  实例化词性标注类</span></span><br><span class="line">postagger.load(model_path)</span><br><span class="line">postags = postagger.postag(words)</span><br><span class="line"></span><br><span class="line">parser = Parser()  <span class="comment"># 将词性标注和分词结果都加入分析器进行句法解析</span></span><br><span class="line">parser.load(model_path2)</span><br><span class="line">arcs = parser.parse(words,postags)</span><br><span class="line">arclen = len(arcs)</span><br><span class="line">conll = <span class="string">""</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> range(arclen): <span class="comment">#  构建conll标准数据结构</span></span><br><span class="line">    <span class="keyword">if</span> arcs[i].head == <span class="number">0</span>:</span><br><span class="line">        arcs[i].relation = <span class="string">'ROOT'</span></span><br><span class="line">    conll += <span class="string">"\t"</span> + words[i] + <span class="string">"("</span> + postags[i] + <span class="string">")"</span> + <span class="string">"\t"</span> + postags[i] + <span class="string">"\t"</span> + str(arcs[i].head) + <span class="string">"\t"</span> + arcs[i].relation + <span class="string">"\n"</span></span><br><span class="line">print(conll)</span><br><span class="line">conlltree = DependencyGraph(conll)  <span class="comment"># 转换为依存句法图</span></span><br><span class="line">tree = conlltree.tree() <span class="comment"># 构建树结构</span></span><br><span class="line">tree.draw() <span class="comment"># 显示输出的树</span></span><br></pre></td></tr></table></figure>
+<p>会在NLTK中输出一个依存树的图，我就不贴图了。。不会传图。。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NLTK/" rel="tag"><i class="fa fa-tag"></i> NLTK</a>
+          
+            <a href="/tags/LTP/" rel="tag"><i class="fa fa-tag"></i> LTP</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/NLP/2019-11-01-遥远的BERT模型.html" rel="next" title="遥远的BERT模型...">
+                <i class="fa fa-chevron-left"></i> 遥远的BERT模型...
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/NLP/2019-11-03-NLP预处理语言模型演进.html" rel="prev" title="NLP预处理语言模型演进">
+                NLP预处理语言模型演进 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">人真正需要的东西是非常之少的</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-5"><a class="nav-link" href="#安装NLTK"><span class="nav-number">1.</span> <span class="nav-text">安装NLTK</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#导入LTP语言处理模型"><span class="nav-number">2.</span> <span class="nav-text">导入LTP语言处理模型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分词"><span class="nav-number">3.</span> <span class="nav-text">分词</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#词性标注及命名实体识别"><span class="nav-number">4.</span> <span class="nav-text">词性标注及命名实体识别</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#依存句法树"><span class="nav-number">5.</span> <span class="nav-text">依存句法树</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

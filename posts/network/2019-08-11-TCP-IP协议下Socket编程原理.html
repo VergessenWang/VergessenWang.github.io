@@ -1,0 +1,1021 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="TCP/IP,计算机网络,Socket编程," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在学习Socket编程之前，首先要了解基本的网络体系结构相关知识。参看网络模型对应关系 不同于应用层之上的Web编程，Socket编程处于应用层和网络层之间，这种API本质上是通过应用进程向OS发出系统调用实现的。 典型的网络API Unix的Socket 微软的WINSOCK AT&amp;amp;T的TLI">
+<meta name="keywords" content="TCP&#x2F;IP,计算机网络,Socket编程">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP&#x2F;IP协议下Socket编程原理">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/network/2019-08-11-TCP-IP协议下Socket编程原理.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="在学习Socket编程之前，首先要了解基本的网络体系结构相关知识。参看网络模型对应关系 不同于应用层之上的Web编程，Socket编程处于应用层和网络层之间，这种API本质上是通过应用进程向OS发出系统调用实现的。 典型的网络API Unix的Socket 微软的WINSOCK AT&amp;amp;T的TLI">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-26T03:50:34.688Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TCP&#x2F;IP协议下Socket编程原理">
+<meta name="twitter:description" content="在学习Socket编程之前，首先要了解基本的网络体系结构相关知识。参看网络模型对应关系 不同于应用层之上的Web编程，Socket编程处于应用层和网络层之间，这种API本质上是通过应用进程向OS发出系统调用实现的。 典型的网络API Unix的Socket 微软的WINSOCK AT&amp;amp;T的TLI">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/network/2019-08-11-TCP-IP协议下Socket编程原理.html"/>
+
+
+
+
+
+  <title>TCP/IP协议下Socket编程原理 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/network/2019-08-11-TCP-IP协议下Socket编程原理.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">TCP/IP协议下Socket编程原理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-11T21:25:57+08:00">
+                2019-08-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,708
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在学习Socket编程之前，首先要了解基本的网络体系结构相关知识。参看<a href="https://github.com/yshunda/Notes/issues/6" target="_blank" rel="noopener">网络模型对应关系</a></p>
+<p>不同于应用层之上的Web编程，Socket编程处于应用层和网络层之间，这种API本质上是通过应用进程向OS发出<strong>系统调用</strong>实现的。</p>
+<h3 id="典型的网络API"><a href="#典型的网络API" class="headerlink" title="典型的网络API"></a>典型的网络API</h3><ol>
+<li>Unix的Socket</li>
+<li>微软的WINSOCK</li>
+<li>AT&amp;T的TLI<a id="more"></a>
+Socket最初是面向TCP/IP协议栈接口，目前是事实上的工业标准，通信模型是C/S架构，为应用进程间通信提供抽象。</li>
+</ol>
+<p>如果只看应用层，在同一主机上可能同时运行多个应用程序，那么如何确定通信对象呢？这个时候就需要借助传输层协议，形成IP+端口机制。</p>
+<p><strong>标识通信端点（对外）：IP地址+端口号</strong> </p>
+<p><strong>OS/进程管理套接字（对内）：套接字描述符</strong> </p>
+<p>这种内部套接字管理方式类似于文件的抽象，当应用进程创建套接字时，OS分配一个数据结构并返回套接字描述符，<strong>每一个进程维护一张Socket描述符表，表项指向一个Socket数据结构</strong> 。</p>
+<h3 id="Socket数据结构"><a href="#Socket数据结构" class="headerlink" title="Socket数据结构"></a>Socket数据结构</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> &#123;</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">short</span> <span class="keyword">int</span> sin_family; <span class="comment">/* Address family */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">short</span> <span class="keyword">int</span> sin_port; <span class="comment">/* Port number */</span></span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">in_addr</span> <span class="title">sin_addr</span>;</span> <span class="comment">/* Internet address */</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">unsigned</span> <span class="keyword">char</span> sin_zero[<span class="number">8</span>]; <span class="comment">/* Same size as struct sockaddr */</span></span><br><span class="line"></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p><code>sockaddr_in</code> 声明端点地址，TCP/IP协议族的<code>sin_family</code>值为<code>AF_INET</code></p>
+<h3 id="Socket-API函数"><a href="#Socket-API函数" class="headerlink" title="Socket API函数"></a>Socket API函数</h3><p><a href="http://staff.ustc.edu.cn/~mengning/np/linux_socket/new_page_6.htm" target="_blank" rel="noopener">常用socket函数</a></p>
+<ol>
+<li><p>创建：<code>socket(protofamily, type, proto)</code></p>
+<ul>
+<li><p>返回套接字描述符</p>
+</li>
+<li><p><code>protofamily = PF_INET</code></p>
+</li>
+<li><p><code>type = SOCK_STREAM/SOCK_DGRAM/SOCK_RAW</code></p>
+<p>其中 <strong>流式套接字SOCK_STREAM (TCP)、数据报套接字SOCK_DGRAM (UDP)  工作在传输层，原始套接字SOCK_RAW 工作在网络层</strong>。SOCK_RAW 可以处理ICMP、IGMP等网络报文、特殊的IPv4报文、可以通过IP_HDRINCL套接字选项由用户构造IP头，创建时需要特殊权限。</p>
+</li>
+<li><p>protocol参数一般取0</p>
+</li>
+</ul>
+<p>例如</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">protoent</span> *<span class="title">p</span>;</span></span><br><span class="line">p = getprotobyname(<span class="string">"tcp"</span>);</span><br><span class="line">SOCKET sd = socket(PF_INET,SOCK_STREAM,p -&gt; p_proto);</span><br></pre></td></tr></table></figure>
+<p>关于TCP/IP参数为什么两者不同，理论上建立socket时是指定协议，应该用PF_xxxx，设置地址时应该用AF_xxxx。当然AF_INET和PF_INET的值是相同的，混用也不会有太大的问题。<a href="https://blog.csdn.net/xiongmaojiayou/article/details/7584211" target="_blank" rel="noopener">关于PF_INET和AF_INET的区别</a></p>
+</li>
+<li><p>关闭：<code>int closesocket(SOCKET sd);</code></p>
+<ul>
+<li>与文件类似，当多个进程共享一个套接字，调用后只能将引用计数减1，至0时真正关闭</li>
+<li>对于同一进程中的多个线程只计数一次，因此一个线程调用之后其他线程也无法再访问</li>
+</ul>
+</li>
+<li><p>绑定本地端点地址：<code>int  bind(sd, localladdr,addrlen)</code></p>
+<ul>
+<li>localaddr对应sockaddr_in</li>
+<li>客户程序一般不调用，服务器端需要绑定熟知端口号，同时服务器端由于可能有多个IP地址，还需要一个地址通配符：<code>INADDR_ANY</code>,意即所匹配的任一地址有效，不指定具体IP地址。</li>
+<li>在Linux系统中，1024以下的端口只有拥有root权限的程序才能绑定。</li>
+</ul>
+</li>
+<li><p>监听：<code>int  listen(sd,queuesize);</code></p>
+<ul>
+<li>仅用于服务器端的TCP连接</li>
+<li>新的Client的连接请求先被放在接收队列中，直到Server程序调用accept函数接受连接请求</li>
+</ul>
+</li>
+<li><p>连接：<code>connect(sd,saddr,saddrlen);</code></p>
+<ul>
+<li>仅用于客户端，但TCP和UDP均可</li>
+<li>saddr即要连接的远程服务器套接字</li>
+</ul>
+</li>
+<li><p>响应连接请求：<code>newsock = accept(sd, caddr, caddrlen);</code></p>
+<ul>
+<li>仅用于服务器端的TCP连接</li>
+<li>从监听状态的连接请求队列取出最前的一个，创建一个<strong>新的</strong>套接字来描述来与特定的Client交换信息，因为TCP是点对点协议，这样才能实现并发。</li>
+</ul>
+</li>
+<li><p>接收/发送消息：</p>
+<p><strong>TCP方式：</strong></p>
+<p><code>int send(sd, *buf, len, flags);</code></p>
+<p><code>int recv(sd, *buf, len, flags);</code></p>
+<p><strong>UDP方式：</strong></p>
+<p><code>int sendto(sd, *buf, len, flags, destaddr, addlen);</code></p>
+<p><code>int recvfrom(sd,*buf, len, flags,senderadde,saddrlen);</code></p>
+<p>由于UDP是无连接的，所以需要指定发送/接收数据的对方</p>
+</li>
+<li><p>获得或改变socket属性:</p>
+<p><code>int getsockopt(int sd, int level, int optname, char *optval, int *optlen);</code></p>
+<p><code>int setsockopt(int sd, int level, int optname, char *optval, int *optlen);</code></p>
+<p>常用属性：</p>
+<ul>
+<li>SO_RCVTIMEO，SO_SNDTIMEO：获得或设置socket发送/接收的timeout</li>
+<li>SO_SNDBUF，SO_RCVBUF：获得或设置socket发送/接收的buffer大小</li>
+<li>SO_BROADCAST：获得或设置socket状况，使之可以广播发送数据报（只能用于UDP方式）</li>
+<li>SO_REUSEADDR：设置该socket绑定的端口可以被重用。</li>
+</ul>
+</li>
+<li><p>网络字节顺序转换</p>
+<p>在TCP/IP结构中虽然没有表示层，但是还是要完成相应的数据格式转换功能</p>
+<ul>
+<li>htons()–”Host to Network Short”</li>
+<li>htonl()–”Host to Network Long”</li>
+<li>ntohs()–”Network to Host Short”</li>
+<li>ntohl()–”Network to Host Long”</li>
+</ul>
+</li>
+<li><p>服务器IP地址解析</p>
+<p>客户端将服务器域名或十进制IP地址转换成二进制IP地址</p>
+<ul>
+<li><code>inet_addr()</code> 十进制 → 二进制(网络字节顺序)</li>
+<li><code>gethostbyname</code> 域名→ 二进制，返回一个指向hostent结构的指针，<code>*h_addr_list</code> 表示的是主机的ip地址，注意，这个是以网络字节序存储的。</li>
+</ul>
+</li>
+</ol>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">hostent</span> &#123;</span></span><br><span class="line">  <span class="keyword">char</span>  *h_name;            <span class="comment">/* official name of host */</span></span><br><span class="line">  <span class="keyword">char</span> **h_aliases;         <span class="comment">/* alias list */</span></span><br><span class="line">  <span class="keyword">int</span>    h_addrtype;        <span class="comment">/* host address type */</span></span><br><span class="line">  <span class="keyword">int</span>    h_length;          <span class="comment">/* length of address */</span></span><br><span class="line">  <span class="keyword">char</span> **h_addr_list;       <span class="comment">/* list of addresses */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>同理，还有<code>getservbyname</code>返回一个<code>servent</code>指针实现服务名→端口号；<code>getprotobyname</code>返回<code>protoent</code>指针实现协议名→协议号</p>
+<h3 id="Socket-TCP"><a href="#Socket-TCP" class="headerlink" title="Socket TCP"></a>Socket TCP</h3><p><a href="https://jachinlin.github.io/old/socket-api/" target="_blank" rel="noopener">socket调用基本流程</a></p>
+<h4 id="TCP客户端软件流程"><a href="#TCP客户端软件流程" class="headerlink" title="TCP客户端软件流程"></a>TCP客户端软件流程</h4><ol>
+<li>确定服务器IP地址与端口号</li>
+<li>创建套接字</li>
+<li>分配本地端点地址（IP地址+端口号）——<strong><em>由系统自动完成，所以bind一般只用在服务器端</em></strong> </li>
+<li>连接服务器（如果是UDP，指定服务器端点地址，构造UDP数据报）</li>
+<li>遵循应用层协议进行通信</li>
+<li>释放连接</li>
+</ol>
+<h4 id="循环TCP服务器流程"><a href="#循环TCP服务器流程" class="headerlink" title="循环TCP服务器流程"></a>循环TCP服务器流程</h4><ol>
+<li>创建(主)套接字，绑定熟知端口号</li>
+<li>设置(主)套接字为被动监听模式，准备用于服务器</li>
+<li>调用accept()函数接受下一个连接请求，创建新套接字用于与该客户建立连接</li>
+<li>遵循应用层协议，反复接受客户请求，构造并发送响应</li>
+<li>完成为特定客户服务后，关闭与该客户之间的连接，返回步骤3</li>
+</ol>
+<h4 id="并发TCP服务器流程"><a href="#并发TCP服务器流程" class="headerlink" title="并发TCP服务器流程"></a>并发TCP服务器流程</h4><p><strong>主线程</strong>：</p>
+<ol>
+<li>创建(主)套接字，绑定熟知端口号</li>
+<li>设置(主)套接字为被动监听模式，准备用于服务器</li>
+<li>调用accept()函数接受下一个连接请求，创建一个<strong>新的子线程</strong>处理该客户响应</li>
+</ol>
+<p><strong>子线程</strong>：</p>
+<ol>
+<li>创建新的套接字接受一个客户的服务请求</li>
+<li>遵循应用层协议，与特定客户进行交互</li>
+<li>完成为特定客户服务后，关闭与该客户之间的连接，终止线程</li>
+</ol>
+<p>在实际过程中，会有一个主线程和多个子线程同时运行，实现并发。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/TCP-IP/" rel="tag"><i class="fa fa-tag"></i> TCP/IP</a>
+          
+            <a href="/tags/计算机网络/" rel="tag"><i class="fa fa-tag"></i> 计算机网络</a>
+          
+            <a href="/tags/Socket编程/" rel="tag"><i class="fa fa-tag"></i> Socket编程</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/frontend/2019-03-28-VUE踩坑记录（一）.html" rel="next" title="VUE踩坑记录（一）">
+                <i class="fa fa-chevron-left"></i> VUE踩坑记录（一）
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/OS/2019-08-12-临界区互斥的软件及抽象方法.html" rel="prev" title="临界区互斥的软件及抽象方法">
+                临界区互斥的软件及抽象方法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">人真正需要的东西是非常之少的</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#典型的网络API"><span class="nav-number">1.</span> <span class="nav-text">典型的网络API</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Socket数据结构"><span class="nav-number">2.</span> <span class="nav-text">Socket数据结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Socket-API函数"><span class="nav-number">3.</span> <span class="nav-text">Socket API函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Socket-TCP"><span class="nav-number">4.</span> <span class="nav-text">Socket TCP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP客户端软件流程"><span class="nav-number">4.1.</span> <span class="nav-text">TCP客户端软件流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#循环TCP服务器流程"><span class="nav-number">4.2.</span> <span class="nav-text">循环TCP服务器流程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#并发TCP服务器流程"><span class="nav-number">4.3.</span> <span class="nav-text">并发TCP服务器流程</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

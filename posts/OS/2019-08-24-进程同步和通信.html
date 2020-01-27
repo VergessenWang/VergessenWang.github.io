@@ -1,0 +1,962 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="信号量,管程,读者写者问题,哲学家就餐问题,消息传递,共享内存," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="信号量与管程互斥只是进程间关系的一个方面，很多时候，进程间还需要进行同步和通信，因此就需要更高级的同步互斥方法。 信号量(抽象数据类型) 一个整型sem , 两个原子操作 P() : sem - 1 , 若 sem &amp;lt; 0 等待，否则继续 V()：sem + 1, 若 sem &amp;lt;= 0 , 唤醒一个等待的P 互斥：二进制信号量  mutex = new Semaphore(1); 条件">
+<meta name="keywords" content="信号量,管程,读者写者问题,哲学家就餐问题,消息传递,共享内存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="进程同步和通信">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/OS/2019-08-24-进程同步和通信.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="信号量与管程互斥只是进程间关系的一个方面，很多时候，进程间还需要进行同步和通信，因此就需要更高级的同步互斥方法。 信号量(抽象数据类型) 一个整型sem , 两个原子操作 P() : sem - 1 , 若 sem &amp;lt; 0 等待，否则继续 V()：sem + 1, 若 sem &amp;lt;= 0 , 唤醒一个等待的P 互斥：二进制信号量  mutex = new Semaphore(1); 条件">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-24T15:35:35.145Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="进程同步和通信">
+<meta name="twitter:description" content="信号量与管程互斥只是进程间关系的一个方面，很多时候，进程间还需要进行同步和通信，因此就需要更高级的同步互斥方法。 信号量(抽象数据类型) 一个整型sem , 两个原子操作 P() : sem - 1 , 若 sem &amp;lt; 0 等待，否则继续 V()：sem + 1, 若 sem &amp;lt;= 0 , 唤醒一个等待的P 互斥：二进制信号量  mutex = new Semaphore(1); 条件">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/OS/2019-08-24-进程同步和通信.html"/>
+
+
+
+
+
+  <title>进程同步和通信 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/OS/2019-08-24-进程同步和通信.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">进程同步和通信</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-24T23:33:47+08:00">
+                2019-08-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,121
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="信号量与管程"><a href="#信号量与管程" class="headerlink" title="信号量与管程"></a>信号量与管程</h2><p>互斥只是进程间关系的一个方面，很多时候，进程间还需要进行同步和通信，因此就需要更高级的同步互斥方法。</p>
+<h3 id="信号量-抽象数据类型"><a href="#信号量-抽象数据类型" class="headerlink" title="信号量(抽象数据类型)"></a>信号量(抽象数据类型)</h3><ul>
+<li>一个整型sem , 两个原子操作</li>
+<li>P() : sem - 1 , 若 sem &lt; 0 等待，否则继续</li>
+<li>V()：sem + 1, 若 sem &lt;= 0 , 唤醒一个等待的P</li>
+<li>互斥：二进制信号量  <code>mutex = new Semaphore(1);</code></li>
+<li>条件同步：计数信号量  <code>fullBuffers = new Semaphore(0);</code>  <code>emptyBuffers  = new Semaphore(n);</code></li>
+</ul>
+<p>相比于锁机制，可以<strong>实现进程的并行</strong>。</p>
+<a id="more"></a>
+<h4 id="实现细节"><a href="#实现细节" class="headerlink" title="实现细节"></a>实现细节</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">classSemaphore&#123;</span><br><span class="line">  <span class="keyword">int</span> sem;</span><br><span class="line">  WaitQueue q;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Semaphore::P()&#123;</span><br><span class="line">  sem--;</span><br><span class="line">  <span class="keyword">if</span>(sem &lt; <span class="number">0</span>)&#123;</span><br><span class="line">    Add <span class="keyword">this</span> thread t to q;</span><br><span class="line">    block(p);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">Semaphore::V()&#123;</span><br><span class="line">  sem++;</span><br><span class="line">  <span class="keyword">if</span>(sem &lt;= <span class="number">0</span>)&#123;  <span class="comment">// 由于先释放一个资源，所以要判断=</span></span><br><span class="line">    Remove a thread t from q;</span><br><span class="line">    wakeup(t);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="存在问题"><a href="#存在问题" class="headerlink" title="存在问题"></a>存在问题</h4><ol>
+<li>开发代码时容易出错：使用的信号量已经被占用；忘记释放信号量</li>
+<li>不能处理死锁</li>
+</ol>
+<h3 id="管程-模块"><a href="#管程-模块" class="headerlink" title="管程(模块)"></a>管程(模块)</h3><p>最初是<strong>从编程语言的层面</strong>提出的，而不是os层面。通过在高级语言中设计管程机制，简化开发中对同步互斥的操作，实现语言的并发机制。</p>
+<p>可以把管程理解成一个特殊的空间。</p>
+<ul>
+<li>一个Lock ：指定临界区, 还没有拿到锁的进程挂在entry queue上，等待进入管程</li>
+<li>0或n个条件变量：已进入管程的进程在并发访问临界区时所受到的约束，等待进程挂在对应条件变量的等待队列(queues associated with x,y….conditions)上</li>
+<li>wait()：释放锁进入睡眠</li>
+<li>signal()</li>
+</ul>
+<h4 id="实现细节-1"><a href="#实现细节-1" class="headerlink" title="实现细节"></a>实现细节</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Condition</span>&#123;</span></span><br><span class="line">  <span class="keyword">int</span> num Waiting = <span class="number">0</span>;</span><br><span class="line">  WaitQueue q;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Condition::Wait(lock)&#123;</span><br><span class="line">  numWaiting++;</span><br><span class="line">  Add <span class="keyword">this</span> thread t to q;</span><br><span class="line">  release(lock); <span class="comment">//释放锁，允许其他进程进入管程执行(要是先睡眠就没有办法释放了)</span></span><br><span class="line">  schedule(); <span class="comment">// 当前进程睡眠，调度一个就绪进程继续执行</span></span><br><span class="line">  require(lock); <span class="comment">// 再次获得锁才能再次进行wait循环</span></span><br><span class="line">&#125;</span><br><span class="line">Condition::Signal()&#123;</span><br><span class="line">  <span class="keyword">if</span>(numWaiting &gt; <span class="number">0</span>)&#123;</span><br><span class="line">    Remove a thread t from q;</span><br><span class="line">    wakeup(t); <span class="comment">// 将一个睡眠进程置为就绪状态</span></span><br><span class="line">    numWaiting--;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>区别于信号量的V操作，signal不一定会做减法。</p>
+<h4 id="例：生产者消费者问题"><a href="#例：生产者消费者问题" class="headerlink" title="例：生产者消费者问题"></a>例：生产者消费者问题</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">classBoundedBuffer&#123;</span><br><span class="line">	Lock lock；<span class="comment">// 拿到锁才能进入管程访问临界区，同一时刻只有一个进程可以进入,不管是生产者还是消费者</span></span><br><span class="line">    <span class="keyword">int</span> count = <span class="number">0</span>；<span class="comment">// 缓存区占用空间</span></span><br><span class="line">    Condition notFull,notEmpty;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">BoundedBuffer::Deposite(c)&#123;</span><br><span class="line">  lock -&gt; Acquire();</span><br><span class="line">  <span class="keyword">while</span>(count == n) notFull.Wait(&amp;lock); <span class="comment">// 区满等待</span></span><br><span class="line">  Add c to the buffer;</span><br><span class="line">  count++;</span><br><span class="line">  notEmpty.Signal(); <span class="comment">// 唤醒一个消费者</span></span><br><span class="line">  lock -&gt; Release();</span><br><span class="line">&#125;</span><br><span class="line">BoundedBuffer::Remove(c)&#123;</span><br><span class="line">  lock -&gt; Acquire();</span><br><span class="line">  <span class="keyword">while</span>(count == <span class="number">0</span>) notEmpty.Wait(&amp;lock);</span><br><span class="line">  Remove c from buffer;</span><br><span class="line">  count--;</span><br><span class="line">  notFull.Signal();</span><br><span class="line">  lock -&gt; Release();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h4><p>当一个正在执行的进程A发出signal操作后，将会调度一个就绪的进程B，那么这个时候到底要执行那一个进程呢？</p>
+<ul>
+<li>Hansen方法：让进程A继续执行，完成release操作，这个时候可能存在多个就绪进程去抢占lock</li>
+<li>Hoare方法：让进程B继续执行，此时不会有抢占问题。用if代替while</li>
+</ul>
+<h3 id="经典同步问题的实现"><a href="#经典同步问题的实现" class="headerlink" title="经典同步问题的实现"></a>经典同步问题的实现</h3><h4 id="读者写者问题"><a href="#读者写者问题" class="headerlink" title="读者写者问题"></a>读者写者问题</h4><h5 id="读者优先"><a href="#读者优先" class="headerlink" title="读者优先"></a>读者优先</h5><p>已经有读者时，下一个读者也可以进入，只是需要用原子操作来改变<code>count</code>变量。可能造成写者一直等待</p>
+<p>写者</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sem_wait(WriteMutex);</span><br><span class="line">write;</span><br><span class="line">sem_post(WriteMutex);</span><br></pre></td></tr></table></figure>
+<p>读者</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sem_wait(CountMutex);</span><br><span class="line"><span class="keyword">if</span>(Rcount == <span class="number">0</span>) </span><br><span class="line">    sem_wait(WriteMutex);</span><br><span class="line">++Rcount;</span><br><span class="line">sem_post(CountMutex);</span><br><span class="line">read;</span><br><span class="line">sem_wait(CountMutex);</span><br><span class="line">--Rcount;</span><br><span class="line"><span class="keyword">if</span>(Rcount == <span class="number">0</span>)</span><br><span class="line">    sem_post(WriteMutex);</span><br><span class="line">sem_post(CountMutex);</span><br></pre></td></tr></table></figure>
+<h5 id="写者优先"><a href="#写者优先" class="headerlink" title="写者优先"></a>写者优先</h5><p>同理，写者之间不互斥</p>
+<h4 id="哲学家就餐问题"><a href="#哲学家就餐问题" class="headerlink" title="哲学家就餐问题"></a>哲学家就餐问题</h4><p>思路一：先拿左再拿右。可能同时拿左，造成死锁</p>
+<p>思路二：右边不在把左边放回，<strong>随机</strong>等待一会再重复。可能造成饥饿</p>
+<p>思路三：将就餐的的动作视为互斥。每次允许一人吃饭，效率降低，有三个叉子浪费了</p>
+<p>思路四：要么不拿要么拿两把，<strong>把状态当临界资源，改变状态是一个互斥操作</strong>。</p>
+<p>我正学到这，老爸走进来，我跟他说了这个问题，他说这还不好办，把筷子从中间一砍啊！ 真妙啊…..</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">philosopher</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(<span class="literal">true</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        think();</span><br><span class="line">        take_forks(i);</span><br><span class="line">        eat();</span><br><span class="line">        put_forks(i);        </span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">take_forks</span><span class="params">(<span class="keyword">int</span> i)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    P(mutex);</span><br><span class="line">    state[i] = hungry;</span><br><span class="line">    test_take_left_right_forks(i);</span><br><span class="line">    V(mutex);</span><br><span class="line">    P(s[i]);   <span class="comment">// 没拿到叉子就阻塞</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">test_take_left_right_forks</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(state[i] == hungry &amp;&amp; state[left] != eating &amp;&amp; state[right] != eating)&#123; <span class="comment">// 判断可否同时拿到两把叉子</span></span><br><span class="line">        state[i] = eating;</span><br><span class="line">        v(s[i]);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">put_fork</span><span class="params">(<span class="keyword">int</span> i)</span></span>&#123;</span><br><span class="line">   P(mutex);</span><br><span class="line">    state[i] = thinking;</span><br><span class="line">    test_take_left_right_forks(left); <span class="comment">// 奥妙之处，帮助邻居判断，满足条件把叉子给邻居并其唤醒</span></span><br><span class="line">    test_take_left_right_forks(right);</span><br><span class="line">    V(mutex);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="进程通信-IPC"><a href="#进程通信-IPC" class="headerlink" title="进程通信(IPC)"></a>进程通信(IPC)</h2><p>为了解决进程间竞争关系（间接制约关系）而引入进程互斥；<strong>为了解决进程间松散的协作关系( 直接制约关系)而引入进程同步；</strong></p>
+<p><strong>为了解决进程间紧密的协作关系而引入进程通信</strong>。互斥是一种特殊的同步，进程同步是一种进程通信。</p>
+<p><strong>进程之间互相交换信息的工作称之为进程通信IPC （InterProcess Communication）（主要是指大量数据的交换）。</strong>进程同步往往只有传递信号的作用，不能传递数据。</p>
+<p>详见：<a href="https://blog.csdn.net/weixin_41413441/article/details/80548683" target="_blank" rel="noopener">进程的同步、互斥、通信的区别</a></p>
+<p>从发送路径上看，可分为：直接通信和间接通信(通过一个<strong>消息队列</strong>发送和接收消息)</p>
+<p>从对是否正确发送消息的处理方式来看，可分为：同步阻塞(直到正确发送才进行下一步)和异步非阻塞</p>
+<p>进程间的通信可以分为两种模型，分别为：</p>
+<ul>
+<li><strong>共享内存(Shared Memory)</strong>: 直接通信。<strong>开辟一段新的贡献资源段</strong>，然后两个进程之间进行数据信息等的交互，该过程不受CPU的控制。</li>
+<li><strong>消息传递(Message Passing)</strong>：间接通信。将相关的信息<strong>传给内核</strong>，然后内核将其转发</li>
+</ul>
+<h4 id="信号"><a href="#信号" class="headerlink" title="信号"></a>信号</h4><p>类似于一种异步打断机制，用软件中断通知事件处理。</p>
+<p>具体实现：需要接受信息的应用程序会在OS中注册一个<code>handler</code>函数，在收到传来的信号时，OS从内核态返回用户态，并把应用程序的堆栈指针设置为<code>handler</code>函数的入口地址</p>
+<p>信号与信号量的区别：</p>
+<p>信号(signal)：是一种处理异步事件的方式。信号是比较复杂的通信方式，用于通知接受进程有某种事件发生，除了用于进程外，还可以发送信号给进程本身。linux除了支持unix早期的信号语义函数，还支持语义符合posix.1标准的信号函数sigaction。</p>
+<p> 信号量(Semaphore)：进程间通信处理同步互斥的机制。在多线程环境下使用，它负责协调各个线程, 以保证它们能够正确、合理的使用公共资源。</p>
+<p>信号比较高效但不能传数据。</p>
+<h4 id="管道"><a href="#管道" class="headerlink" title="管道|"></a>管道<code>|</code></h4><p>可以进行数据交换。一个进程的输出作为另一个的输入，完成重定向。</p>
+<p>管道是一种<strong>虚文件</strong>，实际上是<strong>内核的一块缓存区</strong>，之所以称之为虚文件，因为对于左边进程而言它就像一个接收文件，对右边进程而言它就像一个数据发送文件。</p>
+<p>具体实现：创建管道，创建两个新的进程，由于子进程继承父进程的文件描述符，这时把管道当做一种文件来处理，并分别设置两个子进程的管道写端和管道读端</p>
+<h4 id="消息队列"><a href="#消息队列" class="headerlink" title="消息队列"></a>消息队列</h4><p>管道的建立依赖于进程间的父子关系，而且传输的数据是字节流，没有结构化关系。消息队列可以解决这两个问题，将消息作为字节序列存储在消息数组中</p>
+<h4 id="共享内存"><a href="#共享内存" class="headerlink" title="共享内存"></a>共享内存</h4><p>管道和消息队列都是间接通信。共享内存实现的是直接通信，可以快速大量地传输数据，但是会有一致性问题。</p>
+<h4 id="SOCKET"><a href="#SOCKET" class="headerlink" title="SOCKET"></a>SOCKET</h4><p>更多用在网络进程通信。相关内容以前已经写过。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/信号量/" rel="tag"><i class="fa fa-tag"></i> 信号量</a>
+          
+            <a href="/tags/管程/" rel="tag"><i class="fa fa-tag"></i> 管程</a>
+          
+            <a href="/tags/读者写者问题/" rel="tag"><i class="fa fa-tag"></i> 读者写者问题</a>
+          
+            <a href="/tags/哲学家就餐问题/" rel="tag"><i class="fa fa-tag"></i> 哲学家就餐问题</a>
+          
+            <a href="/tags/消息传递/" rel="tag"><i class="fa fa-tag"></i> 消息传递</a>
+          
+            <a href="/tags/共享内存/" rel="tag"><i class="fa fa-tag"></i> 共享内存</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/database/2019-08-15-基于MySQL的数据库操作实验.html" rel="next" title="基于MySQL的数据库操作实验">
+                <i class="fa fa-chevron-left"></i> 基于MySQL的数据库操作实验
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/data-structure/2019-09-01-数据结构与C语言.html" rel="prev" title="数据结构与C语言">
+                数据结构与C语言 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">人真正需要的东西是非常之少的</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#信号量与管程"><span class="nav-number">1.</span> <span class="nav-text">信号量与管程</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#信号量-抽象数据类型"><span class="nav-number">1.1.</span> <span class="nav-text">信号量(抽象数据类型)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现细节"><span class="nav-number">1.1.1.</span> <span class="nav-text">实现细节</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存在问题"><span class="nav-number">1.1.2.</span> <span class="nav-text">存在问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#管程-模块"><span class="nav-number">1.2.</span> <span class="nav-text">管程(模块)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实现细节-1"><span class="nav-number">1.2.1.</span> <span class="nav-text">实现细节</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#例：生产者消费者问题"><span class="nav-number">1.2.2.</span> <span class="nav-text">例：生产者消费者问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#存在的问题"><span class="nav-number">1.2.3.</span> <span class="nav-text">存在的问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#经典同步问题的实现"><span class="nav-number">1.3.</span> <span class="nav-text">经典同步问题的实现</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#读者写者问题"><span class="nav-number">1.3.1.</span> <span class="nav-text">读者写者问题</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#读者优先"><span class="nav-number">1.3.1.1.</span> <span class="nav-text">读者优先</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#写者优先"><span class="nav-number">1.3.1.2.</span> <span class="nav-text">写者优先</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#哲学家就餐问题"><span class="nav-number">1.3.2.</span> <span class="nav-text">哲学家就餐问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#进程通信-IPC"><span class="nav-number">2.</span> <span class="nav-text">进程通信(IPC)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#信号"><span class="nav-number">2.0.1.</span> <span class="nav-text">信号</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#管道"><span class="nav-number">2.0.2.</span> <span class="nav-text">管道|</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#消息队列"><span class="nav-number">2.0.3.</span> <span class="nav-text">消息队列</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#共享内存"><span class="nav-number">2.0.4.</span> <span class="nav-text">共享内存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SOCKET"><span class="nav-number">2.0.5.</span> <span class="nav-text">SOCKET</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="C/S,TCP/IP,Socket," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="之前写过socket编程的原理 ,  正好高级网络实验课要写socket程序，故总结一下实践中的一些问题。 Winsock实现由于我的系统是windows，所以采用Winsock接口。 MFC提供了两个类用以封装Windows Sockets API  CAsyncSocket类：具有一定网络编程经验的开发人员 CSocket类：由CAsyncSocket类派生，简化网络编程  需要包含Winso">
+<meta name="keywords" content="C&#x2F;S,TCP&#x2F;IP,Socket">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Socket编程实践">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/network/2019-10-26-Socket编程实践.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="之前写过socket编程的原理 ,  正好高级网络实验课要写socket程序，故总结一下实践中的一些问题。 Winsock实现由于我的系统是windows，所以采用Winsock接口。 MFC提供了两个类用以封装Windows Sockets API  CAsyncSocket类：具有一定网络编程经验的开发人员 CSocket类：由CAsyncSocket类派生，简化网络编程  需要包含Winso">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-26T11:33:14.658Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Socket编程实践">
+<meta name="twitter:description" content="之前写过socket编程的原理 ,  正好高级网络实验课要写socket程序，故总结一下实践中的一些问题。 Winsock实现由于我的系统是windows，所以采用Winsock接口。 MFC提供了两个类用以封装Windows Sockets API  CAsyncSocket类：具有一定网络编程经验的开发人员 CSocket类：由CAsyncSocket类派生，简化网络编程  需要包含Winso">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/network/2019-10-26-Socket编程实践.html"/>
+
+
+
+
+
+  <title>Socket编程实践 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/network/2019-10-26-Socket编程实践.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Socket编程实践</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-26T19:30:03+08:00">
+                2019-10-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,333
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前写过<a href="https://vergessenwang.github.io/posts/network/2019-08-11-TCP-IP协议下Socket编程原理.html">socket编程的原理</a> ,  正好高级网络实验课要写socket程序，故总结一下实践中的一些问题。</p>
+<h2 id="Winsock实现"><a href="#Winsock实现" class="headerlink" title="Winsock实现"></a>Winsock实现</h2><p>由于我的系统是windows，所以采用Winsock接口。</p>
+<p>MFC提供了两个类用以封装Windows Sockets API</p>
+<ul>
+<li>CAsyncSocket类：具有一定网络编程经验的开发人员</li>
+<li>CSocket类：由CAsyncSocket类派生，简化网络编程</li>
+</ul>
+<p>需要包含Winsock2.h，Winsock32.dll和ws2_32.lib</p>
+<p>端口选择：端口1024以前的端口号都是系统保留的或是作为公共服务的，应尽量选择大于1024的端口号</p>
+<h3 id="WinSock初始化"><a href="#WinSock初始化" class="headerlink" title="WinSock初始化"></a>WinSock初始化</h3><p>Windows 下的 socket 程序依赖 Winsock.dll 或 ws2_32.dll，必须提前加载。</p>
+<p>调用任何一个Winsock函数之前都必须检查协议栈安装情况，使用函数WSAStartup() 调用winsock DLL</p>
+<a id="more"></a>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;WinSock2.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">pragma</span> comment(lib, <span class="meta-string">"ws2_32.lib"</span>)  <span class="comment">//加载 ws2_32.dll</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	WORD wVersionRequested; <span class="comment">//指定使用的版本号</span></span><br><span class="line">	WSADATA wsaData;   <span class="comment">//返回关于Winsock实现的详细信息</span></span><br><span class="line">	wVersionRequested = MAKEWORD(<span class="number">2</span>, <span class="number">2</span>); <span class="comment">// 用宏获得版本号</span></span><br><span class="line">	<span class="keyword">if</span> (WSAStartup(wVersionRequested, &amp;wsaData) != <span class="number">0</span>)<span class="comment">//初始化ws2_32.dll动态库</span></span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"WSAStartup() failed!\n"</span>);<span class="comment">//Winsock初始化错误	</span></span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="keyword">if</span> (wsaData.wVersion != wVersionRequested)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"The version of Winsock is not suited!\n"</span>);<span class="comment">//Winsock版本不匹配		</span></span><br><span class="line">		WSACleanup();<span class="comment">//结束对ws2_32.dll的调用</span></span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">-1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="comment">//说明ws2_32.dll正确加载</span></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Load ws2_32.dll successfully!\n"</span>);</span><br><span class="line">	system(<span class="string">"pause"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="创建套接字"><a href="#创建套接字" class="headerlink" title="创建套接字"></a>创建套接字</h3><p>当type指定为SOCK_STREAM或SOCK_DGRAM时，因为系统已明确使用tcp和udp来工作，protocol可指定为0</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SERV_PORT 6789  <span class="comment">// 定义端口</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SERV_IP <span class="meta-string">"127.0.0.1"</span>  <span class="comment">//定义IP</span></span></span><br><span class="line"></span><br><span class="line"><span class="comment">/* 创建套接字*/</span></span><br><span class="line">SOCKET ssock = socket(AF_INET, SOCK_STREAM, <span class="number">0</span>); <span class="comment">// 设置IP地址族，socket类型，协议类型,创建一个套接字</span></span><br><span class="line"><span class="comment">//初始化socket addr_in结构</span></span><br><span class="line">sockaddr_in server;</span><br><span class="line"><span class="built_in">memset</span>(&amp;server, <span class="number">0</span>, <span class="keyword">sizeof</span>(server));  <span class="comment">//数据清零</span></span><br><span class="line">server.sin_family = AF_INET;  <span class="comment">// IP地址类型</span></span><br><span class="line">server.sin_addr.s_addr = inet_addr(SERV_IP);  <span class="comment">//将IP转成网络字节序</span></span><br><span class="line">server.sin_port = htons(SERV_PORT); <span class="comment">//将端口号转为网络字节序</span></span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"Socket OK!\n"</span>);</span><br></pre></td></tr></table></figure>
+<p>编译时报错：Use inet_pton() or InetPton() instead or define _WINSOCK_DEPRECATED_NO_WARNINGS to disable deprecated API warnings</p>
+<p>问题的解决：<br>1、用所提示的新函数代替inet_addr函数。<br>2、修改VS配置，告诉它我就要旧函数，修改方法：项目-&gt;属性-&gt;C/C++-&gt;常规-&gt;SDL检查，将“是”改为“否”，即可</p>
+<h3 id="主机序与网络字节序"><a href="#主机序与网络字节序" class="headerlink" title="主机序与网络字节序"></a>主机序与网络字节序</h3><p>主机序：不同的CPU有不同的字节序类型，这些字节序是指整数在内存中保存的顺序。分为大端和小端两种方式</p>
+<p>测试主机序</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="comment">//判断本机的字节序</span></span><br><span class="line"><span class="comment">//返回true表为小段序。返回false表示为大段序</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">am_little_endian</span> <span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123; </span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">short</span> i=<span class="number">1</span>;</span><br><span class="line"> 	<span class="keyword">return</span> (<span class="keyword">int</span>)*((<span class="keyword">char</span> *)(&amp;i)) ? <span class="literal">true</span> : <span class="literal">false</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;  </span><br><span class="line">    <span class="keyword">if</span>(am_little_endian())  <span class="built_in">printf</span>(<span class="string">"本机字节序为小段序!\n"</span>); </span><br><span class="line"> 	<span class="keyword">else</span>  <span class="built_in">printf</span>(<span class="string">"本机字节序为大段序!\n"</span>); </span><br><span class="line"> 	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>本机测试结果为：<strong>小端序</strong></p>
+<p>网络字节序：TCP/IP中规定好的一种数据表示格式，它与具体的CPU类型、操作系统等无关，从而可以保证数据在不同主机之间传输时能够被正确解释。网络字节顺序采用<strong>big endian</strong>排序方式。</p>
+<p>于是，在数据处理时涉及到字节顺序转换的问题。这里用<code>inet_addr</code> <code>htons</code> 处理</p>
+<h3 id="绑定端口-服务器"><a href="#绑定端口-服务器" class="headerlink" title="绑定端口(服务器)"></a>绑定端口(服务器)</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*绑定套接字和端口 */</span></span><br><span class="line"><span class="keyword">int</span> iSockErr =<span class="number">0</span>;</span><br><span class="line"><span class="comment">//建立一个绑定，参数类型需要强转,中间的参数表示指向SOCKADDR结构的地址</span></span><br><span class="line">iSockErr = bind(ssock, (struct sockaddr*)&amp;server, <span class="keyword">sizeof</span>(sockaddr)); </span><br><span class="line"><span class="keyword">if</span> (iSockErr == SOCKET_ERROR) &#123;</span><br><span class="line">	WSAGetLastError();<span class="comment">//根据不同的错误类型进行不同的处理</span></span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="built_in">printf</span>(<span class="string">"Bind OK!\n"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="监听端口-服务器"><a href="#监听端口-服务器" class="headerlink" title="监听端口(服务器)"></a>监听端口(服务器)</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 监听连接请求 */</span></span><br><span class="line">	iSockErr = listen(ssock, <span class="number">128</span>); <span class="comment">// 限定同时建立连接的客户端数量</span></span><br><span class="line">	<span class="keyword">if</span> (iSockErr == SOCKET_ERROR) &#123;</span><br><span class="line">		WSAGetLastError();<span class="comment">//根据不同的错误类型进行不同的处理</span></span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Listenning......\n"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="发起连接-客户端"><a href="#发起连接-客户端" class="headerlink" title="发起连接(客户端)"></a>发起连接(客户端)</h3><p>在客户端使用connect请求建立连接时，将激活建立连接的三次握手，用来建立一条到服务器TCP的连接。</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 发起连接请求*/</span></span><br><span class="line"><span class="keyword">int</span> iSockErr = <span class="number">0</span>;</span><br><span class="line">iSockErr = connect(sock, (struct sockaddr*)&amp;server, <span class="keyword">sizeof</span>(sockaddr));</span><br><span class="line"><span class="keyword">if</span> (iSockErr == SOCKET_ERROR) &#123;</span><br><span class="line">	WSAGetLastError();<span class="comment">//根据不同的错误类型进行不同的处理</span></span><br><span class="line">	<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="处理连接请求-服务器"><a href="#处理连接请求-服务器" class="headerlink" title="处理连接请求(服务器)"></a>处理连接请求(服务器)</h3><p>accept用于面向连接的服务器端，在IP协议族中，只用于TCP服务器端</p>
+<p>accept接受一个socket的连接请求，同时<strong>返回一个新的socket</strong>，新的socket用来在服务器与客户端之间传递和接收信息</p>
+<p>此时socket表示<strong>处于监听状态的socket</strong>，地址是客户机的IP地址</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*阻塞等待客户端发起连接，三次握手成功建立连接后会返回一个新的文件描述符指向客户端socket,用于真正数据传输*/</span></span><br><span class="line">	SOCKADDR client;</span><br><span class="line">	<span class="keyword">int</span> nSize = <span class="keyword">sizeof</span>(SOCKADDR);</span><br><span class="line">	SOCKET csock = accept(ssock, (SOCKADDR*)&amp;client, &amp;nSize);</span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"Connect OK!\n"</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="获取客户端的数据并处理-服务器"><a href="#获取客户端的数据并处理-服务器" class="headerlink" title="获取客户端的数据并处理(服务器)"></a>获取客户端的数据并处理(服务器)</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 客户端</span></span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">char</span> buffer[<span class="number">1024</span>] = <span class="string">"\0"</span>;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Input the string you want transfer-------------\n"</span>);</span><br><span class="line">		<span class="built_in">scanf</span>(<span class="string">"%s"</span>, buffer);</span><br><span class="line">		<span class="keyword">if</span> (send(sock, buffer, <span class="keyword">sizeof</span> buffer, <span class="number">0</span>) != SOCKET_ERROR)</span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">if</span> (recv(sock, buffer, <span class="keyword">sizeof</span> buffer, <span class="number">0</span>) != SOCKET_ERROR)</span><br><span class="line">				<span class="built_in">printf</span>(<span class="string">"Received datagram from TCP server:%s\n"</span>, buffer);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 服务器</span></span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		<span class="keyword">char</span> buffer[<span class="number">1024</span>] = <span class="string">"\0"</span>;</span><br><span class="line">		<span class="built_in">printf</span>(<span class="string">"Waiting for message from client-------------\n"</span>);</span><br><span class="line">		<span class="keyword">if</span> (recv(csock, buffer, <span class="keyword">sizeof</span> buffer, <span class="number">0</span>) != SOCKET_ERROR) <span class="comment">//从recv缓冲区读入数据，没有数据会阻塞</span></span><br><span class="line">		&#123;</span><br><span class="line">			<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; <span class="keyword">sizeof</span> buffer; i++) &#123;</span><br><span class="line">				<span class="keyword">char</span> ch = buffer[i];</span><br><span class="line">				<span class="keyword">if</span> (ch &gt;= <span class="string">'a'</span>&amp;&amp;ch &lt;= <span class="string">'z'</span>)</span><br><span class="line">					buffer[i] = ch - <span class="number">32</span>;</span><br><span class="line">			&#125;</span><br><span class="line">			<span class="comment">////给cilent发转为大写的数据</span></span><br><span class="line">			send(csock, buffer, <span class="keyword">sizeof</span> buffer, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">		&#125;</span><br><span class="line">		Sleep(<span class="number">500</span>);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="关闭套接字"><a href="#关闭套接字" class="headerlink" title="关闭套接字"></a>关闭套接字</h3><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//关闭套接字</span></span><br><span class="line">closesocket(ssock);</span><br><span class="line">closesocket(csock);</span><br><span class="line"></span><br><span class="line"><span class="comment">//终止 DLL 的使用</span></span><br><span class="line">WSACleanup();</span><br></pre></td></tr></table></figure>
+<h2 id="Linux实现"><a href="#Linux实现" class="headerlink" title="Linux实现"></a>Linux实现</h2><p>Windows 下的 socket 程序和 Linux 思路相同，但细节有所差别：</p>
+<p>1) Windows 下的 socket 程序依赖 Winsock.dll 或 ws2_32.dll，必须提前加载。</p>
+<p>2) Linux 使用“文件描述符”的概念，而 Windows 使用“文件句柄”的概念；Linux 不区分 socket 文件和普通文件，而 Windows 区分；Linux 下 socket() 函数的返回值为 int 类型，而 Windows 下为 SOCKET 类型，也就是句柄。</p>
+<p>3) Linux 下使用 read() / write() 函数读写，而 Windows 下使用 recv() / send() 函数发送和接收。</p>
+<p>4) 关闭 socket 时，Linux 使用 close() 函数，而 Windows 使用 closesocket() 函数。</p>
+<p>服务器端</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt; // 包含 sockaddr_in 结构体</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;ctype.h&gt; // 大小写转换</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt; // 包含bzero</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SERV_PORT 6666</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SERV_IP <span class="meta-string">"127.0.0.1"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> lfd,cfd;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">serv_addr</span>,<span class="title">client_addr</span>;</span></span><br><span class="line">	<span class="keyword">socklen_t</span> client_addr_len,client_IP_len;</span><br><span class="line">	<span class="keyword">char</span> buf[BUFSIZ],client_IP[BUFSIZ];</span><br><span class="line">	<span class="keyword">int</span> n,ret;</span><br><span class="line"></span><br><span class="line">	lfd = socket(AF_INET, SOCK_STREAM, <span class="number">0</span>); <span class="comment">//创建一个套接字，返回文件描述符指向服务器socket</span></span><br><span class="line">	<span class="keyword">if</span> (lfd == <span class="number">-1</span>) &#123;</span><br><span class="line">		perror(<span class="string">"socket error"</span>); <span class="comment">// 如果在连接状态先关掉server，那么并不会真正关闭，端口还占用，下一次启动就会出现问题</span></span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="comment">//结构体初始化</span></span><br><span class="line">	bzero(&amp;serv_addr, <span class="keyword">sizeof</span>(serv_addr)); <span class="comment">// 缓冲区清零</span></span><br><span class="line">	serv_addr.sin_family = AF_INET; <span class="comment">// IP地址类型</span></span><br><span class="line">	serv_addr.sin_port = htons(SERV_PORT); <span class="comment">//将端口号转为网络字节序</span></span><br><span class="line">	serv_addr.sin_addr.s_addr = htonl(INADDR_ANY); <span class="comment">//将IP转成网络字节序，INADDR_ANY自动获取当前网卡上有效IP</span></span><br><span class="line"></span><br><span class="line">	ret = bind(lfd, (struct sockaddr*)&amp;serv_addr, <span class="keyword">sizeof</span>(serv_addr)); <span class="comment">//建立一个绑定，参数类型需要强转</span></span><br><span class="line">	<span class="keyword">if</span> (ret == <span class="number">-1</span>) &#123;</span><br><span class="line">		perror(<span class="string">"bind error"</span>); </span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	ret = listen(lfd, <span class="number">128</span>); <span class="comment">// 限定同时建立连接的客户端数量</span></span><br><span class="line">	<span class="keyword">if</span> (ret == <span class="number">-1</span>) &#123;</span><br><span class="line">		perror(<span class="string">"listen error"</span>);</span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	client_addr_len = <span class="keyword">sizeof</span>(client_addr);</span><br><span class="line">	<span class="comment">//阻塞等待客户端发起连接，三次握手成功建立连接后会返回一个新的文件描述符指向客户端socket,用于真正数据传输</span></span><br><span class="line">	cfd = accept(lfd, (struct sockaddr*)&amp;client_addr, &amp;client_addr_len); </span><br><span class="line">	<span class="keyword">if</span> (cfd == <span class="number">-1</span>) &#123;</span><br><span class="line">		perror(<span class="string">"accept error"</span>); <span class="comment">// 如果在连接状态先关掉server，那么并不会真正关闭，端口还占用，下一次启动就会出现问题</span></span><br><span class="line">		<span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="built_in">printf</span>(<span class="string">"client IP：%s,client port:%d\n"</span>, </span><br><span class="line">		inet_ntop(AF_INET, &amp;client_addr.sin_addr.s_addr,client_IP,<span class="keyword">sizeof</span>(client_IP),</span><br><span class="line">			ntohs(client_addr.sin_port));</span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>) &#123;</span><br><span class="line">		n = read(cfd, buf, <span class="keyword">sizeof</span>(buf));  <span class="comment">//从read缓冲区读入数据，没有数据会阻塞</span></span><br><span class="line">		<span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; n; i++) &#123;</span><br><span class="line">			buf[i] = <span class="built_in">toupper</span>(buf[i]);</span><br><span class="line">		&#125;</span><br><span class="line">		write(cfd, buf, n); <span class="comment">// socket双向通信，故有两个缓冲区，双向全双工</span></span><br><span class="line">		<span class="comment">// read 和 write 缓冲区在内核中， 而char buf[] 是用户定义的，在stack中</span></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	close(lfd);</span><br><span class="line">	close(cfd);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>客户端</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;unistd.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;sys/socket.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdlib.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;string.h&gt; // memset 的头文件</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;arpa/inet.h&gt; // 包含 sockaddr_in 结构体</span></span></span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SERV_PORT 6666</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> SERV_IP <span class="meta-string">"127.0.0.1"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span> </span>&#123;</span><br><span class="line">	<span class="keyword">int</span> cfd;</span><br><span class="line">	<span class="class"><span class="keyword">struct</span> <span class="title">sockaddr_in</span> <span class="title">serv_addr</span>;</span></span><br><span class="line">	<span class="comment">// socklen_t serv_addr_len;</span></span><br><span class="line">	<span class="keyword">char</span> buf[BUFSIZ];</span><br><span class="line">	<span class="keyword">int</span> n;</span><br><span class="line"></span><br><span class="line">	cfd = socket(AF_INET, SOCK_STREAM, <span class="number">0</span>);</span><br><span class="line"></span><br><span class="line">	<span class="comment">//结构体初始化</span></span><br><span class="line">	<span class="built_in">memset</span>(&amp;serv_addr,<span class="number">0</span>,<span class="keyword">sizeof</span>(serv_addr); <span class="comment">// 指针清空，防止默认取随机值</span></span><br><span class="line">	serv_addr.sin_family = AF_INET; <span class="comment">// IP地址类型</span></span><br><span class="line">	serv_addr.sin_port = htons(SERV_PORT); <span class="comment">//将端口号转为网络字节序</span></span><br><span class="line">	inet_pton(AF_INET, SERV_IP, &amp;serv_addr.sin_addr.s_addr); </span><br><span class="line"></span><br><span class="line">	connect(cfd,(struct sockaddr*)&amp;serv_addr,<span class="keyword">sizeof</span>(serv_addr)); <span class="comment">// linux 会隐式bind</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">while</span> (<span class="number">1</span>)</span><br><span class="line">	&#123;</span><br><span class="line">		fgets(buf, <span class="keyword">sizeof</span>(buf), <span class="built_in">stdin</span>);<span class="comment">//输入要处理的数据，没有数据会阻塞</span></span><br><span class="line">		write(cfd, buf, <span class="built_in">strlen</span>(buf); <span class="comment">// 将从键盘接收的数据写入write </span></span><br><span class="line">		n = read(cfd, buf, <span class="keyword">sizeof</span>(buf));</span><br><span class="line">		write(STDOUT_FILENO, buf, n);</span><br><span class="line">	&#125;</span><br><span class="line">	</span><br><span class="line">	close(cfd);</span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/C-S/" rel="tag"><i class="fa fa-tag"></i> C/S</a>
+          
+            <a href="/tags/TCP-IP/" rel="tag"><i class="fa fa-tag"></i> TCP/IP</a>
+          
+            <a href="/tags/Socket/" rel="tag"><i class="fa fa-tag"></i> Socket</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/life/2019-10-16-不能用一种猛兽克制另一种猛兽.html" rel="next" title="不能用一种猛兽克制另一种猛兽">
+                <i class="fa fa-chevron-left"></i> 不能用一种猛兽克制另一种猛兽
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/NLP/2019-10-28-KBQA中的一些问题.html" rel="prev" title="KBQA中的一些问题">
+                KBQA中的一些问题 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">人真正需要的东西是非常之少的</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Winsock实现"><span class="nav-number">1.</span> <span class="nav-text">Winsock实现</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#WinSock初始化"><span class="nav-number">1.1.</span> <span class="nav-text">WinSock初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建套接字"><span class="nav-number">1.2.</span> <span class="nav-text">创建套接字</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#主机序与网络字节序"><span class="nav-number">1.3.</span> <span class="nav-text">主机序与网络字节序</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#绑定端口-服务器"><span class="nav-number">1.4.</span> <span class="nav-text">绑定端口(服务器)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#监听端口-服务器"><span class="nav-number">1.5.</span> <span class="nav-text">监听端口(服务器)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#发起连接-客户端"><span class="nav-number">1.6.</span> <span class="nav-text">发起连接(客户端)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#处理连接请求-服务器"><span class="nav-number">1.7.</span> <span class="nav-text">处理连接请求(服务器)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#获取客户端的数据并处理-服务器"><span class="nav-number">1.8.</span> <span class="nav-text">获取客户端的数据并处理(服务器)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关闭套接字"><span class="nav-number">1.9.</span> <span class="nav-text">关闭套接字</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux实现"><span class="nav-number">2.</span> <span class="nav-text">Linux实现</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

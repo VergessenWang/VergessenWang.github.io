@@ -1,0 +1,1048 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Anonymous World" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="概念CPS系统与实时系统的区别？实时系统（Real-Time Systems） 定义：系统的正确性不仅取决于计算的逻辑结果，还取决于产生结果的时间，在计算和操作上具有性能最后期限。 实时系统通常是嵌入式的，意味着计算系统存在于一个更大的系统内部，目的是帮助系统实现其整体职责。 时间定义： 时间约束（Timing constraint）：对执行时间行为的约束（包括硬实时和软实时） 发布时间（Rele">
+<meta property="og:type" content="article">
+<meta property="og:title" content="系统建模">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/CS/2020-01-11-系统建模.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="概念CPS系统与实时系统的区别？实时系统（Real-Time Systems） 定义：系统的正确性不仅取决于计算的逻辑结果，还取决于产生结果的时间，在计算和操作上具有性能最后期限。 实时系统通常是嵌入式的，意味着计算系统存在于一个更大的系统内部，目的是帮助系统实现其整体职责。 时间定义： 时间约束（Timing constraint）：对执行时间行为的约束（包括硬实时和软实时） 发布时间（Rele">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-01-11T12:41:43.036Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="系统建模">
+<meta name="twitter:description" content="概念CPS系统与实时系统的区别？实时系统（Real-Time Systems） 定义：系统的正确性不仅取决于计算的逻辑结果，还取决于产生结果的时间，在计算和操作上具有性能最后期限。 实时系统通常是嵌入式的，意味着计算系统存在于一个更大的系统内部，目的是帮助系统实现其整体职责。 时间定义： 时间约束（Timing constraint）：对执行时间行为的约束（包括硬实时和软实时） 发布时间（Rele">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/CS/2020-01-11-系统建模.html"/>
+
+
+
+
+
+  <title>系统建模 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/CS/2020-01-11-系统建模.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">系统建模</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-11T20:37:29+08:00">
+                2020-01-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/CS/" itemprop="url" rel="index">
+                    <span itemprop="name">CS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,216
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h3><h4 id="CPS系统与实时系统的区别？"><a href="#CPS系统与实时系统的区别？" class="headerlink" title="CPS系统与实时系统的区别？"></a>CPS系统与实时系统的区别？</h4><h5 id="实时系统（Real-Time-Systems）"><a href="#实时系统（Real-Time-Systems）" class="headerlink" title="实时系统（Real-Time Systems）"></a>实时系统（Real-Time Systems）</h5><ul>
+<li>定义：<strong>系统的正确性不仅取决于计算的逻辑结果，还取决于<u>产生结果的时间</u>，在计算和操作上具有性能最后期限</strong>。 实时系统通常是嵌入式的，意味着计算系统存在于一个更大的系统内部，目的是帮助系统实现其整体职责。</li>
+<li>时间定义：<ul>
+<li>时间约束（Timing constraint）：对执行时间行为的约束（包括硬实时和软实时）</li>
+<li>发布时间（Release Time）：作业变成为可执行的时间。如果所有的工作在系统开始执行时被释放，那么就认为没有释放时间</li>
+<li>截止时间（Deadline）：工作被要求执行完成的时间。如果截止时间是无限的，那么工作就没有最后期限。绝对截止时间等于发布时间加上相对截止时间</li>
+<li>响应时间（Response time）：作业从发布到执行完成的时间长度</li>
+</ul>
+</li>
+</ul>
+<a id="more"></a>
+<ul>
+<li><p>特征</p>
+<ul>
+<li><p>及时性：行为的及时性与时间约束有关，如截止时间。最后期限可能很硬或很软。时效性的重要建模问题是建模<strong>执行时间，截止时间，到达模式，同步模式和时间源</strong>。</p>
+</li>
+<li><p>并发性：</p>
+<p>​    多个操作顺序链的同时执行。围绕并发系统执行的问题与此有关：</p>
+<p>​          a.并发线程的调度特性——线程调度</p>
+<p>​          b.即将到来的事件的到来模式</p>
+<p>​          c.线程必须同步时使用的集合点模式</p>
+<p>​          d.控制对共享资源访问的方法</p>
+</li>
+<li><p>可预测性</p>
+</li>
+<li><p>正确性： 正确性表明一个系统总是运行正确。</p>
+</li>
+<li><p>鲁棒性：鲁棒性表明系统即使在遇到新的情况（不在计划中）下也是可靠的。因此必须<u>警惕死锁，竞争以及其他异常情况</u></p>
+</li>
+</ul>
+</li>
+</ul>
+<h5 id="实时操作系统"><a href="#实时操作系统" class="headerlink" title="实时操作系统"></a>实时操作系统</h5><p>实时性能定量指标包括</p>
+<ul>
+<li>任务上下文切换时间 ：中断延迟，响应，恢复时间，任务响应时间</li>
+<li>最大中断禁止时间：反映内核对外界停止中断响应的最长时间</li>
+</ul>
+<p>提高内核实时性的方法：任务互斥、同步</p>
+<p><strong>资源有限等待</strong>：任务没能获得需要的资源会被阻塞。如果资源不是任务继续运行必备的，任务可选择有限等待该资源</p>
+<p><strong>优先级反转问题解决：抢占式任务调度中的资源竞争，输入输出时间不一致导致抖动，优先级本身的不确定性导致可预测性下降。多任务内核应允许动态改变任务的优先级以避免发生优先级反转现象。为防止发生优先级反转,内核能自动变换任务的优先级,这叫做优先级继承(Priority inheritance)。</strong></p>
+<h5 id="CPS系统-建模对象"><a href="#CPS系统-建模对象" class="headerlink" title="CPS系统(建模对象)"></a>CPS系统(建模对象)</h5><p>​     Cyber（信息技术）:  计算，通信，控制（3C技术,computation,communication, control )，并且离散，逻辑，交换的系统；</p>
+<p>​     Physical（物理系统）： 自然的和人造的系统受物理定律的支配，并持续运行；如嵌入式、传感系统</p>
+<p>​     Cyber-Physical Systems（信息物理融合系统）:  网络和物理系统紧密结合在一起的系统。</p>
+<p>CPS系统的特点</p>
+<ul>
+<li>信息-物理的耦合由新的需求和应用驱动<ul>
+<li>网络工作在多个和极端的规模下，每个物理组件中的网络性能，大规模的有线和无线网络  </li>
+</ul>
+</li>
+<li>系统的系统</li>
+<li>新的时空约束<ul>
+<li>多个时间和空间尺度上的复杂性，动态重组/重新配置，非传统的计算和物理基板</li>
+</ul>
+</li>
+<li>通信/计算/控制 之间的新型交互<ul>
+<li>自动化程度高，控制回路必须在所有尺度上关闭，控制回路中有大量非技术型的精明用户</li>
+</ul>
+</li>
+<li><p>无处不在的安全和隐私需求，操作必须可靠</p>
+<p>Notice：不是桌面计算；不是传统的，事后嵌入式/实时系统；不是今天的传感器网络.</p>
+</li>
+</ul>
+<p>其研究目标是物理和网络（计算，通信，控制）设计深度集成；未来工程和监控物理系统的新学科</p>
+<p><strong>CPS是基于实时操作系统开发的，但是由于各种结构可能是异构的，所以要进行融合</strong>。</p>
+<h4 id="※MDA-模型选择-建模方法"><a href="#※MDA-模型选择-建模方法" class="headerlink" title="※MDA(模型选择/建模方法)"></a>※MDA(模型选择/建模方法)</h4><p> MDA定义的三种模型—— <strong>逐步求精</strong></p>
+<ul>
+<li>计算独立模型（CIM，Computation-Independent Model）——功能需求：<strong>描述系统的需求和将在其中使用系统的业务上下文</strong>。此模型通常描述系统将用于做什么，而不描述如何实现系统。CIM 通常用业务语言或领域特定语言来表示。</li>
+<li>平台独立模型（PIM，Platform-Independent Model）—— 操作系统：描述如何<strong>构造系统</strong>，而不涉及到用于实现模型的技术。此模型不描述用于为特定平台构建解决方案的机制。PIM 在由特定平台实现时可能是适当的，或者可能适合于多种平台上的实现。</li>
+<li>平台特定模型 （PSM，Platform-Specific Model）—— 硬件：<strong>从特定平台的角度描述解决方案</strong>。其中包括如何实现 CIM 和如何在特定平台上完成该实现的细节。</li>
+</ul>
+<h4 id="MARTE与UML的区别？"><a href="#MARTE与UML的区别？" class="headerlink" title="MARTE与UML的区别？"></a>MARTE与UML的区别？</h4><p>MARTE(modeling and analysis of real time and embedded systems)是UML在嵌入式实时系统领域的建模规范，取代原有的UML-SPT（UML profile for Schedulability , Performance and Time），支持对嵌入式实时系统的非功能属性建模。弥补了UML在嵌入式实时领域非功能属性表达能力的不足。</p>
+<h3 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h3><h4 id="实时调度算法"><a href="#实时调度算法" class="headerlink" title="实时调度算法"></a>实时调度算法</h4><p>可调度性：表示实时系统（一组实时任务）是否能够按期完成的属性</p>
+<p>对于周期任务（p，e），任务周期性的重复。（注意任务的描述符号表示，调度算法部分会用到）<br>周期 p = inter - release time；p&gt;0<br>执行时间 e = maximum execution time  (0 &lt; e &lt; p)<br>利用率 U = e/p</p>
+<p>响应时间<strong>：</strong>任务<strong>从释放时间到结束</strong>时间</p>
+<p><strong>RM算法和EDF算法都属于抢占式算法</strong></p>
+<h5 id="RM算法-单调速率，Rate-Monotonic"><a href="#RM算法-单调速率，Rate-Monotonic" class="headerlink" title="RM算法(单调速率，Rate Monotonic)"></a>RM算法(单调速率，Rate Monotonic)</h5><p>前提假设</p>
+<ul>
+<li>所有的任务是相互独立的（它们不相互作用，不相互依赖）</li>
+<li>所有任务都是<strong>周期</strong>的，且运行时间不变</li>
+<li>没有任何任务因等待外部事件而阻塞。</li>
+<li>所有任务共享一个共同的释放时间（临界时刻，critical instant）</li>
+<li>所有的任务的<strong>截止时间等于它们的周期</strong>，即任务必须在下一个作业释放之前完成。</li>
+</ul>
+<p>算法描述</p>
+<ul>
+<li>最佳的<strong>静态</strong>优先级调度</li>
+<li>根据周期分配优先权</li>
+<li><strong>周期较短的任务具有较高的优先级</strong></li>
+<li><p>以最短的时间执行一项工作</p>
+<p>使用限制：$∑U_i &lt;= n*(2^{(1/n)}-1)$  满足以上式子时才能用RM算法进行调度</p>
+</li>
+</ul>
+<h5 id="EDF算法（最早截止时间优先，Earliest-Deadline-First）"><a href="#EDF算法（最早截止时间优先，Earliest-Deadline-First）" class="headerlink" title="EDF算法（最早截止时间优先，Earliest Deadline First）"></a>EDF算法（最早截止时间优先，Earliest Deadline First）</h5><p>算法描述</p>
+<ul>
+<li><p>最佳的动态优先级调度</p>
+</li>
+<li><p>具有较早截止时间的任务具有较高的优先级</p>
+</li>
+<li><p>以最早的截止时间执行任务</p>
+<p>注意：<del>当一个任务在执行时，这时有一个新的任务到了，即使优先级更高，当前任务还是会继续执行(类似于磁盘电梯算法)</del></p>
+</li>
+</ul>
+<p>使用限制：$∑U_i &lt;= 1$ </p>
+<h4 id="UML-建模工具"><a href="#UML-建模工具" class="headerlink" title="UML(建模工具)"></a>UML(建模工具)</h4><p>UML (Unified Modeling Language)为<strong>面向对象</strong>软件设计提供统一的、标准的、可视化的建模语言。适用于描述<strong>以用例为驱动，以体系结构为中心</strong>的软件设计的全过程。 </p>
+<p>过程:  分析 -&gt; 设计 -&gt; 实现 -&gt; 测试 -&gt; 分析…</p>
+<ul>
+<li><p>用例图：描述用户所看到的系统的功能行为，用例图从用户的角度来表示系统的功能，用例是系统中的一个功能单元（静态视图）</p>
+<p><a href="http://www.umlchina.com/xprogrammer/issue/5/digitalsound.htm" target="_blank" rel="noopener">录音机用例图</a></p>
+</li>
+<li><p>类图：描述系统的静态结构（对象，属性，联系），类图表示系统的结构</p>
+</li>
+<li><p>序列图：描述系统对象之间的动态行为，序列图将系统的行为表示为不同对象之间的消息交互。当执行一个用例行为时，顺序图中的每条消息对应了一个类操作或引起状态转换的触发事件 。综合考虑<strong>用例图中参与者和类图中对象</strong>的关系</p>
+</li>
+<li><p>状态图：描述单个对象的动态行为，一个类对象所可能经历的所有历程的模型图。状态图由对象的各个状态和连接这些状态的转换组成 </p>
+</li>
+<li><p>活动图：状态图的一个变体，用来描述执行算法的工作流程中涉及的活动，活动图描述了一组顺序的或并发的活动</p>
+</li>
+</ul>
+<p><strong>UML的主要特征是支持有限状态机。状态图的两个基本概念是状态和转换</strong>。</p>
+<h5 id="状态图"><a href="#状态图" class="headerlink" title="状态图"></a>状态图</h5><p>​    UML中定义了四种事件：</p>
+<ul>
+<li>SignalEvent：与信号相关的事件。</li>
+</ul>
+<p>​          Signal是一个异步通信的规范，所以SignalEvent是一个与异步接收信号相关的事件。</p>
+<ul>
+<li>CallEvent：与调用相关联的事件。</li>
+</ul>
+<p>​          Call是一个同步通信的规范，所以CallEvent允许一个对象直接调用其中一个方法来影响另一个对象的状态。</p>
+<ul>
+<li><p>TimeEvent：与时间流逝相关的事件，通常用tm（\<duration>）或after（\<duration>）表示。</duration></duration></p>
+<p>几乎所有的TimeEvents都是相对的时间。也就是说，它们指定事件将在对象处于指定状态至少\<duration>时间单位后发生。</duration></p>
+<p>如果对象在超时之前离开该状态，则与该持续时间关联的逻辑计时器将消失，而不会创建超时事件</p>
+</li>
+<li><p>ChangeEvent：与属性的值更改关联的事件。</p>
+<p>它很少用在软件应用程序中。然而，当一个状态属性被内存映射到一个硬件上时，它可以用来指示内存地址改变的值</p>
+</li>
+</ul>
+<p>状态的特点：</p>
+<p>​    可以在状态图上捕获行为的对象被认为是被动的。</p>
+<p>​    这样一个对象的行为空间被分解为存在的不相交和不相交的条件，称为状态。</p>
+<p>​    转换是对导致状态改变的事件的响应。该对象可以在<strong>接收到事件（尽管不进行转换）或者进行转换</strong>时执行动作，进入或退出状态。</p>
+<p>转换（transition）</p>
+<p>​     转换是从起始状态开始并在目标状态结束的弧。 </p>
+<p>​     转换通常具有命名的事件触发器，可选地随后是执行转换时执行的动作（即可执行语句或操作）。</p>
+<p>​      过渡事件签名的格式为：</p>
+<p>​              <strong>event-name ‘(‘ parameter-list ‘)’ ‘[‘ guard-expression ‘]’ ‘/‘ action-list</strong></p>
+<p>​              注：事件可以指定形式参数列表，这意味着事件可以携带实际的参数。</p>
+<p>​              digit(key: keyType)/ show(key)</p>
+<p>​    约束（Guard）和行为执行顺序（Execution Order）：</p>
+<p>​    <strong>guard表达式是一个布尔表达式，包含在方括号中，必须计算为true或false</strong>。</p>
+<p>​    行动的执行顺序很重要，基本规则是<strong>退出-&gt;转换-&gt;进入</strong>（exit-transition-entry）。</p>
+<p>​    也就是说，<strong>先行状态的退出动作首先执行，然后是转换动作，随后是后续状态的进入动作</strong>。</p>
+<h5 id="序列图"><a href="#序列图" class="headerlink" title="序列图"></a>序列图</h5><p>含 Alternatives, Branches, Options, and Loops</p>
+<h4 id="时间自动机（Timed-automata-建模与验证）"><a href="#时间自动机（Timed-automata-建模与验证）" class="headerlink" title="时间自动机（Timed automata 建模与验证）"></a>时间自动机（Timed automata 建模与验证）</h4><p>​        时间自动机是实时系统建模与验证的理论。 具有相同目的的其他形式的例子还有时间Petri网（timed Petri Nets），</p>
+<p>​        时间过程代数（timed process algebras）和实时逻辑（real time logics）</p>
+<p>​        公平地说，以时间自动机作为输入语言的核心开发的几种模型检查器是理论应用和发展的动力。</p>
+<p>时间自动机本质上是一个<strong>用实值变量（时间系统）进行扩展的有限自动机</strong>（包含一组有限节点和一组有限带有标记的边的图）</p>
+<ul>
+<li>变量（variables）对系统中的逻辑时钟进行建模，在系统启动时用零初始化，然后以相同的速率同步增加</li>
+<li>时钟约束（clock constraints），即边上用于限制自动机行为的约束（Guard）</li>
+<li>当时钟值满足在边上标记约束（Guard）时，边表示的转换（transition）就可以发生。 当进行转换时，时钟可能被重置为零。</li>
+</ul>
+<h4 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h4><p>时间自动机工具<strong>UPPAAL</strong></p>
+<ul>
+<li>同步通信（synchronous）通过使用输入输出行为的握手同步（hand-shake synchronization）来实现</li>
+<li>异步通信（asynchronous）使用共享变量（shared variables）来实现</li>
+</ul>
+<p>​       为了对握手同步进行建模，字母 ∑ 定义为包括：输入动作 a？，输出动作a！，内部行为 ‘T’</p>
+<p>三次实验内容回顾</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/DL/2019-12-27-在ModelArts上用Caffe-SSD进行目标检测模型训练.html" rel="next" title="在ModelArts上用Caffe-SSD进行目标检测模型训练">
+                <i class="fa fa-chevron-left"></i> 在ModelArts上用Caffe-SSD进行目标检测模型训练
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/Java/2020-01-20-JavaFX-SQLite实现简单系统.html" rel="prev" title="JavaFX + SQLite实现简单系统">
+                JavaFX + SQLite实现简单系统 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">人真正需要的东西是非常之少的</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#概念"><span class="nav-number">1.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CPS系统与实时系统的区别？"><span class="nav-number">1.1.</span> <span class="nav-text">CPS系统与实时系统的区别？</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#实时系统（Real-Time-Systems）"><span class="nav-number">1.1.1.</span> <span class="nav-text">实时系统（Real-Time Systems）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#实时操作系统"><span class="nav-number">1.1.2.</span> <span class="nav-text">实时操作系统</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#CPS系统-建模对象"><span class="nav-number">1.1.3.</span> <span class="nav-text">CPS系统(建模对象)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#※MDA-模型选择-建模方法"><span class="nav-number">1.2.</span> <span class="nav-text">※MDA(模型选择/建模方法)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MARTE与UML的区别？"><span class="nav-number">1.3.</span> <span class="nav-text">MARTE与UML的区别？</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实践"><span class="nav-number">2.</span> <span class="nav-text">实践</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#实时调度算法"><span class="nav-number">2.1.</span> <span class="nav-text">实时调度算法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#RM算法-单调速率，Rate-Monotonic"><span class="nav-number">2.1.1.</span> <span class="nav-text">RM算法(单调速率，Rate Monotonic)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#EDF算法（最早截止时间优先，Earliest-Deadline-First）"><span class="nav-number">2.1.2.</span> <span class="nav-text">EDF算法（最早截止时间优先，Earliest Deadline First）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UML-建模工具"><span class="nav-number">2.2.</span> <span class="nav-text">UML(建模工具)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#状态图"><span class="nav-number">2.2.1.</span> <span class="nav-text">状态图</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#序列图"><span class="nav-number">2.2.2.</span> <span class="nav-text">序列图</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时间自动机（Timed-automata-建模与验证）"><span class="nav-number">2.3.</span> <span class="nav-text">时间自动机（Timed automata 建模与验证）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#实验"><span class="nav-number">2.4.</span> <span class="nav-text">实验</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Anonymous World" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="学习来源  为了完成数据库大作业，终于开始了像蔡徐坤一样的学写代码的历程 首先在IDEA中新建一个javaFX项目，在sample文件夹会自动生成三个默认文件，删掉即可，新建自己的package和类 登录模块在class上新建一个fxml文件，发现了什么不得了的东西。。好像是一个可拖拽的界面，看起来大有用处。 加载fxml文件： 12345678public void start(Stage st">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaFX + SQLite实现简单系统">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/Java/2020-01-20-JavaFX-SQLite实现简单系统.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="学习来源  为了完成数据库大作业，终于开始了像蔡徐坤一样的学写代码的历程 首先在IDEA中新建一个javaFX项目，在sample文件夹会自动生成三个默认文件，删掉即可，新建自己的package和类 登录模块在class上新建一个fxml文件，发现了什么不得了的东西。。好像是一个可拖拽的界面，看起来大有用处。 加载fxml文件： 12345678public void start(Stage st">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-01-20T08:48:52.988Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaFX + SQLite实现简单系统">
+<meta name="twitter:description" content="学习来源  为了完成数据库大作业，终于开始了像蔡徐坤一样的学写代码的历程 首先在IDEA中新建一个javaFX项目，在sample文件夹会自动生成三个默认文件，删掉即可，新建自己的package和类 登录模块在class上新建一个fxml文件，发现了什么不得了的东西。。好像是一个可拖拽的界面，看起来大有用处。 加载fxml文件： 12345678public void start(Stage st">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/Java/2020-01-20-JavaFX-SQLite实现简单系统.html"/>
+
+
+
+
+
+  <title>JavaFX + SQLite实现简单系统 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/Java/2020-01-20-JavaFX-SQLite实现简单系统.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaFX + SQLite实现简单系统</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-20T16:45:36+08:00">
+                2020-01-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,619
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p><a href="https://www.youtube.com/watch?v=h1rYlMrvNyE&amp;list=PL7X-e-3qk1pzbM4gLESPqjq8wWsEHC-hs&amp;index=2&amp;t=242s" target="_blank" rel="noopener">学习来源</a> </p>
+<p>为了完成数据库大作业，终于开始了像蔡徐坤一样的学写代码的历程</p>
+<p>首先在IDEA中新建一个javaFX项目，在sample文件夹会自动生成三个默认文件，删掉即可，新建自己的package和类</p>
+<h3 id="登录模块"><a href="#登录模块" class="headerlink" title="登录模块"></a>登录模块</h3><p>在class上新建一个fxml文件，发现了什么不得了的东西。。好像是一个可拖拽的界面，看起来大有用处。</p>
+<p>加载fxml文件：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span><span class="params">(Stage stage)</span><span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">    Parent root = (Parent) FXMLLoader.load(getClass().getResource(<span class="string">"login.fxml"</span>));</span><br><span class="line"></span><br><span class="line">    Scene scene = <span class="keyword">new</span> Scene(root);</span><br><span class="line">    stage.setScene(scene);</span><br><span class="line">    stage.setTitle(<span class="string">"School Management System"</span>);</span><br><span class="line">    stage.show();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在fxml中拖入一个AnchorPane, 运行类就会出来一个窗口。</p>
+<p>在fxml的源代码中添加控制器 <code>fx:controller=&quot;loginapp.LoginController&quot;</code></p>
+<a id="more"></a>
+<h4 id="SQLiteStudio"><a href="#SQLiteStudio" class="headerlink" title="SQLiteStudio"></a>SQLiteStudio</h4><p><a href="https://www.dropbox.com/sh/ao4nz2qjfsz2yuy/AABwiiss3do7n0wNecuk-uyna?dl=0" target="_blank" rel="noopener">下载地址</a></p>
+<p>基本操作就不说了，图形化界面点点点就完事了。</p>
+<p>新建一个dbUilt库，用于操作数据库。</p>
+<p>连接数据库：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">dbConnection</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String USERNAE = <span class="string">"dbuser"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String PASSWORD = <span class="string">"dapassword"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String CONN = <span class="string">"jdbc:mysql://localhost/login"</span>;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> String SQCONN = <span class="string">"jdbc:sqlite:schoolsystem.sqlite"</span>;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> Connection <span class="title">getConnection</span><span class="params">()</span> <span class="keyword">throws</span> SQLException</span>&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            Class.forName(<span class="string">"org.sqlite.JDBC"</span>);</span><br><span class="line">            <span class="keyword">return</span> DriverManager.getConnection(SQCONN);</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (ClassNotFoundException ex) &#123;</span><br><span class="line">            ex.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>在fxml中，如果在使用中出现表格无法激活的情况，需要下载SceneBuilder, 并在IDEA的setting中指定JavaFX的路径到下载好的exe文件。然后就可以右键fxml文件 open in Scene Builder</p>
+<p>这个功能更完善一点，可以搜索并配置controller，所以我还是下了一个。虽然下载速度很感人，看着YTB上的UP主秒打开链接我真的好羡慕啊。。</p>
+<p><a href="http://www.oracle.com/technetwork/java/javase/downloads/javafxscenebuilder-1x-archive-2199384.html" target="_blank" rel="noopener">下载地址</a>  还得注册一个oracle…账户 46…qq  密码 B…98  结果登不上..最后在<a href="https://blog.csdn.net/qq_41264674/article/details/89715321" target="_blank" rel="noopener">网上找另一个可用的</a></p>
+<p>注意<strong>在Scene Builder中修改完要保存</strong>一下。</p>
+<p>拖入label，第一个命名，第二个设置为code对应的变量名。需要输入的拖入textfield。 password可以用专用PasswordField</p>
+<p>拖入一个combobox，这是下拉框，在properties中添加 Admin/ Students, 作为选项,同样也可以在username的properties中甚至promot占位提示符。 还有一个button ，作为login键</p>
+<p>为combobox添加枚举类型。</p>
+<p>新建enum类option:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="keyword">enum</span> option &#123;</span><br><span class="line">    Admin,Student;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">option</span><span class="params">()</span></span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">value</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> name();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> option <span class="title">fromvalue</span><span class="params">(String v)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> valueOf(v);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>登录模块</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginModel</span> </span>&#123;</span><br><span class="line">    Connection connection;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">LoginModel</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">this</span>.connection = dbConnection.getConnection();</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException ex) &#123;</span><br><span class="line">            ex.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.connection == <span class="keyword">null</span>)&#123;</span><br><span class="line">            System.exit(<span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">boolean</span> <span class="title">isDatabaseConnected</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.connection != <span class="keyword">null</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isLogin</span><span class="params">(String user, String  password, String opt)</span><span class="keyword">throws</span> Exception</span>&#123;</span><br><span class="line">        PreparedStatement pr = <span class="keyword">null</span>;</span><br><span class="line">        ResultSet rs = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">        String sql = <span class="string">"SELECT * FROM login where username = ? and password = ? and division = ?"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            pr = <span class="keyword">this</span>.connection.prepareStatement(sql);</span><br><span class="line">            pr.setString(<span class="number">1</span>,user);</span><br><span class="line">            pr.setString(<span class="number">2</span>,password);</span><br><span class="line">            pr.setString(<span class="number">3</span>,opt);</span><br><span class="line"></span><br><span class="line">            rs = pr.executeQuery();</span><br><span class="line"></span><br><span class="line">            <span class="keyword">boolean</span> boll1;</span><br><span class="line"></span><br><span class="line">            <span class="keyword">if</span>(rs.next())&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException ex) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">finally</span> &#123;</span><br><span class="line">            &#123;</span><br><span class="line">                pr.close();</span><br><span class="line">                rs.close();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>控制模块：</p>
+<p>注意在<strong>Label时要选择sence里的</strong>(因为很多库都有这个，不要弄错了)</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LoginController</span> <span class="keyword">implements</span> <span class="title">Initializable</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    LoginModel loginModel = <span class="keyword">new</span> LoginModel();</span><br><span class="line"></span><br><span class="line">    <span class="meta">@FXML</span></span><br><span class="line">    <span class="keyword">private</span> Label dbstatus;</span><br><span class="line">    <span class="meta">@FXML</span></span><br><span class="line">    <span class="keyword">private</span> TextField username;</span><br><span class="line">    <span class="meta">@FXML</span></span><br><span class="line">    <span class="keyword">private</span> PasswordField password;</span><br><span class="line">    <span class="meta">@FXML</span></span><br><span class="line">    <span class="keyword">private</span> ComboBox&lt;option&gt; combobox;</span><br><span class="line">    <span class="meta">@FXML</span></span><br><span class="line">    <span class="keyword">private</span> Button loginButton;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initialize</span><span class="params">(URL url, ResourceBundle rb)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(<span class="keyword">this</span>.loginModel.isDatabaseConnected())&#123;</span><br><span class="line">            <span class="keyword">this</span>.dbstatus.setText(<span class="string">"Connected to database"</span>);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            <span class="keyword">this</span>.dbstatus.setText(<span class="string">"Not connected to database"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">this</span>.combobox.setItems(FXCollections.observableArrayList(option.values()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>运行时报错，<code>java.lang.ClassNotFoundException: org.sqlite.JDBC</code>没有安装sqlite的driver</p>
+<p><a href="https://bitbucket.org/xerial/sqlite-jdbc/downloads/" target="_blank" rel="noopener">下载地址</a>  实在下不动，换了<a href="https://jar-download.com/artifacts/io.github.willena/sqlite-jdbc/3.30.1/source-code" target="_blank" rel="noopener">另一个网站</a> </p>
+<p>添加库：文件 -&gt; 目录结构 -&gt; 库 -&gt; + java -&gt; 下载的包 </p>
+<p>运行成功。</p>
+<h3 id="分用户登录"><a href="#分用户登录" class="headerlink" title="分用户登录"></a>分用户登录</h3><p>给Login键添加事件onaction。注意<strong>ActionEvent要选 javafx.event</strong>. </p>
+<p>给admin和student分别写方法</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FXML</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">Login</span><span class="params">(ActionEvent event)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            <span class="keyword">if</span> (<span class="keyword">this</span>.loginModel.isLogin(<span class="keyword">this</span>.username.getText(), <span class="keyword">this</span>.password.getText(), ((option) <span class="keyword">this</span>.combobox.getValue()).toString())) &#123;</span><br><span class="line">                Stage stage = (Stage) <span class="keyword">this</span>.loginButton.getScene().getWindow();</span><br><span class="line">                stage.close();</span><br><span class="line">                <span class="keyword">switch</span> (((option) <span class="keyword">this</span>.combobox.getValue()).toString()) &#123;</span><br><span class="line">                    <span class="keyword">case</span> <span class="string">"Admin"</span>:</span><br><span class="line">                        adminLogin();</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line"></span><br><span class="line">                    <span class="keyword">case</span> <span class="string">"Student"</span>:</span><br><span class="line">                        studentLogin();</span><br><span class="line">                        <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">this</span>.loginStatus.setText(<span class="string">"Wrong Credential"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">catch</span>(Exception localException)&#123;</span><br><span class="line">            </span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">studentLogin</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Stage userStage = <span class="keyword">new</span> Stage();</span><br><span class="line">            FXMLLoader loader = <span class="keyword">new</span> FXMLLoader();</span><br><span class="line">            Pane root = (Pane) loader.load(getClass().getResource(<span class="string">"/students/studentFXML.fxml"</span>).openStream());</span><br><span class="line"></span><br><span class="line">            StudentsController studentsController = (StudentsController) loader.getController();</span><br><span class="line"></span><br><span class="line">            Scene scene = <span class="keyword">new</span> Scene(root);</span><br><span class="line">            userStage.setScene(scene);</span><br><span class="line">            userStage.setTitle(<span class="string">"Student Dashboard"</span>);</span><br><span class="line">            userStage.setResizable(<span class="keyword">false</span>);</span><br><span class="line">            userStage.show();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException ex) &#123;</span><br><span class="line">            ex.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">adminLogin</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            Stage adminStage = <span class="keyword">new</span> Stage();</span><br><span class="line">            FXMLLoader adminLoader = <span class="keyword">new</span> FXMLLoader();</span><br><span class="line">            Pane adminroot = (Pane) adminLoader.load(getClass().getResource(<span class="string">"/Admin/Admin.fxml"</span>).openStream());</span><br><span class="line"></span><br><span class="line">            AdminController adminController = (AdminController) adminLoader.getController();</span><br><span class="line"></span><br><span class="line">            Scene scene = <span class="keyword">new</span> Scene(adminroot);</span><br><span class="line">            adminStage.setScene(scene);</span><br><span class="line">            adminStage.setTitle(<span class="string">"Admin Dashboard"</span>);</span><br><span class="line">            adminStage.setResizable(<span class="keyword">false</span>);</span><br><span class="line">            adminStage.show();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException ex) &#123;</span><br><span class="line">            ex.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>这里数据连接有点问题。。不管了先学用法吧</p>
+<p>设置Admin.fxml 。tabpane可以创建多标签的表格；右边添加Hbox；添加tableview，按需要添加列;左边添加Vbox,在里面添加所需的label可以设置padding，添加textfield可以设置margin；添加datapicker</p>
+<p>在scene builder中可以预览效果</p>
+<p>添加数据更新方法。<strong>在变量上右键可以快速生成get和set方法</strong>，</p>
+<p>数据加载：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">loadStudentData</span><span class="params">(ActionEvent event)</span><span class="keyword">throws</span> SQLException</span>&#123;</span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            Connection conn = dbConnection.getConnection();</span><br><span class="line">            <span class="keyword">this</span>.data = FXCollections.observableArrayList();</span><br><span class="line"></span><br><span class="line">            ResultSet rs = conn.createStatement().executeQuery(sql);</span><br><span class="line">            <span class="keyword">while</span>(rs.next())&#123;</span><br><span class="line">                <span class="keyword">this</span>.data.add(<span class="keyword">new</span> StudentData(rs.getString(<span class="number">1</span>),rs.getString(<span class="number">2</span>),rs.getString(<span class="number">3</span>),rs.getString(<span class="number">4</span>),rs.getString(<span class="number">5</span>)));</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">catch</span> (SQLException e)&#123;</span><br><span class="line">            System.err.println(<span class="string">"ERROR"</span>+ e );</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.idcolumn.setCellValueFactory(<span class="keyword">new</span> PropertyValueFactory&lt;StudentData,String&gt;(<span class="string">"id"</span>));</span><br><span class="line">        <span class="keyword">this</span>.fnamecolumn.setCellValueFactory(<span class="keyword">new</span> PropertyValueFactory&lt;StudentData,String&gt;(<span class="string">"fname"</span>));</span><br><span class="line">        <span class="keyword">this</span>.lnamecolumn.setCellValueFactory(<span class="keyword">new</span> PropertyValueFactory&lt;StudentData,String&gt;(<span class="string">"lname"</span>));</span><br><span class="line">        <span class="keyword">this</span>.emailcolumn.setCellValueFactory(<span class="keyword">new</span> PropertyValueFactory&lt;StudentData,String&gt;(<span class="string">"email"</span>));</span><br><span class="line">        <span class="keyword">this</span>.dobcolumn.setCellValueFactory(<span class="keyword">new</span> PropertyValueFactory&lt;StudentData,String&gt;(<span class="string">"dob"</span>));</span><br><span class="line"></span><br><span class="line">        <span class="keyword">this</span>.studenttable.setItems(<span class="keyword">null</span>);</span><br><span class="line">        <span class="keyword">this</span>.studenttable.setItems(<span class="keyword">this</span>.data);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>添加元组：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">addStudent</span><span class="params">(ActionEvent event)</span></span>&#123;</span><br><span class="line">        String sqlInsert = <span class="string">"INSERT INTO students(id,fname,lname,email,dob) VALUES (?,?,?,?,?)"</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">try</span>&#123;</span><br><span class="line">            Connection conn = dbConnection.getConnection();</span><br><span class="line">            PreparedStatement stmt = conn.prepareStatement(sqlInsert);</span><br><span class="line"></span><br><span class="line">            stmt.setString(<span class="number">1</span>,<span class="keyword">this</span>.id.getText());</span><br><span class="line">            stmt.setString(<span class="number">2</span>,<span class="keyword">this</span>.fname.getText());</span><br><span class="line">            stmt.setString(<span class="number">3</span>,<span class="keyword">this</span>.lname.getText());</span><br><span class="line">            stmt.setString(<span class="number">4</span>,<span class="keyword">this</span>.email.getText());</span><br><span class="line">            stmt.setString(<span class="number">5</span>,<span class="keyword">this</span>.dob.getEditor().getText());</span><br><span class="line"></span><br><span class="line">            stmt.execute();</span><br><span class="line">            conn.close();</span><br><span class="line"></span><br><span class="line">        &#125; <span class="keyword">catch</span> (SQLException e) &#123;</span><br><span class="line">            e.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>清空数据：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@FXML</span></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">clearFields</span><span class="params">(ActionEvent event)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.id.setText(<span class="string">""</span>);</span><br><span class="line">        <span class="keyword">this</span>.fname.setText(<span class="string">""</span>);</span><br><span class="line">        <span class="keyword">this</span>.lname.setText(<span class="string">""</span>);</span><br><span class="line">        <span class="keyword">this</span>.email.setText(<span class="string">""</span>);</span><br><span class="line">        <span class="keyword">this</span>.dob.setValue(<span class="keyword">null</span>);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<p>生成jar:  文件 -&gt; 项目结构 -&gt; Artifacts -&gt;jar -&gt;from mode…depen..-&gt; 选择LoginAPP作为入口类 -&gt; build artifacts。  数据和jar要放在同一目录下才可以直接运行。</p>
+<p>为避免JRE版本不一致，可以把<a href="https://www.jianshu.com/p/3d472e75634b" target="_blank" rel="noopener">jar转成exe</a></p>
+<hr>
+<p>学完这个视频内容之后，最后用时三天总算写完了数据库大作业，不过冗余代码好多，我的OOP水平是真的烂啊..</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/CS/2020-01-11-系统建模.html" rel="next" title="系统建模">
+                <i class="fa fa-chevron-left"></i> 系统建模
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/frontend/2020-01-22-React初体验-谁说前端很简单的？？.html" rel="prev" title="React初体验--谁说前端很简单的？？">
+                React初体验--谁说前端很简单的？？ <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">人真正需要的东西是非常之少的</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#登录模块"><span class="nav-number">1.</span> <span class="nav-text">登录模块</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SQLiteStudio"><span class="nav-number">1.1.</span> <span class="nav-text">SQLiteStudio</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#分用户登录"><span class="nav-number">2.</span> <span class="nav-text">分用户登录</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

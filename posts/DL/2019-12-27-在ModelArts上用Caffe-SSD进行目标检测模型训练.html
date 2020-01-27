@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Caffe,SSD,ModelArts," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="本着不再当队长的原则，这学期的深度学习实践课进了别的同学的队伍，果然，当普通队员的感觉就是……真香！ 今天服从组织安排，用华为云的ModelArts尝试跑一下Caffe框架下的SSD模型来进行目标检测。队友说，让我尽量试试，还给我发了一大堆文档，可以说是相当耐心了。认真学习。 首先是在ModelArts中创建一个GPU实例并编译好Caffe-SSD, 这里队友实在看不下去我编译时的弱智操作，帮我完">
+<meta name="keywords" content="Caffe,SSD,ModelArts">
+<meta property="og:type" content="article">
+<meta property="og:title" content="在ModelArts上用Caffe-SSD进行目标检测模型训练">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/DL/2019-12-27-在ModelArts上用Caffe-SSD进行目标检测模型训练.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="本着不再当队长的原则，这学期的深度学习实践课进了别的同学的队伍，果然，当普通队员的感觉就是……真香！ 今天服从组织安排，用华为云的ModelArts尝试跑一下Caffe框架下的SSD模型来进行目标检测。队友说，让我尽量试试，还给我发了一大堆文档，可以说是相当耐心了。认真学习。 首先是在ModelArts中创建一个GPU实例并编译好Caffe-SSD, 这里队友实在看不下去我编译时的弱智操作，帮我完">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-12-27T14:23:50.534Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="在ModelArts上用Caffe-SSD进行目标检测模型训练">
+<meta name="twitter:description" content="本着不再当队长的原则，这学期的深度学习实践课进了别的同学的队伍，果然，当普通队员的感觉就是……真香！ 今天服从组织安排，用华为云的ModelArts尝试跑一下Caffe框架下的SSD模型来进行目标检测。队友说，让我尽量试试，还给我发了一大堆文档，可以说是相当耐心了。认真学习。 首先是在ModelArts中创建一个GPU实例并编译好Caffe-SSD, 这里队友实在看不下去我编译时的弱智操作，帮我完">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/DL/2019-12-27-在ModelArts上用Caffe-SSD进行目标检测模型训练.html"/>
+
+
+
+
+
+  <title>在ModelArts上用Caffe-SSD进行目标检测模型训练 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/DL/2019-12-27-在ModelArts上用Caffe-SSD进行目标检测模型训练.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">在ModelArts上用Caffe-SSD进行目标检测模型训练</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-27T22:22:10+08:00">
+                2019-12-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DL/" itemprop="url" rel="index">
+                    <span itemprop="name">DL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,575
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>本着不再当队长的原则，这学期的深度学习实践课进了别的同学的队伍，果然，当普通队员的感觉就是……真香！</p>
+<p>今天服从组织安排，用华为云的ModelArts尝试跑一下Caffe框架下的SSD模型来进行目标检测。队友说，让我尽量试试，还给我发了一大堆文档，可以说是相当耐心了。认真学习。</p>
+<p>首先是在ModelArts中创建一个GPU实例并编译好Caffe-SSD, 这里队友实在看不下去我编译时的弱智操作，帮我完成了这一步。。</p>
+<hr>
+<h3 id="准备数据集"><a href="#准备数据集" class="headerlink" title="准备数据集"></a>准备数据集</h3><p>虽然模拟电梯环境采集了一些数据，但是明显有很多重复的。</p>
+<p>所以只能在寻找另外的方法，而网上很少有所需的数据，于是打算自己爬图片做标注后用于训练。</p>
+<h4 id="获取图片"><a href="#获取图片" class="headerlink" title="获取图片"></a>获取图片</h4><p><a href="https://sspai.com/post/45672" target="_blank" rel="noopener">爬取谷歌图片</a></p>
+<p>打算用<a href="https://github.com/hardikvasa/google-images-download" target="_blank" rel="noopener">googleimagesdownload工具</a></p>
+<p>由于图片数量较多，还需要安装chromedriver, 我的谷歌版本时版本 78.0.3904.97，<a href="https://sites.google.com/a/chromium.org/chromedriver/downloads" target="_blank" rel="noopener">下载对应版本</a>, 放在图片存放路径的文件夹中，切换到目录运行命令：</p>
+<p><code>googleimagesdownload -k &quot;电动车&quot; -l 300 --chromedriver=&quot;./chromedriver</code></p>
+<p>然后就开始自动下载啦~~~</p>
+<a id="more"></a>
+<h4 id="图片预处理"><a href="#图片预处理" class="headerlink" title="图片预处理"></a>图片预处理</h4><p>筛选出符合要求的图片后，接下来进行数据增强。一方面是为了增加样本量，另一方面能够提高模型的泛化能力。</p>
+<p>由于大小不一，先统一转为500*500</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> PIL <span class="keyword">import</span> Image</span><br><span class="line"><span class="keyword">import</span> os.path</span><br><span class="line"><span class="keyword">import</span> glob</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">convertjpg</span><span class="params">(jpgfile,outdir,width=<span class="number">500</span>,height=<span class="number">500</span>)</span>:</span></span><br><span class="line">    img=Image.open(jpgfile)</span><br><span class="line">    <span class="keyword">try</span>:</span><br><span class="line">        new_img=img.resize((width,height),Image.BILINEAR)</span><br><span class="line">        new_img.save(os.path.join(outdir,os.path.basename(jpgfile)))</span><br><span class="line">    <span class="keyword">except</span> Exception <span class="keyword">as</span> e:</span><br><span class="line">        print(e)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> jpgfile <span class="keyword">in</span> glob.glob(<span class="string">"C:/Users/18771/Desktop/emotor_1/*.jpg"</span>):</span><br><span class="line">    convertjpg(jpgfile,<span class="string">"C:/Users/18771/Desktop/emotor_2"</span>)</span><br></pre></td></tr></table></figure>
+<p>处理完其实已经没多少数据了，应该多爬一点的..</p>
+<p>接下来可以用labelImg标注数据了，我已经是个熟练工了。。感觉触摸板都要摸烂了。。</p>
+<h3 id="生成LMDB数据集"><a href="#生成LMDB数据集" class="headerlink" title="生成LMDB数据集"></a>生成LMDB数据集</h3><p>将数据集划分下训练集、测试集和验证集</p>
+<p><strong>按VOC标准建好目录结构</strong>，把数据传到ModelArts上面</p>
+<p>ImageSets里Main文件夹，用到4个文件： </p>
+<ul>
+<li>train.txt 是用来训练的图片文件的文件名列表 </li>
+<li>val.txt是用来验证的图片文件的文件名列表 </li>
+<li><p>trianval.txt是用来训练和验证的图片文件的文件名列表 </p>
+</li>
+<li><p>test.txt 是用来测试的图片文件的文件名列表 </p>
+</li>
+</ul>
+<p>用脚本生成训练集和测试集，</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> os</span><br><span class="line"><span class="keyword">import</span> random</span><br><span class="line"></span><br><span class="line">trainval_percent = <span class="number">0.8</span>    <span class="comment">#  修改训练集与测试集比例，此时train:test=8:2</span></span><br><span class="line">train_percent = <span class="number">0.7</span>       <span class="comment">#  train 占 trainval 中的 0.7 ， 后面只用 trainval，所以这里这个数值不重要</span></span><br><span class="line">fdir = <span class="string">'/home/ma-user/work/caffe/data/VOC1227/VOCdevkit/VOC1227/ImagesSets/Main/'</span>      <span class="comment"># 修改对应路径</span></span><br><span class="line">xmlfilepath = <span class="string">'/home/ma-user/work/caffe/data/VOC1227/VOCdevkit/VOC1227/Annotations/label'</span>  <span class="comment"># 修改对应路径</span></span><br><span class="line">txtsavepath = fdir</span><br><span class="line">total_xml = os.listdir(xmlfilepath)</span><br><span class="line"></span><br><span class="line">num=len(total_xml)</span><br><span class="line">list=range(num)</span><br><span class="line">tv=int(num*trainval_percent)</span><br><span class="line">tr=int(tv*train_percent)</span><br><span class="line">trainval= random.sample(list,tv)</span><br><span class="line">train=random.sample(trainval,tr)</span><br><span class="line"></span><br><span class="line">ftrainval = open(fdir + <span class="string">'trainval.txt'</span>, <span class="string">'w'</span>)</span><br><span class="line">ftest = open(fdir + <span class="string">'test.txt'</span>, <span class="string">'w'</span>)</span><br><span class="line">ftrain = open(fdir + <span class="string">'train.txt'</span>, <span class="string">'w'</span>)</span><br><span class="line">fval = open(fdir + <span class="string">'val.txt'</span>, <span class="string">'w'</span>)</span><br><span class="line"></span><br><span class="line"><span class="keyword">for</span> i  <span class="keyword">in</span> list:</span><br><span class="line">    name=total_xml[i][:<span class="number">-4</span>]+<span class="string">'\n'</span></span><br><span class="line">    <span class="keyword">if</span> i <span class="keyword">in</span> trainval:</span><br><span class="line">        ftrainval.write(name)</span><br><span class="line">        <span class="keyword">if</span> i <span class="keyword">in</span> train:</span><br><span class="line">            ftrain.write(name)</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            fval.write(name)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        ftest.write(name)</span><br><span class="line"></span><br><span class="line">ftrainval.close()</span><br><span class="line">ftrain.close()</span><br><span class="line">fval.close()</span><br><span class="line">ftest .close()</span><br></pre></td></tr></table></figure>
+<p>接下来引用分好的dataset建立list文件，改下create_list.sh中的路径, 这个文件是从VOC0712中拷贝过来的，记得注释掉[[ \$dataset == “test” &amp;&amp; \$name == “VOC1227” ]] 不然无法生成test</p>
+<p><a href="http://www.voycn.com/article/chengxurensheng-jiandanjiedulinux-shelljiaobenyuyanhelmdbshujuku" target="_blank" rel="noopener">文件内容详解</a></p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#!/bin/bash</span></span><br><span class="line"></span><br><span class="line">root_dir=/home/ma-user/work/caffe/data/VOC1227/VOCdevkit</span><br><span class="line">sub_dir=ImagesSets/Main</span><br><span class="line">bash_dir=<span class="string">"<span class="variable">$(cd "$(dirname "$&#123;BASH_SOURCE[0]&#125;")</span>"</span> &amp;&amp; <span class="built_in">pwd</span>)<span class="string">"</span></span><br><span class="line"><span class="string">for dataset in trainval test </span></span><br><span class="line"><span class="string">do</span></span><br><span class="line"><span class="string">  dst_file=<span class="variable">$bash_dir</span>/<span class="variable">$dataset</span>.txt</span></span><br><span class="line"><span class="string">  if [ -f <span class="variable">$dst_file</span> ]</span></span><br><span class="line"><span class="string">  then</span></span><br><span class="line"><span class="string">    rm -f <span class="variable">$dst_file</span></span></span><br><span class="line"><span class="string">  fi</span></span><br><span class="line"><span class="string">  for name in VOC1227</span></span><br><span class="line"><span class="string">  do</span></span><br><span class="line"><span class="string">    //if [[ <span class="variable">$dataset</span> == "</span><span class="built_in">test</span><span class="string">" &amp;&amp; <span class="variable">$name</span> == "</span>VOC1227<span class="string">" ]]</span></span><br><span class="line"><span class="string">    //then</span></span><br><span class="line"><span class="string">      //continue</span></span><br><span class="line"><span class="string">    //fi</span></span><br><span class="line"><span class="string">    echo "</span>Create list <span class="keyword">for</span> <span class="variable">$name</span> <span class="variable">$dataset</span>...<span class="string">"</span></span><br><span class="line"><span class="string">    dataset_file=<span class="variable">$root_dir</span>/<span class="variable">$name</span>/<span class="variable">$sub_dir</span>/<span class="variable">$dataset</span>.txt</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    img_file=<span class="variable">$bash_dir</span>/<span class="variable">$dataset</span>"</span>_img.txt<span class="string">"</span></span><br><span class="line"><span class="string">    cp <span class="variable">$dataset_file</span> <span class="variable">$img_file</span></span></span><br><span class="line"><span class="string">    sed -i "</span>s/^/<span class="variable">$name</span>\/JPEGImages\/image\//g<span class="string">" <span class="variable">$img_file</span></span></span><br><span class="line"><span class="string">    sed -i "</span>s/$/.jpg/g<span class="string">" <span class="variable">$img_file</span></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    label_file=<span class="variable">$bash_dir</span>/<span class="variable">$dataset</span>"</span>_label.txt<span class="string">"</span></span><br><span class="line"><span class="string">    cp <span class="variable">$dataset_file</span> <span class="variable">$label_file</span></span></span><br><span class="line"><span class="string">    sed -i "</span>s/^/<span class="variable">$name</span>\/Annotations\/label\//g<span class="string">" <span class="variable">$label_file</span></span></span><br><span class="line"><span class="string">    sed -i "</span>s/$/.xml/g<span class="string">" <span class="variable">$label_file</span></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    paste -d' ' <span class="variable">$img_file</span> <span class="variable">$label_file</span> &gt;&gt; <span class="variable">$dst_file</span></span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">    rm -f <span class="variable">$label_file</span></span></span><br><span class="line"><span class="string">    rm -f <span class="variable">$img_file</span></span></span><br><span class="line"><span class="string">  done</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  # Generate image name and size infomation.</span></span><br><span class="line"><span class="string">  if [ <span class="variable">$dataset</span> == "</span><span class="built_in">test</span><span class="string">" ]</span></span><br><span class="line"><span class="string">  then</span></span><br><span class="line"><span class="string">    <span class="variable">$bash_dir</span>/../../build/tools/get_image_size <span class="variable">$root_dir</span> <span class="variable">$dst_file</span> <span class="variable">$bash_dir</span>/<span class="variable">$dataset</span>"</span>_name_size.txt<span class="string">"</span></span><br><span class="line"><span class="string">  fi</span></span><br><span class="line"><span class="string"></span></span><br><span class="line"><span class="string">  # Shuffle trainval file.</span></span><br><span class="line"><span class="string">  if [ <span class="variable">$dataset</span> == "</span>trainval<span class="string">" ]</span></span><br><span class="line"><span class="string">  then</span></span><br><span class="line"><span class="string">    rand_file=<span class="variable">$dst_file</span>.random</span></span><br><span class="line"><span class="string">    cat <span class="variable">$dst_file</span> | perl -MList::Util=shuffle -e 'print shuffle(&lt;STDIN&gt;);' &gt; <span class="variable">$rand_file</span></span></span><br><span class="line"><span class="string">    mv <span class="variable">$rand_file</span> <span class="variable">$dst_file</span></span></span><br><span class="line"><span class="string">  fi</span></span><br><span class="line"><span class="string">done</span></span><br></pre></td></tr></table></figure>
+<p>接下来根据建好的list文件，生成lmdb文件用于之后的训练</p>
+<p>需要export一下openblas的路径</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/home/ma-user/anaconda2/lib</span><br><span class="line">source ~/.bashrc</span><br><span class="line">echo &apos;export LD_LIBRARY_PATH=/home/ma-user/work/OpenBLAS:$LD_LIBRARY_PATH&apos; &gt;&gt; ~/.bashrc</span><br><span class="line">source ~/.bashrc</span><br></pre></td></tr></table></figure>
+<p>然后调用convert_annoset生成lmdb文件</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/home/ma-user/work/caffe/build/tools/convert_annoset --anno_type=detection --encode_type=jpg --encoded=true --shuffle=true \</span><br><span class="line">--label_map_file=/home/ma-user/work/caffe/data/VOC1227/labelmap_voc.prototxt \</span><br><span class="line">/home/ma-user/work/caffe/data/VOC1227/VOCdevkit/ \</span><br><span class="line">/home/ma-user/work/caffe/data/VOC1227/trainval.txt \</span><br><span class="line">/home/ma-user/work/caffe/data/emotor_lmdb1227</span><br></pre></td></tr></table></figure>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">/home/ma-user/work/caffe/build/tools/convert_annoset --anno_type=detection --encode_type=jpg --encoded=true --shuffle=true \</span><br><span class="line">--label_map_file=/home/ma-user/work/caffe/data/VOC1227/labelmap_voc.prototxt \</span><br><span class="line">/home/ma-user/work/caffe/data/VOC1227/VOCdevkit/ \</span><br><span class="line">/home/ma-user/work/caffe/data/VOC1227/test.txt \</span><br><span class="line">/home/ma-user/work/caffe/data/emotor_lmdb1227test</span><br></pre></td></tr></table></figure>
+<hr>
+<h3 id="训练模型"><a href="#训练模型" class="headerlink" title="训练模型"></a>训练模型</h3><p>修改模型中的相应参数，开跑。。</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/home/ma-user/work/caffe/build/tools/caffe train \</span><br><span class="line">-solver=/home/ma-user/work/caffe/MobileNet-SSD/solver_train.prototxt \</span><br><span class="line">--weights=/home/ma-user/work/caffe/MobileNet-SSD/mobilenet_iter_73000.caffemodel</span><br></pre></td></tr></table></figure>
+<p>美滋滋地开跑了，结果loss全是0？？？？</p>
+<p>还得重新看数据集有什么问题。。弄了一天，人都傻了。。</p>
+<p>后来反应过来是文件名写错了。</p>
+<hr>
+<center><br><br>当房间烧成了废墟 我看见了更皎洁的月光<br><br>我看见了所有赐予我的幸福<br><br>所有转瞬即逝的欢乐<br><br>我看见了我违背的誓言<br><br>不曾释怀的痛楚<br><br>未能痊愈的伤痛<br><br>压抑住的泪水<br><br>我看见了我不曾哀悼的死亡<br><br>没有回应的祈祷<br><br>未曾开启的门 和始终开放的门<br><br>我看见了被我遗弃的爱人<br><br>未能实践的梦想<br><br>我看见了所有给予我却不能接受的一切<br><br>我看见了我期盼的却未能收到的来信<br><br>我看见了所有应该发生但从未发生的一切<br><br>——《尘与雪》<br><br></center>
+
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Caffe/" rel="tag"><i class="fa fa-tag"></i> Caffe</a>
+          
+            <a href="/tags/SSD/" rel="tag"><i class="fa fa-tag"></i> SSD</a>
+          
+            <a href="/tags/ModelArts/" rel="tag"><i class="fa fa-tag"></i> ModelArts</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/DL/2019-12-23-基于Caffe的Mnist数据集手写识别.html" rel="next" title="基于Caffe的Mnist数据集手写识别">
+                <i class="fa fa-chevron-left"></i> 基于Caffe的Mnist数据集手写识别
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/CS/2020-01-11-系统建模.html" rel="prev" title="系统建模">
+                系统建模 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">人真正需要的东西是非常之少的</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备数据集"><span class="nav-number">1.</span> <span class="nav-text">准备数据集</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#获取图片"><span class="nav-number">1.1.</span> <span class="nav-text">获取图片</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#图片预处理"><span class="nav-number">1.2.</span> <span class="nav-text">图片预处理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#生成LMDB数据集"><span class="nav-number">2.</span> <span class="nav-text">生成LMDB数据集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练模型"><span class="nav-number">3.</span> <span class="nav-text">训练模型</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

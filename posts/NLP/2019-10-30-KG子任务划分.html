@@ -1,0 +1,959 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="KG," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="首先我们需要考虑的是目前的搜索存在的问题。 当我们打开一个搜索引擎的时候，目前其实是想得到答案。然而，现在的互联网是一个基于HTML的网页结构以及相互直接通过URL相互链接。这种链接中有太多的无用信息，在其中寻找所需的信息往往是一个费时费力的过程。基于知识图谱的问答或搜索系统，可以从一定程度上解决这个问题。 KG的本质 Web角度：像建立文本之间的超链接一样建立数据之间的语义链接，并支持语义搜索">
+<meta name="keywords" content="KG">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KG子任务划分">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/NLP/2019-10-30-KG子任务划分.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="首先我们需要考虑的是目前的搜索存在的问题。 当我们打开一个搜索引擎的时候，目前其实是想得到答案。然而，现在的互联网是一个基于HTML的网页结构以及相互直接通过URL相互链接。这种链接中有太多的无用信息，在其中寻找所需的信息往往是一个费时费力的过程。基于知识图谱的问答或搜索系统，可以从一定程度上解决这个问题。 KG的本质 Web角度：像建立文本之间的超链接一样建立数据之间的语义链接，并支持语义搜索">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-30T08:33:40.318Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="KG子任务划分">
+<meta name="twitter:description" content="首先我们需要考虑的是目前的搜索存在的问题。 当我们打开一个搜索引擎的时候，目前其实是想得到答案。然而，现在的互联网是一个基于HTML的网页结构以及相互直接通过URL相互链接。这种链接中有太多的无用信息，在其中寻找所需的信息往往是一个费时费力的过程。基于知识图谱的问答或搜索系统，可以从一定程度上解决这个问题。 KG的本质 Web角度：像建立文本之间的超链接一样建立数据之间的语义链接，并支持语义搜索">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/NLP/2019-10-30-KG子任务划分.html"/>
+
+
+
+
+
+  <title>KG子任务划分 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/NLP/2019-10-30-KG子任务划分.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">KG子任务划分</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-30T16:32:26+08:00">
+                2019-10-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/" itemprop="url" rel="index">
+                    <span itemprop="name">NLP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,077
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>首先我们需要考虑的是目前的搜索存在的问题。</p>
+<p>当我们打开一个搜索引擎的时候，目前其实是想得到答案。然而，现在的互联网是一个基于HTML的网页结构以及相互直接通过URL相互链接。这种链接中有太多的无用信息，在其中寻找所需的信息往往是一个费时费力的过程。基于知识图谱的问答或搜索系统，可以从一定程度上解决这个问题。</p>
+<h3 id="KG的本质"><a href="#KG的本质" class="headerlink" title="KG的本质"></a>KG的本质</h3><ul>
+<li>Web角度：像建立文本之间的超链接一样建立数据之间的<strong>语义</strong>链接，并支持语义搜索</li>
+<li>NLP视角：怎样<strong>从文本中抽取语义和结构化数据</strong></li>
+<li>KR视角：怎样利用计算机符号来表示和处理知识</li>
+<li>AI视角：怎样利用知识库来辅助理解人的语言</li>
+<li>DB视角：用图的方式去存储知识</li>
+</ul>
+<h3 id="传统KE的问题"><a href="#传统KE的问题" class="headerlink" title="传统KE的问题"></a>传统KE的问题</h3><p>传统知识工程在规则明确、边界清晰、应用封闭的应用场景取得了巨大成功。缺点是体系是自上而下的：<strong>严重依赖专家和人的干预</strong> 。</p>
+<p>解决方式：大规模自动知识获取 。基于大数据、ML，充分利用现代计算机的强大算力，从大量数据中<strong>自动</strong>进行信息挖掘。</p>
+<p>这种数据驱动的知识获取是自下而上的，以维基百科页面内容为例：</p>
+<pre class="mermaid">graph LR
+
+A[Wikipedia] -->B(预处理器 <br>schema定义<br>训练数据构造)
+
+    B --> C{是否分类}
+
+    C -->|未分类| D[分类器<br>文本,句法分类]
+
+    C -->|已分类| E[抽取器<br>CRFmodel]
+
+    D --> E
+    E --> F[infobox]</pre>
+
+<p>以其为基础建立的数据库有：YAGO、 CN-DBpedia(以后仔细学习下API)等</p>
+<p>知识图谱富含<strong>实体、概念(is)、属性(has)、关系</strong>等信息。以RDF或图的形式存储</p>
+<a id="more"></a>
+<p>领域知识图谱的三个问题：</p>
+<p>需要哪些业务知识？ ——分析实际应用需求</p>
+<p>已有知识如何用最好的方式在计算机中存储？——建立从数据到知识库中实体、概念、关系的映射 </p>
+<p>如何基于问题寻求答案？—— 利用知识库中实体、概念、 关系解释现象的过程 </p>
+<h3 id="知识表示"><a href="#知识表示" class="headerlink" title="知识表示"></a>知识表示</h3><p>怎样用计算机符号来表示人脑知识，及如何用符号运算进行推理</p>
+<h4 id="基于数理逻辑的知识表示"><a href="#基于数理逻辑的知识表示" class="headerlink" title="基于数理逻辑的知识表示"></a>基于数理逻辑的知识表示</h4><p>现在主流的是RDF: </p>
+<ul>
+<li>RDF三元组语义模型</li>
+<li>RDF图：有向标记图——存整图(多元关系)</li>
+<li>RDFS: 更加细分</li>
+</ul>
+<p>通过OWL(本体论)对RDF模式进行拓展，能表示更复杂的类和属性</p>
+<h4 id="基于向量空间学习的分布式知识表示"><a href="#基于向量空间学习的分布式知识表示" class="headerlink" title="基于向量空间学习的分布式知识表示"></a>基于向量空间学习的分布式知识表示</h4><p>在保留语义的同时，将KG中的实体和关系映射到连续的稠密和低维向量空间。</p>
+<p>KG-Emdedding: 要用到张量分解、神经网络、距离模型等知识</p>
+<h3 id="知识抽取"><a href="#知识抽取" class="headerlink" title="知识抽取"></a>知识抽取</h3><ol>
+<li>文本预处理</li>
+<li>分词，词性标注，语法解析，依存分析</li>
+<li>命名实体识别，实体链接</li>
+<li>关系抽取，事件抽取</li>
+</ol>
+<h4 id="抽取方法"><a href="#抽取方法" class="headerlink" title="抽取方法"></a>抽取方法</h4><ul>
+<li>知识工程： 用正则表达式、模板匹配、规则约束——人工干预较多</li>
+<li>基于本体的抽取：对应KR中的图、Embedding—— 主要是为了后续知识推理</li>
+<li>基于模型的抽取：模型有SVM/Logistic/CRF/LSTM 等，训练有有监督学习、无监督聚类、远程监督——自学习</li>
+</ul>
+<h3 id="知识存储"><a href="#知识存储" class="headerlink" title="知识存储"></a>知识存储</h3><p>用关系型数据库存抽取完的三元组数据，然后导入到图数据库中是主流做法，不做深入对比。</p>
+<h3 id="知识问答"><a href="#知识问答" class="headerlink" title="知识问答"></a>知识问答</h3><p>问句 –&gt; 语义解析 –&gt; 问题语义表示</p>
+<p>语义表示方法：</p>
+<ul>
+<li>基于符号</li>
+<li>基于问题模板</li>
+<li>基于子图</li>
+<li>基于分布式</li>
+</ul>
+<h3 id="知识推理"><a href="#知识推理" class="headerlink" title="知识推理"></a>知识推理</h3><p>有些问题并不是一步就可以获得答案的，需要进行多步推理才能知道。</p>
+<p>按解决方法分类：</p>
+<ul>
+<li>基于描述逻辑：本体推理</li>
+<li>基于统计规则挖掘<ul>
+<li>基于路径排序学习方法(PRA)</li>
+<li>基于关联规则挖掘犯法(AMIE)</li>
+</ul>
+</li>
+<li>基于表示学习与神经网络: 将实体和关系都表示为向量，用<strong>向量计算代替图遍历</strong></li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/KG/" rel="tag"><i class="fa fa-tag"></i> KG</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/NLP/2019-10-29-LSTM模型浅析.html" rel="next" title="LSTM模型浅析">
+                <i class="fa fa-chevron-left"></i> LSTM模型浅析
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/NLP/2019-10-31-HMM与Viterbi算法.html" rel="prev" title="HMM与Viterbi算法">
+                HMM与Viterbi算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">人真正需要的东西是非常之少的</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#KG的本质"><span class="nav-number">1.</span> <span class="nav-text">KG的本质</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#传统KE的问题"><span class="nav-number">2.</span> <span class="nav-text">传统KE的问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#知识表示"><span class="nav-number">3.</span> <span class="nav-text">知识表示</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基于数理逻辑的知识表示"><span class="nav-number">3.1.</span> <span class="nav-text">基于数理逻辑的知识表示</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于向量空间学习的分布式知识表示"><span class="nav-number">3.2.</span> <span class="nav-text">基于向量空间学习的分布式知识表示</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#知识抽取"><span class="nav-number">4.</span> <span class="nav-text">知识抽取</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#抽取方法"><span class="nav-number">4.1.</span> <span class="nav-text">抽取方法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#知识存储"><span class="nav-number">5.</span> <span class="nav-text">知识存储</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#知识问答"><span class="nav-number">6.</span> <span class="nav-text">知识问答</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#知识推理"><span class="nav-number">7.</span> <span class="nav-text">知识推理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

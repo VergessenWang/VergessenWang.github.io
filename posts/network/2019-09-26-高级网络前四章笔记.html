@@ -1,0 +1,1093 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="IP,读文献," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在赵老师的第一节高级网络结束之后，各位同学表示很开心，能学到很多前沿的东西，了解计算机网络的核心。他们兴致冲冲的说：”要不，咱们回去退课吧！….” 不过三周的学习过后，暂时还跟得上，可能因为还在讲一些基础的内容。 CH0教材《TCP/IP协议族》然而教材只包含上课内容的极小一部分，很多东西要自己拓展学习。 其他参考书：《计算机网络自顶向下》 《TCP/IP详解》 社区：http://www.iet">
+<meta name="keywords" content="IP,读文献">
+<meta property="og:type" content="article">
+<meta property="og:title" content="高级网络前四章笔记">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/network/2019-09-26-高级网络前四章笔记.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="在赵老师的第一节高级网络结束之后，各位同学表示很开心，能学到很多前沿的东西，了解计算机网络的核心。他们兴致冲冲的说：”要不，咱们回去退课吧！….” 不过三周的学习过后，暂时还跟得上，可能因为还在讲一些基础的内容。 CH0教材《TCP/IP协议族》然而教材只包含上课内容的极小一部分，很多东西要自己拓展学习。 其他参考书：《计算机网络自顶向下》 《TCP/IP详解》 社区：http://www.iet">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-09-26T13:58:17.075Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="高级网络前四章笔记">
+<meta name="twitter:description" content="在赵老师的第一节高级网络结束之后，各位同学表示很开心，能学到很多前沿的东西，了解计算机网络的核心。他们兴致冲冲的说：”要不，咱们回去退课吧！….” 不过三周的学习过后，暂时还跟得上，可能因为还在讲一些基础的内容。 CH0教材《TCP/IP协议族》然而教材只包含上课内容的极小一部分，很多东西要自己拓展学习。 其他参考书：《计算机网络自顶向下》 《TCP/IP详解》 社区：http://www.iet">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/network/2019-09-26-高级网络前四章笔记.html"/>
+
+
+
+
+
+  <title>高级网络前四章笔记 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/network/2019-09-26-高级网络前四章笔记.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">高级网络前四章笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-26T21:50:24+08:00">
+                2019-09-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,827
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在赵老师的第一节高级网络结束之后，各位同学表示很开心，能学到很多前沿的东西，了解计算机网络的核心。他们兴致冲冲的说：”要不，咱们回去退课吧！….”</p>
+<p>不过三周的学习过后，暂时还跟得上，可能因为还在讲一些基础的内容。</p>
+<h3 id="CH0"><a href="#CH0" class="headerlink" title="CH0"></a>CH0</h3><p>教材《TCP/IP协议族》然而教材只包含上课内容的极小一部分，很多东西要自己拓展学习。</p>
+<p>其他参考书：《计算机网络自顶向下》 《TCP/IP详解》</p>
+<p>社区：<a href="http://www.ietf.org/rfc.html" target="_blank" rel="noopener">http://www.ietf.org/rfc.html</a></p>
+<p>基础</p>
+<p>硬件：网卡(适配器)的原理——加上MAC地址，串并转换</p>
+<p>软件：</p>
+<ul>
+<li>查看端口情况<ul>
+<li><code>netstat -ano</code>  列出运行中的端口</li>
+<li><code>TASKLIST /FI &quot;PID eq 1048&quot;</code> 查询使用端口的程序名</li>
+<li><code>taskkill /f /t /im 程序名</code> 终止进程</li>
+<li><code>netstat -aon|findstr &quot;端口号&quot;</code>    查询是哪个进程在占用端口</li>
+<li><code>tasklist|findstr &quot;进程号&quot;</code> 查询是哪个程序在占用</li>
+<li><code>taskkill  /pid  进程号 /f</code>  终止进程</li>
+</ul>
+</li>
+<li>网络分层协议</li>
+</ul>
+<a id="more"></a>
+<p>分析：用抓包软件获取数据报并分析其二进制对应的内容</p>
+<p>高级：</p>
+<ol>
+<li>多线程时，如何处理线程与端口的对应关系</li>
+<li>proxy 代理的原理</li>
+<li>协议4.4BSD 源码分析</li>
+<li>Hourglass模型：简化核心网</li>
+<li>软件定义网络SDN (如OpenFlow)  集中式可编程管控——复杂路由,数据平面和控制平面分离</li>
+<li>网络虚拟化 NFV ，云化池化虚拟</li>
+<li>TCP/IP 向 RCP 演进的趋势——重新给路由器将入处理功能，内容区块作为连接</li>
+<li>对网络设备潜力进行开发的智能应用，如无线结点用于导航</li>
+<li>新的应用需求和通信技术对协议的推进</li>
+</ol>
+<h4 id="课程要求"><a href="#课程要求" class="headerlink" title="课程要求"></a>课程要求</h4><ul>
+<li>学会将C/S 、P2P 模型与Socket、以太网等观点有机结合起来理解</li>
+<li>熟悉TCP/IP 协议 、 网络体系结构、 <strong>擅长Socket 编程</strong></li>
+</ul>
+<h3 id="CH1"><a href="#CH1" class="headerlink" title="CH1"></a>CH1</h3><p>发展简史</p>
+<ul>
+<li>第一个网络ARPANET——冷战产物——不同主体之间通信采用的协议不同，比较复杂——网络</li>
+<li>第一个协议NCP(复杂链路) -&gt; TCP/IP(简单链路)——协议</li>
+<li>第一个无线网络Aloha, 解决了信道碰撞冲突 -&gt; 以太网</li>
+<li>UNIX 学术版发布 ——OS</li>
+<li>ISPs 创立 —— 运营</li>
+</ul>
+<h4 id="Internet"><a href="#Internet" class="headerlink" title="Internet"></a>Internet</h4><p>Internet(因特网)是Internet(网际网)的子集，产生于协议、技术和应用需求的多重推动。</p>
+<p>基于TCP/IP协议</p>
+<p>体系结构：主机连到某一物理网络，各物理网络通过路由器互连，国际ISP通过<strong>NAP</strong>(network access point)互连</p>
+<p>Internet标准—— RFC（Request For Comments）——如一些常见的协议：</p>
+<ul>
+<li>0791  Internet Protocol</li>
+<li>1256  ICMP Router Discovery Messages</li>
+<li>1460  Post Office Protocol </li>
+<li>1788  ICMP Domain Name Messages</li>
+</ul>
+<p>标准的种类：Required、Recommended 、Elective 、Limited use 、Not recommended</p>
+<h4 id="分析协议的角度"><a href="#分析协议的角度" class="headerlink" title="分析协议的角度"></a>分析协议的角度</h4><ol>
+<li>三个要素：Syntax 语法、Semantics 语义 、Timing 时序</li>
+<li>依赖于哪些技术</li>
+<li>应用的驱动力是什么，对于新的需求有无更好的策略</li>
+<li>可以想象一下协议运行的过程，用到什么算法，时序是怎样的，时间复杂度是多少，还有无改进之处</li>
+<li>例如语言、交通规则都可视为一种协议，可尝试理解这里面的要素</li>
+</ol>
+<blockquote>
+<p>课堂例子：一个工作10年的建筑系女生最后去了硅谷…她会经常用自己的话去描述学到的东西。转专业的同学，要学会发挥自己的专业优势</p>
+</blockquote>
+<h4 id="如何阅读和评论文献"><a href="#如何阅读和评论文献" class="headerlink" title="如何阅读和评论文献"></a>如何阅读和评论文献</h4><p>关注领域顶尖组织和会议：了解前沿问题</p>
+<p>与自己研究领域直接相关的论文——<strong>热点问题或具有首创性和前瞻性</strong></p>
+<ul>
+<li>仔细反复阅读</li>
+<li>新观点和新技术提出的历史依据和原因</li>
+<li>解决方案的价值   Does it solve an important problem?</li>
+<li>创新之处  new problem? new solutions? new evaluation methods/techniques?</li>
+<li>带来的启发</li>
+<li>同时还要<strong>找出论文的局限和缺陷</strong>(难点)<ul>
+<li>Check assumptions, problem settings</li>
+<li>Check how fast the solution works, how long the solution can sustain…</li>
+</ul>
+</li>
+<li>如何评论<ul>
+<li>不要用原文内容，用自己的话进行阐述</li>
+<li>3个重点 + 1个缺陷</li>
+</ul>
+</li>
+</ul>
+<p>好的论文结构——具体内容以后写论文时可再回头来研究</p>
+<ul>
+<li>Abstract (1/8~1/4 page)</li>
+<li>Introduction section (1 page)</li>
+<li>Background section (0.5~0.75 page)</li>
+<li>Design section (3.5 page)</li>
+<li>Implementation section (1 page)</li>
+<li>Evaluation section (3.5 page)</li>
+<li>Discussion section (0.75 page)</li>
+<li>Related work section (0.5~0.75 page)</li>
+<li>Conclusion section (0.25~0.5 page)</li>
+</ul>
+<p>反正，多读多看就完事了…看的少也看不出什么缺陷来…</p>
+<h3 id="CH2-OSI-amp-TCP-IP"><a href="#CH2-OSI-amp-TCP-IP" class="headerlink" title="CH2 OSI  &amp; TCP/IP"></a>CH2 <strong>OSI  &amp; TCP/IP</strong></h3><h4 id="关于分层"><a href="#关于分层" class="headerlink" title="关于分层"></a>关于分层</h4><ul>
+<li>好处：降低复杂性，易拓展等</li>
+<li>缺点：效率较低</li>
+<li>特征：每层关注自己的细节，并<strong>为上层提供服务</strong>。<strong>通过协议与同层通信</strong></li>
+<li>不同节点：层次组成不同，作用不同</li>
+<li><strong>横向理解：虚通信，对等实体，协议，PDU</strong></li>
+<li><strong>纵向理解：封装与解封，服务，接口</strong></li>
+</ul>
+<h4 id="OSI七层概念模型各层功能"><a href="#OSI七层概念模型各层功能" class="headerlink" title="OSI七层概念模型各层功能"></a>OSI七层概念模型各层功能</h4><ul>
+<li>物理层：bit传输</li>
+<li>链路层：hop - to - hop</li>
+<li>网络层：host - to - host</li>
+<li>传输层：end - to - end  可靠</li>
+<li>会话层：SYN同步</li>
+<li>表示层：编/解码，加/解密，数据压缩/解压缩</li>
+</ul>
+<h4 id="TCP-IP-四层模型中的协议族"><a href="#TCP-IP-四层模型中的协议族" class="headerlink" title="TCP/IP 四层模型中的协议族"></a>TCP/IP 四层模型中的协议族</h4><ul>
+<li>应用层：注意端口号<ul>
+<li>基于TCP: FTP HTTP SMTP  DNS?</li>
+<li>基于UDP: DNS TFTP SNMP</li>
+</ul>
+</li>
+<li>(socket)</li>
+<li>传输层：TCP-6 UDP-17——封装端口号</li>
+<li>网络层：IP(IPV4 -&gt; IPV6)  ICMP IGMP ARP RARP——封装IP</li>
+<li>网际层：LANs MANs WANs——封装MAC</li>
+</ul>
+<h4 id="注意区别"><a href="#注意区别" class="headerlink" title="注意区别"></a>注意区别</h4><ul>
+<li>OSI  vs.  ISO</li>
+<li>Physical address  vs.  MAC address —不是很能区别</li>
+<li>Network address  vs.  IP address</li>
+</ul>
+<h3 id="CH3-底层网络技术"><a href="#CH3-底层网络技术" class="headerlink" title="CH3 底层网络技术"></a>CH3 底层网络技术</h3><h4 id="传输介质"><a href="#传输介质" class="headerlink" title="传输介质"></a>传输介质</h4><p>UTP双绞线：五种质量型号</p>
+<ul>
+<li><strong>差别在于单位距离上的螺旋的数目</strong></li>
+<li>第三类：传输频率为<strong>16MHz</strong>，主要用于10base-T</li>
+<li>第四类：传输频率为<strong>20MHz</strong>，主要用于10/100base-T</li>
+<li>第五类：外套一种高质量的绝缘材料,传输频率为<strong>100MHz</strong>。主要用于100base-T和10base-T网络，这是<strong>最常用的以太网电缆</strong></li>
+</ul>
+<p><strong>为什么帧的最小长度为64KB，这与10Base - T 的物理媒介有关</strong>——那么，到底为什么？</p>
+<p>同轴电缆</p>
+<ul>
+<li>基带电缆：50Ω，可传输数字信号</li>
+<li>宽带电缆：75Ω，可传输模拟信号，远距离传输 ——物理学证明了视频信号最优化的衰减特性发生在77 欧姆</li>
+</ul>
+<p>光纤</p>
+<ul>
+<li>全反射，传输速率受到光/电转换速率的制约</li>
+<li>单模光纤：激光源，可远距离传输</li>
+<li>多模光纤：发光二极管</li>
+</ul>
+<h4 id="LAN-局域网"><a href="#LAN-局域网" class="headerlink" title="LAN(局域网)"></a>LAN(局域网)</h4><p>技术：Ethernet, Token Ring, FDDI, WLAN</p>
+<p>由于局域网中物理线路是直连的，故是一个<strong>冲突域</strong>，可能发生碰撞冲突</p>
+<p><strong>帧格式</strong>：结合教材</p>
+<h4 id="WAN-广域网"><a href="#WAN-广域网" class="headerlink" title="WAN(广域网)"></a>WAN(广域网)</h4><p>技术：</p>
+<ul>
+<li>点对点WAN: PPP —— 一种数据链路层协议  ADSL <ul>
+<li>PPP工作的点对点链路可能是串行的拨号电话线、SONET/SDH链路、X.25连接或者ISDN电路。</li>
+<li>PPP也是点对点隧道协议（PPTP）和第二层隧道协议（L2TP）的基础，这些协议<strong>可用于创建虚拟专用网</strong>。如VPN</li>
+</ul>
+</li>
+<li>交换 WAN: Frame Relay -帧中继(虚电路), ATM(面向连接的分组交换) —— 宽带交换技术</li>
+<li>还有一些早期技术：PSTN(电路)  X.25(虚电路)  DDN(电路)  ISDN(电路)    FR -&gt;  SMDS(无连接，分组) -&gt; ATM</li>
+<li>同步传输  SONET/SDH ——物理层协议</li>
+</ul>
+<p>这些技术其实还没弄很懂….</p>
+<p>交换的三种类型：报文、电路、分组(数据报、虚电路)</p>
+<p>一个典型的计算题：<strong>分组交换中35个用户同时有11个及以上用户在传输的概率</strong>  <strong>从35中选11个*(0.1)^(11)​</strong>….我不会输这个公式，对不起！得出的概率小于0.0004   在拥塞发生之后，任何剩余用户均不能传输，所有情况综合起来的条件概率为1，所以并不包含二项分布的第二部分</p>
+<h4 id="物理设备"><a href="#物理设备" class="headerlink" title="物理设备"></a>物理设备</h4><ul>
+<li>Repeater 转发器/ Hub 集线器</li>
+<li>Bridge 网桥/ L2 switch 二层交换机</li>
+<li>Router 路由器/ L3 switch 三层交换机</li>
+<li>Gateway 网关 —— <strong>所有层，在异构传输层中间作为代理</strong><ul>
+<li>区别：Default gateway  vs.  Gateway—— 默认网关是一个路由器？</li>
+</ul>
+</li>
+</ul>
+<h3 id="CH4-IP编址"><a href="#CH4-IP编址" class="headerlink" title="CH4 IP编址"></a>CH4 IP编址</h3><p>分类IP地址：涉及到类型判断和网络号提取，主要是二/十进制转换的计算</p>
+<h4 id="特殊地址："><a href="#特殊地址：" class="headerlink" title="特殊地址："></a>特殊地址：</h4><ul>
+<li>全1：表示当前网络的受限广播地址，当一个报文的目的地址为该地址时，这个报文将会被发送给本网络中的所有主机。但是路由器并不会将该报文转发到该网络外，故称为受限广播地址。</li>
+<li>全0 ：表示本网络上的本主机地址，当一个主机刚加入网络时还没有IP地址，这时它将以全0地址作为源地址，全1 地址作为目的地址，向全网广播一个报文，DHCP服务器收到这样的报文之后就会进行IP分配的相关应答</li>
+<li>网络号不为全0或全1 ，主机号全1：直接广播地址，用于标识对特定网络的广播。当一个路由器将报文的目的地址设置为该地址时，这个报文将会被发送给该地址对应的特定网络中的所有主机。该特定网络中的所有主机都会接收这个报文</li>
+<li>网络号不为全0或全1 ，主机号全0：网络地址，用来标识这个网络，包含这个网络中的所有主机</li>
+<li>网络号全0，主机号不为全0或全1 ：本网特殊主机地址，可作为目的地址向本网特定主机发送报文，因为本网内主机的网络号必然是相同的，仅通过主机号就可以对不同主机进行区分。</li>
+<li>网络号为127，主机号任意：环回地址，一般用作测试，报文以该地址作为目的地址时，报文将只会在机器内部进行接收和处理，而不会被发送到外部网络上。自己发自己收，所以是环回</li>
+<li>10.+ 24位 , 172.16~172.31 + 16位 , 192.168 + 16位：专用地址，仅在局域网内部使用，无法被外部访问。可用来节省IP地址，或者保证局域网的安全性</li>
+</ul>
+<p><strong>路由器的一个接口能连多个IP网(集线器，总线型)，但是多个接口不能连同一IP网</strong>——后者因为接口用IP来唯一标识？</p>
+<p>P2P WAN :避免直连端口构成的子网浪费地址，解决方法</p>
+<ol>
+<li>把两个路由器当做一个虚拟路由器，互连端口作为内部总线</li>
+<li>把路由器当做交换机，分配同一子网的IP</li>
+<li>工业界：IP地址借用，多端口共用IP，路由器内部多了报文流量但节省了地址空间</li>
+</ol>
+<p>分类IP编址容易造成地址的浪费 -&gt; 无类IP编址——涉及掩码问题、子网划分</p>
+<p>在分配子网和主机时，要考虑到全0和全1 的特殊情况。<strong>子网所需 IP = 主机数 + 路由器接口数 + 2</strong></p>
+<p>要点</p>
+<ul>
+<li><p>确定掩码</p>
+</li>
+<li><p>确定每个网络的IP地址范围</p>
+</li>
+</ul>
+<p>128，192，224，240，248，252，254，255</p>
+<p>/1，   /2，   /3，   /4，   /5，   /6，  /7，   /8</p>
+<p>路由聚合 -&gt; 超网</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/IP/" rel="tag"><i class="fa fa-tag"></i> IP</a>
+          
+            <a href="/tags/读文献/" rel="tag"><i class="fa fa-tag"></i> 读文献</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/OS/2019-09-24-虚拟机安装Deepin.html" rel="next" title="虚拟机安装Deepin">
+                <i class="fa fa-chevron-left"></i> 虚拟机安装Deepin
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/NLP/2019-09-29-NLP知识简要梳理.html" rel="prev" title="NLP知识简要梳理">
+                NLP知识简要梳理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">人真正需要的东西是非常之少的</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#CH0"><span class="nav-number">1.</span> <span class="nav-text">CH0</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#课程要求"><span class="nav-number">1.1.</span> <span class="nav-text">课程要求</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CH1"><span class="nav-number">2.</span> <span class="nav-text">CH1</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Internet"><span class="nav-number">2.1.</span> <span class="nav-text">Internet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#分析协议的角度"><span class="nav-number">2.2.</span> <span class="nav-text">分析协议的角度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#如何阅读和评论文献"><span class="nav-number">2.3.</span> <span class="nav-text">如何阅读和评论文献</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CH2-OSI-amp-TCP-IP"><span class="nav-number">3.</span> <span class="nav-text">CH2 OSI  &amp; TCP/IP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#关于分层"><span class="nav-number">3.1.</span> <span class="nav-text">关于分层</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#OSI七层概念模型各层功能"><span class="nav-number">3.2.</span> <span class="nav-text">OSI七层概念模型各层功能</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TCP-IP-四层模型中的协议族"><span class="nav-number">3.3.</span> <span class="nav-text">TCP/IP 四层模型中的协议族</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#注意区别"><span class="nav-number">3.4.</span> <span class="nav-text">注意区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CH3-底层网络技术"><span class="nav-number">4.</span> <span class="nav-text">CH3 底层网络技术</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#传输介质"><span class="nav-number">4.1.</span> <span class="nav-text">传输介质</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#LAN-局域网"><span class="nav-number">4.2.</span> <span class="nav-text">LAN(局域网)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#WAN-广域网"><span class="nav-number">4.3.</span> <span class="nav-text">WAN(广域网)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#物理设备"><span class="nav-number">4.4.</span> <span class="nav-text">物理设备</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CH4-IP编址"><span class="nav-number">5.</span> <span class="nav-text">CH4 IP编址</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#特殊地址："><span class="nav-number">5.1.</span> <span class="nav-text">特殊地址：</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

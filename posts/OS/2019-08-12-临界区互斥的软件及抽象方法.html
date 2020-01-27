@@ -1,0 +1,965 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="进程,互斥,Peterson算法,锁,原子操作," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="临界区在每个进程中，访问互斥资源的代码段称为临界区。为了实现对资源互斥，在每一个时刻，只允许一个进程进入临界区执行相应的代码。如何控制一个进程进入，而其他进程被”卡住”，就是接下来要解决的问题。 互斥的四个条件 忙则等待：任何两个进程不能同时处于临界区 不应对CPU的速度和数量做任何假设 让权等待：临界区外运行的进程不得阻塞其他进程，不能忙等 有限等待：不得使进程无限期等待进入临界区  基本实现机">
+<meta name="keywords" content="进程,互斥,Peterson算法,锁,原子操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="临界区互斥的软件及抽象方法">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/OS/2019-08-12-临界区互斥的软件及抽象方法.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="临界区在每个进程中，访问互斥资源的代码段称为临界区。为了实现对资源互斥，在每一个时刻，只允许一个进程进入临界区执行相应的代码。如何控制一个进程进入，而其他进程被”卡住”，就是接下来要解决的问题。 互斥的四个条件 忙则等待：任何两个进程不能同时处于临界区 不应对CPU的速度和数量做任何假设 让权等待：临界区外运行的进程不得阻塞其他进程，不能忙等 有限等待：不得使进程无限期等待进入临界区  基本实现机">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-24T10:03:18.026Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="临界区互斥的软件及抽象方法">
+<meta name="twitter:description" content="临界区在每个进程中，访问互斥资源的代码段称为临界区。为了实现对资源互斥，在每一个时刻，只允许一个进程进入临界区执行相应的代码。如何控制一个进程进入，而其他进程被”卡住”，就是接下来要解决的问题。 互斥的四个条件 忙则等待：任何两个进程不能同时处于临界区 不应对CPU的速度和数量做任何假设 让权等待：临界区外运行的进程不得阻塞其他进程，不能忙等 有限等待：不得使进程无限期等待进入临界区  基本实现机">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/OS/2019-08-12-临界区互斥的软件及抽象方法.html"/>
+
+
+
+
+
+  <title>临界区互斥的软件及抽象方法 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/OS/2019-08-12-临界区互斥的软件及抽象方法.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">临界区互斥的软件及抽象方法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-12T15:57:47+08:00">
+                2019-08-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,302
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="临界区"><a href="#临界区" class="headerlink" title="临界区"></a>临界区</h3><p>在每个进程中，访问互斥资源的代码段称为临界区。为了实现对资源互斥，在每一个时刻，只允许一个进程进入临界区执行相应的代码。如何控制一个进程进入，而其他进程被”卡住”，就是接下来要解决的问题。</p>
+<h4 id="互斥的四个条件"><a href="#互斥的四个条件" class="headerlink" title="互斥的四个条件"></a>互斥的四个条件</h4><ul>
+<li>忙则等待：任何两个进程不能同时处于临界区</li>
+<li>不应对CPU的速度和数量做任何假设</li>
+<li>让权等待：临界区外运行的进程不得阻塞其他进程，不能忙等</li>
+<li>有限等待：不得使进程无限期等待进入临界区</li>
+</ul>
+<h4 id="基本实现机制"><a href="#基本实现机制" class="headerlink" title="基本实现机制"></a>基本实现机制</h4><ul>
+<li>基于硬件的禁用中断——<strong>无法进行上下文切换，失去了并发，在多CPU中都不能工作。更严重的是，无法限制响应中断所需的时间，因为时钟中断也被屏蔽了，在临界区中的进程无法被停止</strong></li>
+<li>基于软件的方法（如Peterson算法）</li>
+<li>更高级的抽象（锁，信号量，管程）</li>
+</ul>
+<a id="more"></a>
+<h3 id="软件方法的演进"><a href="#软件方法的演进" class="headerlink" title="软件方法的演进"></a>软件方法的演进</h3><p>进程临界区处理的抽象结构(此处及以后均用伪代码表达)</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">do</span>&#123;</span><br><span class="line">  enter section</span><br><span class="line">    	critical section</span><br><span class="line">  <span class="built_in">exit</span> section</span><br><span class="line">    	reminder section <span class="comment">//提醒其他线程</span></span><br><span class="line">&#125;<span class="keyword">while</span>(<span class="number">1</span>);</span><br></pre></td></tr></table></figure>
+<h4 id="单标志法-交替进入"><a href="#单标志法-交替进入" class="headerlink" title="单标志法(交替进入)"></a>单标志法(交替进入)</h4><p>设置一个共享变量<code>int turn = i;</code> 表示现在轮到哪个进程</p>
+<p>对于第i个进程，enter section：<code>while(turn != i)；</code>  exit section: <code>turn = j;</code> </p>
+<p>缺点：实现了互斥，但不满足前进属性。<strong>必须交替执行，违背“空闲让进”</strong></p>
+<h4 id="双标志法先检查-先看排队"><a href="#双标志法先检查-先看排队" class="headerlink" title="双标志法先检查(先看排队)"></a>双标志法先检查(先看排队)</h4><p>设置一个数组<code>int flag[n];</code>  当<code>flag[i] = 1</code>时表示进程 i 有进入临界区的意愿</p>
+<p>对于第i个进程，enter section：<code>while(flag[j] == 1)；flag[i]=1;</code>  若无进程进入临界区则置自己的标志位</p>
+<p>exit section: <code>flag[i] = 0;</code> </p>
+<p>缺点：不满足互斥。<strong>可能同时查询同时置位，同时进入临界区</strong>。根本原因是置位过程被打断。</p>
+<h4 id="双标志法后检查-先抢位置"><a href="#双标志法后检查-先抢位置" class="headerlink" title="双标志法后检查(先抢位置)"></a>双标志法后检查(先抢位置)</h4><p>enter section：<code>flag[i]=1； while(flag[j] == 1);</code> </p>
+<p>缺点：满足互斥，但可能死锁。<strong>同时置位后都停在while死循环，都无法进入</strong>。</p>
+<h4 id="Peterson算法-两个进程"><a href="#Peterson算法-两个进程" class="headerlink" title="Peterson算法(两个进程)"></a>Peterson算法(两个进程)</h4><p><strong>同时使用 turn 和 flag</strong></p>
+<p>enter section：<code>flag[i]=1；turn = j; while(flag[j] == 1 &amp;&amp; turn == j);</code> 先“谦让”一下，让对方先进，如果对方恰好有进入的意愿，则自己保持等待；对方不进则自己进。</p>
+<h4 id="Bakery算法-n个进程"><a href="#Bakery算法-n个进程" class="headerlink" title="Bakery算法(n个进程)"></a>Bakery算法(n个进程)</h4><ol>
+<li>进入临界区之前，进程接收一个数字(<strong>请求号</strong>)，数字小的进入</li>
+<li>若数字相同，比较<strong>进程号</strong>，i &lt; j 则 i 进</li>
+<li>编号方案总是按照枚举的增加序列生成数字</li>
+</ol>
+<h4 id="软件方法的缺点"><a href="#软件方法的缺点" class="headerlink" title="软件方法的缺点"></a>软件方法的缺点</h4><ul>
+<li>需要进程间共享数据项</li>
+<li>while循环需要CPU忙等</li>
+<li>实现上需要硬件原子指令LOAD和STORE的支持</li>
+</ul>
+<h3 id="更高级的抽象"><a href="#更高级的抽象" class="headerlink" title="更高级的抽象"></a>更高级的抽象</h3><p>操作系统基于硬件的中断、原语提供更高级的编程抽象来简化并行编程。</p>
+<h4 id="硬件基础"><a href="#硬件基础" class="headerlink" title="硬件基础"></a>硬件基础</h4><p>通过特殊的内存访问电路提供特殊的原子操作指令</p>
+<ul>
+<li>TestAndSet：从内存读值判断是否为1，内存值设为1</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">boolean <span class="title">TestAndSet</span><span class="params">(boolean *target)</span></span>&#123;</span><br><span class="line">  boolean rv = *target;</span><br><span class="line">  *target = True;</span><br><span class="line">  <span class="keyword">return</span> rv;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>Swap：交换内存中的值</li>
+</ul>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">viod <span class="title">Swap</span><span class="params">(boolean *a,boolean *b)</span></span>&#123;</span><br><span class="line">  boolean temp = *a;</span><br><span class="line">  *a = *b;</span><br><span class="line">  *b = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>以上指令虽然由多条操作组成，但<strong>在体系结构中已经被封装成了一条机器指令，由硬件逻辑直接实现，不会被中断</strong>。</p>
+<h4 id="锁-抽象数据结构"><a href="#锁-抽象数据结构" class="headerlink" title="锁(抽象数据结构)"></a>锁(抽象数据结构)</h4><h5 id="忙等锁"><a href="#忙等锁" class="headerlink" title="忙等锁"></a>忙等锁</h5><ul>
+<li><code>class Lock{int value = 0;}</code>   加锁/解锁</li>
+<li><code>Lock :: Acquire(){while(TestAndSet(value));}</code> 锁被释放前一直等待，直到得到锁</li>
+<li><code>Lock :: Release(){value = 0;}</code> 释放锁，唤醒等待进程</li>
+</ul>
+<p>以上方法支持n个进程，但是仍然是忙等，使用忙等方式的锁称为<strong>自旋锁</strong></p>
+<p>改进：</p>
+<h5 id="无忙等锁-增加一个等待队列"><a href="#无忙等锁-增加一个等待队列" class="headerlink" title="无忙等锁(增加一个等待队列)"></a>无忙等锁(增加一个等待队列)</h5><ul>
+<li><p><code>class Lock{int value = 0;WaitQueue q;}</code>   </p>
+</li>
+<li><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Lock :: Acquire()&#123;</span><br><span class="line">  <span class="keyword">while</span>(TestAndSet(value))&#123;</span><br><span class="line">    add <span class="keyword">this</span> TCB to wait <span class="built_in">queue</span> q;</span><br><span class="line">    schedule();</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Lock :: Release()&#123;</span><br><span class="line">  value = <span class="number">0</span>;</span><br><span class="line">  remove one thread t from q;</span><br><span class="line">  wakeup(t);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<p>挂到阻塞队列后，睡眠等待，让出CPU。因为<strong>有上下文切换的开销，更适用于临界区较长的情况</strong>。</p>
+<h5 id="基于Swap的锁"><a href="#基于Swap的锁" class="headerlink" title="基于Swap的锁"></a>基于Swap的锁</h5><ul>
+<li>共享数据 <code>int lock = 0;</code></li>
+<li>enter section：<code>key=1; while(key == 1){Swap(lock,key);}</code> </li>
+<li>exit section: <code>lock = 0;</code> </li>
+</ul>
+<p>只有lock为0时，才能通过Swap使得key为0 ，打破while循环。</p>
+<h5 id="可能存在的问题"><a href="#可能存在的问题" class="headerlink" title="可能存在的问题"></a>可能存在的问题</h5><p>优先级反转造成死锁：若一个低优先级的进程拥有临界区，一个高优先级进程获得CPU并等待临界区，那么低优先级进程就无法获得CPU以继续执行释放锁，导致死锁。根本原因是互斥资源占用顺序和CPU优先级不匹配，<strong>解决优先级反转问题有优先级天花板(priority ceiling)和优先级继承(priority inheritance)</strong>两种办法，其实就是对低优先级进程的优先级进行提升。</p>
+<p>基于忙等的方式都可能存在优先级反转问题，所以还可以用睡眠与唤醒的方式来解决。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/进程/" rel="tag"><i class="fa fa-tag"></i> 进程</a>
+          
+            <a href="/tags/互斥/" rel="tag"><i class="fa fa-tag"></i> 互斥</a>
+          
+            <a href="/tags/Peterson算法/" rel="tag"><i class="fa fa-tag"></i> Peterson算法</a>
+          
+            <a href="/tags/锁/" rel="tag"><i class="fa fa-tag"></i> 锁</a>
+          
+            <a href="/tags/原子操作/" rel="tag"><i class="fa fa-tag"></i> 原子操作</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/network/2019-08-11-TCP-IP协议下Socket编程原理.html" rel="next" title="TCP/IP协议下Socket编程原理">
+                <i class="fa fa-chevron-left"></i> TCP/IP协议下Socket编程原理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/reading/2019-08-13-雀鹰与该隐——《德米安》.html" rel="prev" title="雀鹰与该隐——《德米安》">
+                雀鹰与该隐——《德米安》 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">人真正需要的东西是非常之少的</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#临界区"><span class="nav-number">1.</span> <span class="nav-text">临界区</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#互斥的四个条件"><span class="nav-number">1.1.</span> <span class="nav-text">互斥的四个条件</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本实现机制"><span class="nav-number">1.2.</span> <span class="nav-text">基本实现机制</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#软件方法的演进"><span class="nav-number">2.</span> <span class="nav-text">软件方法的演进</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#单标志法-交替进入"><span class="nav-number">2.1.</span> <span class="nav-text">单标志法(交替进入)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#双标志法先检查-先看排队"><span class="nav-number">2.2.</span> <span class="nav-text">双标志法先检查(先看排队)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#双标志法后检查-先抢位置"><span class="nav-number">2.3.</span> <span class="nav-text">双标志法后检查(先抢位置)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Peterson算法-两个进程"><span class="nav-number">2.4.</span> <span class="nav-text">Peterson算法(两个进程)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Bakery算法-n个进程"><span class="nav-number">2.5.</span> <span class="nav-text">Bakery算法(n个进程)</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#软件方法的缺点"><span class="nav-number">2.6.</span> <span class="nav-text">软件方法的缺点</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更高级的抽象"><span class="nav-number">3.</span> <span class="nav-text">更高级的抽象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#硬件基础"><span class="nav-number">3.1.</span> <span class="nav-text">硬件基础</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#锁-抽象数据结构"><span class="nav-number">3.2.</span> <span class="nav-text">锁(抽象数据结构)</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#忙等锁"><span class="nav-number">3.2.1.</span> <span class="nav-text">忙等锁</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#无忙等锁-增加一个等待队列"><span class="nav-number">3.2.2.</span> <span class="nav-text">无忙等锁(增加一个等待队列)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#基于Swap的锁"><span class="nav-number">3.2.3.</span> <span class="nav-text">基于Swap的锁</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#可能存在的问题"><span class="nav-number">3.2.4.</span> <span class="nav-text">可能存在的问题</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

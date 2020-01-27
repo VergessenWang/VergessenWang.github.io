@@ -1,0 +1,1208 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="分词,问答系统,命名实体识别," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="等我草草刷完一遍NLP领域的相关知识，才发现工程实践的综合性太强了，几乎涉及到了NLP的所有！核心知识！而且还要结合KG!暴风哭泣，我好害怕做到一半做不出来。。。啊，我好菜啊。。。我怎么什么都不懂。。。 自然语言：语音、文字 NLP：研究语言能力和语言应用的模型，建立算法框架来实现这样的语言模型，并完善和评测。最终用于设计各种实用系统。 是语言学、计算机科学、统计学的交叉学科。属于AI领域的子领域">
+<meta name="keywords" content="分词,问答系统,命名实体识别">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NLP知识简要梳理">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/NLP/2019-09-29-NLP知识简要梳理.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="等我草草刷完一遍NLP领域的相关知识，才发现工程实践的综合性太强了，几乎涉及到了NLP的所有！核心知识！而且还要结合KG!暴风哭泣，我好害怕做到一半做不出来。。。啊，我好菜啊。。。我怎么什么都不懂。。。 自然语言：语音、文字 NLP：研究语言能力和语言应用的模型，建立算法框架来实现这样的语言模型，并完善和评测。最终用于设计各种实用系统。 是语言学、计算机科学、统计学的交叉学科。属于AI领域的子领域">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-06T14:35:56.999Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NLP知识简要梳理">
+<meta name="twitter:description" content="等我草草刷完一遍NLP领域的相关知识，才发现工程实践的综合性太强了，几乎涉及到了NLP的所有！核心知识！而且还要结合KG!暴风哭泣，我好害怕做到一半做不出来。。。啊，我好菜啊。。。我怎么什么都不懂。。。 自然语言：语音、文字 NLP：研究语言能力和语言应用的模型，建立算法框架来实现这样的语言模型，并完善和评测。最终用于设计各种实用系统。 是语言学、计算机科学、统计学的交叉学科。属于AI领域的子领域">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/NLP/2019-09-29-NLP知识简要梳理.html"/>
+
+
+
+
+
+  <title>NLP知识简要梳理 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/NLP/2019-09-29-NLP知识简要梳理.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">NLP知识简要梳理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-29T22:29:06+08:00">
+                2019-09-29
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/" itemprop="url" rel="index">
+                    <span itemprop="name">NLP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,335
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>等我草草刷完一遍NLP领域的相关知识，才发现工程实践的综合性太强了，几乎涉及到了NLP的所有！核心知识！而且还要结合KG!暴风哭泣，我好害怕做到一半做不出来。。。啊，我好菜啊。。。我怎么什么都不懂。。。</p>
+<p>自然语言：语音、文字</p>
+<p>NLP：研究语言能力和语言应用的模型，建立算法框架来实现这样的语言模型，并完善和评测。最终用于设计各种实用系统。</p>
+<p>是语言学、计算机科学、统计学的交叉学科。属于AI领域的子领域。</p>
+<p>处理粒度：文档库 -&gt; 文章 - &gt; 段落 -&gt; 句子 -&gt; 词</p>
+<h4 id="发展历程"><a href="#发展历程" class="headerlink" title="发展历程"></a>发展历程</h4><p>以语言学为基础：建立基本语言规则，使用数理逻辑进行推理，建立模型或理解语言——语法语义，形式语言理论</p>
+<p>以统计学为基础(目前)：在足够大的数据的基础上，分析规则，产生智能。业务知识相对不重要——对材料的数量有要求</p>
+<p>未来的趋势是深度学习等AI最新技术</p>
+<a id="more"></a>
+<h4 id="NLP的研究内容"><a href="#NLP的研究内容" class="headerlink" title="NLP的研究内容"></a>NLP的研究内容</h4><ul>
+<li><strong>信息检索</strong>：搜索引擎，要求分词歧义处理、文档质量判断、去重</li>
+<li>机器翻译</li>
+<li><strong>文档分类</strong>：基于距离的文本聚类</li>
+<li><strong>问答系统</strong>：基于答案库</li>
+<li>信息过滤</li>
+<li>自动文摘</li>
+<li><strong>信息抽取</strong>：将无结构的数据整理成结构化的数据以供检索——命名实体抽取</li>
+<li>文本挖掘</li>
+<li>舆情分析：情感分析——基于监督的文本分类<ul>
+<li>词库匹配</li>
+<li>基于正负样本构建分类器</li>
+</ul>
+</li>
+<li>机器写作：形式语言处理<ul>
+<li>如自动股评：先分为行情和预测两部分，每一部分都可以有多种文法来自动生成句子</li>
+</ul>
+</li>
+<li>文稿机器校对</li>
+<li>OCR或语音识别</li>
+</ul>
+<h4 id="困难"><a href="#困难" class="headerlink" title="困难"></a>困难</h4><p>场景：语言的多样性、多变性、歧义性</p>
+<p>学习：数学模型——概率图模型、隐含马尔科夫过程、最大熵模型、条件随机场</p>
+<p>语料：定义、作用、获得途径</p>
+<h4 id="基于语言学的理论"><a href="#基于语言学的理论" class="headerlink" title="基于语言学的理论"></a>基于语言学的理论</h4><p><strong>描述语言的三种途径：穷举法、文法(产生式系统描述)、自动机法</strong></p>
+<h5 id="形式语言"><a href="#形式语言" class="headerlink" title="形式语言"></a>形式语言</h5><ul>
+<li>集合论<ul>
+<li>字符串——语言是一定规律的字符串的有限或无限的集合<ul>
+<li>连接</li>
+<li>集合乘积</li>
+<li>闭包</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>图论(离散数学)</li>
+<li>形式语法是一个四元组(非终结符，终结符，<strong>产生式(推理规则)</strong>，初始符) ==&gt; 句子<ul>
+<li>推导</li>
+<li>规约——中间有多次推导</li>
+</ul>
+</li>
+</ul>
+<p>文法的构造：一般来说，根据语言构造文法没有太直接的方法可用，它需要构造者本人所具有的经验。同一种语言可有多种文法。</p>
+<p>形式语言的应用：</p>
+<ul>
+<li>一些结构化语言：如SQL语法图</li>
+<li>机器写作</li>
+</ul>
+<h5 id="自动机理论"><a href="#自动机理论" class="headerlink" title="自动机理论"></a>自动机理论</h5><p>四型文法：——类似于数据库的设计范式</p>
+<ol>
+<li>正则文法——3型文法，顺序线性产生<ul>
+<li>左右线性正则文法是等价的</li>
+</ul>
+</li>
+<li>上下文无关文法——2型文法</li>
+<li>上下文有关文法——1型文法</li>
+<li>无约束文法——0型文法</li>
+</ol>
+<p><strong>越规范越易于处理</strong></p>
+<p>有限自动机(DFA)：</p>
+<ul>
+<li>M 五元组 (输入符号，状态集合，映射，初始状态，终止状态)</li>
+<li><strong>对于任意一个正则文法，总可以确定一个对应的DFA</strong></li>
+</ul>
+<p>下推自动机(PDA)：</p>
+<ul>
+<li>可看成一个带有附加下推存储器(一个堆栈)的有限自动机</li>
+<li>七元组</li>
+<li>对于上下文无关文法，可以构造一个下推自动机。由于正则文法是上下文无关文法的子集，因此也可以出离正则文法</li>
+</ul>
+<p>线性界限自动机——对应上下文有关文法</p>
+<p>图灵机——对应无约束文法</p>
+<p>自动机的应用：</p>
+<ul>
+<li>单词自动查错<strong>纠正</strong><ul>
+<li>编辑距离</li>
+</ul>
+</li>
+<li>词性消歧<ul>
+<li>状态转换机</li>
+</ul>
+</li>
+</ul>
+<h5 id="形式语言的缺陷"><a href="#形式语言的缺陷" class="headerlink" title="形式语言的缺陷"></a>形式语言的缺陷</h5><ul>
+<li>对于汉语这样的大型自然语言系统，难以构造精确的文法</li>
+<li>语法正确的句子可能是无意义的</li>
+<li>解决：基于大量预料，采用统计学手段建立模型</li>
+</ul>
+<h4 id="统计自然语言处理"><a href="#统计自然语言处理" class="headerlink" title="统计自然语言处理"></a>统计自然语言处理</h4><p><strong>只有在数据不够充足的情况下，我们才需要更加借助业务知识。</strong></p>
+<h5 id="n元语言模型"><a href="#n元语言模型" class="headerlink" title="n元语言模型"></a>n元语言模型</h5><p>通过概率，计算某个句子的概率。——条件概率，为了简化计算并减少空间占用，只计算与前一个字有关的概率</p>
+<h6 id="一般步骤"><a href="#一般步骤" class="headerlink" title="一般步骤"></a>一般步骤</h6><ol>
+<li>收集大量语料：基础工作，工作量最大</li>
+<li>对语料进行统计分析，得出知识(概率)——例如n元文法</li>
+<li>针对场景建立算法 ，即使是计算简单的概率也有很多复杂的算法可以运用，有些可以直接标注</li>
+<li>解释或应用结果</li>
+</ol>
+<p>性能评价常用指标：交叉熵、困惑度</p>
+<p>数据平滑：加法平滑、古德-图灵估计法、Jelinek-Mercer平滑方法</p>
+<h6 id="语言模型的缺陷"><a href="#语言模型的缺陷" class="headerlink" title="语言模型的缺陷"></a>语言模型的缺陷</h6><ul>
+<li>在训练语言模型时所采用的的语料往往来自多种不同的领域，这些综合型语料难以反映不同领域之间在语言使用规律上的差异，而语言模型恰恰对于训练文本的类型、主题和风格都非常敏感——<strong>非常依赖语料库</strong>，数据来源是多领域而应用比较专业时效果往往比较差</li>
+<li>n元语言模型的独立性假设前提是当前词出现的概率仅与前面的n-1个词相关，这种假设比较脆弱</li>
+</ul>
+<p>应用：——选择最高概率的做出结果输出</p>
+<ul>
+<li>语音识别歧义消除</li>
+<li>汉语分词问题</li>
+</ul>
+<h5 id="概率图模型"><a href="#概率图模型" class="headerlink" title="概率图模型"></a>概率图模型</h5><p>基于图的概率表示，计算联合分布的概率</p>
+<p>有向图——贝叶斯网； 无向图——马尔科夫网</p>
+<p>不同视角： 图 -&gt; 图导出的独立关系 -&gt; 图导出的因子分解</p>
+<p><a href="http://homepages.inf.ed.ac.uk/csutton/publications/crftut-fnt.pdf" target="_blank" rel="noopener">An Introduction to Conditional Random Fields</a></p>
+<h6 id="分类器"><a href="#分类器" class="headerlink" title="分类器"></a>分类器</h6><p>产生式模型：朴素贝叶斯——先估算联合概率密度，再用贝叶斯公式，在少量样本情况下，可以取得更好的精确率</p>
+<p>判别式模型：logistics回归——直接估算，在样本增加的情况下，逐渐逼近前者的精确率</p>
+<p>两者关系</p>
+<p><strong>朴素贝叶斯 -&gt;(序列化) -&gt; 隐马尔可夫 -&gt;(去掉一些限制条件) -&gt; 条件随机场</strong></p>
+<p> <strong>logistics回归 -&gt;(序列化) -&gt;  条件随机场</strong></p>
+<h6 id="马尔科夫及HMM"><a href="#马尔科夫及HMM" class="headerlink" title="马尔科夫及HMM"></a>马尔科夫及HMM</h6><p>马尔科夫链的应用：</p>
+<ul>
+<li>压缩算法</li>
+<li>排队论</li>
+<li>语言识别</li>
+<li>基因预测</li>
+<li>搜索引擎鉴别网页质量的RP值</li>
+</ul>
+<p>隐马尔可夫的应用：</p>
+<ul>
+<li>语音识别</li>
+<li>分词</li>
+</ul>
+<p>缺陷：</p>
+<ul>
+<li>只能根据顺序(马尔科夫性)来计算，有些特征没有办法刻画——解决最大熵</li>
+<li>生成式模型，需要给出状态和符号之间的联合概率分布，把观察符号割裂为相互独立的验资结构，无法提现依赖关系，标注偏置——解决：条件随机场</li>
+</ul>
+<h6 id="最大熵模型"><a href="#最大熵模型" class="headerlink" title="最大熵模型"></a>最大熵模型</h6><p>在只掌握了未知分布的部分信息的情况下，符合已知知识的可能有多个，但是熵值最大的概率分布最真实地反映了事件的分布情况</p>
+<p>数学表达：特征</p>
+<p>参数估计：GIS算法</p>
+<p><strong>最大熵马尔科夫模型</strong>：因为加入了特征，克服了马尔科夫只能适应线性的缺陷</p>
+<h6 id="条件随机场-最难理解"><a href="#条件随机场-最难理解" class="headerlink" title="条件随机场(最难理解)"></a>条件随机场(最难理解)</h6><p>给定随机变量X的条件下，随机变量Y的马尔科夫随机场。</p>
+<p>参数化形式</p>
+<p>特征模板</p>
+<p>前向-后向算法</p>
+<p>具体理论部分以后细看吧…这会真滴看不懂</p>
+<p>CRF应用：<strong>把NLP问题转为标注问题</strong>——命名实体识别，标注，句法分析，词法分析</p>
+<ol>
+<li>收集大量已经标注好的语料</li>
+<li>建立特征模板，由软件系统自动扫描语料并按模板生成特征函数。对重复出现的特征进行强化</li>
+<li>训练，参数估计，确立模型</li>
+<li>给模型输入观测序列，模型预测其标注序列</li>
+</ol>
+<h4 id="汉语分词"><a href="#汉语分词" class="headerlink" title="汉语分词"></a>汉语分词</h4><p><strong>自动分词，命名实体识别，词性标注</strong></p>
+<h5 id="存在的问题"><a href="#存在的问题" class="headerlink" title="存在的问题"></a>存在的问题</h5><p>分词规范问题：切分粒度</p>
+<p>歧义切分问题：交集型、组合型、多义组合型——问题不大</p>
+<p>未登陆词问题：人名、地名、组织名、术语、术语、新词——占比98%，主要关注问题</p>
+<h5 id="分词发展"><a href="#分词发展" class="headerlink" title="分词发展"></a>分词发展</h5><p>基于词典 -&gt;  最少词数分词 -&gt; 用统计模型解决分词歧义 -&gt;  无词典统计方法分词</p>
+<p>词典：——精度不高，但简单性能好</p>
+<ul>
+<li>正向最大匹配法、逆向最大匹配法、双向匹配法</li>
+<li>逐词遍历法</li>
+<li>基于词表的分类法</li>
+<li>实现：树、散列表、<strong>布隆过滤器</strong></li>
+</ul>
+<p>统计方法：</p>
+<ul>
+<li>N-最短路径方法</li>
+<li>基于词的n元语法模型——语言模型</li>
+<li>由字构词——把分词问题看成标注问题，即CRF——不适用于海量数据</li>
+<li>基于词感知机算法</li>
+<li>生成式和判别式相结合</li>
+</ul>
+<p><strong>词典其实可以看成一种没有上下文关系，只有词的特殊语料库。</strong></p>
+<h5 id="性能指标"><a href="#性能指标" class="headerlink" title="性能指标"></a>性能指标</h5><ul>
+<li>精确率</li>
+<li>召回率</li>
+<li>$F$值——前两个指标的调和平均</li>
+</ul>
+<p><a href="http://bcmi.sjtu.edu.cn/home/zhaohai/pubs/CWS-10Year-Review-2.pdf" target="_blank" rel="noopener">中文分词十年回顾</a></p>
+<h5 id="命名实体识别-发展较差"><a href="#命名实体识别-发展较差" class="headerlink" title="命名实体识别(发展较差)"></a>命名实体识别(发展较差)</h5><ul>
+<li>基于多特征的命名实体识别模型</li>
+<li>基于CRF</li>
+</ul>
+<h5 id="未登录词处理方法-重要"><a href="#未登录词处理方法-重要" class="headerlink" title="未登录词处理方法(重要)"></a>未登录词处理方法(重要)</h5><p>基于规则的方法、机器学习方法</p>
+<h5 id="词性标注"><a href="#词性标注" class="headerlink" title="词性标注"></a>词性标注</h5><p>汉语语法分析“三姐妹”：分词(较成熟)、实体命名识别(发展较差)、词性标注(较成熟)。</p>
+<p>在工程实现里，词性标注和分词同时完成</p>
+<ul>
+<li>基于HMM的方法——相比于CRF对语料的要求更宽松，基于较少的标注就可以得到不错的结果，速度也更快</li>
+</ul>
+<h4 id="文本分类"><a href="#文本分类" class="headerlink" title="文本分类"></a>文本分类</h4><p>选取适当的特征及权重，将文本量化映射为样本空间中的样本。</p>
+<p>通过在样本空间构建适当的分类器或聚类解决文本分类问题，通过计算向量余弦计算文本相似度。</p>
+<h5 id="文本特征选择方法"><a href="#文本特征选择方法" class="headerlink" title="文本特征选择方法"></a>文本特征选择方法</h5><ul>
+<li>基于文本频率的特征提取方法——太高太低都不行</li>
+<li>信息增益法——熵的差值</li>
+<li>$X^2$统计量——关联程度</li>
+<li>互信息法——共现程度</li>
+</ul>
+<h5 id="LDA模型-较难"><a href="#LDA模型-较难" class="headerlink" title="LDA模型(较难)"></a>LDA模型(较难)</h5><p>抽词建立文档</p>
+<p>分类器性能评测</p>
+<p>应用：</p>
+<ul>
+<li>网页自动分类</li>
+<li>判断垃圾邮件</li>
+<li>情感分析</li>
+</ul>
+<h4 id="句法分析"><a href="#句法分析" class="headerlink" title="句法分析"></a>句法分析</h4><ul>
+<li>基于PCFG——上下文无关</li>
+<li>结构分析<ul>
+<li>浅层句法分析——完全句法分析的简化版，包括语块识别与分析和语块依附关系两部分</li>
+<li>baseNP —— 转成标注问题 </li>
+</ul>
+</li>
+<li>依存关系——以动词为中心<ul>
+<li>判别式</li>
+<li>序列标注</li>
+</ul>
+</li>
+</ul>
+<h4 id="语义分析"><a href="#语义分析" class="headerlink" title="语义分析"></a>语义分析</h4><p>语义消歧</p>
+<h4 id="篇章分析"><a href="#篇章分析" class="headerlink" title="篇章分析"></a>篇章分析</h4><p>指代消解——技术难度极高</p>
+<p>自动抽取文摘—— 给句子打分，抽取每段中的高分句子。句子之间必须做篇章衔接性的处理，即句子消融。过程：对原文进行分词 -&gt; 特征分析统计 -&gt; 计算词的权重 -&gt; 根据主题词计算句子的权重 -&gt; 根据摘要句生成摘要</p>
+<ul>
+<li><p>基于LDA的单文档摘要</p>
+</li>
+<li><p>多文档摘要：基于单文档抽取的句子，如何解决排列问题，如何上下文融合</p>
+</li>
+</ul>
+<h4 id="问答系统"><a href="#问答系统" class="headerlink" title="问答系统"></a>问答系统</h4><p>问题分析 + 信息检索 + 答案抽取</p>
+<ul>
+<li>基于问题-答案对的问答系统——根据日常经验形成的有问题-答案数据库</li>
+<li>基于自由文本的问答系统——只有知识库，没有标准答案对。对答案进行分析后，知识库抽取信息对原问题中的句子进行替换，这可能会产生多个句子，所以还需要将这些句子拿去与原文匹配，找出存在的证据。每找出一次证据，给句子加分，最后选出得分最高的句子。<ul>
+<li>极其复杂，几乎用到了NLP中所有技术</li>
+<li>问题分析：问句分类，主题识别，语法分析，指代消解，命名实体识别，名词短语，动词短语抽取</li>
+<li>信息检索：文本检索，隐语义析取，相似度计算</li>
+<li>答案提取：文档摘要</li>
+</ul>
+</li>
+</ul>
+<h4 id="工具"><a href="#工具" class="headerlink" title="工具"></a>工具</h4><p><a href="https://blog.csdn.net/fendouaini/article/details/82027310?tdsourcetag=s_pctim_aiomsg" target="_blank" rel="noopener">中文分词工具</a></p>
+<p>语料库：</p>
+<ul>
+<li>LIAVC：香港城市大学建立</li>
+<li>LDC中文树库</li>
+<li>WordNet</li>
+<li>FrameNet</li>
+<li>EDR</li>
+<li>北京大学综合型知识语言库</li>
+<li>知网</li>
+<li>概念层次网络</li>
+</ul>
+<p>词性标注：</p>
+<ul>
+<li>tagger</li>
+</ul>
+<p>语言模型：</p>
+<ul>
+<li>SRILM</li>
+</ul>
+<p>HMM:</p>
+<ul>
+<li>HTK: 主要用于大规模语音识别系统</li>
+</ul>
+<p>最大熵：</p>
+<ul>
+<li>openNLP：有java的API </li>
+<li>MALLET</li>
+<li>NLTK：python</li>
+</ul>
+<p>CRF:</p>
+<ul>
+<li>CRF++</li>
+</ul>
+<p>分词：</p>
+<ul>
+<li>ICTCLAS/NLPIR</li>
+<li>Jieba——python</li>
+<li>庖丁解牛——java</li>
+</ul>
+<p>命名实体识别：</p>
+<ul>
+<li>Stanford NER: 英文，CRF</li>
+</ul>
+<p>问答机器人：</p>
+<ul>
+<li><a href="http://www.turingapi.com/" target="_blank" rel="noopener">图灵机器人</a></li>
+</ul>
+<p>关于语料：要么提供明确的业务逻辑，比如在信息的哪一个部分能够提取到所需的信息；或者提供一个词典，词典中的都是想摘取的信息；要不基于大量标注好的学习材料，建立一个学习模型</p>
+<h4 id="顶尖会议及人物"><a href="#顶尖会议及人物" class="headerlink" title="顶尖会议及人物"></a>顶尖会议及人物</h4><p><a href="http://www.cipsc.org.cn/" target="_blank" rel="noopener">中文信息学会</a></p>
+<p><a href="http://www.ccks2019.cn/" target="_blank" rel="noopener">ccks</a></p>
+<p><a href="http://bcmi.sjtu.edu.cn/home/zhaohai/index.ch.html" target="_blank" rel="noopener">赵海</a></p>
+<p>有兴趣可以参加会议相关比赛…</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/分词/" rel="tag"><i class="fa fa-tag"></i> 分词</a>
+          
+            <a href="/tags/问答系统/" rel="tag"><i class="fa fa-tag"></i> 问答系统</a>
+          
+            <a href="/tags/命名实体识别/" rel="tag"><i class="fa fa-tag"></i> 命名实体识别</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/network/2019-09-26-高级网络前四章笔记.html" rel="next" title="高级网络前四章笔记">
+                <i class="fa fa-chevron-left"></i> 高级网络前四章笔记
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/NLP/2019-10-01-几种分词算法对比.html" rel="prev" title="几种分词算法对比">
+                几种分词算法对比 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">人真正需要的东西是非常之少的</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#发展历程"><span class="nav-number">1.</span> <span class="nav-text">发展历程</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NLP的研究内容"><span class="nav-number">2.</span> <span class="nav-text">NLP的研究内容</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#困难"><span class="nav-number">3.</span> <span class="nav-text">困难</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于语言学的理论"><span class="nav-number">4.</span> <span class="nav-text">基于语言学的理论</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#形式语言"><span class="nav-number">4.1.</span> <span class="nav-text">形式语言</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#自动机理论"><span class="nav-number">4.2.</span> <span class="nav-text">自动机理论</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#形式语言的缺陷"><span class="nav-number">4.3.</span> <span class="nav-text">形式语言的缺陷</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#统计自然语言处理"><span class="nav-number">5.</span> <span class="nav-text">统计自然语言处理</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#n元语言模型"><span class="nav-number">5.1.</span> <span class="nav-text">n元语言模型</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#一般步骤"><span class="nav-number">5.1.1.</span> <span class="nav-text">一般步骤</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#语言模型的缺陷"><span class="nav-number">5.1.2.</span> <span class="nav-text">语言模型的缺陷</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#概率图模型"><span class="nav-number">5.2.</span> <span class="nav-text">概率图模型</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#分类器"><span class="nav-number">5.2.1.</span> <span class="nav-text">分类器</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#马尔科夫及HMM"><span class="nav-number">5.2.2.</span> <span class="nav-text">马尔科夫及HMM</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#最大熵模型"><span class="nav-number">5.2.3.</span> <span class="nav-text">最大熵模型</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#条件随机场-最难理解"><span class="nav-number">5.2.4.</span> <span class="nav-text">条件随机场(最难理解)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#汉语分词"><span class="nav-number">6.</span> <span class="nav-text">汉语分词</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#存在的问题"><span class="nav-number">6.1.</span> <span class="nav-text">存在的问题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#分词发展"><span class="nav-number">6.2.</span> <span class="nav-text">分词发展</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#性能指标"><span class="nav-number">6.3.</span> <span class="nav-text">性能指标</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#命名实体识别-发展较差"><span class="nav-number">6.4.</span> <span class="nav-text">命名实体识别(发展较差)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#未登录词处理方法-重要"><span class="nav-number">6.5.</span> <span class="nav-text">未登录词处理方法(重要)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#词性标注"><span class="nav-number">6.6.</span> <span class="nav-text">词性标注</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#文本分类"><span class="nav-number">7.</span> <span class="nav-text">文本分类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#文本特征选择方法"><span class="nav-number">7.1.</span> <span class="nav-text">文本特征选择方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#LDA模型-较难"><span class="nav-number">7.2.</span> <span class="nav-text">LDA模型(较难)</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#句法分析"><span class="nav-number">8.</span> <span class="nav-text">句法分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#语义分析"><span class="nav-number">9.</span> <span class="nav-text">语义分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#篇章分析"><span class="nav-number">10.</span> <span class="nav-text">篇章分析</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#问答系统"><span class="nav-number">11.</span> <span class="nav-text">问答系统</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#工具"><span class="nav-number">12.</span> <span class="nav-text">工具</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#顶尖会议及人物"><span class="nav-number">13.</span> <span class="nav-text">顶尖会议及人物</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>

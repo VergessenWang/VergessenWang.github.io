@@ -1,0 +1,955 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="红黑树,AVL树," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="二叉查找树二叉查找树的特征(递归) ——或者是一棵空树或者是具有如下特性的二叉树：  若它的左子树不空，则左子树上所有结点的值均小于根结点的值； 若它的右子树不空，则右子树上所有结点的值均大于根结点的值； 它的左、右子树也分别是二叉排序树。 中序遍历二叉排序树可得到一个关键字的有序序列。  在一般情况下，查找和插入的时间复杂度为logN,  但是在极端情况下会退化为链表，此时查找变为顺序遍历，失去">
+<meta name="keywords" content="红黑树,AVL树">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AVL树、红黑树和伸展树">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/data-structure/2019-12-10-AVL树、红黑树和伸展树.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="二叉查找树二叉查找树的特征(递归) ——或者是一棵空树或者是具有如下特性的二叉树：  若它的左子树不空，则左子树上所有结点的值均小于根结点的值； 若它的右子树不空，则右子树上所有结点的值均大于根结点的值； 它的左、右子树也分别是二叉排序树。 中序遍历二叉排序树可得到一个关键字的有序序列。  在一般情况下，查找和插入的时间复杂度为logN,  但是在极端情况下会退化为链表，此时查找变为顺序遍历，失去">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-12-10T04:25:08.906Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AVL树、红黑树和伸展树">
+<meta name="twitter:description" content="二叉查找树二叉查找树的特征(递归) ——或者是一棵空树或者是具有如下特性的二叉树：  若它的左子树不空，则左子树上所有结点的值均小于根结点的值； 若它的右子树不空，则右子树上所有结点的值均大于根结点的值； 它的左、右子树也分别是二叉排序树。 中序遍历二叉排序树可得到一个关键字的有序序列。  在一般情况下，查找和插入的时间复杂度为logN,  但是在极端情况下会退化为链表，此时查找变为顺序遍历，失去">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/data-structure/2019-12-10-AVL树、红黑树和伸展树.html"/>
+
+
+
+
+
+  <title>AVL树、红黑树和伸展树 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/data-structure/2019-12-10-AVL树、红黑树和伸展树.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">AVL树、红黑树和伸展树</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-10T12:23:05+08:00">
+                2019-12-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/data-structure/" itemprop="url" rel="index">
+                    <span itemprop="name">data_structure</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,420
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h4 id="二叉查找树"><a href="#二叉查找树" class="headerlink" title="二叉查找树"></a>二叉查找树</h4><p>二叉查找树的特征(递归) ——或者是一棵空树或者是具有如下特性的二叉树：</p>
+<ul>
+<li>若它的左子树不空，则左子树上所有结点的值均小于根结点的值；</li>
+<li>若它的右子树不空，则右子树上所有结点的值均大于根结点的值；</li>
+<li>它的左、右子树也分别是二叉排序树。</li>
+<li>中序遍历二叉排序树可得到一个关键字的有序序列。</li>
+</ul>
+<p>在一般情况下，查找和插入的时间复杂度为logN,  但是<strong>在极端情况下会退化为链表</strong>，此时查找变为顺序遍历，失去了排序树的意义。——<strong>构造的二叉查找树的形状依赖于数据项，且依赖于它们加载的顺序</strong></p>
+<p>二叉查找树平衡性很差（即失衡）时，可用AVL树、红黑树和伸展树进行改进。其中AVL树和红黑树是<strong>高度平衡</strong>的，伸展树是<strong>加权平衡</strong>的(将常用的数据项放在树中接近根部的位置)</p>
+<a id="more"></a>
+<h4 id="AVL树"><a href="#AVL树" class="headerlink" title="AVL树"></a>AVL树</h4><p>定义(递归)：或者是一棵空树，或者是具有如下特性的二叉查找树</p>
+<ul>
+<li>左子树和右子树的高度最多相差1；</li>
+<li>它的左、右子树也分别是平衡二叉树。</li>
+</ul>
+<p>如何调整节点以维持高度的平衡？</p>
+<p>Step1：找到不平衡（即左右子树高度差距大于1）的<strong>最小子树的根节点</strong>（记为A）</p>
+<p>Step2：依据新插入节点与节点A的相对位置，进行相应处理。</p>
+<ul>
+<li>LL型失衡: 在A结点的左孩子的左子树上插入结点,导致A结点失去平衡.——<strong>单向右旋平衡处理</strong></li>
+<li>RR型失衡: 单向左旋平衡处理</li>
+<li>LR型失衡: 双向旋转先左后右平衡处理型。<strong>先把下段左旋转换为LL型失衡，再将上段右旋解决LL型失衡</strong></li>
+<li>RL型失衡: 双向旋转先右后左平衡处理型。先把下段右旋转换为RR型失衡，再将上段左旋解决RR型失衡</li>
+</ul>
+<p>为修复失衡所进行的旋转操作可能需要对插入和删除期间所采用的访问路径执行<strong>向后遍历</strong>(当需要多次旋转时）——实现起来比较麻烦？</p>
+<h4 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h4><p>红黑树是满足下列条件的二叉查找树：</p>
+<ul>
+<li>每个节点都带有红色或黑色。节点的颜色由以下规则确定：</li>
+<li>根节点是黑色的。</li>
+<li>所有叶节点都是黑色的。</li>
+<li>在沿着从根出发的任何路径上都不允许出现两个连续的红色节点，即：“红色”结点的两个子结点都是“黑色”的。</li>
+<li>从任一节点到其每个子孙叶子节点的所有简单路径都包含相同数目的黑色节点（简称黑色高度）<ul>
+<li>节点X的黑色高度：从节点X到其子孙叶子节点的简单路径中的黑色链的数量。<ul>
+<li><strong>不包括 X 结点本身，包括叶结点</strong></li>
+<li>外部结点的阶是零； </li>
+</ul>
+</li>
+<li>红黑树的黑色高度：根节点的黑色高度（称为：根节点的阶）<ul>
+<li>阶为 k 的红黑树路径长度：<strong>最短是 k，最长是 2k</strong> ——实现平衡的原因</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>2-3-4树的二叉树的实现本质上就是红黑树</strong>——可利用颜色翻转和旋转来等价实现</p>
+<p>两类基本操作：</p>
+<p>颜色翻转</p>
+<ul>
+<li><strong>实质上为4-节点分裂</strong></li>
+<li>当某个结点的两个孩子结点都为红色时</li>
+<li><strong>将两个红色孩子结点和其黑色双亲结点的颜色翻转</strong></li>
+</ul>
+<p>旋转</p>
+<ul>
+<li>出现右的红色链时；有连续两个红色链时</li>
+<li>依据两个连续的红色链的形状，进行相应的旋转处理（<strong>类似AVL树的失衡旋转规则</strong>）；对于右的红色链，进行左旋处理</li>
+</ul>
+<h4 id="伸展树"><a href="#伸展树" class="headerlink" title="伸展树"></a>伸展树</h4><p>实现一种恒定重排的方式：每次访问树时，都使用旋转操作重排树，<strong>使得访问过的节点位于树的根部</strong>。</p>
+<p>优点：最近使用的数据比未使用过的数据可更快的被访问——局部性原理,<strong>可以用于缓存</strong></p>
+<h5 id="自底向上的伸展-更好理解"><a href="#自底向上的伸展-更好理解" class="headerlink" title="自底向上的伸展(更好理解)"></a><strong>自底向上的伸展</strong>(更好理解)</h5><p>利用旋转，将访问的节点c搬根部。有三种基本操作：</p>
+<p>Case1：若访问的节点c没有祖父节点，则：直接在c与其父节点p之间进行旋转。</p>
+<p>Case2：若访问的节点c，其父节点p，其祖父节点g三者之间的相关位置呈LL或RR型，则：先在p和g间旋转，再在p和c间旋转。（由上至下）</p>
+<p>Case3：若访问的节点，其父节点，其祖父节点三者之间的相关位置呈LR或RL型，则：先在c和p间旋转，再在c和g间旋转。（由下至上）</p>
+<h5 id="自顶向下的伸展"><a href="#自顶向下的伸展" class="headerlink" title="自顶向下的伸展"></a><strong>自顶向下的伸展</strong></h5><p>首先确定从根到访问节点的路径，然后依据路径的形状，进行“分裂”操作。最后，以目标节点作为根进行片断的重组。</p>
+<p>每次分裂操作会将当前树分为左，中，右三个片断。左片断为中间片断的前驱，右片断为中间片断的后继；其中，前驱、后继是指中序遍历顺序。左，右片断分别插入到左右存储树中。</p>
+<p>左连接点：指左存储树中插入新片断的位置，指向<strong>左存储树中最右下角</strong>的节点。</p>
+<p>右连接点：右存储树中插入新片断的位置，指向<strong>右存储树中最左下角</strong>的节点。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/红黑树/" rel="tag"><i class="fa fa-tag"></i> 红黑树</a>
+          
+            <a href="/tags/AVL树/" rel="tag"><i class="fa fa-tag"></i> AVL树</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/DL/2019-12-09-VS2017-Miniconda2编译Caffe.html" rel="next" title="VS2017+Miniconda2编译Caffe">
+                <i class="fa fa-chevron-left"></i> VS2017+Miniconda2编译Caffe
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/poetry/2019-12-11-困兽的悲剧.html" rel="prev" title="困兽的悲剧">
+                困兽的悲剧 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">人真正需要的东西是非常之少的</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#二叉查找树"><span class="nav-number">1.</span> <span class="nav-text">二叉查找树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AVL树"><span class="nav-number">2.</span> <span class="nav-text">AVL树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#红黑树"><span class="nav-number">3.</span> <span class="nav-text">红黑树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#伸展树"><span class="nav-number">4.</span> <span class="nav-text">伸展树</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#自底向上的伸展-更好理解"><span class="nav-number">4.1.</span> <span class="nav-text">自底向上的伸展(更好理解)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#自顶向下的伸展"><span class="nav-number">4.2.</span> <span class="nav-text">自顶向下的伸展</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

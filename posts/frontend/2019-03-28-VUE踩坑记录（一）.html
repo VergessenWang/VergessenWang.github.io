@@ -1,0 +1,898 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="vue2.0,工具配置," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Q1：以前的el挂载点是body；但是在Vue2.0中，是一个名为#app的CSS选择器，template是将会替换挂载元素的模板。（官方：不推荐root实例挂载到 或，且所有的挂载元素都会被Vue生成的DOM替换） Q2：旧版中没有router，先重新建一个不含router的项目开始学习。 Q3 ：ES6 允许在对象之中，直接写变量。这时，属性名为变量名, 属性值为变量的值。">
+<meta name="keywords" content="vue2.0,工具配置">
+<meta property="og:type" content="article">
+<meta property="og:title" content="VUE踩坑记录（一）">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/frontend/2019-03-28-VUE踩坑记录（一）.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="Q1：以前的el挂载点是body；但是在Vue2.0中，是一个名为#app的CSS选择器，template是将会替换挂载元素的模板。（官方：不推荐root实例挂载到 或，且所有的挂载元素都会被Vue生成的DOM替换） Q2：旧版中没有router，先重新建一个不含router的项目开始学习。 Q3 ：ES6 允许在对象之中，直接写变量。这时，属性名为变量名, 属性值为变量的值。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-11T18:27:34.851Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="VUE踩坑记录（一）">
+<meta name="twitter:description" content="Q1：以前的el挂载点是body；但是在Vue2.0中，是一个名为#app的CSS选择器，template是将会替换挂载元素的模板。（官方：不推荐root实例挂载到 或，且所有的挂载元素都会被Vue生成的DOM替换） Q2：旧版中没有router，先重新建一个不含router的项目开始学习。 Q3 ：ES6 允许在对象之中，直接写变量。这时，属性名为变量名, 属性值为变量的值。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/frontend/2019-03-28-VUE踩坑记录（一）.html"/>
+
+
+
+
+
+  <title>VUE踩坑记录（一） | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2019-03-28-VUE踩坑记录（一）.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">VUE踩坑记录（一）</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-03-28T10:05:05+08:00">
+                2019-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  17
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Q1：以前的el挂载点是body；但是在Vue2.0中，是一个名为#app的CSS选择器，template是将会替换挂载元素的模板。（官方：不推荐root实例挂载到<html> 或<body>，且所有的挂载元素都会被Vue生成的DOM替换）</body></html></p>
+<p>Q2：旧版中没有router，先重新建一个不含router的项目开始学习。</p>
+<p>Q3 ：ES6 允许在对象之中，直接写变量。这时，属性名为变量名, 属性值为变量的值。<br><a id="more"></a><br>Q4：自定义标签<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">export default &#123;</span><br><span class="line">      name: &apos;App&apos;,</span><br><span class="line">      components: &#123;</span><br><span class="line">     HelloWorld</span><br><span class="line">   &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Q5: div里面的代表模板，可以访问到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">data () &#123;</span><br><span class="line">    return &#123;</span><br><span class="line">      msg: &apos;Welcome to Your Vue.js App&apos;</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure></p>
+<p>中对应的msg</p>
+<p>Q6:创建一个组件。<br>首先创建一个.vue文件，分为template、script、style三部分，export导出一个对象，对vue的各自属性进行定义。<br>使用时先用import引用，再用components注册，就可以使用该标签</p>
+<p>Q7:webpack原理——了解完了简单配置</p>
+<p>Q8：<a href="https://www.zhangxinxu.com/wordpress/2012/08/window-devicepixelratio" target="_blank" rel="noopener">设备像素比devicePixelRatio简单介绍</a> </p>
+<p>Q9：<a href="https://icomoon.io/" target="_blank" rel="noopener">SVG图标字体制作</a> </p>
+<p>Q10: （已弃用sublime，改用vs code）如何在sublime中新建.vue格式的文件<br>首先安装sublime包插件时出现There are no packages available for installation<br>ctrl+`打开控制台找原因：Error downloading channel. HTTP error 404 downloading <a href="https://packagecontrol.io/channel_v3.json" target="_blank" rel="noopener">https://packagecontrol.io/channel_v3.json</a>.<br>找到一个下载地址：<a href="https://download.csdn.net/download/ming_221/9944588" target="_blank" rel="noopener">https://download.csdn.net/download/ming_221/9944588</a><br>然后在sublime设置：preferences-&gt;package settings -&gt; package control -&gt; settings-user<br>添加一条本地渠道（该文件绝对路径）：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&quot;channels&quot;:</span><br><span class="line">[</span><br><span class="line"></span><br><span class="line">	&quot;/Users/18771/AppData/Roaming/Sublime Text 3/channel_v3.json&quot;</span><br><span class="line"></span><br><span class="line">],</span><br></pre></td></tr></table></figure></p>
+<p>核心问题还是……科学上网啊<br>​<br>    问题解决，开始安装插件<br>新建文件模板插件 SublimeTmpl：在安装包的templates中新建vue.tmpl<br>一个可用模板参见<a href="http://www.imooc.com/article/33817?block_id=tuijian_wz" target="_blank" rel="noopener">http://www.imooc.com/article/33817?block_id=tuijian_wz</a><br>Preferences&gt;Package Settings&gt;SublimeTmpl&gt;Menu中新增vue<br>vue语法高亮插件 Vue Syntax Highlight: 模板绑定语法高亮<br>Preferences&gt;Package Settings&gt;SublimeTmpl&gt;Settings -Users中设置<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&#123;	</span><br><span class="line">	&quot;vue&quot;: &#123;</span><br><span class="line">    	&quot;syntax&quot;: &quot;Packages/vue-syntax-highlight/vue.tmLanguage&quot;,</span><br><span class="line">    	&quot;extension&quot;: &quot;vue&quot; // default_extension</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>但是好像没效果，新版sublime没有文件夹，只有.package文件。也不知道怎么绑定。最后还要手动在右下角选：）<br>所以，我是不是要换一个编辑器了…<br>嗯，换了一个VS code装起插件来简直不要太爽，界面也好看，开心地像个二十几岁的孩子…</p>
+<p>Q11: 科学上网——已用ss解决</p>
+<p>Q12: CSS预编译：stylus，sass, less</p>
+<p>Q12:前后端分离，通过ajax请求进行交互；对接之前，前端通过Mock模拟后台数据</p>
+<p>Q13: vue-cli生成的webpack配置解析中没有-build/dev-server.js: 新版本的vue已将dev-server.js与webpack.dev.conf.js合并了，上面的操作webpack.dev.conf.js中配置就好了</p>
+<p>Q14:VS code快速注释，CTRL+k 然后CTRL+c</p>
+<p>Q15: express is not defined :<br>没有npm install<br>json-server获取服务器数据只能用get方式，而express支持post方式获取数据。<br><code>npm install express –-save</code><br>  <a href="https://blog.csdn.net/tjj3027/article/details/80540239" target="_blank" rel="noopener">具体含义</a><br>但是安装完了之后，package.js中有了包”express”: “^4.16.4”,，可以仍然显示没有定义：<br>express在4.0之后，需要安装the executable（执行器express-generator）才能执行express命令，<code>npm install express-generator</code><br>终端运行<code>npm run dev</code> 编译通过，但是api没有配置成功，发现还是新版本webpack.dev.conf.js请求本地数据的配置的问题：<br><a href="https://www.cnblogs.com/chen-cong/p/8001352.html" target="_blank" rel="noopener">参见</a><br>要添加到devServer中，注意别忘了逗号<br>在8080调用api显示成功，但是不美观，没有格式化。安装Google插件JSON Viewer,<br>接口调用成功</p>
+<p>Q16: 整体缩进  Ctrl+】</p>
+<p>Q17:在static中将css进行reset</p>
+<p>Q18: vscode 新建vue模板:user snippets中设置，新建后输入vue按tab键，模板代码就出来了</p>
+<p>Q19: 安装 stylus-loader后出现Cannot find module ‘stylus’<br>原因：需要安装stylus 再安装stylus-loader再进行npm install<br>解决：重新安装<code>npm install stylus --save-dev</code> <code>npm install stylus-loader --save-dev</code></p>
+<p>Q20:快速复制一行  按住Ctrl+Alt+Down，即可以在下面快速复制一行，按住Ctrl+Alt+Up，即可以在上面快速复制一行。</p>
+<p>Q20:Flex布局 实现三等分</p>
+<p>Q21:vue-router实现跳转，router.map is not a function报错<br>原因：2.0已经没有map和start方法<br><a href="https://vuejs.org/v2/guide/migration-vue-router.html#router-map-replaced" target="_blank" rel="noopener">参考文档</a><br>将<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">let app = Vue.extend(App);</span><br><span class="line">var router = new VueRouter();</span><br><span class="line"></span><br><span class="line">router.map(&#123;</span><br><span class="line">  &apos;/goods&apos;: &#123;</span><br><span class="line">    component: goods</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>替换为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">const routes = [</span><br><span class="line">  &#123;path: &apos;/goods&apos;, component: goods&#125;,</span><br><span class="line">  &#123;path: &apos;/ratings&apos;, component: ratings&#125;,</span><br><span class="line">  &#123;path: &apos;/seller&apos;, component: seller&#125;</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line">const router = new VueRouter(&#123;</span><br><span class="line">  routes</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p>将<br><code>router.start(app, &#39;#app&#39;);</code><br>替换为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">/* eslint-disable no-new */</span><br><span class="line">new Vue(&#123;</span><br><span class="line">  el: &apos;#app&apos;,</span><br><span class="line">  router,</span><br><span class="line">  components: &#123;</span><br><span class="line">    App</span><br><span class="line">  &#125;,</span><br><span class="line">  template: &apos;&lt;App/&gt;&apos;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure></p>
+<p><a href="https://segmentfault.com/a/1190000011298261" target="_blank" rel="noopener">一个用法的实例</a><br>编译通过后又出现问题：Failed to resolve directive: link<br>原因：vue的版本升级后，取消了v-link指定，取而代之的为 router-link。router-link组件支持用户在具有路由功能的应用中点击导航。 通过 to 属性指定目标地址，默认渲染成带有正确链接的 a标签，可以通过配置 tag 属性生成别的标签。<br>解决：a v-link=”{path:’/goods’}”商品/a替换为router-link to=”/goods”商品/router-link (markdown转义不会弄，没加标签&lt;&gt;)<br>总算路由成功！！！</p>
+<p>Q22：在webpack中配置alis可以简化路径</p>
+<p>Q23:设置默认路由router.go后页面一直刷新<br>原因：router的设计模式是参考了浏览器的window.history相关API，同history.go, router.go接受的参数应该为Number<br>解决一：不用router.go ,直接在routes中增加 <code>{path: &#39;/&#39;, component: goods},</code><br>解决二（更好）：用router.push方法</p>
+<p>Q24: CSS预编译语法  引用父选择符： &amp;</p>
+<p>Q25: 标签最好设置为display：block 扩大可点击范围<br>&amp;.router-link格式设置不生效<br>&amp;.active选中标签高亮不生效<br>原因：选择器有点问题。当目标路由成功激活时，链接元素自动设置一个表示激活的 CSS 类名active-class=”activeClass”<br>解决：在router-link中加上tag=”li”，通过&amp; &gt; li将其渲染成li标签来选择router-link。在router中全局配置linkActiveClass: ‘active’重命名激活标签，激活时标签通过&amp;.active来选择</p>
+<p>Q26:通过stylus的mixin方法实现通用一像素伪类的绝对定位，同时全局定义base根据不同设备缩放（主要是通过调整scaleY使得DPI*缩放=1）<br>问题：tab-item字体被压扁<br>原因：border-1px那个方法改变了scaleY压缩了字体。用transform做了个3d坐标轴，然后每个轴都要写上文字节点ul，问题是放在三个平面内的文字会跟各自平面一起被变形和压扁<br>解决：不用border-1px方法了… “tab border-1px”还原为tab<br>以后再找解决方法，现在这个不重要，知道保持像素的方法就行</p>
+<p>Q27:Vue-resource 实现Ajax请求（vue-resource已经不再是官方推荐的ajax库了，请使用axios）<br><code>npm install vue-resource –save</code><br>Vue的每个实例在生命周期中有一个钩子函数created。response.body()返回一个json类型的对象,通过api拿到数据后传给组件，组件通过props接收<br>问题：”TypeError: Cannot read property ‘avatar’ of undefined”<br>原因：页面进行了渲染和请求接口获取数据，异步进行，所以获取数据没有完成时，页面已经进行渲染，所以第一次报使用未定义变量。<br>解决：<v-header :seller="seller"> 父组件  &lt;:src=”seller.avatar”&gt; 子组件   用v-bind: 方法引用<br>问题：图片无法显示<br>原因：if (response.erron === ERR_OK) 改成不等号。检查到头都大了：）</v-header></p>
+<p>Q28:要判断状态码时最好设置为一个常量，便于后续修改</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/vue2-0/" rel="tag"><i class="fa fa-tag"></i> vue2.0</a>
+          
+            <a href="/tags/工具配置/" rel="tag"><i class="fa fa-tag"></i> 工具配置</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/life/2019-03-27-迟来的2018年感悟.html" rel="next" title="迟来的2018年感悟">
+                <i class="fa fa-chevron-left"></i> 迟来的2018年感悟
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/network/2019-08-11-TCP-IP协议下Socket编程原理.html" rel="prev" title="TCP/IP协议下Socket编程原理">
+                TCP/IP协议下Socket编程原理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+
+      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">人真正需要的东西是非常之少的</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

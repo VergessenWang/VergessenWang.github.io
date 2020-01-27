@@ -1,0 +1,992 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="数据结构,线性表,算法," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="CH0参考书：  《程序员实用算法》 《编程珠玑》(第二版) 《算法导论》  课前：阅读代码并验证其性能，调研STL库 课后：加深对算法设计思想的理解。(自己理解了一个问题跟用自己的话向别人解释是有很大区别的) 本课程的重点：依据问题定义、输入数据的特征和要求输出的数据的特征，分析广泛的解决方案（数据结构+算法），并选择最佳的解决方案 CH1 绪论重点：算法的概念、算法与相关术语的关联难点：算法时">
+<meta name="keywords" content="数据结构,线性表,算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实用算法前三章笔记">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/data-structure/2019-10-02-实用算法前三章笔记.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="CH0参考书：  《程序员实用算法》 《编程珠玑》(第二版) 《算法导论》  课前：阅读代码并验证其性能，调研STL库 课后：加深对算法设计思想的理解。(自己理解了一个问题跟用自己的话向别人解释是有很大区别的) 本课程的重点：依据问题定义、输入数据的特征和要求输出的数据的特征，分析广泛的解决方案（数据结构+算法），并选择最佳的解决方案 CH1 绪论重点：算法的概念、算法与相关术语的关联难点：算法时">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-11-12T15:37:43.290Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="实用算法前三章笔记">
+<meta name="twitter:description" content="CH0参考书：  《程序员实用算法》 《编程珠玑》(第二版) 《算法导论》  课前：阅读代码并验证其性能，调研STL库 课后：加深对算法设计思想的理解。(自己理解了一个问题跟用自己的话向别人解释是有很大区别的) 本课程的重点：依据问题定义、输入数据的特征和要求输出的数据的特征，分析广泛的解决方案（数据结构+算法），并选择最佳的解决方案 CH1 绪论重点：算法的概念、算法与相关术语的关联难点：算法时">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/data-structure/2019-10-02-实用算法前三章笔记.html"/>
+
+
+
+
+
+  <title>实用算法前三章笔记 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/data-structure/2019-10-02-实用算法前三章笔记.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">实用算法前三章笔记</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-02T21:42:35+08:00">
+                2019-10-02
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/data-structure/" itemprop="url" rel="index">
+                    <span itemprop="name">data_structure</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,432
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="CH0"><a href="#CH0" class="headerlink" title="CH0"></a>CH0</h3><p>参考书：</p>
+<ul>
+<li>《程序员实用算法》</li>
+<li>《编程珠玑》(第二版)</li>
+<li>《算法导论》</li>
+</ul>
+<p>课前：阅读代码并验证其性能，调研STL库</p>
+<p>课后：加深对算法设计思想的理解。(自己理解了一个问题跟用自己的话向别人解释是有很大区别的)</p>
+<p>本课程的重点：依据问题定义、输入数据的特征和要求输出的数据的特征，分析广泛的解决方案（数据结构+算法），并选择<strong>最佳</strong>的解决方案</p>
+<h3 id="CH1-绪论"><a href="#CH1-绪论" class="headerlink" title="CH1 绪论"></a>CH1 绪论</h3><p>重点：算法的概念、算法与相关术语的关联<br><strong>难点：算法时间复杂度的估算</strong> </p>
+<a id="more"></a>
+<p>什么是算法：</p>
+<ul>
+<li>描述了特定问题的<strong>有限</strong>求解步骤；</li>
+<li>指为了解决特定问题，而<strong>操作数据的方式</strong>；</li>
+<li>指求解问题的<strong>策略</strong> </li>
+</ul>
+<p>五大特征：有穷性、确定性、可行性、零或多个输入、一或多个输出</p>
+<p>五大要求：正确性、可读性、健壮性、高效率、低存储</p>
+<p>程序： 指为计算机处理问题而编制的一组<strong>指令</strong> </p>
+<p><strong>算法 + 数据结构 = 程序</strong></p>
+<h4 id="数据结构"><a href="#数据结构" class="headerlink" title="数据结构"></a>数据结构</h4><ul>
+<li>性质相同<strong>的数据元素的有限集合及其上的关系</strong>的有限集合（数据+结构）</li>
+<li>是描述现实世界实体的数据模型及其上的操作在<strong>计算机上的表示和实现</strong></li>
+<li>包括逻辑结构和存储结构/物理结构</li>
+</ul>
+<p>数据类型：系统定义的int, char等，用户自定义的struct类型。也可采用typedef将类型名重命名，以增加代码的可读<br>性。</p>
+<p>数据结构的选择是与具体问题以及相应的约束密切相关的。</p>
+<p>而且有时候采用一些特殊的存储结构，可以使得解决算法相当巧妙。</p>
+<h4 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h4><p>一般我们用大O来进行比较，但是这只是一个大致的比较，在相差比较大的时候很有用。如果两个算法的大O是一样，则还要从实际运算时间去比较，因为可能有的语句涉及到了调用，本身需要多步执行，这样在实际运行的时候就会有很大的差异。</p>
+<p>另外数据本身的规律也会影响时间复杂度，如在排序算法中经常会比较最好和最坏情况。</p>
+<h4 id="空间复杂度"><a href="#空间复杂度" class="headerlink" title="空间复杂度"></a>空间复杂度</h4><p>内存 + 栈空间</p>
+<p>经典的节省空间方法：bitmap</p>
+<p>通过在C++中对分配空间后的地址进行计算，可得知<strong>每次分配的内存实际上都是大于数据类型本身的大小的</strong>。在这里，是直接算的首末地址的差值，注意与用<code>sizeof</code>的时候涉及的数据对齐问题相区别。</p>
+<p>申请1~8B：实际分配32B；申请9~16B：实际分配40B；申请17~24B：实际分配48B。<strong>申请分配内存空间1次，额外开销为： 24~31B</strong></p>
+<p>由此看见，每一次分配内存实际都会有额外的开销，会降低Cache的存储密度从而降低算法的执行性能，同时内存的分配和销毁也是一个耗时的工作。<strong>要尽量减少分配内存的次数</strong>，可以用<strong>内存池</strong>等方法来解决。</p>
+<h4 id="代码优化"><a href="#代码优化" class="headerlink" title="代码优化"></a>代码优化</h4><ul>
+<li>尽量<strong>减少输入输出</strong><ul>
+<li>扩展缓冲区</li>
+</ul>
+</li>
+<li><strong>减少函数调用的次数</strong></li>
+<li><strong>限制计算密集型操作</strong>（浮点运算，除法运算）；</li>
+<li>确定最耗时的操作，并提高其性能<ul>
+<li>可用测量和跟踪工具（如， Profiler，AQTime） </li>
+</ul>
+</li>
+</ul>
+<h4 id="影响选择算法的决定性因素"><a href="#影响选择算法的决定性因素" class="headerlink" title="影响选择算法的决定性因素"></a>影响选择算法的决定性因素</h4><ul>
+<li>问题时间和空间的约束</li>
+<li>存何种信息，数据结构</li>
+<li>输入输出数据的特征</li>
+</ul>
+<h3 id="CH2-线性表"><a href="#CH2-线性表" class="headerlink" title="CH2  线性表"></a>CH2  线性表</h3><p>参考: 实用算法第2章  编程珠玑 1.4  13.4 </p>
+<p>重点：理解线性表的逻辑特点；掌握线性表两种存储结构的特点、实现（C定义）及其基本操作的实现、适用范围；掌握算法的描述方法：伪代码和算法流程图；会粗略分析算法的时间复杂度（三种情况下）和内存开销。</p>
+<p><strong>难点</strong>：对于给定的应用需求——设计数据结构的一般过程</p>
+<ol>
+<li>判断是否需要用到DS？——操作对象为：取值为同种类型的很多数据，且这些数据间存在某种关系 或者 某些共性操作 </li>
+<li>判断是否适合用线性表来刻画同类数据之间的关系？（逻辑结构）——被操作的数据之间没有天然的一对多 和 多对多的关系 ；对已存储的数据进行处理时，处理顺序 有明显的<strong>唯一的先后次序关系</strong> </li>
+<li>设计线性表的存储结构（包括：存储哪些数据（包括数据类型和取值）？顺序存储/链式存储的选择？） （数据+存储结构）——取决于数据处理时的<strong>最频繁</strong>操作，为静态操作，还是动态操作？ </li>
+<li><strong>编码实现数据的存储结构</strong>—— 学会<strong>画图</strong>设计DS并实现</li>
+<li><strong>利用线性表的基本操作来解决问题</strong> </li>
+</ol>
+<p>四类数据结构：</p>
+<ul>
+<li>集合：元素间无任何关系，即关系集合是空集： S={}    如C中的枚举</li>
+<li>线性：1:1</li>
+<li>树形：1:n </li>
+<li>图形：n:n</li>
+</ul>
+<p>图形渲染的例子： 红 —— 线性   紫—— 树形</p>
+<h4 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h4><ul>
+<li>创建空的线性表</li>
+<li>销毁已有线性表</li>
+<li>查找直接后继和直接前驱</li>
+<li>插入一个元素</li>
+<li>删除一个元素 </li>
+</ul>
+<p>存储结构：顺序表和链表两种方式</p>
+<p>健壮性：从数据操作的<strong>位置</strong> 和 空间是否<strong>上溢或下溢</strong> 两个方面来考虑</p>
+<h4 id="顺序表"><a href="#顺序表" class="headerlink" title="顺序表"></a>顺序表</h4><p>在内存中连续存储的线性表 ，<strong>用下标来表明线性特征</strong> </p>
+<h5 id="静态定义：数组"><a href="#静态定义：数组" class="headerlink" title="静态定义：数组"></a>静态定义：数组</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> List_Size 100<span class="comment">/*分配空间的大小*/</span></span></span><br><span class="line">Typedef Struct&#123;</span><br><span class="line"><span class="keyword">int</span> elem[List_Size ]; <span class="comment">/*存储空间*/</span></span><br><span class="line"><span class="keyword">int</span> len; <span class="comment">/*实际长度*/</span></span><br><span class="line">&#125;SqList_static;</span><br></pre></td></tr></table></figure>
+<p>类似STL:vector </p>
+<p>在编译的时候， 系统在<strong>函数栈</strong>中分配连续的内存空间。当静态顺序表所在的函数执行完毕后，由<strong>系统来回收</strong>所开辟的内存空间。 </p>
+<p>缺点：空间分配不够灵活</p>
+<h5 id="动态定义：指针"><a href="#动态定义：指针" class="headerlink" title="动态定义：指针"></a>动态定义：指针</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> List_Size 100 <span class="comment">/*分配空间的大小*/</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span>&#123;</span></span><br><span class="line"><span class="keyword">int</span> *elem; <span class="comment">/*顺序表的存储空间*/</span></span><br><span class="line"><span class="keyword">int</span> len; <span class="comment">/*实际长度*/</span></span><br><span class="line"><span class="keyword">int</span> ListSize ; <span class="comment">/*当前分配的空间大小*/</span></span><br><span class="line">&#125; Sqlist;</span><br></pre></td></tr></table></figure>
+<p>用<code>malloc()</code> <code>realloc()</code> <code>free()</code> 手动管理空间分配，实现了灵活，但增加了开销——CH1 中的内容可知，每次分配内容都是有额外开销的</p>
+<p><a href="https://blog.csdn.net/msdnwolaile/article/details/51695361" target="_blank" rel="noopener">malloc原理</a>   关于malloc之后再仔细研究一下</p>
+<p>初始化</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">InitSqList</span><span class="params">(SqList *L)</span><span class="comment">//构造一个空的顺序表L</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">L-&gt;elem=(<span class="keyword">int</span> *) <span class="built_in">malloc</span>(List_Size *<span class="keyword">sizeof</span>(<span class="keyword">int</span>));</span><br><span class="line"><span class="keyword">if</span> (L-&gt;elem==<span class="literal">NULL</span>)</span><br><span class="line"><span class="built_in">exit</span>(EXIT_FAILURE);</span><br><span class="line">L-&gt;len=<span class="number">0</span>;</span><br><span class="line">L-&gt;ListSize =List_Size;</span><br><span class="line"><span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="静态-VS-动态"><a href="#静态-VS-动态" class="headerlink" title="静态 VS 动态"></a>静态 VS 动态</h5><p>都是连续的空间，<strong>增、删、查</strong>的方式一样；区别在于对内存的分配和回收方式上</p>
+<p>由此可以看出：<strong>数组≠顺序表    并不是只有链表中才能有指针</strong>   </p>
+<p>不要建立 “数组形式即为顺序表，有指针即为链表的刻板印象”</p>
+<h5 id="插入元素"><a href="#插入元素" class="headerlink" title="插入元素"></a>插入元素</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">ListInsert_Sq</span><span class="params">( SqList &amp;L, <span class="keyword">int</span> i, ElemType e)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line"><span class="comment">// 位置合法性的判断</span></span><br><span class="line"><span class="keyword">if</span> ( i&lt;<span class="number">1</span> || i&gt;L.len +<span class="number">1</span> ) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"><span class="comment">// 上溢时增加空间的分配</span></span><br><span class="line"><span class="keyword">if</span>( L.len &gt;= L.listsize)</span><br><span class="line">&#123;</span><br><span class="line">newbase = (ElemType *) <span class="built_in">realloc</span>(L.elem,</span><br><span class="line">(L.listsize+ LISTINCREMENT)*<span class="keyword">sizeof</span>(ElemType));</span><br><span class="line"><span class="keyword">if</span> ( newbase == <span class="literal">NULL</span> ) <span class="built_in">exit</span>(OVERFLOW);</span><br><span class="line">L.elem = newbase;</span><br><span class="line">L.listsize += LISTINCREMENT;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 插入元素</span></span><br><span class="line"><span class="keyword">for</span> ( j = L.len; j &gt;= i; j--) L.elem[j] = L.elem[j<span class="number">-1</span>];</span><br><span class="line">L.elem[i<span class="number">-1</span>] = e;</span><br><span class="line">L.len++;</span><br><span class="line"><span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h5 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h5><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">ListDelete_Sq</span><span class="params">( SqList &amp;L, <span class="keyword">int</span> i)</span> </span>&#123;</span><br><span class="line"><span class="comment">// 位置合法性的判断</span></span><br><span class="line"><span class="keyword">if</span> ( i&lt;<span class="number">1</span> || i&gt;L.len ) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line"><span class="comment">// 删除</span></span><br><span class="line"><span class="keyword">for</span> ( j = i; j &lt; L.len ; j++) L.elem[j<span class="number">-1</span>] = L.elem[j];</span><br><span class="line">L.len--;</span><br><span class="line"><span class="keyword">return</span> <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="链表"><a href="#链表" class="headerlink" title="链表"></a>链表</h4><p><strong>用链来表明线性特征</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span>&#123;</span></span><br><span class="line"><span class="keyword">int</span> data;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">next</span>&#125;;</span></span><br><span class="line">&#125;;</span><br><span class="line">Typedef <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">Link</span>;</span></span><br><span class="line">Link head;</span><br></pre></td></tr></table></figure>
+<h5 id="插入算法"><a href="#插入算法" class="headerlink" title="插入算法"></a>插入算法</h5><h6 id="有头结点"><a href="#有头结点" class="headerlink" title="有头结点"></a>有头结点</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">ListInsert</span><span class="params">(LinkList &amp;L, <span class="keyword">int</span> i, ElemType e)</span></span>&#123;</span><br><span class="line"><span class="comment">// 有头结点，无须对i为1的插入位置作特殊处理</span></span><br><span class="line">p = L; j = <span class="number">0</span>; <span class="comment">// 对p,j初始化; *p为L的第j个结点</span></span><br><span class="line"><span class="keyword">while</span>( p != <span class="literal">NULL</span> &amp;&amp; j&lt;i<span class="number">-1</span>)&#123;</span><br><span class="line">	p = p-&gt;next;</span><br><span class="line">	j++; <span class="comment">// 寻找第i-1个结点的位置</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>( p == <span class="literal">NULL</span> || j&gt;i<span class="number">-1</span>) <span class="keyword">return</span> ERROR;<span class="comment">// i小于1或大于表长</span></span><br><span class="line">s = (LinkList )<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LNode)); <span class="comment">// 生成新结点</span></span><br><span class="line"><span class="keyword">if</span> ( s == <span class="literal">NULL</span> ) <span class="built_in">exit</span>(OVERFLOW);<span class="comment">// 空间分配不成功，报错返回</span></span><br><span class="line">s-&gt;data = e; s-&gt;next = p-&gt;next; <span class="comment">// 插入L中</span></span><br><span class="line">p-&gt;next = s;</span><br><span class="line"><span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h6 id="无头结点"><a href="#无头结点" class="headerlink" title="无头结点"></a>无头结点</h6><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Status <span class="title">ListInsert</span><span class="params">(LinkList &amp;L, <span class="keyword">int</span> i, ElemType e)</span> </span>&#123;</span><br><span class="line"><span class="comment">// 无头结点，须对i为1的插入位置作特殊处理</span></span><br><span class="line"><span class="keyword">if</span> ( i==<span class="number">1</span>)&#123;</span><br><span class="line">s = (LinkList )<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LNode)); <span class="comment">// 生成新结点</span></span><br><span class="line"><span class="keyword">if</span> ( s == <span class="literal">NULL</span> ) <span class="built_in">exit</span>(OVERFLOW); <span class="comment">// 空间分配不成功，报错返回</span></span><br><span class="line">s-&gt;data = e; s-&gt;next = L; <span class="comment">// 插入到链表L中</span></span><br><span class="line">L = s; <span class="comment">// 修改链头指针L</span></span><br><span class="line">&#125;<span class="keyword">else</span>&#123;</span><br><span class="line">p = L; j = <span class="number">1</span>; <span class="comment">// 对p,j初始化; *p为链表的第j个结点</span></span><br><span class="line"><span class="keyword">while</span>( p != <span class="literal">NULL</span> &amp;&amp; j&lt;i<span class="number">-1</span>)&#123;</span><br><span class="line">p = p-&gt;next;</span><br><span class="line">j++; <span class="comment">// 寻找第i-1个结点的位置</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span>( p == <span class="literal">NULL</span> || j&gt;i<span class="number">-1</span>) <span class="keyword">return</span> ERROR;<span class="comment">// i小于1或大于表长</span></span><br><span class="line">s = (LinkList )<span class="built_in">malloc</span>(<span class="keyword">sizeof</span>(LNode)); <span class="comment">// 生成新结点*s</span></span><br><span class="line"><span class="keyword">if</span> ( s == <span class="literal">NULL</span> ) <span class="built_in">exit</span>(OVERFLOW); <span class="comment">// 空间分配不成功，报错返回</span></span><br><span class="line">s-&gt;data = e; s-&gt;next = p-&gt;next; <span class="comment">// 插入到链表L中</span></span><br><span class="line">p-&gt;next = s;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">return</span> OK;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>区别在于<strong>是否对i为1的插入位置作特殊处理</strong> ,实际上是对于第一个结点而言是否有前驱结点</p>
+<p>STL:list 是一个<strong>双向链表</strong></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">Struct Node&#123;</span><br><span class="line">ElemType data;</span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">prior</span>;</span></span><br><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Node</span> *<span class="title">next</span>;</span></span><br><span class="line">&#125;;</span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">Node</span> * <span class="title">Link</span>;</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> &#123;</span></span><br><span class="line">Link head, tail;</span><br><span class="line"><span class="keyword">int</span> len;</span><br><span class="line">&#125;DLinkList;</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据结构/" rel="tag"><i class="fa fa-tag"></i> 数据结构</a>
+          
+            <a href="/tags/线性表/" rel="tag"><i class="fa fa-tag"></i> 线性表</a>
+          
+            <a href="/tags/算法/" rel="tag"><i class="fa fa-tag"></i> 算法</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/NLP/2019-10-01-几种分词算法对比.html" rel="next" title="几种分词算法对比">
+                <i class="fa fa-chevron-left"></i> 几种分词算法对比
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/NLP/2019-10-04-Jieba分词包使用.html" rel="prev" title="Jieba分词包使用">
+                Jieba分词包使用 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">人真正需要的东西是非常之少的</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#CH0"><span class="nav-number">1.</span> <span class="nav-text">CH0</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CH1-绪论"><span class="nav-number">2.</span> <span class="nav-text">CH1 绪论</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#数据结构"><span class="nav-number">2.1.</span> <span class="nav-text">数据结构</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#时间复杂度"><span class="nav-number">2.2.</span> <span class="nav-text">时间复杂度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#空间复杂度"><span class="nav-number">2.3.</span> <span class="nav-text">空间复杂度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码优化"><span class="nav-number">2.4.</span> <span class="nav-text">代码优化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#影响选择算法的决定性因素"><span class="nav-number">2.5.</span> <span class="nav-text">影响选择算法的决定性因素</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CH2-线性表"><span class="nav-number">3.</span> <span class="nav-text">CH2  线性表</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#基本操作"><span class="nav-number">3.1.</span> <span class="nav-text">基本操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#顺序表"><span class="nav-number">3.2.</span> <span class="nav-text">顺序表</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#静态定义：数组"><span class="nav-number">3.2.1.</span> <span class="nav-text">静态定义：数组</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#动态定义：指针"><span class="nav-number">3.2.2.</span> <span class="nav-text">动态定义：指针</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#静态-VS-动态"><span class="nav-number">3.2.3.</span> <span class="nav-text">静态 VS 动态</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#插入元素"><span class="nav-number">3.2.4.</span> <span class="nav-text">插入元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除元素"><span class="nav-number">3.2.5.</span> <span class="nav-text">删除元素</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#链表"><span class="nav-number">3.3.</span> <span class="nav-text">链表</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#插入算法"><span class="nav-number">3.3.1.</span> <span class="nav-text">插入算法</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#有头结点"><span class="nav-number">3.3.1.1.</span> <span class="nav-text">有头结点</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#无头结点"><span class="nav-number">3.3.1.2.</span> <span class="nav-text">无头结点</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

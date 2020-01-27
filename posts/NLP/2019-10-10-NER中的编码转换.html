@@ -1,0 +1,914 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="NER,BIOES编码," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="命名实体识别(NER)的作用：关系抽取、事件抽取、知识图谱(分构建和应用两个方向，构建目前人工干预还是需要很多)、问答系统、机器翻译… 通用实体分类：人名、地名、组织机构名、日期时间、专用名词 学术上的分类：  三大类：实体类、时间类、数字类 七小类：人名、地名、组织机构名、时间、日期、货币、百分比  相关算法早期：基于字典，基于规则 传统ML：HMM  MEMM  CRF DL:  RNN-CR">
+<meta name="keywords" content="NER,BIOES编码">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NER中的编码转换">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/NLP/2019-10-10-NER中的编码转换.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="命名实体识别(NER)的作用：关系抽取、事件抽取、知识图谱(分构建和应用两个方向，构建目前人工干预还是需要很多)、问答系统、机器翻译… 通用实体分类：人名、地名、组织机构名、日期时间、专用名词 学术上的分类：  三大类：实体类、时间类、数字类 七小类：人名、地名、组织机构名、时间、日期、货币、百分比  相关算法早期：基于字典，基于规则 传统ML：HMM  MEMM  CRF DL:  RNN-CR">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-10-10T16:02:23.714Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NER中的编码转换">
+<meta name="twitter:description" content="命名实体识别(NER)的作用：关系抽取、事件抽取、知识图谱(分构建和应用两个方向，构建目前人工干预还是需要很多)、问答系统、机器翻译… 通用实体分类：人名、地名、组织机构名、日期时间、专用名词 学术上的分类：  三大类：实体类、时间类、数字类 七小类：人名、地名、组织机构名、时间、日期、货币、百分比  相关算法早期：基于字典，基于规则 传统ML：HMM  MEMM  CRF DL:  RNN-CR">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/NLP/2019-10-10-NER中的编码转换.html"/>
+
+
+
+
+
+  <title>NER中的编码转换 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/NLP/2019-10-10-NER中的编码转换.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">NER中的编码转换</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-10T23:57:45+08:00">
+                2019-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/" itemprop="url" rel="index">
+                    <span itemprop="name">NLP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  952
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>命名实体识别(NER)的作用：<strong>关系抽取</strong>、事件抽取、<strong>知识图谱</strong>(分构建和应用两个方向，构建目前人工干预还是需要很多)、问答系统、机器翻译…</p>
+<p>通用实体分类：人名、地名、组织机构名、日期时间、专用名词</p>
+<p>学术上的分类：</p>
+<ul>
+<li>三大类：实体类、时间类、数字类</li>
+<li>七小类：人名、地名、组织机构名、时间、日期、货币、百分比</li>
+</ul>
+<h3 id="相关算法"><a href="#相关算法" class="headerlink" title="相关算法"></a>相关算法</h3><p>早期：基于字典，基于规则</p>
+<p>传统ML：HMM  MEMM  CRF</p>
+<p>DL:  RNN-CRF  CNN-CRF</p>
+<p>学术界近期方法：<u>注意力模型，迁移学习，半监督学习</u>  —— 有时间了解下</p>
+<p>BiLSTM + CRF</p>
+<p>从双向神经网络输出的结果为什么还要经过CRF的处理？—— 输出的是一系列标签的概率，而且每个字之间是相互独立的，利用CRF的<strong>条件转移概率矩阵</strong>，可以改善输出结果</p>
+<p>本次主要学习实体抽取前对中文字的词性标注后的编码转换，这是进行更深入信息抽取的基础工作</p>
+<a id="more"></a>
+<h3 id="加载数据"><a href="#加载数据" class="headerlink" title="加载数据"></a>加载数据</h3><p>获取训练数据集：<a href="https://github.com/zjy-ucas/ChineseNER" target="_blank" rel="noopener">采用github上的中文NER数据</a></p>
+<p>数据导入</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">load_sentences</span><span class="params">(path)</span>:</span></span><br><span class="line">    <span class="comment"># 存放数据集</span></span><br><span class="line">    sentences = []</span><br><span class="line">    <span class="comment"># 临时存放每一个句子</span></span><br><span class="line">    sentence = []</span><br><span class="line">    <span class="keyword">for</span> line <span class="keyword">in</span> codecs.open(path, <span class="string">'r'</span>, encoding=<span class="string">'utf8'</span>):</span><br><span class="line">        <span class="comment"># 去掉两边空格</span></span><br><span class="line">        line = line.strip()</span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> line:  <span class="comment"># 是否读完一个句子</span></span><br><span class="line">            <span class="keyword">if</span> len(sentence) &gt; <span class="number">0</span>:</span><br><span class="line">                sentences.append(sentence)</span><br><span class="line">                sentence = []</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">if</span> line[<span class="number">0</span>] == <span class="string">" "</span>:</span><br><span class="line">                <span class="keyword">continue</span></span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                word = line.split()</span><br><span class="line">                <span class="keyword">assert</span> len(word) &gt;= <span class="number">2</span></span><br><span class="line">                sentence.append(word)</span><br><span class="line">    <span class="comment"># 确保最后一个句子被读入</span></span><br><span class="line">    <span class="keyword">if</span> len(sentence) &gt; <span class="number">0</span>:</span><br><span class="line">        sentences.append(sentence)</span><br><span class="line">    <span class="keyword">return</span> sentences</span><br></pre></td></tr></table></figure>
+<p>首先检查是否为BIO编码格式，如</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">开 O</span><br><span class="line">始 O</span><br><span class="line">修 O</span><br><span class="line">建 O</span><br><span class="line">莫 B-LOC</span><br><span class="line">斯 I-LOC</span><br><span class="line">科 I-LOC</span><br><span class="line">到 O</span><br><span class="line">圣 B-LOC</span><br><span class="line">彼 I-LOC</span><br><span class="line">得 I-LOC</span><br><span class="line">堡 I-LOC</span><br></pre></td></tr></table></figure>
+<h3 id="BIO检验"><a href="#BIO检验" class="headerlink" title="BIO检验"></a>BIO检验</h3><p>先进行检验，如果不符合，做相应的处理进行转换</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">check_bio</span><span class="params">(tags)</span>:</span></span><br><span class="line">    <span class="comment">#  检查输入的编码是否符合BIO编码，如I一定在B之后;不符合则进行调整</span></span><br><span class="line">    <span class="keyword">for</span> i, tag <span class="keyword">in</span> enumerate(tags):</span><br><span class="line">        <span class="keyword">if</span> tag == <span class="string">'O'</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        tag_list = tag.split(<span class="string">"-"</span>)</span><br><span class="line">        <span class="keyword">if</span> len(tag_list) != <span class="number">2</span> <span class="keyword">or</span> tag_list[<span class="number">0</span>] <span class="keyword">not</span> <span class="keyword">in</span> set([<span class="string">'B'</span>, <span class="string">'I'</span>]):</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">False</span></span><br><span class="line">        <span class="keyword">if</span> tag_list[<span class="number">0</span>] == <span class="string">'B'</span>:</span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">elif</span> i == <span class="number">0</span> <span class="keyword">or</span> tags[i<span class="number">-1</span>] == <span class="string">'O'</span>:  <span class="comment">#  前一位置为O，且当前位置不为B,则转换为B,即I-ORG转为B-ORG</span></span><br><span class="line">            tag[i] = <span class="string">'B'</span> + tag[<span class="number">1</span>:]</span><br><span class="line">        <span class="keyword">elif</span> tags[i<span class="number">-1</span>][<span class="number">1</span>:] == tag[<span class="number">1</span>:]:  <span class="comment">#  判断尾部三位是否合法</span></span><br><span class="line">            <span class="keyword">continue</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="comment">#  如果编码类型完全不一致，则从B开始编码</span></span><br><span class="line">            tags[i] = <span class="string">'B'</span> + tag[<span class="number">1</span>:]</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">True</span></span><br></pre></td></tr></table></figure>
+<h3 id="转为BIOES格式"><a href="#转为BIOES格式" class="headerlink" title="转为BIOES格式"></a>转为BIOES格式</h3><p>然后将BIO格式转为BIOES格式</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">bio_to_bioes</span><span class="params">(tags)</span>:</span></span><br><span class="line">    new_tags = []</span><br><span class="line">    <span class="keyword">for</span> i, tag <span class="keyword">in</span> enumerate(tags):</span><br><span class="line">        <span class="keyword">if</span> tag == <span class="string">'O'</span>:</span><br><span class="line">            new_tags.append(tag)</span><br><span class="line">        <span class="keyword">elif</span> tag.split(<span class="string">'-'</span>)[<span class="number">0</span>] == <span class="string">'B'</span>:</span><br><span class="line">            <span class="comment">#  若不是最后一个，且后面一个开头为I，则是一个正确的开头</span></span><br><span class="line">            <span class="keyword">if</span> i + <span class="number">1</span> &lt; len(tags) <span class="keyword">and</span> tags[i+<span class="number">1</span>].split(<span class="string">'-'</span>)[<span class="number">0</span>] == <span class="string">'I'</span>:</span><br><span class="line">                new_tags.append(tag)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                new_tags.append(tag.replace(<span class="string">'B-'</span>,<span class="string">'S-'</span>)) <span class="comment">#  不是开头，则换成单字</span></span><br><span class="line">        <span class="keyword">elif</span> tag.split(<span class="string">'-'</span>)[<span class="number">0</span>] == <span class="string">'I'</span>:</span><br><span class="line">            <span class="keyword">if</span> i + <span class="number">1</span> &lt; len(tags) <span class="keyword">and</span> tags[i+<span class="number">1</span>].split(<span class="string">'-'</span>)[<span class="number">0</span>] == <span class="string">'I'</span>: <span class="comment"># 是正确的中间字</span></span><br><span class="line">                new_tags.append(tag)</span><br><span class="line">            <span class="keyword">else</span>:</span><br><span class="line">                new_tags.append(tag.replace(<span class="string">'I-'</span>,<span class="string">'E-'</span>)) <span class="comment"># 不是中间，换成结尾</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="keyword">raise</span> Exception(<span class="string">'非法编码'</span>)</span><br><span class="line">    <span class="keyword">return</span> new_tags</span><br></pre></td></tr></table></figure>
+<p>综合处理</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">update_tag_scheme</span><span class="params">(sentences, tag_scheme)</span>:</span></span><br><span class="line">    <span class="comment"># 编码更新</span></span><br><span class="line">    <span class="keyword">for</span> i, s <span class="keyword">in</span> enumerate(sentences):</span><br><span class="line">        tags = [w[<span class="number">-1</span>] <span class="keyword">for</span> w <span class="keyword">in</span> s ]  <span class="comment">#  取出标记部分</span></span><br><span class="line">        <span class="keyword">if</span> <span class="keyword">not</span> data_utils.check_bio(tags):</span><br><span class="line">            s_str = <span class="string">"\n"</span>.join(<span class="string">" "</span>.join(w) <span class="keyword">for</span> w <span class="keyword">in</span> s)</span><br><span class="line">            <span class="keyword">raise</span> Exception(<span class="string">"输入的句子应为BIO编码，请检查输入句子%i:\n%s"</span> % (i, s_str))</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">if</span> tag_scheme == <span class="string">"BIO"</span>:</span><br><span class="line">        <span class="keyword">for</span> word,new_tag <span class="keyword">in</span> zip(s,tags):</span><br><span class="line">            word[<span class="number">-1</span>] = new_tag</span><br><span class="line">            </span><br><span class="line">    <span class="keyword">if</span> tag_scheme == <span class="string">'BIOES'</span>:</span><br><span class="line">        new_tags = data_utils.bio_to_bioes(tags)</span><br><span class="line">        <span class="keyword">for</span> word,new_tag <span class="keyword">in</span> zip(s,new_tags): <span class="comment"># 重组</span></span><br><span class="line">            word[<span class="number">-1</span>] = new_tag</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">raise</span> Exception(<span class="string">"非法目标编码"</span>)</span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/NER/" rel="tag"><i class="fa fa-tag"></i> NER</a>
+          
+            <a href="/tags/BIOES编码/" rel="tag"><i class="fa fa-tag"></i> BIOES编码</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/OS/2019-10-09-VMware无法在Windows运行问题解决.html" rel="next" title="VMware无法在Windows运行问题解决">
+                <i class="fa fa-chevron-left"></i> VMware无法在Windows运行问题解决
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/Java/2019-10-11-Java前四章笔记.html" rel="prev" title="Java前四章笔记">
+                Java前四章笔记 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">人真正需要的东西是非常之少的</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#相关算法"><span class="nav-number">1.</span> <span class="nav-text">相关算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#加载数据"><span class="nav-number">2.</span> <span class="nav-text">加载数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BIO检验"><span class="nav-number">3.</span> <span class="nav-text">BIO检验</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转为BIOES格式"><span class="nav-number">4.</span> <span class="nav-text">转为BIOES格式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

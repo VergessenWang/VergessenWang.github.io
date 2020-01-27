@@ -1,0 +1,970 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="MySQL,数据库操作," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="安装MySQL在MySQL官网下载社区版，我下载的是8.0.17版本。安装时选择Developer Default 一路执行，可以看到有安装上Server/Workbench/For Excel/Shell/Router 以及 C++/Python/NET等多种语言Connector 默认使用TCP/IP协议，端口为3306 设置超级用户root的密码l**3 创建一个普通用户–我的名字–1234">
+<meta name="keywords" content="MySQL,数据库操作">
+<meta property="og:type" content="article">
+<meta property="og:title" content="基于MySQL的数据库操作实验">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/database/2019-08-15-基于MySQL的数据库操作实验.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="安装MySQL在MySQL官网下载社区版，我下载的是8.0.17版本。安装时选择Developer Default 一路执行，可以看到有安装上Server/Workbench/For Excel/Shell/Router 以及 C++/Python/NET等多种语言Connector 默认使用TCP/IP协议，端口为3306 设置超级用户root的密码l**3 创建一个普通用户–我的名字–1234">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2019-08-15T15:02:19.500Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="基于MySQL的数据库操作实验">
+<meta name="twitter:description" content="安装MySQL在MySQL官网下载社区版，我下载的是8.0.17版本。安装时选择Developer Default 一路执行，可以看到有安装上Server/Workbench/For Excel/Shell/Router 以及 C++/Python/NET等多种语言Connector 默认使用TCP/IP协议，端口为3306 设置超级用户root的密码l**3 创建一个普通用户–我的名字–1234">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/database/2019-08-15-基于MySQL的数据库操作实验.html"/>
+
+
+
+
+
+  <title>基于MySQL的数据库操作实验 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/database/2019-08-15-基于MySQL的数据库操作实验.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">基于MySQL的数据库操作实验</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-08-15T23:00:43+08:00">
+                2019-08-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,389
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="安装MySQL"><a href="#安装MySQL" class="headerlink" title="安装MySQL"></a>安装MySQL</h3><p>在<a href="https://dev.mysql.com/downloads/" target="_blank" rel="noopener">MySQL官网</a>下载社区版，我下载的是8.0.17版本。安装时选择<code>Developer Default</code> 一路执行，可以看到有安装上Server/Workbench/For Excel/Shell/Router 以及 C++/Python/NET等多种语言Connector</p>
+<p>默认使用TCP/IP协议，端口为3306</p>
+<p>设置超级用户root的密码l**3</p>
+<p>创建一个普通用户–我的名字–123456 ，如果把host改成<code>localhost</code> 将只能在本地登录，身份设置为DB Admin</p>
+<p>windows下服务名为<code>MySQL80</code>  我喜欢手动开启不常用的服务，这里没有选择开机启动</p>
+<p>Router暂时用不到，没有配置</p>
+<p>安装完毕自动启动了一个shell和一个workbench</p>
+<a id="more"></a>
+<h3 id="基本操作"><a href="#基本操作" class="headerlink" title="基本操作"></a>基本操作</h3><h4 id="登录"><a href="#登录" class="headerlink" title="登录"></a>登录</h4><p>workbench→Database→connect to database→输入用户名→store in…输入密码，进入主界面</p>
+<h4 id="新建数据库"><a href="#新建数据库" class="headerlink" title="新建数据库"></a>新建数据库</h4><p>选择schemas中的一个数据库右键<code>create schema</code> ,命名创建</p>
+<h4 id="修改数据库"><a href="#修改数据库" class="headerlink" title="修改数据库"></a>修改数据库</h4><p>选中要修改的数据库，右键<code>alter schema</code></p>
+<h4 id="删除数据库"><a href="#删除数据库" class="headerlink" title="删除数据库"></a>删除数据库</h4><p>选中要修改的数据库，右键<code>drop schema</code></p>
+<h4 id="新建、修改、删除数据表"><a href="#新建、修改、删除数据表" class="headerlink" title="新建、修改、删除数据表"></a>新建、修改、删除数据表</h4><p>注意：所有的操作最后都需要进行<strong>刷新</strong>才能看到效果，右键数据表<code>refresh all</code></p>
+<p>选中要建表的数据库中的tables, 右键新建。<strong>点击column name 下的空白格</strong>按需求新建表项，Apply之后左侧就会有相应的信息</p>
+<p>修改和删除同数据库操作</p>
+<h4 id="添加用户"><a href="#添加用户" class="headerlink" title="添加用户"></a>添加用户</h4><p>选择server→users and privileges →查看已登录账号的Administrative roles中是否有useradmin权限，若有→add acount</p>
+<h3 id="安装PowerDesigner"><a href="#安装PowerDesigner" class="headerlink" title="安装PowerDesigner"></a>安装PowerDesigner</h3><p>一路next，地区选USA，最后覆盖一下dll文件</p>
+<h3 id="基本操作-1"><a href="#基本操作-1" class="headerlink" title="基本操作"></a>基本操作</h3><h4 id="新建概念模型"><a href="#新建概念模型" class="headerlink" title="新建概念模型"></a>新建概念模型</h4><p>右键workspace→new→conceptual data model</p>
+<p>新建完之后选中右边的entity, 然后点击中间空白处新建一个Entity ,右键properties进行属性Attributes设置</p>
+<p>建立Entity之间的联系，就是用<code>relationship</code> 和<code>inheritance</code> 把关系连起来</p>
+<p>注：<a href="">概念模型</a>与<a href="">逻辑模型</a></p>
+<h4 id="建立物理模型"><a href="#建立物理模型" class="headerlink" title="建立物理模型"></a>建立物理模型</h4><p>工具栏tools→generate physical data model →选择相应的DBMS   </p>
+<p>注意：<strong>先建立了概念模型之后才能生成相应的物理模型</strong></p>
+<p>生成完毕会多一个物理模型编辑窗口，选中关系连线如relationship，右键properties，可以在preview中查看代码。在join中选择要建立联系的属性</p>
+<h4 id="检验模型的正确性"><a href="#检验模型的正确性" class="headerlink" title="检验模型的正确性"></a>检验模型的正确性</h4><p>tools → check model</p>
+<h4 id="配置数据源"><a href="#配置数据源" class="headerlink" title="配置数据源"></a>配置数据源</h4><p>windows系统 控制面板 — 管理工具 —  ODBC数据源 — 用户DSN — 添加 <code>MySQL OBDC  8.0 Unicode Driver</code></p>
+<p>填上名称，主机<code>127.0.0.1</code> 管理员账密 ，用Test测试一下连接 ，不是开机启动的话，要在<code>services.msc</code> 服务中开启 <code>MySQL80</code> 。连接成功后选择一个数据库 </p>
+<h4 id="由物理模型自动生成MySQL表"><a href="#由物理模型自动生成MySQL表" class="headerlink" title="由物理模型自动生成MySQL表"></a>由物理模型自动生成MySQL表</h4><p>选中物理模型编辑页，打开工具栏 database → connect →ODBC machine datasource →选择配置的数据源，输入账密。</p>
+<p>连接成功后， database → generate database </p>
+<p>生成的SQL语句要进行正确性验证之后，才能执行真正生成数据库。打开MySQL workbench , open SQL Script运行</p>
+<p>refresh all 即可在MySQL看到来自Powerdesigner的模型生成的数据库</p>
+<hr>
+<p>在<a href="www.shiyanlou.com/courses/9">实验楼</a>中完成操作部分实验</p>
+<h3 id="实验中值得注意的地方"><a href="#实验中值得注意的地方" class="headerlink" title="实验中值得注意的地方"></a>实验中值得注意的地方</h3><h4 id="CHAR-和-VARCHAR-的区别"><a href="#CHAR-和-VARCHAR-的区别" class="headerlink" title="CHAR 和 VARCHAR 的区别"></a><strong>CHAR 和 VARCHAR 的区别</strong></h4><p>CHAR 的长度是固定的，而 VARCHAR 的长度是可以变化的，比如，存储字符串 “abc”，对于 CHAR(10)，表示存储的字符将占 10 个字节(包括 7 个空字符)，而同样的 VARCHAR(12) 则只占用4个字节的长度，<code>增加一个额外字节来存储字符串本身的长度</code>，12 只是最大值，当你存储的字符小于 12 时，按实际长度存储。</p>
+<h4 id="ENUM和SET的区别"><a href="#ENUM和SET的区别" class="headerlink" title="ENUM和SET的区别"></a><strong>ENUM和SET的区别</strong></h4><p>ENUM 类型的数据的值，必须是定义时枚举的值的其中之一，即单选，而 SET 类型的值则可以多选。</p>
+<h4 id="SQL约束"><a href="#SQL约束" class="headerlink" title="SQL约束"></a>SQL约束</h4><p>MySQL通常的约束：<strong>主键(primary key)、默认值(default)、唯一(unique)、外键(foreign key)、非空(not null)</strong></p>
+<p>一个表可以有多个外键，<strong>每个外键必须 REFERENCES (参考) 另一个表的主键</strong>，被外键约束的列，取值必须在它参考的列中有对应值。外键既能<strong>确保数据完整性，也能表现表之间的关系</strong>。</p>
+<p>如 <code>FOREIGN KEY(sid) REFERENCES student(sid)</code></p>
+<h4 id="常用操作语句"><a href="#常用操作语句" class="headerlink" title="常用操作语句"></a>常用操作语句</h4><h5 id="单表操作"><a href="#单表操作" class="headerlink" title="单表操作"></a>单表操作</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">SELECT name,age FROM employee WHERE age&gt;25 AND age&lt;30; // 不包含边界</span><br><span class="line">SELECT name,age FROM employee WHERE age BETWEEN 25 AND 30 ; // 包含</span><br><span class="line">SELECT name,age,phone,in_dpt FROM employee WHERE in_dpt IN (&apos;dpt1&apos;,&apos;dpt3&apos;); // 从不连续的范围中找</span><br><span class="line">SELECT name,age,phone FROM employee WHERE name LIKE &apos;J%&apos;;</span><br><span class="line">SELECT name,age,salary,phone FROM employee ORDER BY salary DESC;</span><br><span class="line">SELECT MAX(salary) AS max_salary,MIN(salary) FROM employee; // as重命名</span><br></pre></td></tr></table></figure>
+<p>关键字 <strong>LIKE</strong> 用于实现模糊查询，常见于搜索功能中。和 LIKE 联用的通常还有通配符，代表未知字符。SQL中的通配符是 <code>_</code> 和 <code>%</code> 。其中 <code>_</code> 代表<strong>一个</strong>未指定字符，<code>%</code> 代表<strong>不定个</strong>未指定字符</p>
+<p>默认情况下，<strong>ORDER BY</strong> 的结果是<strong>升序</strong>排列，而使用关键词 <strong>ASC</strong> 和 <strong>DESC</strong> 可指定<strong>升序</strong>或<strong>降序</strong>排序</p>
+<p>5 个内置函数： COUNT 函数可用于任何数据类型(因为它只是计数)，而 SUM 、AVG 函数都只能对数字类数据类型做计算，MAX 和 MIN 可用于数值、<strong>字符串或是日期时间</strong>数据类型</p>
+<h5 id="多表操作"><a href="#多表操作" class="headerlink" title="多表操作"></a>多表操作</h5><h6 id="子查询"><a href="#子查询" class="headerlink" title="子查询"></a>子查询</h6><p>只有在结果来自<strong>一个表</strong>时才有用。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT of_dpt,COUNT(proj_name) AS count_project </span><br><span class="line">FROM project GROUP BY of_dpt </span><br><span class="line">HAVING of_dpt IN</span><br><span class="line">(SELECT in_dpt FROM employee WHERE name=&apos;Tom&apos;);</span><br></pre></td></tr></table></figure>
+<p>HAVING 关键字可以的作用和 WHERE 是一样的，都是说明接下来要进行条件筛选操作。区别在于 HAVING 用于<strong>对分组后的数据</strong>进行筛选</p>
+<h6 id="连接查询"><a href="#连接查询" class="headerlink" title="连接查询"></a>连接查询</h6><p>结果来自多个表时，要进行连接</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">SELECT id,name,people_num</span><br><span class="line">FROM employee,department</span><br><span class="line">WHERE employee.in_dpt = department.dpt_name</span><br><span class="line">ORDER BY id;</span><br><span class="line">//or</span><br><span class="line">SELECT id,name,people_num</span><br><span class="line">FROM employee JOIN department</span><br><span class="line">ON employee.in_dpt = department.dpt_name</span><br><span class="line">ORDER BY id;</span><br></pre></td></tr></table></figure>
+<h6 id="综合应用"><a href="#综合应用" class="headerlink" title="综合应用"></a>综合应用</h6><p>例：使用连接查询的方式，查询出各员工所在部门的人数与工程数，工程数命名为 count_project。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">SELECT name, people_num, COUNT(proj_name) AS count_project</span><br><span class="line">FROM employee, department, project</span><br><span class="line">WHERE in_dpt = dpt_name AND of_dpt = dpt_name</span><br><span class="line">GROUP BY name, people_num;</span><br></pre></td></tr></table></figure>
+<h5 id="数据库操作"><a href="#数据库操作" class="headerlink" title="数据库操作"></a>数据库操作</h5><p>目前 Mysql 没有提供重命名数据库名称的方法。</p>
+<p>重命名表名称</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">RENAME TABLE 原名 TO 新名字;</span><br><span class="line"></span><br><span class="line">ALTER TABLE 原名 RENAME 新名;</span><br><span class="line"></span><br><span class="line">ALTER TABLE 原名 RENAME TO 新名;</span><br></pre></td></tr></table></figure>
+<p>新建：create  删除：drop</p>
+<h5 id="列操作"><a href="#列操作" class="headerlink" title="列操作"></a>列操作</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名字 ADD COLUMN 列名字 数据类型 约束;</span><br><span class="line">或：</span><br><span class="line">ALTER TABLE 表名字 ADD 列名字 数据类型 约束;</span><br></pre></td></tr></table></figure>
+<p>新增加的列，被默认放置在这张表的最右边。如果要把增加的列插入在指定位置，则需要在语句的最后使用AFTER关键词(<strong>“AFTER 列1” 表示新增的列被放置在 “列1” 的后面</strong>)。如果想放在第一列的位置，则使用 <code>FIRST</code> 关键词</p>
+<p>如 <code>ALTER TABLE employee ADD weight INT(4) DEFAULT 120 AFTER age;</code></p>
+<p>删除列:  用drop代替add</p>
+<p>重命名:  <strong>重命名语句后面的 “数据类型” 不能省略</strong>。 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名字 CHANGE 原列名 新列名 数据类型 约束;</span><br></pre></td></tr></table></figure>
+<p>当原列名和新列名相同的时候，指定新的数据类型或约束，就可以<strong>用于修改数据类型或约束</strong></p>
+<p>另外一种改变数据类型的方式</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名字 MODIFY 列名字 新数据类型;</span><br></pre></td></tr></table></figure>
+<h5 id="值操作"><a href="#值操作" class="headerlink" title="值操作"></a>值操作</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">UPDATE 表名字 SET 列1=值1,列2=值2 WHERE 条件;</span><br><span class="line">DELETE FROM 表名字 WHERE 条件;</span><br></pre></td></tr></table></figure>
+<p>注意都要加上<code>WHERE</code>关键字，不用的话相当于对整个表进行操作，即整列修改或删除表中所有记录</p>
+<h5 id="其他操作"><a href="#其他操作" class="headerlink" title="其他操作"></a>其他操作</h5><h6 id="索引"><a href="#索引" class="headerlink" title="索引"></a>索引</h6><p>建立索引可以加快查询速度。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">ALTER TABLE 表名字 ADD INDEX 索引名 (列名);</span><br><span class="line">//or</span><br><span class="line">CREATE INDEX 索引名 ON 表名字 (列名);</span><br><span class="line">//查看索引</span><br><span class="line">SHOW INDEX FROM 表名字;</span><br></pre></td></tr></table></figure>
+<p>在使用 SELECT 语句查询的时候，语句中 WHERE 里面的条件，会<strong>自动判断有没有可用的索引</strong>。</p>
+<h6 id="视图"><a href="#视图" class="headerlink" title="视图"></a>视图</h6><p>作为提供给用户的虚拟表。</p>
+<ul>
+<li>数据库中只存放了视图的定义，而没有存放视图中的数据，这些数据存放在原来的表中；</li>
+<li>使用视图查询数据时，数据库系统会从原来的表中取出对应的数据；</li>
+<li>视图中的数据依赖于原来表中的数据，一旦表中数据发生改变，显示在视图中的数据也会发生改变；</li>
+<li>在使用视图的时候，可以把它当作一张表。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">CREATE VIEW 视图名(列a,列b,列c) AS SELECT 列1,列2,列3 FROM 表名字;</span><br></pre></td></tr></table></figure>
+<p><strong>表的操作语句同样适用于视图</strong>。</p>
+<h6 id="导入"><a href="#导入" class="headerlink" title="导入"></a>导入</h6><p>纯数据文件：<code>LOAD DATA INFILE &#39;文件路径和文件名&#39; INTO TABLE 表名字;</code>  导入导出的文件都必须在指定的路径下进行，在 mysql 终端中查看路径变量：<code>show variables like &#39;%secure%&#39;;</code>  在移动至该路径时需要权限，所以实现了安全的导入。</p>
+<p>SQL语句：<code>source *.sql</code>  可以在文件中包含更多的操作</p>
+<h6 id="导出"><a href="#导出" class="headerlink" title="导出"></a>导出</h6><p>只保存数据</p>
+<p><code>SELECT 列1，列2 INTO OUTFILE &#39;文件路径和文件名&#39; FROM 表名字;</code>  不能有同名文件</p>
+<h6 id="备份与恢复"><a href="#备份与恢复" class="headerlink" title="备份与恢复"></a>备份与恢复</h6><p>把数据库的结构，包括数据、约束、索引、视图等全部另存为一个文件。</p>
+<p><strong>mysqldump</strong> 是 MySQL 用于备份数据库的实用程序。它主要产生一个 SQL 脚本文件，其中包含从头重新创建数据库所必需的命令 CREATE TABLE INSERT 等。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag"><i class="fa fa-tag"></i> MySQL</a>
+          
+            <a href="/tags/数据库操作/" rel="tag"><i class="fa fa-tag"></i> 数据库操作</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/visualization/2019-08-14-Python处理数据后用于查看动态排名.html" rel="next" title="Python处理数据后用于查看动态排名">
+                <i class="fa fa-chevron-left"></i> Python处理数据后用于查看动态排名
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/OS/2019-08-24-进程同步和通信.html" rel="prev" title="进程同步和通信">
+                进程同步和通信 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">人真正需要的东西是非常之少的</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装MySQL"><span class="nav-number">1.</span> <span class="nav-text">安装MySQL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本操作"><span class="nav-number">2.</span> <span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#登录"><span class="nav-number">2.1.</span> <span class="nav-text">登录</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#新建数据库"><span class="nav-number">2.2.</span> <span class="nav-text">新建数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#修改数据库"><span class="nav-number">2.3.</span> <span class="nav-text">修改数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#删除数据库"><span class="nav-number">2.4.</span> <span class="nav-text">删除数据库</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#新建、修改、删除数据表"><span class="nav-number">2.5.</span> <span class="nav-text">新建、修改、删除数据表</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#添加用户"><span class="nav-number">2.6.</span> <span class="nav-text">添加用户</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装PowerDesigner"><span class="nav-number">3.</span> <span class="nav-text">安装PowerDesigner</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本操作-1"><span class="nav-number">4.</span> <span class="nav-text">基本操作</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#新建概念模型"><span class="nav-number">4.1.</span> <span class="nav-text">新建概念模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#建立物理模型"><span class="nav-number">4.2.</span> <span class="nav-text">建立物理模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#检验模型的正确性"><span class="nav-number">4.3.</span> <span class="nav-text">检验模型的正确性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#配置数据源"><span class="nav-number">4.4.</span> <span class="nav-text">配置数据源</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#由物理模型自动生成MySQL表"><span class="nav-number">4.5.</span> <span class="nav-text">由物理模型自动生成MySQL表</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实验中值得注意的地方"><span class="nav-number">5.</span> <span class="nav-text">实验中值得注意的地方</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CHAR-和-VARCHAR-的区别"><span class="nav-number">5.1.</span> <span class="nav-text">CHAR 和 VARCHAR 的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ENUM和SET的区别"><span class="nav-number">5.2.</span> <span class="nav-text">ENUM和SET的区别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SQL约束"><span class="nav-number">5.3.</span> <span class="nav-text">SQL约束</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#常用操作语句"><span class="nav-number">5.4.</span> <span class="nav-text">常用操作语句</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#单表操作"><span class="nav-number">5.4.1.</span> <span class="nav-text">单表操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#多表操作"><span class="nav-number">5.4.2.</span> <span class="nav-text">多表操作</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#子查询"><span class="nav-number">5.4.2.1.</span> <span class="nav-text">子查询</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#连接查询"><span class="nav-number">5.4.2.2.</span> <span class="nav-text">连接查询</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#综合应用"><span class="nav-number">5.4.2.3.</span> <span class="nav-text">综合应用</span></a></li></ol></li><li class="nav-item nav-level-5"><a class="nav-link" href="#数据库操作"><span class="nav-number">5.4.3.</span> <span class="nav-text">数据库操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#列操作"><span class="nav-number">5.4.4.</span> <span class="nav-text">列操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#值操作"><span class="nav-number">5.4.5.</span> <span class="nav-text">值操作</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#其他操作"><span class="nav-number">5.4.6.</span> <span class="nav-text">其他操作</span></a><ol class="nav-child"><li class="nav-item nav-level-6"><a class="nav-link" href="#索引"><span class="nav-number">5.4.6.1.</span> <span class="nav-text">索引</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#视图"><span class="nav-number">5.4.6.2.</span> <span class="nav-text">视图</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#导入"><span class="nav-number">5.4.6.3.</span> <span class="nav-text">导入</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#导出"><span class="nav-number">5.4.6.4.</span> <span class="nav-text">导出</span></a></li><li class="nav-item nav-level-6"><a class="nav-link" href="#备份与恢复"><span class="nav-number">5.4.6.5.</span> <span class="nav-text">备份与恢复</span></a></li></ol></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

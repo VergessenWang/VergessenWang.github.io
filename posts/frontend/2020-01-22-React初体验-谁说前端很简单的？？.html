@@ -1,0 +1,963 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="React," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="预备知识 Node.js: 基于Chrome V8引擎的JavaScript 运行环境，使用了事件驱动、非阻塞I/O的模式 npm: node包管理工具 webpack：前端资源加载、打包工具，根据模块的依赖生成静态资源 ES6: js语言标准  React核心思想：声明式编程(注重结果而非实现)，组件化(自定义label)，虚拟DOM(减少渲染次数，diff算法) 环境搭建利用脚手架create">
+<meta name="keywords" content="React">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React初体验--谁说前端很简单的？？">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/frontend/2020-01-22-React初体验-谁说前端很简单的？？.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="预备知识 Node.js: 基于Chrome V8引擎的JavaScript 运行环境，使用了事件驱动、非阻塞I/O的模式 npm: node包管理工具 webpack：前端资源加载、打包工具，根据模块的依赖生成静态资源 ES6: js语言标准  React核心思想：声明式编程(注重结果而非实现)，组件化(自定义label)，虚拟DOM(减少渲染次数，diff算法) 环境搭建利用脚手架create">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-01-21T17:16:00.646Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React初体验--谁说前端很简单的？？">
+<meta name="twitter:description" content="预备知识 Node.js: 基于Chrome V8引擎的JavaScript 运行环境，使用了事件驱动、非阻塞I/O的模式 npm: node包管理工具 webpack：前端资源加载、打包工具，根据模块的依赖生成静态资源 ES6: js语言标准  React核心思想：声明式编程(注重结果而非实现)，组件化(自定义label)，虚拟DOM(减少渲染次数，diff算法) 环境搭建利用脚手架create">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/frontend/2020-01-22-React初体验-谁说前端很简单的？？.html"/>
+
+
+
+
+
+  <title>React初体验--谁说前端很简单的？？ | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-01-22-React初体验-谁说前端很简单的？？.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">React初体验--谁说前端很简单的？？</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-22T01:14:03+08:00">
+                2020-01-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,010
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="预备知识"><a href="#预备知识" class="headerlink" title="预备知识"></a>预备知识</h3><ul>
+<li>Node.js: 基于Chrome V8引擎的JavaScript 运行环境，使用了事件驱动、非阻塞I/O的模式</li>
+<li>npm: node包管理工具</li>
+<li>webpack：前端资源加载、打包工具，根据模块的依赖生成静态资源</li>
+<li>ES6: js语言标准</li>
+</ul>
+<p>React核心思想：声明式编程(注重结果而非实现)，组件化(自定义label)，虚拟DOM(减少渲染次数，diff算法)</p>
+<h3 id="环境搭建"><a href="#环境搭建" class="headerlink" title="环境搭建"></a>环境搭建</h3><p>利用脚手架create-react-app来安装react</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">npm install -g create-react-app  //安装脚手架</span><br><span class="line"></span><br><span class="line">C:\Users\18771\AppData\Roaming\npm\create-react-app -&gt; C:\Users\18771\AppData\Roaming\npm\node_modules\create-react-app\index.js</span><br><span class="line">+ create-react-app@3.3.0</span><br><span class="line">added 91 packages in 96.802s</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create-react-app my-app //会自动创建好Server Webpack 和 Babel</span><br></pre></td></tr></table></figure>
+<p>此时报错：bash: create-react-app: command not found</p>
+<a id="more"></a>
+<p>应该是路径问题 改用命令<code>npx create-react-app my-app</code> , 还是不行</p>
+<p>用<code>npm root</code>命令寻找npm 的根目录发现是 <code>C:\Users\18771\node_modules</code>  <a href="https://rogerramos.me/how-to-fix-create-react-app-command-not-found/" target="_blank" rel="noopener">解决方法参考</a></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm config set prefix /usr/local</span><br><span class="line">npm i -g react-create-app</span><br></pre></td></tr></table></figure>
+<p>又报错 <code>Unexpected end of JSON input while parsing near &#39;...5mVz30VuXnFvjkEbnA5Oc&#39;</code></p>
+<p>进入 C:\Users\18771\AppData\Roaming\npm-cache 目录 执行 <code>npm cache clean --force</code>  <a href="https://segmentfault.com/a/1190000015646531" target="_blank" rel="noopener">解决方法参考</a></p>
+<p>重新安装 </p>
+<p>切换到要创建项目的目录，执行 npx create-react-app my-app</p>
+<p>报错 ：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm ERR! code EINTEGRITY</span><br><span class="line">npm ERR! sha512-k1g3gRQ4fwfJoIfgUpz78AovicSWKFANmvTfkAHP24MgJHjWfZI6ya7tsQZt1sLczvP4G9BE5G5MgADHdmJB/w== integrity checksum failed when using sha512: wanted sha512-k1g3gRQ4fwfJoIfgUpz78AovicSWKFANmvTfkAHP24MgJHjWfZI6ya7tsQZt1sLczvP4G9BE5G5MgADHdmJB/w== but got sha512-WkbI2UIeavrFcTouh/pYNWeOYEQFVDIs8JjFZLRlZPSyyYVpmqLA0jN+BTmrDVMN23qY0wBFktjQhVBJ1PO8Yw==. (<span class="number">698</span> bytes)</span><br></pre></td></tr></table></figure>
+<p>似乎是package-json 文件的问题</p>
+<p><strong>执行 <code>npm cache verify</code></strong> </p>
+<p>再次尝试成功创建 </p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line">npx create-react-app my-app</span><br><span class="line"></span><br><span class="line">npm WARN react-scripts@<span class="number">3</span>.<span class="number">3</span>.<span class="number">0</span> requires a peer of typescript@^<span class="number">3</span>.<span class="number">2</span>.<span class="number">1</span> but none is installed. You must install peer dependencies yourself.</span><br><span class="line">npm WARN sass-loader@<span class="number">8</span>.<span class="number">0</span>.<span class="number">0</span> requires a peer of node-sass@^<span class="number">4</span>.<span class="number">0</span>.<span class="number">0</span> but none is installed. You must install peer dependencies yourself.</span><br><span class="line">npm WARN sass-loader@<span class="number">8</span>.<span class="number">0</span>.<span class="number">0</span> requires a peer of sass@^<span class="number">1</span>.<span class="number">3</span>.<span class="number">0</span> but none is installed. You must install peer dependencies yourself.</span><br><span class="line">npm WARN sass-loader@<span class="number">8</span>.<span class="number">0</span>.<span class="number">0</span> requires a peer of fibers@&gt;= <span class="number">3</span>.<span class="number">1</span>.<span class="number">0</span> but none is installed. You must install peer dependencies yourself.</span><br><span class="line">npm WARN tsutils@<span class="number">3</span>.<span class="number">17</span>.<span class="number">1</span> requires a peer of typescript@&gt;=<span class="number">2</span>.<span class="number">8</span>.<span class="number">0</span> || &gt;= <span class="number">3</span>.<span class="number">2</span>.<span class="number">0</span>-dev || &gt;= <span class="number">3</span>.<span class="number">3</span>.<span class="number">0</span>-dev || &gt;= <span class="number">3</span>.<span class="number">4</span>.<span class="number">0</span>-dev || &gt;= <span class="number">3</span>.<span class="number">5</span>.<span class="number">0</span>-dev || &gt;= <span class="number">3</span>.<span class="number">6</span>.<span class="number">0</span>-dev || &gt;= <span class="number">3</span>.<span class="number">6</span>.<span class="number">0</span>-beta || &gt;= <span class="number">3</span>.<span class="number">7</span>.<span class="number">0</span>-dev || &gt;= <span class="number">3</span>.<span class="number">7</span>.<span class="number">0</span>-beta but none is installed. You must install peer dependencies yourself.</span><br><span class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@<span class="number">1</span>.<span class="number">2</span>.<span class="number">11</span> (node_modules\jest-haste-map\node_modules\fsevents):</span><br><span class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform <span class="keyword">for</span> fsevents@<span class="number">1</span>.<span class="number">2</span>.<span class="number">11</span>: wanted &#123;"os":"darwin","arch":"any"&#125; (current: &#123;"os":"win32","arch":"x64"&#125;)</span><br><span class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@<span class="number">1</span>.<span class="number">2</span>.<span class="number">11</span> (node_modules\chokidar\node_modules\fsevents):</span><br><span class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform <span class="keyword">for</span> fsevents@<span class="number">1</span>.<span class="number">2</span>.<span class="number">11</span>: wanted &#123;"os":"darwin","arch":"any"&#125; (current: &#123;"os":"win32","arch":"x64"&#125;)</span><br><span class="line">npm WARN optional SKIPPING OPTIONAL DEPENDENCY: fsevents@<span class="number">2</span>.<span class="number">1</span>.<span class="number">2</span> (node_modules\fsevents):</span><br><span class="line">npm WARN notsup SKIPPING OPTIONAL DEPENDENCY: Unsupported platform <span class="keyword">for</span> fsevents@<span class="number">2</span>.<span class="number">1</span>.<span class="number">2</span>: wanted &#123;"os":"darwin","arch":"any"&#125; (current: &#123;"os":"win32","arch":"x64"&#125;)</span><br><span class="line"></span><br><span class="line">removed <span class="number">1</span> package <span class="keyword">in</span> <span class="number">29</span>.<span class="number">248</span>s</span><br><span class="line"></span><br><span class="line">Initialized a git repository.</span><br><span class="line"></span><br><span class="line">Success! Created my-app <span class="built_in">at</span> C:\Users\<span class="number">18771</span>\Desktop\my_app\my-app</span><br><span class="line">Inside that directory, you can run several commands:</span><br><span class="line"></span><br><span class="line">  npm <span class="built_in">start</span></span><br><span class="line">    Starts the development server.</span><br><span class="line"></span><br><span class="line">  npm run build</span><br><span class="line">    Bundles the app into static files <span class="keyword">for</span> production.</span><br><span class="line"></span><br><span class="line">  npm test</span><br><span class="line">    Starts the test runner.</span><br><span class="line"></span><br><span class="line">  npm run eject</span><br><span class="line">    Removes this tool and copies build dependencies, configuration files</span><br><span class="line">    and scripts into the app directory. <span class="keyword">If</span> you <span class="keyword">do</span> this, you can’t go back!</span><br><span class="line"></span><br><span class="line">We suggest that you begin by typing:</span><br><span class="line"></span><br><span class="line">  <span class="built_in">cd</span> my-app</span><br><span class="line">  npm <span class="built_in">start</span></span><br></pre></td></tr></table></figure>
+<p>执行start 会自动在本地3000端口打开一个页面</p>
+<hr>
+<p>在VS Code中安装 <code>Simple React Snippets</code> 和 <code>Prettier</code>插件</p>
+<p>同时在setting.json中添加一行<code>&quot;editor.formatOnSave&quot;: true,</code>  自动格式化后保存</p>
+<p>在Chrome中添加插件 <code>React Developer Tools</code> </p>
+<h3 id="实践"><a href="#实践" class="headerlink" title="实践"></a>实践</h3><p><a href="https://babeljs.io/repl" target="_blank" rel="noopener">Babel</a> 可以将 JSX 翻译为 react </p>
+<h4 id="boostraps"><a href="#boostraps" class="headerlink" title="boostraps"></a>boostraps</h4><p>为了设计CSS ，安装bootstrap ，直接在VS Code 的集成终端输入 <code>npm i bootstrap@4.1.1</code></p>
+<p>在index.js 中导入 <code>import &quot;bootstrap/dist/css/bootstrap.css&quot;;</code> </p>
+<h4 id="components"><a href="#components" class="headerlink" title="components"></a>components</h4><h5 id="基本用法"><a href="#基本用法" class="headerlink" title="基本用法"></a>基本用法</h5><p>新建counter.jsx文件写入组件代码</p>
+<figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">"react"</span>; <span class="comment">//imrc</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="comment">//cc</span></span><br><span class="line">  state = &#123;</span><br><span class="line">    count: <span class="number">1</span>,</span><br><span class="line">    <span class="comment">//imageUrl: "https://picsum.photos/200",</span></span><br><span class="line">    tags: [<span class="string">"tag1"</span>, <span class="string">"tag2"</span>, <span class="string">"tag3"</span>]</span><br><span class="line">  &#125;;</span><br><span class="line">  styles = &#123;</span><br><span class="line">    fontWeight: <span class="string">"bold"</span>,</span><br><span class="line">    fontSize: <span class="number">20</span></span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;React.Fragment&gt;</span><br><span class="line">        &lt;span style=&#123;<span class="keyword">this</span>.styles&#125; className=&#123;<span class="keyword">this</span>.getBadgeClasses()&#125;&gt;</span><br><span class="line">          &#123;<span class="keyword">this</span>.formatCount()&#125;</span><br><span class="line">        &lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">        &lt;button className="btn btn-secondary btn-sm"&gt;Increment&lt;/</span>button&gt;</span><br><span class="line">        &lt;ul&gt;</span><br><span class="line">          &#123;<span class="keyword">this</span>.state.tags.map(<span class="function"><span class="params">tag</span> =&gt;</span> (</span><br><span class="line">            &lt;li key=&#123;tag&#125;&gt;&#123;tag&#125;&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">          ))&#125;</span></span><br><span class="line"><span class="regexp">        &lt;/u</span>l&gt;</span><br><span class="line">        &lt;img src=&#123;<span class="keyword">this</span>.state.imageUrl&#125; alt=<span class="string">""</span> /&gt;</span><br><span class="line">      &lt;<span class="regexp">/React.Fragment&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">  getBadgeClasses() &#123;</span></span><br><span class="line"><span class="regexp">    let classes = "badge m-2 badge-";</span></span><br><span class="line"><span class="regexp">    classes += this.state.count === 0 ? "warning" : "primary";</span></span><br><span class="line"><span class="regexp">    return classes;</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">  formatCount() &#123;</span></span><br><span class="line"><span class="regexp">    const &#123; count &#125; = this.state;</span></span><br><span class="line"><span class="regexp">    return count === 0 ? "Zero" : count;</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Counter;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>由于装了插件，可以直接用简写；因为render()只能默认产生一个元素，所以多个标签要用&lt;React.Fragment&gt;包起来；</li>
+<li>{}可以引用类中的成员或方法；</li>
+<li>className=”btn btn-secondary btn-sm”是bootstrap中的样式；</li>
+<li><em>style</em>={this.styles} 自定义样式；</li>
+<li>classes += this.state.count === 0 ? “warning” : “primary”; 可按数值变化样式</li>
+<li>{this.state.tags.map(<em>tag</em> =&gt; </li><li *key*="{tag}">{tag}</li>)}  map是一种遍历方法，为每个值设置一个key是为了react能区分出元素
+<li><strong>除了用class，还可以用stateless funciton 来写组件(sfc) 这也是一种比较常用的写法，只是不能用this关键字</strong></li>
+</ul>
+<p>然后在index.js中引用</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> Counter <span class="keyword">from</span> <span class="string">"./components/counter"</span>;</span><br><span class="line"></span><br><span class="line">ReactDOM.render(&lt;Counter /&gt;, document.getElementById("root"));</span><br></pre></td></tr></table></figure>
+<h5 id="按不同条件进行渲染"><a href="#按不同条件进行渲染" class="headerlink" title="按不同条件进行渲染"></a>按不同条件进行渲染</h5><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">"react"</span>; </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  state = &#123;</span><br><span class="line">    count: <span class="number">1</span>,</span><br><span class="line">    tags: [<span class="string">"tag1"</span>, <span class="string">"tag2"</span>, <span class="string">"tag3"</span>]</span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  renderTags() &#123;</span><br><span class="line">    <span class="keyword">if</span> (<span class="keyword">this</span>.state.tags.length === <span class="number">0</span>) <span class="keyword">return</span> &lt;p&gt;There are no tags!&lt;/p&gt;;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;ul&gt;</span><br><span class="line">        &#123;<span class="keyword">this</span>.state.tags.map(<span class="function"><span class="params">tag</span> =&gt;</span> (</span><br><span class="line">          &lt;li key=&#123;tag&#125;&gt;&#123;tag&#125;&lt;<span class="regexp">/li&gt;</span></span><br><span class="line"><span class="regexp">        ))&#125;</span></span><br><span class="line"><span class="regexp">      &lt;/u</span>l&gt;</span><br><span class="line">    );</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;React.Fragment&gt;</span><br><span class="line">        &#123;<span class="keyword">this</span>.state.tags.length === <span class="number">0</span> &amp;&amp; <span class="string">"Please create a new tags!"</span>&#125;</span><br><span class="line">        &#123;<span class="keyword">this</span>.renderTags()&#125;</span><br><span class="line">      &lt;<span class="regexp">/React.Fragment&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Counter;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>this.state.tags.length === 0 &amp;&amp; “Please create a new tags!”    在js中 &amp;&amp;结果为真时，返回最后一个表达式</li>
+<li>新增一个方法用于条件判断</li>
+</ul>
+<h5 id="交互"><a href="#交互" class="headerlink" title="交互"></a>交互</h5><figure class="highlight jsx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> React, &#123; Component &#125; <span class="keyword">from</span> <span class="string">"react"</span>; <span class="comment">//imrc</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Counter</span> <span class="keyword">extends</span> <span class="title">Component</span> </span>&#123;</span><br><span class="line">  <span class="comment">//cc</span></span><br><span class="line">  state = &#123;</span><br><span class="line">    count: <span class="number">1</span></span><br><span class="line">  &#125;;</span><br><span class="line"></span><br><span class="line">  <span class="keyword">constructor</span>() &#123;</span><br><span class="line">    <span class="keyword">super</span>();</span><br><span class="line">    <span class="keyword">this</span>.handleIncrement = <span class="keyword">this</span>.handleIncrement.bind(<span class="keyword">this</span>);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  handleIncrement() &#123;</span><br><span class="line">    <span class="keyword">this</span>.setState(&#123; <span class="attr">count</span>: <span class="keyword">this</span>.state.count + <span class="number">1</span> &#125;);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> (</span><br><span class="line">      &lt;React.Fragment&gt;</span><br><span class="line">        &lt;span className=&#123;<span class="keyword">this</span>.getBadgeClasses()&#125;&gt;&#123;<span class="keyword">this</span>.formatCount()&#125;&lt;<span class="regexp">/span&gt;</span></span><br><span class="line"><span class="regexp">        &lt;button</span></span><br><span class="line"><span class="regexp">          onClick=&#123;this.handleIncrement&#125;</span></span><br><span class="line"><span class="regexp">          className="btn btn-secondary btn-sm"</span></span><br><span class="line"><span class="regexp">        &gt;</span></span><br><span class="line"><span class="regexp">          Increment</span></span><br><span class="line"><span class="regexp">        &lt;/</span>button&gt;</span><br><span class="line">      &lt;<span class="regexp">/React.Fragment&gt;</span></span><br><span class="line"><span class="regexp">    );</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">  getBadgeClasses() &#123;</span></span><br><span class="line"><span class="regexp">    let classes = "badge m-2 badge-";</span></span><br><span class="line"><span class="regexp">    classes += this.state.count === 0 ? "warning" : "primary";</span></span><br><span class="line"><span class="regexp">    return classes;</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">  formatCount() &#123;</span></span><br><span class="line"><span class="regexp">    const &#123; count &#125; = this.state;</span></span><br><span class="line"><span class="regexp">    return count === 0 ? "Zero" : count;</span></span><br><span class="line"><span class="regexp">  &#125;</span></span><br><span class="line"><span class="regexp">&#125;</span></span><br><span class="line"><span class="regexp"></span></span><br><span class="line"><span class="regexp">export default Counter;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>button 中添加 *<em>onClick</em>= {this.handleIncrement}  —注意没有跟()     并写好handleIncrement() 方法</li>
+<li>this.handleIncrement = this.handleIncrement.bind(this); 主要是为了将this与当前的Counter 对象绑定—-还可以用箭头函数</li>
+<li>this.setState({ count: this.state.count + 1 });  需要用setstate显式更改状态才能显示在页面上</li>
+</ul>
+<h5 id="复合组件"><a href="#复合组件" class="headerlink" title="复合组件"></a>复合组件</h5><p>props可以作为一个参数传入，将任意类型的数据传给组件，但是不能修改，定义时也要声明为static</p>
+<p>state是在组件内部使用并可以修改的</p>
+<p>父组件和子组件通信可以通过props进行信息传递，当子组件要更新父组件时，可以<strong>让父组件传一个回调函数给子组件</strong>，子组件通过调用实现父组件更新——很常用的一种做法</p>
+<p>同级之间如果要相互通信，可以将一个的函数上升为共同的父组件的回调函数；或者采用react的上下文方式，子组件可以直接访问祖先组件的属性和方法</p>
+<p>为避免写太多this.props ,可以定义 <code>const {func1, func2...} = this.props</code>  选出要用的方法，之后就可以不加this.props前缀了 </p>
+<p><strong>分清是模块控制还是全局控制</strong></p>
+<h4 id="lifecycle-amp-hooks"><a href="#lifecycle-amp-hooks" class="headerlink" title="lifecycle&amp;hooks"></a>lifecycle&amp;hooks</h4><ul>
+<li>挂载期：constructor()—先调用super() ;  render() —<strong>所有</strong>父子组件渲染完后才会挂载; componentDidMount() —常用于Ajax与Server交互 </li>
+<li>更新期：componentDidUpdate()</li>
+<li>卸载期: componentWillUnmount() —从DOM树中删除组件之前调用，用于做一些数据清零工作<strong>避免内存泄露</strong></li>
+</ul>
+<p>每个阶段都有对应的钩子函数，按序执行</p>
+<p><strong>只能用于class组件不能用于stateless funciton组件</strong></p>
+<h4 id="tips"><a href="#tips" class="headerlink" title="tips"></a>tips</h4><ol>
+<li>同时修改前后标签，选中标签，Ctrl+d </li>
+<li>为了更好的封装，选中要转为方法的语句，右键，vscode提供了一个refactor功能，可以自动抽取出一个方法</li>
+<li>true &amp;&amp; ‘hi’ —&gt;  ‘hi’      在js中 &amp;&amp;结果为真时，返回最后一个表达式</li>
+<li><a href="https://getbootstrap.com/docs/4.4/examples/" target="_blank" rel="noopener">bootstrap</a>一些设计案例，甚至可以直接搜索如“Navbar”, 会给出很多例子</li>
+<li>react同时在内存保存有新和旧两份virtualDOM，通过比对，决定只需要对哪些部分进行更新</li>
+</ol>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/React/" rel="tag"><i class="fa fa-tag"></i> React</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/Java/2020-01-20-JavaFX-SQLite实现简单系统.html" rel="next" title="JavaFX + SQLite实现简单系统">
+                <i class="fa fa-chevron-left"></i> JavaFX + SQLite实现简单系统
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/Java/2020-01-27-Spring-Boot实现简单REST-API.html" rel="prev" title="Spring Boot实现简单REST-API">
+                Spring Boot实现简单REST-API <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">人真正需要的东西是非常之少的</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">17</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#预备知识"><span class="nav-number">1.</span> <span class="nav-text">预备知识</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#环境搭建"><span class="nav-number">2.</span> <span class="nav-text">环境搭建</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实践"><span class="nav-number">3.</span> <span class="nav-text">实践</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#boostraps"><span class="nav-number">3.1.</span> <span class="nav-text">boostraps</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#components"><span class="nav-number">3.2.</span> <span class="nav-text">components</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#基本用法"><span class="nav-number">3.2.1.</span> <span class="nav-text">基本用法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#按不同条件进行渲染"><span class="nav-number">3.2.2.</span> <span class="nav-text">按不同条件进行渲染</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#交互"><span class="nav-number">3.2.3.</span> <span class="nav-text">交互</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#复合组件"><span class="nav-number">3.2.4.</span> <span class="nav-text">复合组件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#lifecycle-amp-hooks"><span class="nav-number">3.3.</span> <span class="nav-text">lifecycle&amp;hooks</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tips"><span class="nav-number">3.4.</span> <span class="nav-text">tips</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
