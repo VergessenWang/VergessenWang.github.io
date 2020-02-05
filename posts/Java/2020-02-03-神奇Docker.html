@@ -138,7 +138,7 @@
 <meta property="og:site_name" content="Anonymous World">
 <meta property="og:description" content="Docker是Go语言开发的应用容器引擎，核心概念是：镜像、容器、仓库 关键字是：分布式应用，微服务，容器，虚拟化 传统的虚拟机技术是在硬件层面实现的，需要额外的虚拟机管理软件跟虚拟机操作系统。而Docker是在操作系统层面实现的，直接使用本地操作系统 Docker的主要目标是通过对应用组件的封装。分发、部署、运行等生命周期的管理，做到“一次封装，到处运行” Docker体系原理一个完整的Dock">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-03T15:31:14.102Z">
+<meta property="og:updated_time" content="2020-02-05T16:07:43.096Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="神奇Docker">
 <meta name="twitter:description" content="Docker是Go语言开发的应用容器引擎，核心概念是：镜像、容器、仓库 关键字是：分布式应用，微服务，容器，虚拟化 传统的虚拟机技术是在硬件层面实现的，需要额外的虚拟机管理软件跟虚拟机操作系统。而Docker是在操作系统层面实现的，直接使用本地操作系统 Docker的主要目标是通过对应用组件的封装。分发、部署、运行等生命周期的管理，做到“一次封装，到处运行” Docker体系原理一个完整的Dock">
@@ -387,7 +387,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,707
+                  1,718
                 </span>
               
 
@@ -455,11 +455,8 @@
 <p>这一步下不下来，可能是众所周知的原因。</p>
 <p>手动下载该文件 <a href="https://github.com/boot2docker/boot2docker/releases/download/v19.03.5/boot2docker.iso" target="_blank" rel="noopener">https://github.com/boot2docker/boot2docker/releases/download/v19.03.5/boot2docker.iso</a></p>
 <p>放在 /Users/{user}/.docker/machine/cache/ 目录下</p>
-<p>运行成功，会自动创建虚拟机，调用virtualBox的接口，创建虚拟网卡等一系列配置，最后出现了一只小鲸鱼！<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">```cmd</span><br><span class="line">                        ##         .</span><br><span class="line">                  ## ## ##        ==</span><br><span class="line">               ## ## ## ## ##    ===</span><br><span class="line">           /&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;&quot;\___/ ===</span><br><span class="line">      ~~~ &#123;~~ ~~~~ ~~~ ~~~~ ~~~ ~ /  ===-</span><br></pre></td></tr></table></figure></p>
-<pre><code>\______ o           __/
-  \    \         __/
-   \____\_______/
-</code></pre><p>docker is configured to use the default machine with IP 192.168.99.100<br><code>`</code></p>
+<p>运行成功，会自动创建虚拟机，调用virtualBox的接口，创建虚拟网卡等一系列配置，最后出现了一只小鲸鱼！~~~</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">                        ##         .</span><br><span class="line">                  ## ## ##        ==</span><br><span class="line">               ## ## ## ## ##    ===</span><br><span class="line">           /"""""""""""""""""\___/ ===</span><br><span class="line">      ~~~ &#123;~~ ~~~~ ~~~ ~~~~ ~~~ ~ /  ===</span><br><span class="line">           \______ o           __/</span><br><span class="line">             \    \         __/</span><br><span class="line">              \____\_______/</span><br><span class="line"></span><br><span class="line">docker is configured to use the default machine with IP <span class="number">192</span>.<span class="number">168</span>.<span class="number">99</span>.<span class="number">100</span></span><br></pre></td></tr></table></figure>
 <p>此时进入了git命令行，即Linux环境</p>
 <h3 id="Docker命令"><a href="#Docker命令" class="headerlink" title="Docker命令"></a>Docker命令</h3><p>命令在Toolbox 运行的 git 终端中运行，而非cmd</p>
 <h4 id="基本命令"><a href="#基本命令" class="headerlink" title="基本命令"></a>基本命令</h4><p><code>docker version</code>  可以看到客户端OS是 Windows 而 服务端OS是 Linux </p>
@@ -492,6 +489,7 @@
 <p><code>docker events</code> container事件动态</p>
 <p><code>docker top container_id</code> container中运行的<strong>进程</strong>信息—–可以理解为container是对进程的封装？ </p>
 <p><code>docker stats</code>  container占用CPU和内存的情况</p>
+<p><code>docker system df</code> 查看对比信息</p>
 <h3 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h3><h4 id="github下载速度过慢"><a href="#github下载速度过慢" class="headerlink" title="github下载速度过慢"></a>github下载速度过慢</h4><p>这是经常遇到，但一直没有解决的问题，在github上经常遇到的，下文件很慢很慢，绝大部分是因为来自于亚马逊的国外服务器</p>
 <p>尝试1：</p>
 <p>更改<code>C:\Windows\System32\drivers\etc\hosts</code>文件，在文件中追加<code>219.76.4.4 github-cloud.s3.amazonaws.com</code>, 将域名指向该IP，即香港的服务器</p>
@@ -551,6 +549,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/Intern/2020-02-05-冲鸭，向着S公司.html" rel="prev" title="冲鸭，向着S公司">
+                冲鸭，向着S公司 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -621,7 +623,7 @@
                 alt="Liana_Wang" />
             
               <p class="site-author-name" itemprop="name">Liana_Wang</p>
-              <p class="site-description motion-element" itemprop="description">人真正需要的东西是非常之少的</p>
+              <p class="site-description motion-element" itemprop="description">旧人事如星闪烁，我亦亏欠良多</p>
           </div>
 
           <nav class="site-state motion-element">
@@ -631,7 +633,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">65</span>
+                  <span class="site-state-item-count">66</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
