@@ -1,0 +1,930 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Spring," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Spring是一个以IoC（Inversion of Control，控制反转）和AOP（Aspect Oriented Programming）为内核的框架。 IoC和DIIoC是Spring的基础。IoC实现的是一种控制，简单地说，就是以前调用new构造方法来创建对象，现在变成了使用Spring来创建对象。DI（Dependency Inject，依赖注入）与IoC的含义相同，从两个角度描述同">
+<meta name="keywords" content="Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring基础之IoC与AOP">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/Java/2020-02-12-Spring基础之IoC与AOP.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="Spring是一个以IoC（Inversion of Control，控制反转）和AOP（Aspect Oriented Programming）为内核的框架。 IoC和DIIoC是Spring的基础。IoC实现的是一种控制，简单地说，就是以前调用new构造方法来创建对象，现在变成了使用Spring来创建对象。DI（Dependency Inject，依赖注入）与IoC的含义相同，从两个角度描述同">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2020-02-12T09:34:59.510Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring基础之IoC与AOP">
+<meta name="twitter:description" content="Spring是一个以IoC（Inversion of Control，控制反转）和AOP（Aspect Oriented Programming）为内核的框架。 IoC和DIIoC是Spring的基础。IoC实现的是一种控制，简单地说，就是以前调用new构造方法来创建对象，现在变成了使用Spring来创建对象。DI（Dependency Inject，依赖注入）与IoC的含义相同，从两个角度描述同">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/Java/2020-02-12-Spring基础之IoC与AOP.html"/>
+
+
+
+
+
+  <title>Spring基础之IoC与AOP | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/Java/2020-02-12-Spring基础之IoC与AOP.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Spring基础之IoC与AOP</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-12T17:33:39+08:00">
+                2020-02-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,168
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Spring是一个以IoC（Inversion of Control，控制反转）和AOP（Aspect Oriented Programming）为内核的框架。</p>
+<h3 id="IoC和DI"><a href="#IoC和DI" class="headerlink" title="IoC和DI"></a>IoC和DI</h3><p>IoC是Spring的基础。IoC实现的是一种控制，简单地说，就是以前调用new构造方法来创建对象，现在变成了使用Spring来创建对象。DI（Dependency Inject，依赖注入）与IoC的含义相同，从两个角度描述同一个概念。简单地说，DI就是对象的属性，已经被注入好相关值，直接使用即可。</p>
+<p>IoC是Inversion of Control的缩写，译为“<strong>控制反转</strong>”，还有的译为“控制反向”或者“控制倒置”。</p>
+<p>在面向对象传统编程方式中，获取对象的方式通常是用new关键字主动创建一个对象。Spring中的IoC方式对象的生命周期由Spring框架提供的IoC容器来管理，直接从IoC容器中获取一个对象，<strong>控制权从应用程序交给了IoC容器</strong>。</p>
+<p><strong>IoC理论上是借助于“第三方”实现具有依赖关系对象之间的解耦，即把各个对象类封装之后，通过IoC容器来关联这些对象类。这样对象与对象之间就通过IoC容器进行联系，而对象与对象之间没有什么直接联系。</strong></p>
+<p>当对象A实例化和运行时，如果需要对象B，IoC容器就会主动创建一个对象B注入（依赖注入）到对象A所需要的地方。由此，对象A获得依赖对象B的过程，<strong>由主动行为变成被动行为</strong>，即把创建对象交给了IoC容器处理，控制权颠倒过来了，这就是所谓的控制反转</p>
+<a id="more"></a>
+<p>DI是Dependency Inject的缩写，译为“依赖注入”。所谓依赖注入，就是由IoC容器在运行期间动态地将某种依赖关系注入对象之中。例如，将对象B注入（赋值）给对象A的成员变量。</p>
+<p>事实上，依赖注入（DI）和控制反转（IoC）是对同一件事情的不同描述，<strong>依赖注入是从应用程序的角度描述，即应用程序依赖容器创建并注入它所需要的外部资源；而控制反转是从容器的角度描述，即容器控制应用程序</strong>，由容器反向地向应用程序注入应用程序所需要的外部资源。这里所说的外部资源可以是外部实例对象，也可以是外部文件对象等</p>
+<h4 id="注入方法"><a href="#注入方法" class="headerlink" title="注入方法"></a>注入方法</h4><p>IoC/DI通常有setter（设置）注入和构造方法注入两种实现方式</p>
+<p>•  　属性setter()方法注入：IoC容器使用setter()方法注入被依赖的实例。通过调用无参构造器或无参静态工厂方法实例化Bean后，调用该Bean的setter()方法，即可实现基于setter()方法的依赖注入。该方式简单、直观，而且容易理解，所以Spring的设置注入被大量使用。<br>•  　构造方法注入：IoC容器使用构造方法注入被依赖的实例。基于构造方法的依赖注入通过调用带参数的构造方法来实现，每个参数代表着一个依赖。</p>
+<h4 id="核心容器"><a href="#核心容器" class="headerlink" title="核心容器"></a>核心容器</h4><p>Spring框架提供的两种核心容器分别是BeanFactory和ApplicationContext。</p>
+<p>Spring框架的两个最基本和最重要的包是org.springframework.beans.factory（该包中的主要接口是BeanFactory）和org.springframework.context（该包中的主要接口是ApplicationFactory）。</p>
+<p><strong>Spring IoC框架的主要组件有Beans、配置文件applicationContext.xml、BeanFactory接口及其相关类、ApplicationContext接口及其相关类。</strong></p>
+<p>（1）Beans是指项目中提供业务功能的Bean，即容器要管理的Bean。Beans就是一个常见的JavaBean、Java类。</p>
+<p>（2）在Spring中对Bean的管理是在配置文件中进行的。在Spring容器内编辑配置文件管理Bean又称为Bean的装配，实际上装配就是告诉容器需要哪些Bean，以及容器是如何使用IoC将它们配合起来的。Bean的配置文件是一个XML文件，可以命名为applicationContext.xml或其他，一般习惯使用applicationContext.xml。</p>
+<p>配置文件包含Bean的id、类、属性及其值，包含一个<beans>元素和数个<bean>子元素。Spring IoC框架可根据Bean的id从Bean配置文件中取得该Bean的类，并生成该类的一个实例对象，继而从配置文件中获得该对象的属性和值。例如<property>是<bean>元素的子元素，其name属性表示Bean实例中的相应属性名，ref属性用于指定其属性值<property>是<bean>元素的子元素，用于调用Bean实例中的setUserDao()方法完成属性赋值，从而实现依赖注入。其name属性表示Bean实例中的相应属性名，ref属性用于指定其属性值</bean></property></bean></property></bean></beans></p>
+<p>（3）BeanFactory采用了<strong>工厂设计模式</strong>，即Bean容器模式，负责读取Bean的配置文件，管理对象的生成、加载，维护Bean对象与Bean对象之间的依赖关系，负责Bean的生命周期。对于简单的应用程序来说，使用BeanFactory就已经足够管理Bean了，在对象的管理上可以获得许多便利性。</p>
+<p>org.springframework.beans.factory.BeanFactory是一个顶级接口，包含管理Bean的各种方法</p>
+<p>org.springframework.beans.factory.xml.XmlBeanFactory是BeanFactory常用的实现类，根据配置文件中的定义装载Bean。要创建XmlBeanFactory，需要传递一个FileInputStream对象，该对象把XML文件提供给工厂。代码可以写成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">BeanFactory factory=new XmlBeanFactory( new FileInputStream(&quot;applicationContext.xml &quot;));</span><br></pre></td></tr></table></figure>
+<p>BeanFactory的常用方法如下：<br>•  　getBean(String name)：可根据Bean的id生成该Bean的对象。<br>•  　getBean(String name,Class requiredType)：可根据Bean的id和相应类生成该Bean的对象。</p>
+<p>（4）ApplicationContext接口提供高级功能的容器，基本功能与BeanFactory很相似，但它还有以下功能：<br>•  　提供访问资源文件更方便的方法。<br>•  　支持国际化消息。<br>•  　提供文字消息解析的方法。<br>•  　可以发布事件，对事件感兴趣的Bean可以接收到这些事件。</p>
+<p>ApplicationContext接口的常用实现类有以下3个。<br>•  　FileSystemXmlApplicationContext：从文件系统中的XML文件加载上下文中定义的信息。<br>•  　ClassPathXmlApplicationContext：从类路径中的XML文件加载上下文中定义的信息，把上下文定义的文件当成类路径资源。<br>•  　XmlWebApplicationContext：从Web系统中的XML文件加载上下文中定义的信息。</p>
+<p>其中，FileSystemXmlApplicationContext和ClassPathXmlApplicationContext的代码编写如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ApplicationContext context=new FileSystemXmlApplicationContext(&quot;d:/applicationContext.xml￼&quot;);￼</span><br><span class="line">ApplicationContext context=new ClassPathXmlApplicationContext(&quot;applicationContext.xml &quot;);</span><br></pre></td></tr></table></figure>
+<h3 id="Beans"><a href="#Beans" class="headerlink" title="Beans"></a>Beans</h3><h4 id="作用域"><a href="#作用域" class="headerlink" title="作用域"></a>作用域</h4><p>在Spring配置文件中，Bean的作用域是通过<bean>元素的<strong>scope属性</strong>来指定的，该属性值可以设置为singleton、prototype、request、session、globalSession、application、websocket七个值</bean></p>
+<p><strong>singleton是Spring容器默认的作用域</strong>，当Bean的作用域为singleton时，Spring容器就只会存在一个共享的Bean实例，并且所有对Bean的请求，只要id与该Bean的id属性相匹配，就会返回同一个Bean的实例。singleton作用域对于无会话状态的Bean（如Dao组件、Service组件）来说是最理想的选择</p>
+<p>对需要保持会话状态的Bean应用使用prototype作用域。在使用prototype作用域时，Spring容器会为每个对该Bean的请求都创建一个新的实例</p>
+<h4 id="装配方式"><a href="#装配方式" class="headerlink" title="装配方式"></a>装配方式</h4><p>Spring容器支持多种形式的Bean装配方式，如基于XML的装配、基于Annotation（注解）的装配和自动装配等</p>
+<h5 id="基于xml的装配"><a href="#基于xml的装配" class="headerlink" title="基于xml的装配"></a>基于xml的装配</h5><p>Spring提供了两种基于XML的装配方式：设值注入（Setter Injection）和构造注入（Constructor Injection）</p>
+<p>在Spring实例化Bean的过程中，<strong>Spring首先会调用Bean的默认构造方法来实例化Bean对象，然后通过反射的方式调用setter()方法来注入属性值</strong>。因此，设值注入要求一个Bean必须满足以下两点要求：<br>•  　Bean类必须提供一个默认的无参构造方法。<br>•  　Bean类必须为需要注入的属性提供对应的setter()方法。</p>
+<p>使用设值注入时，在Spring配置文件中需要使用<bean>元素的子元素<property>来为每个属性注入值；而使用构造注入时，在配置文件中需要使用<bean>元素的子元素<constructor-arg>来定义构造方法的参数，可以使用其value属性（或子元素）来设置该参数的值。</constructor-arg></bean></property></bean></p>
+<h5 id="基于注解的装配"><a href="#基于注解的装配" class="headerlink" title="基于注解的装配"></a>基于注解的装配</h5><p>注解将类标识为Spring中的Bean，Spring注解提供了一种高效的注解配置方式<strong>（对包路径下的所有Bean文件进行扫描)</strong><br>@Repository、@Service和@Controller的功能与@Component注解的功能相同，但为了使标注类本身用途更加清晰，建议在实际开发中使用@Repository、@Service和@Controller分别对实现类进行标注</p>
+<h5 id="自动装配"><a href="#自动装配" class="headerlink" title="自动装配"></a>自动装配</h5><p>Spring的<bean>元素中包含一个autowire属性，我们可以通过设置autowire的属性值来自动装配Bean。所谓自动装配，就是将一个Bean自动注入其他Bean的Property中</bean></p>
+<h3 id="AOP"><a href="#AOP" class="headerlink" title="AOP"></a>AOP</h3><p>AOP的全称是Aspect-Oriented Programming，即面向切面编程（也称面向方面编程），是面向对象编程（OOP）的一种补充，目前已成为一种比较成熟的编程方式。</p>
+<p>在AOP思想中，通过Aspect（切面）可以分别在不同类的方法中加入<strong>事务、日志、权限和异常</strong>等功能。</p>
+<h4 id="Aspect（切面）"><a href="#Aspect（切面）" class="headerlink" title="Aspect（切面）"></a>Aspect（切面）</h4><p>在实际应用中，切面通常是指封装的用于横向插入系统功能（如事务、日志等）的类，该类要被Spring容器识别为切面，需要在配置文件中通过<bean>元素指定。</bean></p>
+<p>在Spring的配置文件中，配置切面使用的是<a href="aop:aspect" target="_blank" rel="noopener">aop:aspect</a>元素，该元素会将一个已定义好的Spring Bean转换成切面Bean，所以要在配置文件中先定义一个普通的Spring Bean（如上述代码中定义的myAspect）。<strong>定义完成后，通过<a href="aop:aspect" target="_blank" rel="noopener">aop:aspect</a>元素的ref属性即可引用该Bean。</strong></p>
+<h4 id="Joinpoint（连接点）"><a href="#Joinpoint（连接点）" class="headerlink" title="Joinpoint（连接点）"></a>Joinpoint（连接点）</h4><p>在程序执行过程中的某个阶段点，它实际上是对象的一个操作，例如方法的调用或异常的抛出。在Spring AOP中，连接点就是指方法的调用。</p>
+<h4 id="Pointcut（切入点）"><a href="#Pointcut（切入点）" class="headerlink" title="Pointcut（切入点）"></a>Pointcut（切入点）</h4><p>指切面与程序流程的交叉点，即那些需要处理的连接点。通常在程序中，切入点指的是类或者方法名，如某个通知要应用到所有以add开头的方法中，那么所有满足这一规则的方法都是切入点。</p>
+<p>当<a href="aop:pointcut" target="_blank" rel="noopener">aop:pointcut</a>元素作为<a href="aop:config" target="_blank" rel="noopener">aop:config</a>元素的子元素定义时，表示该切入点是全局切入点，可以被多个切面所共享；当<a href="aop:pointcut" target="_blank" rel="noopener">aop:pointcut</a>元素作为<a href="aop:aspect" target="_blank" rel="noopener">aop:aspect</a>元素的子元素时，表示该切入点只对当前切面有效。在定义<a href="aop:pointcut" target="_blank" rel="noopener">aop:pointcut</a>元素时，通常会指定id和expression两个属性</p>
+<p>express格式 ：</p>
+<p><code>execution(modifiers-pattern? ret-type-pattern declaring-type-pattern?name-pattern(param-￼pattern) throws-pattern?</code></p>
+<p>带有问号（?）的部分表示可选配置项，其他部分属于必须配置项。</p>
+<h4 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h4><p>•  　Advice（通知增强处理）：AOP框架在特定的切入点执行增强处理，即在定义好的切入点处所要执行的程序代码。可以将其理解为切面类中的方法，它是切面的具体实现。<br>•  　Target Object（目标对象）：是指所有被通知的对象，也称为被增强对象。如果AOP框架采用的是动态的AOP实现，那么该对象就是一个被代理对象。<br>•  　Proxy（代理）：将通知应用到目标对象之后，被动态创建的对象。<br>•  　Weaving（织入）：将切面代码插入目标对象上，从而生成代理对象的过程。</p>
+<h4 id="基于XML的声明式AspectJ"><a href="#基于XML的声明式AspectJ" class="headerlink" title="基于XML的声明式AspectJ"></a>基于XML的声明式AspectJ</h4><p>通过XML文件来定义切面、切入点及通知，Spring配置文件中的<beans>元素下可以包含多个<a href="aop:config" target="_blank" rel="noopener">aop:config</a>元素，一个<a href="aop:config" target="_blank" rel="noopener">aop:config</a>元素中又可以包含属性和子元素，其子元素包括<a href="aop:pointcut" target="_blank" rel="noopener">aop:pointcut</a>、<a href="aop:advisor" target="_blank" rel="noopener">aop:advisor</a>和<a href="aop:aspect" target="_blank" rel="noopener">aop:aspect</a>。在配置时，这3个子元素必须按照此顺序来定义。</beans></p>
+<h4 id="基于注解的声明式AspectJ"><a href="#基于注解的声明式AspectJ" class="headerlink" title="基于注解的声明式AspectJ"></a>基于注解的声明式AspectJ</h4><p>使用@Aspect注解定义了切面类，由于该类在Spring中是作为组件使用的，因此<strong>还需要添加@Component注解才能生效</strong>。然后使用@Pointcut注解来配置切入表达式，并通过定义方法来表示切入点名称。接下来在每个通知相应的方法上添加了相应的注解，并将切入点名称作为参数传递给需要执行增强的通知方法。如果需要其他参数（如异常通知的异常参数），可以根据代码提示传递相应的属性值。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spring/" rel="tag"><i class="fa fa-tag"></i> Spring</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/OS/2020-02-10-Deepin真好玩之我怎么又黑屏了？？.html" rel="next" title="Deepin真好玩之我怎么又黑屏了？？">
+                <i class="fa fa-chevron-left"></i> Deepin真好玩之我怎么又黑屏了？？
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">虚己以游世，乘物以游心</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">69</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">111</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#IoC和DI"><span class="nav-number">1.</span> <span class="nav-text">IoC和DI</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#注入方法"><span class="nav-number">1.1.</span> <span class="nav-text">注入方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#核心容器"><span class="nav-number">1.2.</span> <span class="nav-text">核心容器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Beans"><span class="nav-number">2.</span> <span class="nav-text">Beans</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#作用域"><span class="nav-number">2.1.</span> <span class="nav-text">作用域</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#装配方式"><span class="nav-number">2.2.</span> <span class="nav-text">装配方式</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#基于xml的装配"><span class="nav-number">2.2.1.</span> <span class="nav-text">基于xml的装配</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#基于注解的装配"><span class="nav-number">2.2.2.</span> <span class="nav-text">基于注解的装配</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#自动装配"><span class="nav-number">2.2.3.</span> <span class="nav-text">自动装配</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AOP"><span class="nav-number">3.</span> <span class="nav-text">AOP</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Aspect（切面）"><span class="nav-number">3.1.</span> <span class="nav-text">Aspect（切面）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Joinpoint（连接点）"><span class="nav-number">3.2.</span> <span class="nav-text">Joinpoint（连接点）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Pointcut（切入点）"><span class="nav-number">3.3.</span> <span class="nav-text">Pointcut（切入点）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他"><span class="nav-number">3.4.</span> <span class="nav-text">其他</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于XML的声明式AspectJ"><span class="nav-number">3.5.</span> <span class="nav-text">基于XML的声明式AspectJ</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基于注解的声明式AspectJ"><span class="nav-number">3.6.</span> <span class="nav-text">基于注解的声明式AspectJ</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
