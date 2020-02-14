@@ -1,0 +1,910 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Spring," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Spring MVC是Spring提供的一个轻量级Web框架，它实现了Web MVC设计模式。提供了一个前端控制器DispatcherServlet，使开发人员无须额外开发控制器对象。 在老版本的Spring中，配置文件内必须要配置处理器映射器、处理器适配器和视图解析器。但在Spring 4.0以后，如果不配置处理器映射器BeanNameUrlHandlerMapping、处理器适配器Simple">
+<meta name="keywords" content="Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring MVC">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/Java/2020-02-15-Spring-MVC.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="Spring MVC是Spring提供的一个轻量级Web框架，它实现了Web MVC设计模式。提供了一个前端控制器DispatcherServlet，使开发人员无须额外开发控制器对象。 在老版本的Spring中，配置文件内必须要配置处理器映射器、处理器适配器和视图解析器。但在Spring 4.0以后，如果不配置处理器映射器BeanNameUrlHandlerMapping、处理器适配器Simple">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/02/14/15816117389997.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/02/14/15816718223992.png">
+<meta property="og:updated_time" content="2020-02-14T16:12:42.779Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring MVC">
+<meta name="twitter:description" content="Spring MVC是Spring提供的一个轻量级Web框架，它实现了Web MVC设计模式。提供了一个前端控制器DispatcherServlet，使开发人员无须额外开发控制器对象。 在老版本的Spring中，配置文件内必须要配置处理器映射器、处理器适配器和视图解析器。但在Spring 4.0以后，如果不配置处理器映射器BeanNameUrlHandlerMapping、处理器适配器Simple">
+<meta name="twitter:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/02/14/15816117389997.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/Java/2020-02-15-Spring-MVC.html"/>
+
+
+
+
+
+  <title>Spring MVC | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/Java/2020-02-15-Spring-MVC.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Spring MVC</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-15T00:01:39+08:00">
+                2020-02-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,735
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>Spring MVC是Spring提供的一个轻量级Web框架，它实现了Web MVC设计模式。提供了一个前端控制器DispatcherServlet，使开发人员无须额外开发控制器对象。</p>
+<p>在老版本的Spring中，配置文件内必须要配置处理器映射器、处理器适配器和视图解析器。但在Spring 4.0以后，如果不配置处理器映射器BeanNameUrlHandlerMapping、处理器适配器SimpleControllerHandlerAdapter和视图解析器InternalResourceViewResolver，就会使用Spring内部默认的配置来完成相应的工作</p>
+<p>在web.xml中配置Spring MVC的前端控制器等信息<br>在src目录下创建Spring MVC的核心配置文件springmvc-config.xml，在该文件中配置组件扫描器和视图解析器</p>
+<h3 id="执行流程"><a href="#执行流程" class="headerlink" title="执行流程"></a>执行流程</h3><p>（1）用户通过浏览器向服务器发送请求，请求会被Spring MVC的前端控制器DispatcherServlet所拦截。<br>（2）DispatcherServlet拦截到请求后，会调用HandlerMapping处理器映射器。<br>（3）处理器映射器根据请求URL找到具体的处理器，生成处理器对象及处理器拦截器（如果有就生成）一并返回给DispatcherServlet。<br>（4）DispatcherServlet会通过返回信息选择合适的HandlerAdapter（处理器适配器）。<br>（5）<strong>HandlerAdapter会调用并执行Handler（处理器），这里的处理器就是程序中编写的Controller类，也被称为后端控制器</strong>。<br>（6）Controller执行完成后，会返回一个ModelAndView对象，该对象中包含视图名或包含模型与视图名。<br>（7）HandlerAdapter将ModelAndView对象返回给DispatcherServlet。<br>（8）DispatcherServlet会根据ModelAndView对象选择一个合适的ViewResolver（视图解析器）。<br>（9）ViewResolver解析后，会向DispatcherServlet中返回具体的View（视图）。<br>（10）DispatcherServlet对View进行渲染（即将模型数据填充至视图中）。<br>（11）视图渲染结果会返回给客户端浏览器显示。（9）ViewResolver解析后，会向DispatcherServlet中返回具体的View（视图）。<br>（10）DispatcherServlet对View进行渲染（即将模型数据填充至视图中）。<br>（11）视图渲染结果会返回给客户端浏览器显示。</p>
+<a id="more"></a>
+<h3 id="注解用法"><a href="#注解用法" class="headerlink" title="注解用法"></a>注解用法</h3><p>Spring通过@Controller注解找到相应的控制器类后，还需要知道控制器内部对每一个请求是如何处理的，这就需要使用org.springframework.web.bind.annotation.RequestMapping注解类型。RequestMapping用于映射一个请求或一个方法，其注解形式为@RequestMapping，可以使用该注解标注在一个方法或一个类上。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/02/14/15816117389997.png" alt="@RequestMapping注解的属性"></p>
+<p>Spring 4.3版本中引入了组合注解来帮助简化常用的HTTP方法的映射，并更好地表达被注解方法的语义。其组合注解如下所示。<br>•  　@GetMapping：匹配GET方式的请求。<br>•  　@PostMapping：匹配POST方式的请求。<br>•  　@PutMapping：匹配PUT方式的请求。<br>•  　@DeleteMapping：匹配DELETE方式的请求。<br>•  　@PatchMapping：匹配PATCH方式的请求。<br>以@GetMapping为例，该组合注解是@RequestMapping(method= RequestMethod.GET)的缩写</p>
+<p>请求方法参数较多，不一一列举。绝大部分为Servlet API类型。但是，org.springframework.ui.Model类型不是一个Servlet API类型，而是一个包含Map对象的Spring MVC类型。如果方法中添加了Model参数，那么每次调用该请求处理方法时，Spring MVC都会创建Model对象，并将其作为参数传递给方法。</p>
+<p>请求方法的返回值，常见的返回类型有ModelAndView、String和void。其中，ModelAndView类型中可以添加Model数据，并指定视图；String类型的返回值可以跳转视图，但不能携带数据；而void类型主要在异步请求时使用，它只返回数据，而不会跳转视图。</p>
+<h3 id="数据绑定"><a href="#数据绑定" class="headerlink" title="数据绑定"></a>数据绑定</h3><p>Spring MVC框架会通过数据绑定组件（DataBinder）将请求参数串的内容进行类型转换，然后将转换后的值赋给控制器类中方法的形参，这样后台方法就可以正确绑定并获取客户端请求携带的参数。</p>
+<p>步骤01　Spring MVC将ServletRequest对象传递给DataBinder。<br>步骤02　将处理方法的入参对象传递给DataBinder。<br>步骤03　DataBinder<strong>调用ConversionService组件</strong>进行数据类型转换、数据格式化等工作，并将ServletRequest对象中的消息填充到参数对象中。<br>步骤04　调用Validator组件对已经绑定了请求消息数据的参数对象进行数据合法性校验。<br>步骤05　校验完成后会生成数据<strong>绑定结果BindingResult对象</strong>，Spring MVC会将BindingResult对象中的内容赋给处理方法的相应参数。</p>
+<p>比较常用的是POJO数据绑定。所有关联的请求参数封装在一个POJO中，然后为每一个参数设定set get 方法<br>使用POJO类型数据绑定时，前端请求的参数名必须与要绑定的POJO类中的属性名一样，这样才会自动将请求数据绑定到POJO对象中，否则后台接收的参数值为null。<br>对象比较复杂时，还可以在其中一个POJO中封装另一个POJO。</p>
+<p>为了防止前端传入的中文数据出现乱码问题，可以使用Spring提供的编码过滤器来统一编码。要使用编码过滤器，只需要<strong>在web.xml中添加<filter>编码过滤器</filter></strong>，这样所有的请求信息都会以UTF-8的编码格式进行解析。</p>
+<p>有些特殊类型的参数无法在后台进行直接转换，例如日期数据需要开发者自定义转换器（Converter）或格式化（Formatter）进行数据绑定。<br>对于复杂类型的数据，比如数组或者集合可以定义包含数组或者对象类的集合，进行绑定。</p>
+<h3 id="JSON数据交互"><a href="#JSON数据交互" class="headerlink" title="JSON数据交互"></a>JSON数据交互</h3><p>JSON（JavaScript Object Notation，JS对象标记）是一种轻量级的数据交换格式，采用完全独立于编程语言的文本格式来存储和表示数据。</p>
+<p>对象结构：</p>
+<figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&#123; keyl: valuel,</span><br><span class="line"> key2: value2,</span><br><span class="line"> ……&#125;</span><br></pre></td></tr></table></figure>
+<p>关键字（key）必须为String类型，值（value）可以是String、Number、Object、Array等数据类型。</p>
+<p>为了实现浏览器与控制器类（Controller）之间的数据交互，Spring提供了一个<strong>HttpMessageConverter<t></t></strong>接口来完成此项工作。该接口主要用于将请求信息中的数据转换为一个类型为T的对象，并将类型为T的对象绑定到请求方法的参数中，或者将对象转换为响应信息传递给浏览器显示。<br>MappingJacksona2HttpMessageConverter是Spring MVC默认处理JSON格式请求响应的实现类。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/02/14/15816718223992.png" alt="JS0N数据交互注解及说明"></p>
+<p><a href="mvc:annotation-driven/" target="_blank" rel="noopener">mvc:annotation-driven/</a>配置会自动注册 RequestMappingHandlerMapping和RequestMappingHandlerAdapter两个Bean，并提供对读写XML和读写JSON等功能的支持。</p>
+<h3 id="RESTful"><a href="#RESTful" class="headerlink" title="RESTful"></a>RESTful</h3><p>RESTful也称为REST（Representational State Transfer），可以将它理解为一种软件架构风格或设计风格。就是把<strong>请求参数变成请求路径</strong></p>
+<p><code>http://.../queryitems?id=1http://.../queryitems?id=1</code><br>变为<br><code>http://.../items/1</code></p>
+<p>RESTful风格在HTTP请求中使用put、delete、post和get方式分别对应添加、删除、修改和查询的操作。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Spring/" rel="tag"><i class="fa fa-tag"></i> Spring</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/Blog/2020-02-13-阿里云OSS-PicGo搭建博客图床.html" rel="next" title="阿里云OSS+PicGo搭建博客图床">
+                <i class="fa fa-chevron-left"></i> 阿里云OSS+PicGo搭建博客图床
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">虚己以游世，乘物以游心</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">71</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#执行流程"><span class="nav-number">1.</span> <span class="nav-text">执行流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注解用法"><span class="nav-number">2.</span> <span class="nav-text">注解用法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#数据绑定"><span class="nav-number">3.</span> <span class="nav-text">数据绑定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#JSON数据交互"><span class="nav-number">4.</span> <span class="nav-text">JSON数据交互</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#RESTful"><span class="nav-number">5.</span> <span class="nav-text">RESTful</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
