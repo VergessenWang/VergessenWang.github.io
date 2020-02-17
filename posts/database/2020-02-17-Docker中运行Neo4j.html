@@ -119,7 +119,7 @@
 
 
 
-  <meta name="keywords" content="LeetCode," />
+  <meta name="keywords" content="Neo4j,Docker," />
 
 
 
@@ -130,18 +130,18 @@
 
 
 
-<meta name="description" content="今天，小伙伴问我，LeetCode刷了几道了？？？ 晴天霹雳。 确实要开始准备笔试了。但是也不想太盲目，所以先了解一下科学的刷题方法。 第一遍：从易到难—主要是easy和medium，广度，看别人的解法 第二遍：按类别—-深度，要有一个方面比较特殊 需要刷的数量 200~300 ，各个难度刷一半；每个类别的核心思想的理解，达到何种程度的优化。 反刷题：一开始就给出最优解？ 然而能不能做出题目其实是">
-<meta name="keywords" content="LeetCode">
+<meta name="description" content="查看最新的Neo4j镜像版本 此时最新为4.0 docker pull neo4j:4.0 拉取镜像4.0  报错Error response from daemon: Get https://registry-1.docker.io/v2/: dial tcp: lookup registry-1.docker.io on 10.0.2.3:53: read udp 10.0.2.15:5177">
+<meta name="keywords" content="Neo4j,Docker">
 <meta property="og:type" content="article">
-<meta property="og:title" content="刷LeetCode的正确姿势">
-<meta property="og:url" content="http://vergessenwang.github.io/posts/Intern/2020-01-31-刷LeetCode的正确姿势.html">
+<meta property="og:title" content="Docker中运行Neo4j">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/database/2020-02-17-Docker中运行Neo4j.html">
 <meta property="og:site_name" content="Anonymous World">
-<meta property="og:description" content="今天，小伙伴问我，LeetCode刷了几道了？？？ 晴天霹雳。 确实要开始准备笔试了。但是也不想太盲目，所以先了解一下科学的刷题方法。 第一遍：从易到难—主要是easy和medium，广度，看别人的解法 第二遍：按类别—-深度，要有一个方面比较特殊 需要刷的数量 200~300 ，各个难度刷一半；每个类别的核心思想的理解，达到何种程度的优化。 反刷题：一开始就给出最优解？ 然而能不能做出题目其实是">
+<meta property="og:description" content="查看最新的Neo4j镜像版本 此时最新为4.0 docker pull neo4j:4.0 拉取镜像4.0  报错Error response from daemon: Get https://registry-1.docker.io/v2/: dial tcp: lookup registry-1.docker.io on 10.0.2.3:53: read udp 10.0.2.15:5177">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-01-31T15:26:57.672Z">
+<meta property="og:updated_time" content="2020-02-17T12:32:38.061Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="刷LeetCode的正确姿势">
-<meta name="twitter:description" content="今天，小伙伴问我，LeetCode刷了几道了？？？ 晴天霹雳。 确实要开始准备笔试了。但是也不想太盲目，所以先了解一下科学的刷题方法。 第一遍：从易到难—主要是easy和medium，广度，看别人的解法 第二遍：按类别—-深度，要有一个方面比较特殊 需要刷的数量 200~300 ，各个难度刷一半；每个类别的核心思想的理解，达到何种程度的优化。 反刷题：一开始就给出最优解？ 然而能不能做出题目其实是">
+<meta name="twitter:title" content="Docker中运行Neo4j">
+<meta name="twitter:description" content="查看最新的Neo4j镜像版本 此时最新为4.0 docker pull neo4j:4.0 拉取镜像4.0  报错Error response from daemon: Get https://registry-1.docker.io/v2/: dial tcp: lookup registry-1.docker.io on 10.0.2.3:53: read udp 10.0.2.15:5177">
 
 
 
@@ -171,13 +171,13 @@
 
 
 
-  <link rel="canonical" href="http://vergessenwang.github.io/posts/Intern/2020-01-31-刷LeetCode的正确姿势.html"/>
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/database/2020-02-17-Docker中运行Neo4j.html"/>
 
 
 
 
 
-  <title>刷LeetCode的正确姿势 | Anonymous World</title>
+  <title>Docker中运行Neo4j | Anonymous World</title>
   
 
 
@@ -304,7 +304,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/Intern/2020-01-31-刷LeetCode的正确姿势.html">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/database/2020-02-17-Docker中运行Neo4j.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liana_Wang">
@@ -321,7 +321,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">刷LeetCode的正确姿势</h1>
+          <h1 class="post-title" itemprop="name headline">Docker中运行Neo4j</h1>
         
 
         <div class="post-meta">
@@ -333,8 +333,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-01-31T23:23:46+08:00">
-                2020-01-31
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-17T20:29:15+08:00">
+                2020-02-17
               </time>
             
 
@@ -356,8 +356,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Intern/" itemprop="url" rel="index">
-                    <span itemprop="name">Intern</span>
+                  <a href="/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
                   </a>
                 </span>
 
@@ -387,7 +387,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  410
+                  1,030
                 </span>
               
 
@@ -412,45 +412,51 @@
       
 
       
-        <p>今天，小伙伴问我，LeetCode刷了几道了？？？ 晴天霹雳。</p>
-<p>确实要开始准备笔试了。但是也不想太盲目，所以先了解一下科学的刷题方法。</p>
-<p>第一遍：从易到难—主要是easy和medium，广度，看别人的解法</p>
-<p>第二遍：按类别—-深度，要有一个方面比较特殊</p>
-<p>需要刷的数量 200~300 ，各个难度刷一半；每个类别的核心思想的理解，达到何种程度的优化。</p>
-<p>反刷题：一开始就给出最优解？ 然而能不能做出题目其实是次要，重要的是解决问题的思路</p>
-<p>其实刷题并不是要去实现一个量化的目标，诸如我刷了多少？刷了几遍？ 而是要去总结和理解题目背后的涵义。</p>
-<p>找实习的话，其实学校的项目经验帮助不大，除非是参加过Github上大型的开源项目。</p>
+        <p>查看<a href="https://hub.docker.com/_/neo4j?tab=tags" target="_blank" rel="noopener">最新的Neo4j镜像版本</a> 此时最新为4.0</p>
+<p><code>docker pull neo4j:4.0</code> 拉取镜像4.0 </p>
+<p>报错Error response from daemon: Get <a href="https://registry-1.docker.io/v2/" target="_blank" rel="noopener">https://registry-1.docker.io/v2/</a>: dial tcp: lookup registry-1.docker.io on 10.0.2.3:53: read udp 10.0.2.15:51774-&gt;10.0.2.3:53: i/o timeout</p>
+<p>可能DNS解析有点问题，看了一下全都是美国弗吉尼亚的Amazon数据中心，应该是访问不到</p>
+<p>去找阿里云镜像，然后被满页的广告蒙蔽了双眼，一个多小时之后，我买了一台云服务器 ：D</p>
+<p>我是谁？我在哪？我刚才不是在学Docker吗？后来，我就开始搭服务器了。。。</p>
 <a id="more"></a>
+<p>一天之后，我回来了。继续学这个</p>
 <hr>
-<p>以下总结来自花花酱</p>
-<ul>
-<li>刷多少题<ul>
-<li>每个类型10~20  DP越多越好</li>
-<li>总共200~300</li>
-</ul>
-</li>
-<li><p>如何刷</p>
-<ul>
-<li>按类型总结</li>
-<li>第一遍：5分钟想不出来就看答案</li>
-<li>第二遍：尝试不看答案完整实现( 不超过60min)</li>
-<li>第三遍：快速实现( 不超过20min)</li>
-</ul>
-</li>
-<li><p>看不同版本的代码—-速度中间偏前的</p>
-<ul>
-<li>看3~5种不同的实现，分析优缺点，速度快慢的原因</li>
-<li>学习新的语言/ API</li>
-</ul>
-</li>
-<li>培养能力<ul>
-<li>至少能看出该使用什么样的算法</li>
-<li>根据数据规模推算时间复杂度</li>
-<li>代码风格： 命名、缩进、括号</li>
-</ul>
-</li>
-</ul>
-<p>不多说了，今天就开始吧</p>
+<h3 id="云服务器"><a href="#云服务器" class="headerlink" title="云服务器"></a>云服务器</h3><p>在云服务器中 <code>docker pull neo4j</code> 默认拉取 lasted 版本，这时速度依然很慢</p>
+<p><a href="https://blog.csdn.net/julien71/article/details/79760919" target="_blank" rel="noopener">添加阿里云地址</a>   速度起飞….</p>
+<p><code>docker run -it -d -p 7474:7474 -p 7687:7687 neo4j:4.0</code> 7474端口用于管理界面，7687端口用于登录连接neo4j服务端 。采用后台运行方式启动，返回一个containerid</p>
+<p>然而在云服务器还要进行安全组端口配置</p>
+<p>这里试了几次都有点问题，不太明白是哪里出了问题，难度是没装java？或者是防火墙没关？</p>
+<p>先<a href="http://www.imooc.com/article/75277" target="_blank" rel="noopener">装sdkman</a>来管理java，先装个java8 不得不说挺方便的，不用自己去改环境变量了 <code>java -version</code> 查看的版本为1.8</p>
+<p>折腾了一会放弃了，还是在电脑上运行把。</p>
+<hr>
+<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p>同样添加一下<a href="https://www.imooc.com/article/48684" target="_blank" rel="noopener">toolbox镜像加速</a> </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker-machine ssh default</span><br><span class="line">sudo sed -i &quot;s|EXTRA_ARGS=&apos;|EXTRA_ARGS=&apos;--registry-mirror=阿里云镜像加速地址 |g&quot; /var/lib/boot2docker/profile</span><br><span class="line">exit</span><br><span class="line">docker-machine restart default</span><br></pre></td></tr></table></figure>
+<p>这里使用的是我自己阿里云控制台里的镜像加速地址</p>
+<p>重启之后提示 <code>docker info</code> 无法查看信息，提示 You may need to re-run the <code>docker-machine env</code> command.</p>
+<p><code>docker-machine env default</code> 根据查询结果 输入 <code>eval $(&quot;C:\Program Files\Docker Toolbox\docker-machine.exe&quot; env default)</code></p>
+<p>再次 <code>docker info</code> 查看信息成功，重新拉取neo4j, 很快的样子</p>
+<p>二十分钟过后….好吧，并不快….</p>
+<p>运行<code>docker run -d -p 7474:7474 -p 7687:7687 neo4j</code> 在浏览器依然没有显示？？</p>
+<p>怎么回事，之前用neo4j的bin文件运行是没有问题的，难道是docker的原因？</p>
+<p>这时我想到了，docker实际上是一个虚拟机，那么在浏览器用localhost的访问当然是不行的，所以找到docker的IP 为 192.168.99.100</p>
+<p>再访问 <a href="http://192.168.99.100:7474/browser/" target="_blank" rel="noopener">http://192.168.99.100:7474/browser/</a> 就有界面了</p>
+<hr>
+<h3 id="云服务器-1"><a href="#云服务器-1" class="headerlink" title="云服务器"></a>云服务器</h3><p>这时我又回到云服务器，试图找出存在的问题</p>
+<p>用<code>docker ps -a</code> 命令 </p>
+<p>我发现在本机运行时</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                                                      NAMES</span><br><span class="line"><span class="number">2</span>d9721591b68        neo4j               "/sbin/tini -g -- /d…"   <span class="number">53</span> minutes ago      Up <span class="number">48</span> minutes       <span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span>:<span class="number">7474</span>-&gt;<span class="number">7474</span>/tcp, <span class="number">7473</span>/tcp, <span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span>:<span class="number">7687</span>-&gt;<span class="number">7687</span>/tcp   jolly_goldberg</span><br></pre></td></tr></table></figure>
+<p>状态为UP ， 端口也映射成功</p>
+<p>但是云服务器上的却是 Exited (1)</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES</span><br><span class="line"><span class="number">28</span>ba3f7d0527        neo4j               "/sbin/tini -g -- /d…"   <span class="number">10</span> seconds ago      Exited (<span class="number">1</span>) <span class="number">9</span> seconds ago                        fervent_ptolemy</span><br><span class="line"><span class="number">0</span>ba0cba50e7d        neo4j               "/sbin/tini -g -- /d…"   <span class="number">11</span> minutes ago      Exited (<span class="number">1</span>) <span class="number">11</span> minutes ago                       sad_pascal</span><br><span class="line"><span class="number">03</span>f239d99289        neo4j:<span class="number">4</span>.<span class="number">0</span>           "/sbin/tini -g -- /d…"   <span class="number">3</span> hours ago         Exited (<span class="number">1</span>) <span class="number">3</span> hours ago                          tender_shannon</span><br><span class="line"><span class="number">78</span>df828be80b        hello-world         "/hello"                 <span class="number">23</span> hours ago        Exited (<span class="number">0</span>) <span class="number">23</span> hours ago                         suspicious_mestorf</span><br></pre></td></tr></table></figure>
+<p>也就是说，neo4j并没有正常的运行起来</p>
+<p>去掉后台运行参数-d 后重新运行，报错 /var/lib/neo4j/bin/neo4j: line 238: /var/lib/neo4j/conf/neo4j.conf: Permission denied</p>
+<p>出现了访问限制。</p>
+<p>然而我并没有找到这个/var/lib/neo4j 这个目录，应该是要修改镜像文件吧。然而docker一般都是部署的已经写好的代码，所以用在云服务器上用docker运行neo4j的话，其实还要对源码进行相应的修改，构建自己的镜像，这个以后真正要部署的时候再说吧，也就是上传源码的事</p>
+<p>话说回来，我一定非要在docker中运行neo4j吗…</p>
+<hr>
+<h3 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h3><p>又开始折腾了，这次是在linux系统上装了Docker 和Neo4J </p>
+<p><code>sudo docker run --publish=7474:7474 --publish=7687:7687 neo4j</code>  </p>
+<p>成功运行起来了, 使用默认账户密码neo4j/neo4j 登陆</p>
 
       
     </div>
@@ -468,7 +474,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/LeetCode/" rel="tag"><i class="fa fa-tag"></i> LeetCode</a>
+            <a href="/tags/Neo4j/" rel="tag"><i class="fa fa-tag"></i> Neo4j</a>
+          
+            <a href="/tags/Docker/" rel="tag"><i class="fa fa-tag"></i> Docker</a>
           
         </div>
       
@@ -496,8 +504,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/Java/2020-01-27-Spring-Boot实现简单REST-API.html" rel="next" title="Spring Boot实现简单REST-API">
-                <i class="fa fa-chevron-left"></i> Spring Boot实现简单REST-API
+              <a href="/posts/Intern/2020-02-16-LC-链表专题-一.html" rel="next" title="LC-链表专题(一)">
+                <i class="fa fa-chevron-left"></i> LC-链表专题(一)
               </a>
             
           </div>
@@ -505,10 +513,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/posts/life/2020-02-01-肆意蒸发的2019.html" rel="prev" title="肆意蒸发的2019">
-                肆意蒸发的2019 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -560,8 +564,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -655,6 +668,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#云服务器"><span class="nav-number">1.</span> <span class="nav-text">云服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows"><span class="nav-number">2.</span> <span class="nav-text">Windows</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#云服务器-1"><span class="nav-number">3.</span> <span class="nav-text">云服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux"><span class="nav-number">4.</span> <span class="nav-text">linux</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
