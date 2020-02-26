@@ -119,7 +119,7 @@
 
 
 
-  <meta name="keywords" content="红黑树,AVL树," />
+  <meta name="keywords" content="正则表达式," />
 
 
 
@@ -130,18 +130,28 @@
 
 
 
-<meta name="description" content="二叉查找树二叉查找树的特征(递归) ——或者是一棵空树或者是具有如下特性的二叉树：  若它的左子树不空，则左子树上所有结点的值均小于根结点的值； 若它的右子树不空，则右子树上所有结点的值均大于根结点的值； 它的左、右子树也分别是二叉排序树。 中序遍历二叉排序树可得到一个关键字的有序序列。  在一般情况下，查找和插入的时间复杂度为logN,  但是在极端情况下会退化为链表，此时查找变为顺序遍历，失去">
-<meta name="keywords" content="红黑树,AVL树">
+<meta name="description" content="正则表达式是一套标准，可用于任何语言 JDK内置正则表达式引擎：Java.uilt.regex 方法String类里也提供了如下几个特殊的方法。  boolean matches(String regex)：判断该字符串是否匹配指定的正则表达式。 String replaceAll(String regex, String replacement)：将该字符串中所有匹配regex的子串替换成rep">
+<meta name="keywords" content="正则表达式">
 <meta property="og:type" content="article">
-<meta property="og:title" content="AVL树、红黑树和伸展树">
-<meta property="og:url" content="http://vergessenwang.github.io/posts/data-structure/2019-12-10-AVL树、红黑树和伸展树.html">
+<meta property="og:title" content="Java正则表达式">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/Java/2020-02-26-Java正则表达式.html">
 <meta property="og:site_name" content="Anonymous World">
-<meta property="og:description" content="二叉查找树二叉查找树的特征(递归) ——或者是一棵空树或者是具有如下特性的二叉树：  若它的左子树不空，则左子树上所有结点的值均小于根结点的值； 若它的右子树不空，则右子树上所有结点的值均大于根结点的值； 它的左、右子树也分别是二叉排序树。 中序遍历二叉排序树可得到一个关键字的有序序列。  在一般情况下，查找和插入的时间复杂度为logN,  但是在极端情况下会退化为链表，此时查找变为顺序遍历，失去">
+<meta property="og:description" content="正则表达式是一套标准，可用于任何语言 JDK内置正则表达式引擎：Java.uilt.regex 方法String类里也提供了如下几个特殊的方法。  boolean matches(String regex)：判断该字符串是否匹配指定的正则表达式。 String replaceAll(String regex, String replacement)：将该字符串中所有匹配regex的子串替换成rep">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-12-10T04:25:08.906Z">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/02/26/15827104968481.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/02/26/15821865345257.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/02/26/15821867536415.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/02/26/15821847108856.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/02/26/15821877270159.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/02/26/15821881591796.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/02/26/15821883812378.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/02/26/15827099476535.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/02/26/15827098397691.jpg">
+<meta property="og:updated_time" content="2020-02-26T10:02:52.729Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="AVL树、红黑树和伸展树">
-<meta name="twitter:description" content="二叉查找树二叉查找树的特征(递归) ——或者是一棵空树或者是具有如下特性的二叉树：  若它的左子树不空，则左子树上所有结点的值均小于根结点的值； 若它的右子树不空，则右子树上所有结点的值均大于根结点的值； 它的左、右子树也分别是二叉排序树。 中序遍历二叉排序树可得到一个关键字的有序序列。  在一般情况下，查找和插入的时间复杂度为logN,  但是在极端情况下会退化为链表，此时查找变为顺序遍历，失去">
+<meta name="twitter:title" content="Java正则表达式">
+<meta name="twitter:description" content="正则表达式是一套标准，可用于任何语言 JDK内置正则表达式引擎：Java.uilt.regex 方法String类里也提供了如下几个特殊的方法。  boolean matches(String regex)：判断该字符串是否匹配指定的正则表达式。 String replaceAll(String regex, String replacement)：将该字符串中所有匹配regex的子串替换成rep">
+<meta name="twitter:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/02/26/15827104968481.jpg">
 
 
 
@@ -171,13 +181,13 @@
 
 
 
-  <link rel="canonical" href="http://vergessenwang.github.io/posts/data-structure/2019-12-10-AVL树、红黑树和伸展树.html"/>
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/Java/2020-02-26-Java正则表达式.html"/>
 
 
 
 
 
-  <title>AVL树、红黑树和伸展树 | Anonymous World</title>
+  <title>Java正则表达式 | Anonymous World</title>
   
 
 
@@ -304,7 +314,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/data-structure/2019-12-10-AVL树、红黑树和伸展树.html">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/Java/2020-02-26-Java正则表达式.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liana_Wang">
@@ -321,7 +331,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">AVL树、红黑树和伸展树</h1>
+          <h1 class="post-title" itemprop="name headline">Java正则表达式</h1>
         
 
         <div class="post-meta">
@@ -333,8 +343,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-10T12:23:05+08:00">
-                2019-12-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-26T17:56:45+08:00">
+                2020-02-26
               </time>
             
 
@@ -356,8 +366,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/data-structure/" itemprop="url" rel="index">
-                    <span itemprop="name">data_structure</span>
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
                   </a>
                 </span>
 
@@ -387,7 +397,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,420
+                  1,271
                 </span>
               
 
@@ -412,73 +422,73 @@
       
 
       
-        <h4 id="二叉查找树"><a href="#二叉查找树" class="headerlink" title="二叉查找树"></a>二叉查找树</h4><p>二叉查找树的特征(递归) ——或者是一棵空树或者是具有如下特性的二叉树：</p>
+        <p>正则表达式是一套标准，可用于任何语言</p>
+<p>JDK内置正则表达式引擎：Java.uilt.regex</p>
+<h3 id="方法"><a href="#方法" class="headerlink" title="方法"></a>方法</h3><p>String类里也提供了如下几个特殊的方法。</p>
 <ul>
-<li>若它的左子树不空，则左子树上所有结点的值均小于根结点的值；</li>
-<li>若它的右子树不空，则右子树上所有结点的值均大于根结点的值；</li>
-<li>它的左、右子树也分别是二叉排序树。</li>
-<li>中序遍历二叉排序树可得到一个关键字的有序序列。</li>
+<li><strong>boolean matches(String regex)</strong>：判断该字符串是否匹配指定的正则表达式。</li>
+<li>String replaceAll(String regex, String replacement)：将该字符串中所有匹配regex的子串替换成replacement</li>
+<li>String replaceFirst(String regex, String replacement)：将该字符串中第一个匹配regex的子串替换成replacement</li>
+<li>String[] split(String regex)：以regex作为分隔符，把该字符串分割成多个子串。<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/02/26/15827104968481.jpg" alt=""></li>
 </ul>
-<p>在一般情况下，查找和插入的时间复杂度为logN,  但是<strong>在极端情况下会退化为链表</strong>，此时查找变为顺序遍历，失去了排序树的意义。——<strong>构造的二叉查找树的形状依赖于数据项，且依赖于它们加载的顺序</strong></p>
-<p>二叉查找树平衡性很差（即失衡）时，可用AVL树、红黑树和伸展树进行改进。其中AVL树和红黑树是<strong>高度平衡</strong>的，伸展树是<strong>加权平衡</strong>的(将常用的数据项放在树中接近根部的位置)</p>
+<p>上面这些特殊的方法都依赖于Java提供的正则表达式支持，除此之外，Java还提供了Pattern和Matcher两个类专门用于提供正则表达式支持。</p>
+<h3 id="精确匹配"><a href="#精确匹配" class="headerlink" title="精确匹配"></a>精确匹配</h3><table>
+<thead>
+<tr>
+<th>需匹配</th>
+<th>正则表达式</th>
+<th>Java中正则</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>a&amp;c</td>
+<td>a\&amp;c</td>
+<td>a\&amp;c</td>
+</tr>
+<tr>
+<td>a和c</td>
+<td>a\u548cc</td>
+<td>a\u548cc</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li><strong>正则中特殊符号最好转义一下</strong>，而Java中\也需转义</li>
+<li>非ASCII字符用了\u####表示，也要转义，不过这里Markdown没有显示岀来</li>
+</ul>
 <a id="more"></a>
-<h4 id="AVL树"><a href="#AVL树" class="headerlink" title="AVL树"></a>AVL树</h4><p>定义(递归)：或者是一棵空树，或者是具有如下特性的二叉查找树</p>
+<h3 id="符号"><a href="#符号" class="headerlink" title="符号"></a>符号</h3><h4 id="合法字符"><a href="#合法字符" class="headerlink" title="合法字符"></a>合法字符</h4><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/02/26/15821865345257.png" alt="合法字符"></p>
+<h4 id="特殊字符"><a href="#特殊字符" class="headerlink" title="特殊字符"></a>特殊字符</h4><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/02/26/15821867536415.png" alt="特殊字符"><br>特殊字符在正则表达式中有其特殊的用途，如果需要匹配这些特殊字符，就必须首先将这些字符转义，也就是在前面添加一个反斜线（\）</p>
+<p>将上面多个字符拼起来，就可以创建一个正则表达式。</p>
+<h4 id="预定义字符"><a href="#预定义字符" class="headerlink" title="预定义字符"></a>预定义字符</h4><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/02/26/15821847108856.png" alt="预定义字符"><br>“通配符”是可以匹配多个字符的特殊字符。正则表达式中的“通配符”远远超出了普通通配符的功能，它被称为预定义字符</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">String input = “<span class="number">1990</span>”;</span><br><span class="line"><span class="keyword">boolean</span> is19xx = input.matches(“<span class="number">19</span>\\d\\d”);</span><br></pre></td></tr></table></figure>
+<h3 id="范围匹配"><a href="#范围匹配" class="headerlink" title="范围匹配"></a>范围匹配</h3><h4 id="方括号表达式"><a href="#方括号表达式" class="headerlink" title="方括号表达式"></a>方括号表达式</h4><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/02/26/15821877270159.png" alt=""></p>
 <ul>
-<li>左子树和右子树的高度最多相差1；</li>
-<li>它的左、右子树也分别是平衡二叉树。</li>
+<li>注意只能匹配[]其中<strong>一个</strong>字符</li>
+<li>\^写在[]取非；写在开始从行的开头开始匹配</li>
 </ul>
-<p>如何调整节点以维持高度的平衡？</p>
-<p>Step1：找到不平衡（即左右子树高度差距大于1）的<strong>最小子树的根节点</strong>（记为A）</p>
-<p>Step2：依据新插入节点与节点A的相对位置，进行相应处理。</p>
+<p>正则表示还支持圆括号表达式，用于<strong>将多个表达式组成一个子表达式</strong>，圆括号中可以使用或运算符（|）。例如，正则表达式”(public|protected|private)”用于匹配Java的三个访问控制符其中之一。<br><code>\\w{3,20}@\\w+\\.(com|org|cn|net|gov)</code></p>
+<p><strong>圆括号还可用于提取所需字符串，去掉多余内容</strong></p>
+<h4 id="边界匹配符"><a href="#边界匹配符" class="headerlink" title="边界匹配符"></a>边界匹配符</h4><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/02/26/15821881591796.png" alt=""></p>
+<h4 id="数量标识符"><a href="#数量标识符" class="headerlink" title="数量标识符"></a>数量标识符</h4><p>正则表达式支持的数量标识符有如下几种模式</p>
 <ul>
-<li>LL型失衡: 在A结点的左孩子的左子树上插入结点,导致A结点失去平衡.——<strong>单向右旋平衡处理</strong></li>
-<li>RR型失衡: 单向左旋平衡处理</li>
-<li>LR型失衡: 双向旋转先左后右平衡处理型。<strong>先把下段左旋转换为LL型失衡，再将上段右旋解决LL型失衡</strong></li>
-<li>RL型失衡: 双向旋转先右后左平衡处理型。先把下段右旋转换为RR型失衡，再将上段左旋解决RR型失衡</li>
+<li>Greedy（贪婪模式）：数量表示符<strong>默认采用贪婪模式</strong>，除非另有表示。贪婪模式的表达式会一直匹配下去，直到无法匹配为止。如果你发现表达式匹配的结果与预期的不符，很有可能是因为——你以为表达式只会匹配前面几个字符，而实际上它是贪婪模式，所以会一直匹配下去。</li>
+<li>Reluctant（勉强模式）：用问号后缀（?）表示，它只会匹配最少的字符。也称为最小匹配模式。</li>
+<li>Possessive（占有模式）：用加号后缀（+）表示，目前只有Java支持占有模式，通常比较少</li>
 </ul>
-<p>为修复失衡所进行的旋转操作可能需要对插入和删除期间所采用的访问路径执行<strong>向后遍历</strong>(当需要多次旋转时）——实现起来比较麻烦？</p>
-<h4 id="红黑树"><a href="#红黑树" class="headerlink" title="红黑树"></a>红黑树</h4><p>红黑树是满足下列条件的二叉查找树：</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/02/26/15821883812378.png" alt=""></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/02/26/15827099476535.jpg" alt=""></p>
+<h3 id="使用Pattern和Matcher类"><a href="#使用Pattern和Matcher类" class="headerlink" title="使用Pattern和Matcher类"></a>使用Pattern和Matcher类</h3><p>Pattern对象是正则表达式编译后在内存中的表示形式，因此，正则表达式字符串必须先被编译为Pattern对象，然后再利用该Pattern对象创建对应的Matcher对象。执行匹配所涉及的状态保留在Matcher对象中，<strong>多个Matcher对象可共享同一个Pattern对象</strong>。<strong>Pattern是不可变类，可供多个并发线程安全使用。</strong><br>只编译一次然后多次使用可以提高匹配效率</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">//将一个字符串编译成Pattern对象</span></span><br><span class="line">Pattern p=Pattern.compile(<span class="string">"a*b"</span>);<span class="comment">//使用Pattern对象创建Matcher对象</span></span><br><span class="line">Matcher m=p.matcher(<span class="string">"aaaaab"</span>);<span class="keyword">boolean</span> b=m.matches(); <span class="comment">//返回true</span></span><br></pre></td></tr></table></figure>
+<p>如果某个正则表达式仅需一次使用，则可直接使用Pattern类的静态matches方法，此方法自动把指定字符串编译成匿名的Pattern对象</p>
+<p><code>boolean b=Pattern.matches(&quot;a*b&quot;, &quot;aaaaab&quot;);  //返回true</code></p>
+<p>但采用这种语句每次都需要重新编译新的Pattern对象，不能重复利用已编译的Pattern对象，所以效率不高。</p>
+<p>Matcher类提供了如下几个常用方法。<br> find()：返回目标字符串中是否包含与Pattern匹配的子串。</p>
 <ul>
-<li>每个节点都带有红色或黑色。节点的颜色由以下规则确定：</li>
-<li>根节点是黑色的。</li>
-<li>所有叶节点都是黑色的。</li>
-<li>在沿着从根出发的任何路径上都不允许出现两个连续的红色节点，即：“红色”结点的两个子结点都是“黑色”的。</li>
-<li>从任一节点到其每个子孙叶子节点的所有简单路径都包含相同数目的黑色节点（简称黑色高度）<ul>
-<li>节点X的黑色高度：从节点X到其子孙叶子节点的简单路径中的黑色链的数量。<ul>
-<li><strong>不包括 X 结点本身，包括叶结点</strong></li>
-<li>外部结点的阶是零； </li>
+<li>find()方法还可以传入一个int类型的参数，带int参数的find()方法从该int索引处向下搜索。<br>group()：返回上一次与Pattern匹配的子串。<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/02/26/15827098397691.jpg" alt=""><br> start()：返回上一次与Pattern匹配的子串在目标字符串中的开始位置。<br> end()：返回上一次与Pattern匹配的子串在目标字符串中的结束位置加1。<br> lookingAt()：返回目标字符串前面部分与Pattern是否匹配。<br> matches()：返回整个目标字符串与Pattern是否匹配。<br> reset()，将现有的Matcher对象应用于一个新的字符序列。<br>replaceAll()把字符串中所有与正则表达式匹配的子串替换replaceFirst()，该方法只替换第一个匹配的子串</li>
 </ul>
-</li>
-<li>红黑树的黑色高度：根节点的黑色高度（称为：根节点的阶）<ul>
-<li>阶为 k 的红黑树路径长度：<strong>最短是 k，最长是 2k</strong> ——实现平衡的原因</li>
-</ul>
-</li>
-</ul>
-</li>
-</ul>
-<p><strong>2-3-4树的二叉树的实现本质上就是红黑树</strong>——可利用颜色翻转和旋转来等价实现</p>
-<p>两类基本操作：</p>
-<p>颜色翻转</p>
-<ul>
-<li><strong>实质上为4-节点分裂</strong></li>
-<li>当某个结点的两个孩子结点都为红色时</li>
-<li><strong>将两个红色孩子结点和其黑色双亲结点的颜色翻转</strong></li>
-</ul>
-<p>旋转</p>
-<ul>
-<li>出现右的红色链时；有连续两个红色链时</li>
-<li>依据两个连续的红色链的形状，进行相应的旋转处理（<strong>类似AVL树的失衡旋转规则</strong>）；对于右的红色链，进行左旋处理</li>
-</ul>
-<h4 id="伸展树"><a href="#伸展树" class="headerlink" title="伸展树"></a>伸展树</h4><p>实现一种恒定重排的方式：每次访问树时，都使用旋转操作重排树，<strong>使得访问过的节点位于树的根部</strong>。</p>
-<p>优点：最近使用的数据比未使用过的数据可更快的被访问——局部性原理,<strong>可以用于缓存</strong></p>
-<h5 id="自底向上的伸展-更好理解"><a href="#自底向上的伸展-更好理解" class="headerlink" title="自底向上的伸展(更好理解)"></a><strong>自底向上的伸展</strong>(更好理解)</h5><p>利用旋转，将访问的节点c搬根部。有三种基本操作：</p>
-<p>Case1：若访问的节点c没有祖父节点，则：直接在c与其父节点p之间进行旋转。</p>
-<p>Case2：若访问的节点c，其父节点p，其祖父节点g三者之间的相关位置呈LL或RR型，则：先在p和g间旋转，再在p和c间旋转。（由上至下）</p>
-<p>Case3：若访问的节点，其父节点，其祖父节点三者之间的相关位置呈LR或RL型，则：先在c和p间旋转，再在c和g间旋转。（由下至上）</p>
-<h5 id="自顶向下的伸展"><a href="#自顶向下的伸展" class="headerlink" title="自顶向下的伸展"></a><strong>自顶向下的伸展</strong></h5><p>首先确定从根到访问节点的路径，然后依据路径的形状，进行“分裂”操作。最后，以目标节点作为根进行片断的重组。</p>
-<p>每次分裂操作会将当前树分为左，中，右三个片断。左片断为中间片断的前驱，右片断为中间片断的后继；其中，前驱、后继是指中序遍历顺序。左，右片断分别插入到左右存储树中。</p>
-<p>左连接点：指左存储树中插入新片断的位置，指向<strong>左存储树中最右下角</strong>的节点。</p>
-<p>右连接点：右存储树中插入新片断的位置，指向<strong>右存储树中最左下角</strong>的节点。</p>
+<p>在Pattern、Matcher类的介绍中经常会看到一个CharSequence接口，该接口代表一个字符序列，其中CharBuffer、String、StringBuffer、StringBuilder都是它的实现类。</p>
 
       
     </div>
@@ -496,9 +506,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/红黑树/" rel="tag"><i class="fa fa-tag"></i> 红黑树</a>
-          
-            <a href="/tags/AVL树/" rel="tag"><i class="fa fa-tag"></i> AVL树</a>
+            <a href="/tags/正则表达式/" rel="tag"><i class="fa fa-tag"></i> 正则表达式</a>
           
         </div>
       
@@ -526,8 +534,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/DL/2019-12-09-VS2017-Miniconda2编译Caffe.html" rel="next" title="VS2017+Miniconda2编译Caffe">
-                <i class="fa fa-chevron-left"></i> VS2017+Miniconda2编译Caffe
+              <a href="/posts/Java/2020-02-19-JVM数据分区.html" rel="next" title="JVM数据分区">
+                <i class="fa fa-chevron-left"></i> JVM数据分区
               </a>
             
           </div>
@@ -535,10 +543,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/posts/poetry/2019-12-11-困兽的悲剧.html" rel="prev" title="困兽的悲剧">
-                困兽的悲剧 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -704,7 +708,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#二叉查找树"><span class="nav-number">1.</span> <span class="nav-text">二叉查找树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#AVL树"><span class="nav-number">2.</span> <span class="nav-text">AVL树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#红黑树"><span class="nav-number">3.</span> <span class="nav-text">红黑树</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#伸展树"><span class="nav-number">4.</span> <span class="nav-text">伸展树</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#自底向上的伸展-更好理解"><span class="nav-number">4.1.</span> <span class="nav-text">自底向上的伸展(更好理解)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#自顶向下的伸展"><span class="nav-number">4.2.</span> <span class="nav-text">自顶向下的伸展</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#方法"><span class="nav-number">1.</span> <span class="nav-text">方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#精确匹配"><span class="nav-number">2.</span> <span class="nav-text">精确匹配</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#符号"><span class="nav-number">3.</span> <span class="nav-text">符号</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#合法字符"><span class="nav-number">3.1.</span> <span class="nav-text">合法字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#特殊字符"><span class="nav-number">3.2.</span> <span class="nav-text">特殊字符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#预定义字符"><span class="nav-number">3.3.</span> <span class="nav-text">预定义字符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#范围匹配"><span class="nav-number">4.</span> <span class="nav-text">范围匹配</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#方括号表达式"><span class="nav-number">4.1.</span> <span class="nav-text">方括号表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#边界匹配符"><span class="nav-number">4.2.</span> <span class="nav-text">边界匹配符</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数量标识符"><span class="nav-number">4.3.</span> <span class="nav-text">数量标识符</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用Pattern和Matcher类"><span class="nav-number">5.</span> <span class="nav-text">使用Pattern和Matcher类</span></a></li></ol></div>
             
 
           </div>
