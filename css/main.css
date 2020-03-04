@@ -1864,7 +1864,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ffff1c;
+  background: #63ff20;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3196,7 +3196,7 @@ pre .javascript .function {
   border-bottom: 1px solid #fc6423;
 }
 body {
-  background: url("/images/bg2.jpg");
+  background: url("https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/05/bg2.jpg");
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed;

@@ -1,0 +1,993 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="黑盒测试," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="测试用例的构成要素 用例编号：唯一标识 如QQmail_login_001 用例标题：简要描述测试目的 何种情况下做何事有何结果 测试项目：所属项目 用例级别：重要程度，优先级 P1&amp;gt;P2&amp;gt;P3 预设条件：执行前提，如环境/数据 — 非必须 测试输入 执行步骤 预期结果：与执行的实际结果对比  在实际中根据项目要求对用例设计要素进行调整 黑盒测试用例设计方法从理论上讲，黑盒测试只能通过">
+<meta name="keywords" content="黑盒测试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="黑盒测试用例设计">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/Test/2020-03-05-黑盒测试用例设计.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="测试用例的构成要素 用例编号：唯一标识 如QQmail_login_001 用例标题：简要描述测试目的 何种情况下做何事有何结果 测试项目：所属项目 用例级别：重要程度，优先级 P1&amp;gt;P2&amp;gt;P3 预设条件：执行前提，如环境/数据 — 非必须 测试输入 执行步骤 预期结果：与执行的实际结果对比  在实际中根据项目要求对用例设计要素进行调整 黑盒测试用例设计方法从理论上讲，黑盒测试只能通过">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/20200304171629.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/20200304171700.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/20200304213010.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/20200304214440.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/20200304214632.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/20200304214714.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/20200304220551.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/20200304221255.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/20200304221348.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/深度截图_选择区域_20200304223252.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/20200304234544.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/20200304234831.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/20200305001058.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/深度截图_选择区域_20200305002452.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/深度截图_选择区域_20200305003444.png">
+<meta property="og:updated_time" content="2020-03-04T16:59:23.971Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="黑盒测试用例设计">
+<meta name="twitter:description" content="测试用例的构成要素 用例编号：唯一标识 如QQmail_login_001 用例标题：简要描述测试目的 何种情况下做何事有何结果 测试项目：所属项目 用例级别：重要程度，优先级 P1&amp;gt;P2&amp;gt;P3 预设条件：执行前提，如环境/数据 — 非必须 测试输入 执行步骤 预期结果：与执行的实际结果对比  在实际中根据项目要求对用例设计要素进行调整 黑盒测试用例设计方法从理论上讲，黑盒测试只能通过">
+<meta name="twitter:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/20200304171629.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/Test/2020-03-05-黑盒测试用例设计.html"/>
+
+
+
+
+
+  <title>黑盒测试用例设计 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/Test/2020-03-05-黑盒测试用例设计.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">黑盒测试用例设计</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-05T00:58:05+08:00">
+                2020-03-05
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Test/" itemprop="url" rel="index">
+                    <span itemprop="name">Test</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,033
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="测试用例的构成要素"><a href="#测试用例的构成要素" class="headerlink" title="测试用例的构成要素"></a>测试用例的构成要素</h3><ul>
+<li>用例编号：唯一标识 如QQmail_login_001</li>
+<li>用例标题：简要描述测试目的 何种情况下做何事有何结果</li>
+<li>测试项目：所属项目</li>
+<li>用例级别：重要程度，优先级 P1&gt;P2&gt;P3</li>
+<li>预设条件：执行前提，如环境/数据 — 非必须</li>
+<li>测试输入</li>
+<li>执行步骤</li>
+<li>预期结果：与执行的实际结果对比</li>
+</ul>
+<p>在实际中根据项目要求对用例设计要素进行调整</p>
+<h3 id="黑盒测试用例设计方法"><a href="#黑盒测试用例设计方法" class="headerlink" title="黑盒测试用例设计方法"></a>黑盒测试用例设计方法</h3><p>从理论上讲，黑盒测试只能通过穷举输入测试。但是实际工作中这种方法是不可行的。所以衍生出多种黑盒测试用例设计方法，包括等价类划分法、边界值分析法、错误推测法、因果图发、判定表驱动法、正交试验设计法、功能图法、场景法等。</p>
+<h4 id="等价类"><a href="#等价类" class="headerlink" title="等价类"></a>等价类</h4><p><strong>分类代替穷举，根据功能需求分类</strong></p>
+<p>等价类：在所有测试的数据中，具有某种共同特征的子集</p>
+<p>等价划分：是把程序的输入域划分成若干部分（子集），然后从每个部分中<strong>选取少数代表性数据</strong>作为测试用例。每一类的代表性数据在测试中的作用等价于这一类中的其他值。</p>
+<p>有效等价类：是指对于程序的规格说明来说是合理的，有意义的输入数据构成的集合.利用有效等价类可检验程序是否实现了规格说明中所规定的功能和性能。</p>
+<p>无效等价类：与有效等价类的定义恰巧相反。无效等价类中是无效输入，系统预期返回一个错误值。测试无效输入能确保软件具有更高的可靠性。</p>
+<p>设计测试用例时，要同时考虑这两种等价类.因为，软件不仅要能接收合理的数据，也要能经受意外的考验.这样的测试才能确保软件具有更高的可靠性。</p>
+<a id="more"></a>
+<h5 id="划分准则"><a href="#划分准则" class="headerlink" title="划分准则"></a>划分准则</h5><p><a href="https://www.douban.com/group/topic/146790985/" target="_blank" rel="noopener">等价类划分准则</a></p>
+<ul>
+<li>在输入条件规定了<strong>取值范围或值的个数</strong>的情况下，则可以确立有一个有效等价类和两个无效等价类。—-如手机号由11位构成，无效则大/多于或者小/少于</li>
+<li>在输入条件规定了输入值的<strong>集合或者规定了“必须如何”</strong>的条件情况下，可确立一个有效等价类（符合规则）和若干个无效等价类（从不同角度违反规则） —-  如要求电话都是数字，无效的情况可能是字母/汉字/特殊字符等多种情况</li>
+<li>在输入条件是一个<strong>布尔量</strong>的情况下，可以确定一个有效等价类和一个无效等价类。　　</li>
+<li>在规定了输入数据的一组值（假定n个），并且程序要<strong>对每一个输入值分别处理</strong>的情况下，可确立n个有效等价类和一个无效等价类。</li>
+</ul>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/20200304171629.png" alt=""></p>
+<h5 id="测试用例规则"><a href="#测试用例规则" class="headerlink" title="测试用例规则"></a>测试用例规则</h5><ol>
+<li>为每一个等价类规定一个唯一的编号。</li>
+<li>设计一个新的测试用例，使其<strong>尽可能多的覆盖尚未被覆盖的有效类</strong>。重复这一步，直到所有的有效等价类都被覆盖为止。</li>
+<li>设计一个新的测试用例，使其<strong><u>仅覆盖一个尚未被覆盖的无效等价类</u></strong>，重复这一步，直到所有的无效等价类被覆盖为止。</li>
+</ol>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/20200304171700.png" alt=""></p>
+<h4 id="边界值"><a href="#边界值" class="headerlink" title="边界值"></a>边界值</h4><p>大量的错误是发生在输入或输出范围的边界上，而不是在输入范围的内部。经验证明，考虑了边界调节的测试用例与其他没有考虑边界条件的测试用例相比，具有更高的测试回报率。</p>
+<p>相比与等价类法，多了一个步骤：<strong>确定上点，离点，内点</strong></p>
+<h5 id="上点-离点-内点"><a href="#上点-离点-内点" class="headerlink" title="上点 离点 内点"></a>上点 离点 内点</h5><ol>
+<li>如果是闭区间，例如[1，10]。那么上点就是1,10。内点就是区间内任意一个数字，例如5。离点则是0,11</li>
+<li>如果是开区间，例如（1,10）。那么上点就是1,10。内点就是区间内任意一个数字，例如5。离点则是（2,9）</li>
+<li>这两个最大的区别就是在于离点的不同，概括起来一句话就是<strong><u>闭两边，开中间</u></strong>。也就是说闭区间的离点是区间外边相邻的两个数字（0,11），开区间的离点就是区间里边相邻的两个数字（2,9）。如两位整数加法器数的范围为-99—99，则应测试-99，-100和99，100</li>
+</ol>
+<p>继续以电话号码的地区嘛为例，现在需要关注的是边界，如无效等价类6要测小于四位数的情况，现在的边界值就是3位</p>
+<h4 id="判定表"><a href="#判定表" class="headerlink" title="判定表"></a>判定表</h4><p>使用等价类方法时对于输入域及输出域存在关联时无法覆盖，可以理解为判定表通过组合覆盖更多的情况</p>
+<p>优点：能够将复杂的问题<strong>按照各种可能的情况全部列举出来</strong>，简明并避免遗漏。因此，利用判定表能够设计出完整的测试用例集合。在一些数据处理问题当中，某些操作的实施依赖于多个逻辑条件的组合，即：针对不同逻辑条件的组合值，分别执行不同的操作。判定表适合于处理这类问题。</p>
+<h5 id="判定表要素"><a href="#判定表要素" class="headerlink" title="判定表要素"></a>判定表要素</h5><p>1)条件桩（Condition Stub）：列出了问题得所有条件。通常认为列出的条件的次序无关紧要。—- 输入</p>
+<p>2)动作桩（Action Stub）：列出了问题规定可能采取的操作。这些操作的排列顺序没有约束。—- 输入的结果</p>
+<p>3)条件项（Condition Entry）：列出针对它左列条件的取值。在所有可能情况下的真假值。—条件集合</p>
+<p>4)动作项（Action Entry）：列出在条件项的各种取值情况下应该采取的动作。 —- 动作集合</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/20200304213010.png" alt=""></p>
+<h5 id="规则及规则合并"><a href="#规则及规则合并" class="headerlink" title="规则及规则合并"></a>规则及规则合并</h5><p>1)规则：任何一个条件组合的特定取值及其相应要执行的操作称为规则。在判定表中<strong>贯穿条件项和动作项的一列就是一条规则</strong>。显然,判定表中列出多少组条件取值,也就有多少条规则,既条件项和动作项有多少列。</p>
+<p>2)化简：就是规则合并有两条或多条规则具有相同的动作，并且其条件项之间存在着极为相似的关系。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/20200304214440.png" alt=""></p>
+<p>如果动作结果一样，对于某些因素取“1”或“0”没有影响，即<strong>以“—”表示，并合并</strong>。</p>
+<p><strong>步骤：定义条件桩与动作桩 –&gt; 设计优化判定表 –&gt; 填写动作项 –&gt; 简化判定表 –&gt; 抽取用例(每个规则一条用例)</strong></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/20200304214632.png" alt=""></p>
+<p>假定：优先警告缺纸，然后警告没有墨粉，最后警告驱动程序不对。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/20200304214714.png" alt=""></p>
+<h5 id="判定表的优-缺点"><a href="#判定表的优-缺点" class="headerlink" title="判定表的优/缺点"></a>判定表的优/缺点</h5><p>优点：把复杂的问题按各种可能的情况一一列举，简明而易于理解，也避免遗漏。</p>
+<p>缺点：不能表达重复执行的动作，如循环结构。判定表不能很好的伸缩。如有n个条件的判定表有2^n个规则。</p>
+<h4 id="因果图"><a href="#因果图" class="headerlink" title="因果图"></a>因果图</h4><p>判定表的指数增长不适合复杂的条件，是先组合再分析关系；而因果图是先考虑所有输入/输出条件的相关制约关系及组合，输入与输出的关系，再根据分析的关系转化为判定表的规则</p>
+<h5 id="输入和输出的关系"><a href="#输入和输出的关系" class="headerlink" title="输入和输出的关系"></a>输入和输出的关系</h5><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/20200304220551.png" alt=""></p>
+<h5 id="输入条件之间的关系"><a href="#输入条件之间的关系" class="headerlink" title="输入条件之间的关系"></a>输入条件之间的关系</h5><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/20200304221255.png" alt=""></p>
+<h5 id="输出条件之间的关系"><a href="#输出条件之间的关系" class="headerlink" title="输出条件之间的关系"></a>输出条件之间的关系</h5><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/20200304221348.png" alt=""></p>
+<p>设计步骤：</p>
+<ol>
+<li>分析程序规格说明的描述中，哪些是原因，哪些是结果。</li>
+<li>分析程序规格的描述中语义的内容，并将其表示成连接各个原因与各个结果的“因果图”。<br>由于语法或环境的限制，有些原因与原因之间、原因与结果之间的组合情况不可能出现。为表明这些特殊情况，在因果图上用一些记号表明约束或限制条件。</li>
+<li>把因果图转换为决策表。用0和1标识，中间状态也放在开始里面</li>
+<li>根据决策表中的每一列设计测试用例。<br>即：找出原因、结果 – 找出关系，画因果图 – 找出约束和限制，加上标记 – 转化为决策表 – 为每一个规则设计测试用例</li>
+</ol>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/深度截图_选择区域_20200304223252.png" alt=""></p>
+<h4 id="场景法"><a href="#场景法" class="headerlink" title="场景法"></a>场景法</h4><p>软件几乎都是用事件触发来控制流程的，时间触发时的情景形成场景，同一事件不同的触发顺序和处理结果形成事件流</p>
+<h5 id="事件流和备选流"><a href="#事件流和备选流" class="headerlink" title="事件流和备选流"></a>事件流和备选流</h5><p>基本流：仅有一个基本流；经过用例的最简单的路径，指每个步骤都“正常”运作时所发生的事 —-正常</p>
+<p>备选流 ：可以有多个；可选的或备选的情况 ，异常事件流程。—- 异常</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/20200304234544.png" alt=""></p>
+<p>场景是事件流的一个实例，由基本流或（基本流+备选流）的步骤组成，表明了用户执行系统操作系列。<strong>从开始到结束才算一个场景</strong>，其实画出来有点像UML中的流程图</p>
+<p>备选流越多，场景越多，执行路径越多，将导致场景爆炸。</p>
+<p>选取典型场景进行测试，其基本如下：<br>1、最少场景数等于基本流与备选流的总数。<br>2、有且唯一有一个场景仅包含基本流。<br>3、对应某个备选流，至少应该有一个场景覆盖备选流，且在该场景中应尽量避免覆盖其他备选流。</p>
+<p>上图的用例场景如下：</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/20200304234831.png" alt=""></p>
+<h4 id="正交法"><a href="#正交法" class="headerlink" title="正交法"></a>正交法</h4><p>根据正交性从全面试验中挑选出部分有代表性的点进行试验，这些有代表性的点具备了“均匀分散，齐整可比”的特点，正交试验设计是一种基于正交表的、高效率、快速、经济的试验。</p>
+<p>正交实验设计方法：从大量的测试案例中挑选适量的、有代表性的例子，从而合理地安排测试的一种科学实验设计方法。通常用于<strong>配置测试</strong></p>
+<h5 id="因素与水平"><a href="#因素与水平" class="headerlink" title="因素与水平"></a>因素与水平</h5><p>因素数：条件因子的个数</p>
+<p>水平数：条件因子取值的个数，取所有条件因子中取得值数目最大的那个。</p>
+<h5 id="正交表"><a href="#正交表" class="headerlink" title="正交表"></a>正交表</h5><p>根据<code>因素数</code>、<code>水平数</code>、<code>最小实验次数n</code>，选择合适的正交表。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/20200305001058.png" alt=""></p>
+<p> n = ∑(每列因素的水平数-1) + 1，也就是说正交表的行数要取大于n的<strong>最小值</strong>。</p>
+<p>把变量的值映射到表中，每一行即一个测试用例。</p>
+<p>使用正交表设计用例，（1）确定因素的取值范围或集合，（2）采用等价类划分、边界值分析等方法确定测试数据，（3）将确定的测试数据作为对应因素的水平值，（4）根据合适的正交表设计用例。</p>
+<p><strong>并不是我们想要什么正交表就有什么正交表，我们选取正交表时只能从现有的正交表中进行选择，而且选择的正交表要满足上述中的因素数、水平数、和最小实验次数n，在这个前提下选择实验次数最少的一个。</strong></p>
+<p>步骤：分析需求获取因子及水平 –&gt; 根据因子及水平数选择正交表 –&gt; 替换因子水平，获取实验次数 –&gt; 细化输出测试用例</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/深度截图_选择区域_20200305002452.png" alt=""></p>
+<h4 id="错误推测法"><a href="#错误推测法" class="headerlink" title="错误推测法"></a>错误推测法</h4><p><strong>经验和直觉</strong>，没有具体的步骤，基于以往的项目经历对常出问题的点针对性设计测试用例</p>
+<p>一般不单独使用，要在其他测试方法之上进行针对性测试</p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/03/深度截图_选择区域_20200305003444.png" alt=""></p>
+<p><a href="https://blog.csdn.net/z0y00000/category_8492475.html" target="_blank" rel="noopener">可以关注该作者的文章</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/黑盒测试/" rel="tag"><i class="fa fa-tag"></i> 黑盒测试</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/database/2020-03-04-IDEA内置Database插件连接Deepin上的MySql.html" rel="next" title="IDEA内置Database插件连接Deepin上的MySql">
+                <i class="fa fa-chevron-left"></i> IDEA内置Database插件连接Deepin上的MySql
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">虚己以游世，乘物以游心</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">78</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">117</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#测试用例的构成要素"><span class="nav-number">1.</span> <span class="nav-text">测试用例的构成要素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#黑盒测试用例设计方法"><span class="nav-number">2.</span> <span class="nav-text">黑盒测试用例设计方法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#等价类"><span class="nav-number">2.1.</span> <span class="nav-text">等价类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#划分准则"><span class="nav-number">2.1.1.</span> <span class="nav-text">划分准则</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#测试用例规则"><span class="nav-number">2.1.2.</span> <span class="nav-text">测试用例规则</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#边界值"><span class="nav-number">2.2.</span> <span class="nav-text">边界值</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#上点-离点-内点"><span class="nav-number">2.2.1.</span> <span class="nav-text">上点 离点 内点</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#判定表"><span class="nav-number">2.3.</span> <span class="nav-text">判定表</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#判定表要素"><span class="nav-number">2.3.1.</span> <span class="nav-text">判定表要素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#规则及规则合并"><span class="nav-number">2.3.2.</span> <span class="nav-text">规则及规则合并</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#判定表的优-缺点"><span class="nav-number">2.3.3.</span> <span class="nav-text">判定表的优/缺点</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#因果图"><span class="nav-number">2.4.</span> <span class="nav-text">因果图</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#输入和输出的关系"><span class="nav-number">2.4.1.</span> <span class="nav-text">输入和输出的关系</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#输入条件之间的关系"><span class="nav-number">2.4.2.</span> <span class="nav-text">输入条件之间的关系</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#输出条件之间的关系"><span class="nav-number">2.4.3.</span> <span class="nav-text">输出条件之间的关系</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#场景法"><span class="nav-number">2.5.</span> <span class="nav-text">场景法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#事件流和备选流"><span class="nav-number">2.5.1.</span> <span class="nav-text">事件流和备选流</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#正交法"><span class="nav-number">2.6.</span> <span class="nav-text">正交法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#因素与水平"><span class="nav-number">2.6.1.</span> <span class="nav-text">因素与水平</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#正交表"><span class="nav-number">2.6.2.</span> <span class="nav-text">正交表</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#错误推测法"><span class="nav-number">2.7.</span> <span class="nav-text">错误推测法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
