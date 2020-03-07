@@ -1,0 +1,973 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="MySQL," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="影响数据库的因素 Sql查询速度 服务器硬件 存储引擎 大表 大事务  服务器硬件CPUMYSQL不支持多核并发，会带来两方面的风险：  大量的并发使数据库连接数被占满。max_connection 默认为100 CPU耗尽导致宕机QPS：每秒钟处理的查询量  更多核数还是更高频率视具体情况而定：高并发选更多核；CPU密集和复杂SQL选更高频率 磁盘IO硬件升级调整计划任务，避开高峰期，做好磁盘维">
+<meta name="keywords" content="MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库影响因素之硬件、存储引擎和事务">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/database/2020-03-07-数据库影响因素之硬件、存储引擎和事务.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="影响数据库的因素 Sql查询速度 服务器硬件 存储引擎 大表 大事务  服务器硬件CPUMYSQL不支持多核并发，会带来两方面的风险：  大量的并发使数据库连接数被占满。max_connection 默认为100 CPU耗尽导致宕机QPS：每秒钟处理的查询量  更多核数还是更高频率视具体情况而定：高并发选更多核；CPU密集和复杂SQL选更高频率 磁盘IO硬件升级调整计划任务，避开高峰期，做好磁盘维">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/07/15827373336084.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/07/15827374451071.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/07/15827374589960.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/07/15827694002715.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/07/15827699831225.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/07/15835735166986.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/07/15835739608618.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/07/15835876167019.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/07/15835889929526.png">
+<meta property="og:updated_time" content="2020-03-07T15:09:52.241Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据库影响因素之硬件、存储引擎和事务">
+<meta name="twitter:description" content="影响数据库的因素 Sql查询速度 服务器硬件 存储引擎 大表 大事务  服务器硬件CPUMYSQL不支持多核并发，会带来两方面的风险：  大量的并发使数据库连接数被占满。max_connection 默认为100 CPU耗尽导致宕机QPS：每秒钟处理的查询量  更多核数还是更高频率视具体情况而定：高并发选更多核；CPU密集和复杂SQL选更高频率 磁盘IO硬件升级调整计划任务，避开高峰期，做好磁盘维">
+<meta name="twitter:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/07/15827373336084.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/database/2020-03-07-数据库影响因素之硬件、存储引擎和事务.html"/>
+
+
+
+
+
+  <title>数据库影响因素之硬件、存储引擎和事务 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/database/2020-03-07-数据库影响因素之硬件、存储引擎和事务.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据库影响因素之硬件、存储引擎和事务</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-07T23:07:03+08:00">
+                2020-03-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/database/" itemprop="url" rel="index">
+                    <span itemprop="name">database</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,156
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="影响数据库的因素"><a href="#影响数据库的因素" class="headerlink" title="影响数据库的因素"></a>影响数据库的因素</h3><ol>
+<li>Sql查询速度</li>
+<li>服务器硬件</li>
+<li>存储引擎</li>
+<li>大表</li>
+<li>大事务</li>
+</ol>
+<h3 id="服务器硬件"><a href="#服务器硬件" class="headerlink" title="服务器硬件"></a>服务器硬件</h3><h4 id="CPU"><a href="#CPU" class="headerlink" title="CPU"></a>CPU</h4><p>MYSQL不支持多核并发，会带来两方面的风险：</p>
+<ul>
+<li>大量的并发使数据库连接数被占满。max_connection 默认为100</li>
+<li>CPU耗尽导致宕机<br>QPS：每秒钟处理的查询量</li>
+</ul>
+<p>更多核数还是更高频率视具体情况而定：高并发选更多核；CPU密集和复杂SQL选更高频率</p>
+<h4 id="磁盘IO"><a href="#磁盘IO" class="headerlink" title="磁盘IO"></a>磁盘IO</h4><p>硬件升级<br>调整计划任务，避开高峰期，做好磁盘维护</p>
+<h5 id="RAID"><a href="#RAID" class="headerlink" title="RAID"></a>RAID</h5><p>RAID（Redundant Array of Independent Disks，独立磁盘冗余数组）的基本思想就是把多个相对便宜的硬盘组合起来，成为一个磁盘数组，使性能达到甚至超过一个价格昂贵、容量巨大的硬盘。</p>
+<p>RAID 0：将多个磁盘合并成一个大的磁盘，不会有冗余，并行I/O，速度最快。在所有的级别中，RAID 0的速度是最快的。理论上，多磁盘的效能就等于（单一磁盘效能）×（磁盘数），但实际上受限于总线I/O瓶颈及其他因素的影响，RAID效能会随<strong>边际递减</strong>。也就是说，假设一个磁盘的效能是50MB/s，两个磁盘的RAID 0效能约96MB/s，三个磁盘的RAID 0也许是130MB/s而不是150MB/s。</p>
+<p>RAID 1：两组以上的N个磁盘相互作为镜像，在一些多线程操作系统中能有很好的读取速度，但写入速度略有降低。RAID 1的数据安全性在所有的RAID级别上来说是最好的。但是所有RAID中磁盘利用率最低的一个级别。</p>
+<p>RAID 5：是一种存储性能、数据安全和存储成本兼顾的存储解决方案。它使用的是Disk Striping（硬盘分区）技术。RAID 5至少需要三个硬盘，RAID 5不对存储的数据进行备份，而是把数据和相对应的<strong>奇偶校验信息</strong>存储到组成RAID 5的各个磁盘上，并且奇偶校验信息和相对应的数据分别存储于不同的磁盘上。当RAID 5的一个磁盘数据发生损坏后，利用剩下的数据和相应的奇偶校验信息去恢复被损坏的数据。<strong>写入数据的速度相当慢</strong>，若使用Write Back可以让性能改善不少。</p>
+<a id="more"></a>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/07/15827373336084.png" alt=""><br>RAID 10和RAID 01：RAID 10是先镜像再分区数据，将所有硬盘分为两组，视为RAID 0的最低组合，然后将这两组各自视为RAID 1运作。RAID 10有着不错的读取速度，而且拥有比RAID 0更高的数据保护性。RAID 01则与RAID 10的程序相反，先分区再将数据镜射到两组硬盘。RAID 10巧妙地利用了RAID 0的速度及RAID 1的安全（保护）两种特性，它的缺点是需要较多的硬盘，因为至少必须拥有四个以上的偶数硬盘才能使用。<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/07/15827374451071.png" alt=""><br>对比：<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/07/15827374589960.jpg" alt=""><br>对于数据库应用来说，<strong>RAID 10</strong>是最好的选择，它同时兼顾了RAID 1和RAID 0的特性。但是，当一个磁盘失效时，性能可能会受到很大的影响，因为条带（strip）会成为瓶颈。</p>
+<h5 id="固态硬盘"><a href="#固态硬盘" class="headerlink" title="固态硬盘"></a>固态硬盘</h5><p>SATA接口的SSD 也支持RAID<br>PCI-E卡，如Fusion IO。不支持SATA，RAID成本太高，且会占一定内存，优点是速度快。<br>固态硬盘适用于存在大量随机I/O的场景，也可用于解决单线程负载的I/O瓶颈——用于单线程的从服务器更好</p>
+<h4 id="网卡流量"><a href="#网卡流量" class="headerlink" title="网卡流量"></a>网卡流量</h4><p>采用高性能和高带宽的网络接口和交换机<br>对多个网卡绑定，增强可用性和带宽<br>减少从服务器数量<br>进行缓存升级<br>避免使用select * 查询<br>分离业务网络和服务器网络</p>
+<p><a href="https://b23.tv/av67859395/p14" target="_blank" rel="noopener">操作系统相关</a></p>
+<p><a href="https://b23.tv/av67859395/p15" target="_blank" rel="noopener">文件系统相关</a></p>
+<h3 id="插件式存储引擎"><a href="#插件式存储引擎" class="headerlink" title="插件式存储引擎"></a>插件式存储引擎</h3><p><strong>MySQL数据库的核心在于存储引擎。</strong>存储引擎的好处是，每个存储引擎都有各自的特点，能够根据具体的应用建立不同存储引擎表。<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/07/15827694002715.jpg" alt=""></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/07/15827699831225.png" alt=""><br>MySQL由以下几部分组成：<br>□ 连接池组件<br>□ 管理服务和工具组件<br>□ SQL接口组件<br>□ 查询分析器组件<br>□ 优化器组件<br>□ 缓冲（Cache）组件<br>□ 插件式存储引擎<br>□ 物理文件</p>
+<p>设置引擎<code>create table name () engine=myisam</code></p>
+<h4 id="InnoDB"><a href="#InnoDB" class="headerlink" title="InnoDB"></a>InnoDB</h4><p>InnoDB存储引擎支持事务，其设计目标主要面向在线事务处理（OLTP）的应用。其特点是行锁设计、支持外键，并支持类似于Oracle的非锁定读，即默认读取操作不会产生锁。从MySQL数据库5.5.8版本开始，InnoDB存储引擎是默认的存储引擎。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/07/15835735166986.jpg" alt=""><br>独立表空间可以用<code>optimize table</code>命令压缩，而系统表空间处理起来则较为复杂，空间很难回收；独立表空间可以提高IO性能<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/07/15835739608618.jpg" alt=""></p>
+<ul>
+<li>支持事务ACID特性，有redo log和undo log</li>
+<li>行级锁，支持更多的并发</li>
+<li>适合面向在线事务处理（OLTP）的应用</li>
+<li>后来也开始支持全文索引和空间函数</li>
+</ul>
+<p>查看状态<strong>show engine innodb status</strong></p>
+<p>InnoDB通过使用多版本并发控制（MVCC）来获得高并发性，并且实现了SQL标准的4种隔离级别，<strong>默认为REPEATABLE级别</strong>。同时，使用一种被称为<strong>next-key locking的策略来避免幻读（phantom）</strong>现象的产生。除此之外，InnoDB储存引擎还提供了插入缓冲（insert buffer）、二次写（double write）、自适应哈希索引（adaptive hash index）、预读（read ahead）等高性能和高可用的功能。</p>
+<p>对于表中数据的存储，InnoDB存储引擎采用了聚集（clustered）的方式，因此每张表的存储都是按主键的顺序进行存放。如果没有显式地在表定义时指定主键，InnoDB存储引擎会为每一行生成一个6字节的ROWID，并以此作为主键。</p>
+<h4 id="MyISAM"><a href="#MyISAM" class="headerlink" title="MyISAM"></a>MyISAM</h4><p>MySQL 5.5.8版本之前MyISAM存储引擎是默认的存储引擎<br>不支持事务、表锁设计，缓冲池只缓存（cache）索引文件，而不缓冲数据文件<br>支持全文索引，主要面向一些OLAP数据库应用。</p>
+<p>MyISAM存储引擎表由MYD和MYI组成，MYD用来存放数据文件，MYI用来存放索引文件。</p>
+<ul>
+<li>表锁的设计使得读写操作是互斥的，读写混合的并发性不好</li>
+<li>没有事务日志，表修复check/repair table</li>
+<li>支持全文索引和前缀索引</li>
+<li>只读文件支持数据压缩，myisampack工具使用赫夫曼（Huffman）编码静态算法来压缩数据，因此使用myisampack工具压缩后的表是只读的</li>
+<li>在MySQL 5.0版本之前，MyISAM默认支持的表大小为4GB，如果需要支持大于4GB的MyISAM表时，则需要制定MAX_ROWS和AVG_ROW_LENGTH属性。从MySQL 5.0版本开始，MyISAM默认支持256TB的单表数据</li>
+</ul>
+<p>适用场景</p>
+<ol>
+<li>非事务型应用，如非财务管理应用</li>
+<li>只读应用，共享锁并发</li>
+<li>空间类应用，支持空间函数，如GPS应用</li>
+</ol>
+<h4 id="Memory"><a href="#Memory" class="headerlink" title="Memory"></a>Memory</h4><p>Memory存储引擎（之前称HEAP存储引擎）将表中的数据存放在<strong>内存</strong>中，如果数据库重启或发生崩溃，表中的数据都将消失。但是表结构还存在，因为放在磁盘上</p>
+<p>Memory存储引擎默认使用<strong>哈希索引</strong>，而不是我们熟悉的B+树索引。所以默认情况下等值查询快，不能进行范围索引。要根据业务需求选择索引</p>
+<p>只支持表锁，并发性能较差，并且不支持TEXT和BLOB列类型。最重要的是，存储变长字段（varchar）时是按照定常字段（char）的方式进行的，因此会浪费内存</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/07/15835876167019.jpg" alt=""><br>MySQL数据库使用Memory存储引擎作为临时表来存放查询的中间结果集（intermediate result）。如果中间结果集大于Memory存储引擎表的容量设置，又或者中间结果含有TEXT或BLOB列类型字段，则MySQL数据库会把其转换到MyISAM存储引擎表而存放到磁盘中。</p>
+<h4 id="Archive"><a href="#Archive" class="headerlink" title="Archive"></a>Archive</h4><p>Archive存储引擎<strong>只支持INSERT和SELECT操作</strong>，从MySQL 5.1开始支持索引。Archive存储引擎使用zlib算法将数据行（row）进行压缩后存储，压缩比一般可达1∶10。正如其名字所示，Archive存储引擎非常适合存储归档数据，如<strong>日志</strong>信息。Archive存储引擎使用行锁来实现高并发的插入操作，但是其本身并不是事务安全的存储引擎，其设计目标主要是提供高速的插入和压缩功能。</p>
+<h4 id="总结对比"><a href="#总结对比" class="headerlink" title="总结对比"></a>总结对比</h4><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/07/15835889929526.png" alt=""><br>考虑因素：事务，备份，错误恢复，存储引擎特征</p>
+<h3 id="大表"><a href="#大表" class="headerlink" title="大表"></a>大表</h3><p>分库分表：主键的选择，分表后跨分区数据的查询和统计<br>历史数据归档，减少对前后端业务的影响：归档时间点的选择</p>
+<h3 id="大事务"><a href="#大事务" class="headerlink" title="大事务"></a>大事务</h3><p>事务：ACID</p>
+<h4 id="并发事务带来的问题"><a href="#并发事务带来的问题" class="headerlink" title="并发事务带来的问题"></a>并发事务带来的问题</h4><ul>
+<li>脏读（Dirty read）: 当一个事务正在访问数据并且对数据进行了修改，而这种修改还没有提交到数据库中，这时另外一个事务也访问了这个数据，然后使用了这个数据。</li>
+<li>丢失修改（Lost to modify）: 指在一个事务读取一个数据时，另外一个事务也访问了该数据，那么在第一个事务中修改了这个数据后，第二个事务也修改了这个数据。这样第一个事务内的修改结果就被丢失，因此称为丢失修改。</li>
+<li>不可重复读（Unrepeatableread）: 指在一个事务内多次读同一数据。在这个事务还没有结束时，另一个事务也访问该数据。那么，在第一个事务中的两次读数据之间，由于第二个事务的修改导致第一个事务两次读取的数据可能不太一样。这就发生了在一个事务内两次读到的数据是不一样的情况，因此称为不可重复读。</li>
+<li>幻读（Phantom read）: 幻读与不可重复读类似。它发生在一个事务（T1）读取了几行数据，接着另一个并发事务（T2）插入了一些数据时。在随后的查询中，第一个事务（T1）就会发现多了一些原本不存在的记录，就好像发生了幻觉一样，所以称为幻读。</li>
+</ul>
+<p><strong>不可重复度和幻读区别：不可重复读的重点是修改，幻读的重点在于新增或者删除。</strong></p>
+<h4 id="事务隔离级别"><a href="#事务隔离级别" class="headerlink" title="事务隔离级别"></a>事务隔离级别</h4><p>SQL 标准定义了四个隔离级别：</p>
+<ul>
+<li>READ-UNCOMMITTED(读取未提交)： 最低的隔离级别，允许读取尚未提交的数据变更，可能会导致脏读、幻读或不可重复读</li>
+<li>READ-COMMITTED(读取已提交): 允许读取并发事务已经提交的数据，可以阻止脏读，但是幻读或不可重复读仍有可能发生</li>
+<li>REPEATABLE-READ（可重读）: 对同一字段的多次读取结果都是一致的，除非数据是被本身事务自己所修改，可以阻止脏读和不可重复读，但幻读仍有可能发生。</li>
+<li>SERIALIZABLE(可串行化): 最高的隔离级别，完全服从ACID的隔离级别。所有的事务依次逐个执行，这样事务之间就完全不可能产生干扰，也就是说，该级别可以防止脏读、不可重复读以及幻读。</li>
+</ul>
+<p><strong>MySQL InnoDB 存储引擎的默认支持的隔离级别是 REPEATABLE-READ（可重读）</strong>。我们可以通过SELECT @@tx_isolation;命令来查看<br>InnoDB 存储引擎在 REPEATABLE-READ（可重读）事务隔离级别下使用的是Next-Key Lock 锁算法，因此可以避免幻读的产生，这与其他数据库系统(如 SQL Server)是不同的。所以说InnoDB 存储引擎的默认支持的隔离级别是 REPEATABLE-READ（可重读） 已经可以完全保证事务的隔离性要求，即达到了 SQL标准的SERIALIZABLE(可串行化)隔离级别。<br>InnoDB 存储引擎在 分布式事务 的情况下一般会用到SERIALIZABLE(可串行化)隔离级别。</p>
+<h4 id="大事务解决"><a href="#大事务解决" class="headerlink" title="大事务解决"></a>大事务解决</h4><p>问题：锁定太多的数据，造成阻塞和锁超时；回滚时间长；执行时间长</p>
+<ul>
+<li>分批处理</li>
+<li>移出不必要的select 操作</li>
+</ul>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MySQL/" rel="tag"><i class="fa fa-tag"></i> MySQL</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/Java/2020-03-06-VUE-ElementUI-SpringBoot实现前后端分离.html" rel="next" title="VUE+ElementUI+SpringBoot实现前后端分离">
+                <i class="fa fa-chevron-left"></i> VUE+ElementUI+SpringBoot实现前后端分离
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">虚己以游世，乘物以游心</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">116</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#影响数据库的因素"><span class="nav-number">1.</span> <span class="nav-text">影响数据库的因素</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务器硬件"><span class="nav-number">2.</span> <span class="nav-text">服务器硬件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU"><span class="nav-number">2.1.</span> <span class="nav-text">CPU</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#磁盘IO"><span class="nav-number">2.2.</span> <span class="nav-text">磁盘IO</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#RAID"><span class="nav-number">2.2.1.</span> <span class="nav-text">RAID</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#固态硬盘"><span class="nav-number">2.2.2.</span> <span class="nav-text">固态硬盘</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#网卡流量"><span class="nav-number">2.3.</span> <span class="nav-text">网卡流量</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#插件式存储引擎"><span class="nav-number">3.</span> <span class="nav-text">插件式存储引擎</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#InnoDB"><span class="nav-number">3.1.</span> <span class="nav-text">InnoDB</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#MyISAM"><span class="nav-number">3.2.</span> <span class="nav-text">MyISAM</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Memory"><span class="nav-number">3.3.</span> <span class="nav-text">Memory</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Archive"><span class="nav-number">3.4.</span> <span class="nav-text">Archive</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#总结对比"><span class="nav-number">3.5.</span> <span class="nav-text">总结对比</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大表"><span class="nav-number">4.</span> <span class="nav-text">大表</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#大事务"><span class="nav-number">5.</span> <span class="nav-text">大事务</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#并发事务带来的问题"><span class="nav-number">5.1.</span> <span class="nav-text">并发事务带来的问题</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事务隔离级别"><span class="nav-number">5.2.</span> <span class="nav-text">事务隔离级别</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#大事务解决"><span class="nav-number">5.3.</span> <span class="nav-text">大事务解决</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
