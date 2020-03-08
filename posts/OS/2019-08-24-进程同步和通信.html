@@ -119,7 +119,7 @@
 
 
 
-  <meta name="keywords" content="信号量,管程,读者写者问题,哲学家就餐问题,消息传递,共享内存," />
+  <meta name="keywords" content="信号量,读者写者问题,哲学家就餐问题," />
 
 
 
@@ -131,14 +131,14 @@
 
 
 <meta name="description" content="信号量与管程互斥只是进程间关系的一个方面，很多时候，进程间还需要进行同步和通信，因此就需要更高级的同步互斥方法。 信号量(抽象数据类型) 一个整型sem , 两个原子操作 P() : sem - 1 , 若 sem &amp;lt; 0 等待，否则继续 V()：sem + 1, 若 sem &amp;lt;= 0 , 唤醒一个等待的P 互斥：二进制信号量  mutex = new Semaphore(1); 条件">
-<meta name="keywords" content="信号量,管程,读者写者问题,哲学家就餐问题,消息传递,共享内存">
+<meta name="keywords" content="信号量,读者写者问题,哲学家就餐问题">
 <meta property="og:type" content="article">
 <meta property="og:title" content="进程同步和通信">
 <meta property="og:url" content="http://vergessenwang.github.io/posts/OS/2019-08-24-进程同步和通信.html">
 <meta property="og:site_name" content="Anonymous World">
 <meta property="og:description" content="信号量与管程互斥只是进程间关系的一个方面，很多时候，进程间还需要进行同步和通信，因此就需要更高级的同步互斥方法。 信号量(抽象数据类型) 一个整型sem , 两个原子操作 P() : sem - 1 , 若 sem &amp;lt; 0 等待，否则继续 V()：sem + 1, 若 sem &amp;lt;= 0 , 唤醒一个等待的P 互斥：二进制信号量  mutex = new Semaphore(1); 条件">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-08-24T15:35:35.145Z">
+<meta property="og:updated_time" content="2020-03-08T15:30:40.759Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进程同步和通信">
 <meta name="twitter:description" content="信号量与管程互斥只是进程间关系的一个方面，很多时候，进程间还需要进行同步和通信，因此就需要更高级的同步互斥方法。 信号量(抽象数据类型) 一个整型sem , 两个原子操作 P() : sem - 1 , 若 sem &amp;lt; 0 等待，否则继续 V()：sem + 1, 若 sem &amp;lt;= 0 , 唤醒一个等待的P 互斥：二进制信号量  mutex = new Semaphore(1); 条件">
@@ -497,15 +497,9 @@
           
             <a href="/tags/信号量/" rel="tag"><i class="fa fa-tag"></i> 信号量</a>
           
-            <a href="/tags/管程/" rel="tag"><i class="fa fa-tag"></i> 管程</a>
-          
             <a href="/tags/读者写者问题/" rel="tag"><i class="fa fa-tag"></i> 读者写者问题</a>
           
             <a href="/tags/哲学家就餐问题/" rel="tag"><i class="fa fa-tag"></i> 哲学家就餐问题</a>
-          
-            <a href="/tags/消息传递/" rel="tag"><i class="fa fa-tag"></i> 消息传递</a>
-          
-            <a href="/tags/共享内存/" rel="tag"><i class="fa fa-tag"></i> 共享内存</a>
           
         </div>
       
@@ -626,7 +620,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-count">81</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -637,7 +631,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -648,7 +642,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">116</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

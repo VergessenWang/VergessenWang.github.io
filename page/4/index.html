@@ -303,6 +303,186 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/Algorithm/2019-11-27-BM算法.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/Algorithm/2019-11-27-BM算法.html" itemprop="url">BM算法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-27T23:43:22+08:00">
+                2019-11-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,365
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>我表示看完这两个匹配算法，头顶有点凉…</p>
+<p>BM算法与KMP算法的主要区别在于：采用<strong>从右向左</strong>进行字符的匹配比较。 </p>
+<p>BM算法中的关键问题是， 如何确定<strong>目标串</strong>中的下一轮匹配的开始位置？即如何决定目标串中指针向右跳跃的距离？——利用P中的重复模式 <strong>和 T中的失配字符</strong></p>
+<p>假设出现失配时， T[i]≠P[k]。则 此时<strong>坏字符为x(=T[i])</strong>，<strong>好后缀P’=P[(k+1) … (len(P)-1)]</strong>（好后缀，是已匹配的部分字符串）</p>
+<p>如何确定目标串中查找指针的移动距离dist[i]？</p>
+<p>采用2种启发式方法：无需检查目标串中的所有字符即可查找到是否存在匹配子串。</p>
+<ul>
+<li>启发式方法#1： 跳过字符（“坏字符”规则）<ul>
+<li>CharJump[x]：依据T中的坏字符x，计算T中查找指针的跳跃距离</li>
+</ul>
+</li>
+<li>启发式方法#2： 重复模式（“好后缀”规则）<ul>
+<li>MatchJump[k] ： 依据P中的失配位置k， 计算T中查找指针的跳跃距离</li>
+</ul>
+</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/Algorithm/2019-11-27-BM算法.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/Algorithm/2019-11-26-KMP算法.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1896,189 +2076,11 @@ A[Wikipedia] -->B(预处理器 <br>schema定义<br>训练数据构造)
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/NLP/2019-10-29-LSTM模型浅析.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liana_Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Anonymous World">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/NLP/2019-10-29-LSTM模型浅析.html" itemprop="url">LSTM模型浅析</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-29T00:07:36+08:00">
-                2019-10-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NLP/" itemprop="url" rel="index">
-                    <span itemprop="name">NLP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  948
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>在对神经网络类算法模型一无所知的时候，我就曾想过信息与时序的问题，并陷入混乱中…今天开始看BiLSTM的原理时，才发现早就有了相应的解决方案…</p>
-<p>神经网络的灵感来自于人脑神经元的工作方式，然而为了在计算机中实现，依然是个跟加权有关的数学问题，权重决定了信息的重要程度。每个节点虽然有多个输入输出，但是一种状态下只是<strong>二值问题</strong>。神经网络的隐藏层越多，处理复杂问题的能力也就越强。</p>
-<h3 id="历史模型的局限"><a href="#历史模型的局限" class="headerlink" title="历史模型的局限"></a>历史模型的局限</h3><p>普通的神经网络(NN)：各输入层之间没有运算连接，无法表示<strong>上下文</strong>关系</p>
-<ul>
-<li>$h_t = sigmoid(W_x * x_t + b)$</li>
-</ul>
-<p>循环神经网络(RNN):  其实比较类似于<strong>进位加法链</strong>，上一次运算的结果会加入到下一次运算中。这种基于时序的处理，只包含了上文信息，而忽略了<strong>下文信息</strong>。如果用增加依赖步数的方式，会导致把精力都集中在记忆大量的输入信息上，从而使建模能力下降。还有一个问题是RNN比较难以训练，逐步求导的梯度下降方式可能产生<strong>梯度爆炸</strong>问题</p>
-<ul>
-<li>$h_t = tanh(W_x <em> x_t + W_h </em> h_{t-1} +b)$</li>
-</ul>
-<p>双向循环神经网络(BRNN): 再增加一个向后的网络，使得未来信息被包含进来。然而，仍然存在存取的上下文信息范围有限的问题，<strong>随着网络环路的不断递归，隐含层的影响是会不断衰减的，即长期依赖问题</strong>，这就引出了关于权重的考虑，什么样的信息是重要的，需要在后续的计算中一直保留呢？ 于是出现了 LSTM</p>
-<p>长短期记忆(LSTM):  核心是基于门函数的<strong>自我衡量</strong>的机制，通过记忆门与遗忘门来控制之前的影响，相比于RNN，多了一个输入和输出，它们控制的是长期记忆。LSTM用细胞状态来表示内部复杂的处理过程。</p>
-<p><strong>双向长短期记忆(BiLSTM)</strong>: 即增加一个反向的LSTM。两个方向的结果拼接后得最终结果。</p>
-<p><strong>门控循环单元（GRU）</strong>：将忘记和输入门结合成一个“更新门”，它还合并了单元状态和隐藏状态，并做了一些其他更改。由此产生的模型比标准的LSTM模型更简单，并且越来越受欢迎。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/NLP/2019-10-29-LSTM模型浅析.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2128,7 +2130,7 @@ A[Wikipedia] -->B(预处理器 <br>schema定义<br>训练数据构造)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">80</span>
+                  <span class="site-state-item-count">81</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2139,7 +2141,7 @@ A[Wikipedia] -->B(预处理器 <br>schema定义<br>训练数据构造)
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">20</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2150,7 +2152,7 @@ A[Wikipedia] -->B(预处理器 <br>schema定义<br>训练数据构造)
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">116</span>
+                  <span class="site-state-item-count">111</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
