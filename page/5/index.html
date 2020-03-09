@@ -303,6 +303,197 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/NLP/2019-10-30-KG子任务划分.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/NLP/2019-10-30-KG子任务划分.html" itemprop="url">KG子任务划分</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-30T16:32:26+08:00">
+                2019-10-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/" itemprop="url" rel="index">
+                    <span itemprop="name">NLP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,077
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>首先我们需要考虑的是目前的搜索存在的问题。</p>
+<p>当我们打开一个搜索引擎的时候，目前其实是想得到答案。然而，现在的互联网是一个基于HTML的网页结构以及相互直接通过URL相互链接。这种链接中有太多的无用信息，在其中寻找所需的信息往往是一个费时费力的过程。基于知识图谱的问答或搜索系统，可以从一定程度上解决这个问题。</p>
+<h3 id="KG的本质"><a href="#KG的本质" class="headerlink" title="KG的本质"></a>KG的本质</h3><ul>
+<li>Web角度：像建立文本之间的超链接一样建立数据之间的<strong>语义</strong>链接，并支持语义搜索</li>
+<li>NLP视角：怎样<strong>从文本中抽取语义和结构化数据</strong></li>
+<li>KR视角：怎样利用计算机符号来表示和处理知识</li>
+<li>AI视角：怎样利用知识库来辅助理解人的语言</li>
+<li>DB视角：用图的方式去存储知识</li>
+</ul>
+<h3 id="传统KE的问题"><a href="#传统KE的问题" class="headerlink" title="传统KE的问题"></a>传统KE的问题</h3><p>传统知识工程在规则明确、边界清晰、应用封闭的应用场景取得了巨大成功。缺点是体系是自上而下的：<strong>严重依赖专家和人的干预</strong> 。</p>
+<p>解决方式：大规模自动知识获取 。基于大数据、ML，充分利用现代计算机的强大算力，从大量数据中<strong>自动</strong>进行信息挖掘。</p>
+<p>这种数据驱动的知识获取是自下而上的，以维基百科页面内容为例：</p>
+<pre class="mermaid">graph LR
+
+A[Wikipedia] -->B(预处理器 <br>schema定义<br>训练数据构造)
+
+    B --> C{是否分类}
+
+    C -->|未分类| D[分类器<br>文本,句法分类]
+
+    C -->|已分类| E[抽取器<br>CRFmodel]
+
+    D --> E
+    E --> F[infobox]</pre>
+
+<p>以其为基础建立的数据库有：YAGO、 CN-DBpedia(以后仔细学习下API)等</p>
+<p>知识图谱富含<strong>实体、概念(is)、属性(has)、关系</strong>等信息。以RDF或图的形式存储</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/NLP/2019-10-30-KG子任务划分.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/NLP/2019-10-29-LSTM模型浅析.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1881,181 +2072,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/NLP/2019-10-04-Jieba分词包使用.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liana_Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Anonymous World">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/NLP/2019-10-04-Jieba分词包使用.html" itemprop="url">Jieba分词包使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-04T17:01:01+08:00">
-                2019-10-04
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NLP/" itemprop="url" rel="index">
-                    <span itemprop="name">NLP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  883
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>目前来说，分词和词性标注一般都是同时完成的，而且技术已经相对成熟。</p>
-<p>今天来学习下Python里面Jieba库的使用，下一步重点要解决的是命名实体识别的问题。</p>
-<h3 id="安装Jieba包"><a href="#安装Jieba包" class="headerlink" title="安装Jieba包"></a>安装Jieba包</h3><p>安装：命令行<code>pip install jieba</code>  pip用于安装及维护Python包。</p>
-<p>然后因为特殊原因并不能连上，我真的是笑嘻嘻</p>
-<p>换上清华的镜像 <code>pip install -i https://pypi.tuna.tsinghua.edu.cn/simple jieba</code>  光速安装完毕</p>
-<p>顺便升级下pip <code>python -m pip install -i https://pypi.tuna.tsinghua.edu.cn/simple --upgrade pip</code></p>
-<h3 id="所用算法"><a href="#所用算法" class="headerlink" title="所用算法"></a>所用算法</h3><p>基于前缀词典实现高效的词图扫描，生成句子中汉字所有可能成词情况所构成的<strong>有向无环图</strong> (DAG)</p>
-<p>采用了<strong>动态规划</strong>查找最大概率路径, 找出基于词频的最大切分组合</p>
-<p>对于未登录词，采用了基于汉字成词能力的 HMM 模型</p>
-<p>可以看出，是一种词典和统计相结合的分词方法</p>
-<p><a href="https://blog.csdn.net/u013510838/article/details/81738431" target="_blank" rel="noopener">jieba原理</a></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/NLP/2019-10-04-Jieba分词包使用.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2110,7 +2126,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">81</span>
+                  <span class="site-state-item-count">82</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2132,7 +2148,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">111</span>
+                  <span class="site-state-item-count">112</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

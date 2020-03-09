@@ -1,0 +1,1040 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="ext4Linux目前使用的是ext4文件系统ext4文件系统会把分区主要分为两大部分（暂时不提超级块）：一小部分用于保存文件的inode（i节点）信息；剩余的大部分用于保存block信息。inode的默认大小为128 Byte，用来记录文件的权限（r、w、x）、文件的所有者和属组、文件的大小、文件的状态改变时间（ctime）、文件的最近一次读取时间（atime）、文件的最近一次修改时间（mtim">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux命令之文件与权限管理">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/OS/2020-03-09-Linux命令之文件与权限管理.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="ext4Linux目前使用的是ext4文件系统ext4文件系统会把分区主要分为两大部分（暂时不提超级块）：一小部分用于保存文件的inode（i节点）信息；剩余的大部分用于保存block信息。inode的默认大小为128 Byte，用来记录文件的权限（r、w、x）、文件的所有者和属组、文件的大小、文件的状态改变时间（ctime）、文件的最近一次读取时间（atime）、文件的最近一次修改时间（mtim">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/20200309215617.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837529246539.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837341342034.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837345008436.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837358189224.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837373980954.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837477741747.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837515327033.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837562195148.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837568773630.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837575529346.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837575974912.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837577510572.png">
+<meta property="og:updated_time" content="2020-03-09T14:14:03.749Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux命令之文件与权限管理">
+<meta name="twitter:description" content="ext4Linux目前使用的是ext4文件系统ext4文件系统会把分区主要分为两大部分（暂时不提超级块）：一小部分用于保存文件的inode（i节点）信息；剩余的大部分用于保存block信息。inode的默认大小为128 Byte，用来记录文件的权限（r、w、x）、文件的所有者和属组、文件的大小、文件的状态改变时间（ctime）、文件的最近一次读取时间（atime）、文件的最近一次修改时间（mtim">
+<meta name="twitter:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/20200309215617.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/OS/2020-03-09-Linux命令之文件与权限管理.html"/>
+
+
+
+
+
+  <title>Linux命令之文件与权限管理 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/OS/2020-03-09-Linux命令之文件与权限管理.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Linux命令之文件与权限管理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-09T22:12:44+08:00">
+                2020-03-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/OS/" itemprop="url" rel="index">
+                    <span itemprop="name">OS</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5,884
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="ext4"><a href="#ext4" class="headerlink" title="ext4"></a>ext4</h3><p>Linux目前使用的是ext4文件系统<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/20200309215617.png" alt=""><br>ext4文件系统会把分区主要分为两大部分（暂时不提超级块）：一小部分用于保存文件的inode（i节点）信息；剩余的大部分用于保存block信息。<br>inode的默认大小为128 Byte，用来记录文件的权限（r、w、x）、文件的所有者和属组、文件的大小、文件的状态改变时间（ctime）、文件的最近一次读取时间（atime）、文件的最近一次修改时间（mtime）、文件的数据真正保存的block编号。每个文件需要占用一个inode。</p>
+<p><strong>inode中是不记录文件名的，那是因为文件名记录在文件所在目录的block中。</strong></p>
+<a id="more"></a>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837529246539.png" alt=""><br>也就是说，目录的block中记录的是这个目录下所有一级子文件和子目录的文件名及inode的对应；而文件的block中记录的才是文件实际的数据。</p>
+<p>当我们查找一个文件，比如/root/test时，要经过以下步骤：<br>●首先找到根目录的inode（<strong>根目录的inode是系统已知的，inode号是2</strong>），然后判断用户是否有权限访问根目录的block。<br>●如果有权限，则可以在根目录的block中访问到/root/的文件名及对应的inode号。<br>●通过/root/目录的inode号，可以查找到/root/目录的inode信息，接着判断用户是否有权限访问/root/目录的block。<br>●如果有权限，则可以从/root/目录的block中读取到test文件的文件名及对应的inode号。<br>●通过test文件的inode号，就可以找到test文件的inode信息，接着判断用户是否有权限访问test文件的block。<br>●如果有权限，则可以读取block中的数据，这样就完成了/root/test文件的读取与访问。</p>
+<h3 id="命令提示符"><a href="#命令提示符" class="headerlink" title="命令提示符"></a>命令提示符</h3><p><code>[root@localhost ~]#</code></p>
+<ul>
+<li>root：显示的是当前的登录用户</li>
+<li>localhost：当前系统的简写主机名</li>
+<li>~：代表用户当前所在的目录</li>
+<li>#：命令提示符，Linux用这个符号标识登录的用户权限等级。如果是超级用户，提示符就是#；如果是普通用户，提示符就是$</li>
+<li>超级用户的家目录：/root/。普通用户的家目录：/home/用户名/。</li>
+</ul>
+<p><code>[root@localhost ~]# 命令 [选项] [参数]</code><br>命令的选项用于调整命令功能，而命令的参数是这个命令的操作对象。</p>
+<h3 id="目录操作命令"><a href="#目录操作命令" class="headerlink" title="目录操作命令"></a>目录操作命令</h3><h4 id="ls"><a href="#ls" class="headerlink" title="ls"></a>ls</h4><p>选项：</p>
+<p>-a:             显示所有文件</p>
+<p>–color=when:   支持颜色输出，when的值默认是always（总显示颜色），也可以是never（从不显示颜色）和auto（自动）</p>
+<p>-d:            显示目录信息，而不是目录下的文件</p>
+<p>-h:            人性化显示，按照我们习惯的单位显示文件大小</p>
+<p>-i:            显示文件的i节点号</p>
+<p>-l:            长格式显示</p>
+<p>-a选项中的a是all的意思，也就是显示隐藏文件，以“.”开头的文件是隐藏文件，隐藏文件不是为了把文件藏起来不让其他用户找到，而是为了告诉用户这些文件都是重要的系统文件，如非必要，不要乱动</p>
+<p>“-l”选项用于显示文件的详细信息，“ll”等同于“ls -l”：<br>●第一列：权限。<br>●第二列：引用计数。文件的引用计数代表该文件的硬链接个数，而目录的引用计数代表该目录有多少个一级子目录。<br>●第三列：所有者，也就是这个文件属于哪个用户。默认所有者是文件的建立用户<br>●第四列：所属组。默认所属组是文件建立用户的有效组，一般情况下就是建立用户的所在组。<br>●第五列：大小。默认单位是字节。<br>●第六列：文件修改时间。文件状态修改时间或文件数据修改时间都会更改这个时间，注意这个时间不是文件的创建时间。<br>●第七列：文件名。</p>
+<p>“ls -l”显示的文件大小是字节，但是我们更加习惯的是千字节用KB显示，兆字节用MB显示，而“-h”选项就是按照人们习惯的单位显示文件大小的</p>
+<p>每个文件都有一个被称作inode（i节点）的隐藏属性，可以看成系统搜索这个文件的ID，而“-i”选项就是用来查看文件的inode号的<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837341342034.jpg" alt=""></p>
+<h4 id="cd"><a href="#cd" class="headerlink" title="cd"></a>cd</h4><p>-P （大写）是指如果切换的目录是软链接目录，则进入其原始的物理目录，而不是进入软链接目录；-L（大写）是指如果切换的目录是软链接目录，则直接进入软链接目录。<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837345008436.png" alt=""><br>“cd ~”命令可以快速回到用户的家目录，cd命令直接按回车键也是快速切换到家目录。</p>
+<p>pwd是查看当前所在目录的命令</p>
+<p>如果路径是从根目录开始，一级一级指定的，那使用的就是绝对路径。所谓相对路径，就是只从当前所在目录开始，切换目录。</p>
+<h4 id="mkdir"><a href="#mkdir" class="headerlink" title="mkdir"></a>mkdir</h4><p>如果需要建立一系列的新目录，则需要加入“-p”选项，递归建立才可以</p>
+<h4 id="rmdir"><a href="#rmdir" class="headerlink" title="rmdir"></a>rmdir</h4><p>既然可以递归建立目录，当然也可以加入“-p”选项递归删除目录。</p>
+<p>但rmdir命令的作用十分有限，因为<strong>只能删除空目录</strong>，所以一旦目录中有内容，就会报错。删除文件或目录更多的使用rm命令</p>
+<h4 id="tree"><a href="#tree" class="headerlink" title="tree"></a>tree</h4><p>以树形结构显示目录下的文件<br><code>apt install tree</code> 安装</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837358189224.jpg" alt=""></p>
+<h3 id="文件操作命令"><a href="#文件操作命令" class="headerlink" title="文件操作命令"></a>文件操作命令</h3><h4 id="touch"><a href="#touch" class="headerlink" title="touch"></a>touch</h4><p>修改文件的时间戳。如果文件不存在，则会建立空文件；如果文件已经存在，则会修改文件的时间戳（访问时间、数据修改时间、状态修改时间都会改变）。千万<strong>不要把touch命令当成新建文件的命令</strong></p>
+<p>选项：</p>
+<p>-a:    只修改文件的访问时间（Access Time）</p>
+<p>-c:    如果文件不存在，则不建立新文件</p>
+<p>-d:    把文件的时间改为指定的时间</p>
+<p>-m:    只修改文件的数据修改时间（Modify Time）</p>
+<p>Linux中的每个文件都有三个时间，分别是访问时间（Access Time）、数据修改时间（Modify Time）和状态修改时间（Change Time）。这三个时间可以通过stat命令来进行查看。不过touch命令只能手工指定是只修改访问时间，还是只修改数据修改时间，而不能指定只修改状态修改时间。因为不论是修改访问时间，还是修改文件的数据时间，对文件来讲，状态都会发生改变，所以状态修改时间会随之改变。<br><strong>注意：在Linux中，文件没有创建时间。</strong></p>
+<h4 id="stat"><a href="#stat" class="headerlink" title="stat"></a>stat</h4><p>stat是查看文件详细信息的命令<br>选项：</p>
+<p>-f： 查看文件所在的文件系统信息，而不是查看文件的信息</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837373980954.jpg" alt=""><br>注意观察各项命令会使哪些时间发生变化</p>
+<p>修改文件内容，使用“echo 9527&gt;&gt; test”（这条命令会向test文件末尾追加一行“9527”数据）</p>
+<h4 id="cat"><a href="#cat" class="headerlink" title="cat"></a>cat</h4><p>concatenate（连接、连续）的简写，合并文件并打印输出到标准输出。不论文件内容有多少，都会一次性显示。<br>选项：</p>
+<p>-A： 相当于-vET选项的整合，用于列出所有隐藏符号</p>
+<p>-E： 列出每行结尾的回车符$</p>
+<p>-n： 显示行号</p>
+<p>-T： 把Tab键用^I显示出来</p>
+<p>-v： 列出特殊字</p>
+<h4 id="tac"><a href="#tac" class="headerlink" title="tac"></a>tac</h4><p>从最后一行开始显示内容，并把所有内容输出</p>
+<h4 id="more"><a href="#more" class="headerlink" title="more"></a>more</h4><p>分屏显示文件内容。如果文件过大，则cat命令会有心无力，这时more命令的作用更加明显。</p>
+<p>常用的交互命令如下<br>●空格键：向下翻页。<br>●b：向上翻页。<br>●回车键：向下滚动一行。<br>●/字符串：搜索指定的字符串。<br>●q：退出。</p>
+<h4 id="less"><a href="#less" class="headerlink" title="less"></a>less</h4><p>分行显示文件内容。可以使用上、下箭头</p>
+<h4 id="head"><a href="#head" class="headerlink" title="head"></a>head</h4><p>显示文件开头的内容。默认显示文件的开头10行内容。<br>选项：</p>
+<p>-n 行数：    从文件头开始，显示指定行数</p>
+<p>-v:        显示文件名</p>
+<h4 id="tail"><a href="#tail" class="headerlink" title="tail"></a>tail</h4><p>显示文件结尾的内容。<br>选项：</p>
+<p>-n 行数：    从文件结尾开始，显示指定行数</p>
+<p>-f:        监听文件的新增内容, 光标不会退出命令，而会一直监听在文件的结尾处，等待显示新增内容。</p>
+<h4 id="ln"><a href="#ln" class="headerlink" title="ln"></a>ln</h4><p>在文件之间建立链接。<br><code>[root@localhost ~]# ln [选项] 源文件 目标文件</code><br>选项：</p>
+<p>-s： 建立软链接文件。如果不加“-s”选项，则建立硬链接文件</p>
+<p>-f： 强制。如果目标文件已经存在，则删除目标文件后再建立链接文件</p>
+<p><strong>软链接文件的源文件必须写成绝对路径，</strong>而不能写成相对路径（硬链接没有这样的要求）；否则软链接文件会报错。</p>
+<h5 id="硬链接"><a href="#硬链接" class="headerlink" title="硬链接"></a>硬链接</h5><p><strong>源文件和硬链接文件的inode号是一样的</strong></p>
+<p>硬链接的特点如下：<br>●不论是修改源文件，还是修改硬链接文件，另一个文件中的数据都会发生改变。<br>●不论是删除源文件，还是删除硬链接文件，只要还有一个文件存在，这个文件都可以被访问。<br>●硬链接不会建立新的inode信息，也不会更改inode的总数。<br>●硬链接<strong>不能跨文件系统（分区）建立，</strong>因为在不同的文件系统中，inode号是重新计算的。<br>●硬链接不能链接目录，因为如果给目录建立硬链接，那么不仅目录本身需要重新建立，目录下所有的子文件，包括子目录中的所有子文件都需要建立硬链接，这对当前的Linux来讲过于复杂。</p>
+<h5 id="软链接"><a href="#软链接" class="headerlink" title="软链接"></a>软链接</h5><p>软链接和源文件的inode号是不一致的</p>
+<p>软链接的标志非常明显，首先，权限位中“l”表示这是一个软链接文件；其次，在文件的后面通过“-&gt;”显示出源文件的完整名字。</p>
+<p>软链接的特点（软链接的特点和Windows中的快捷方式完全一致）。<br>●不论是修改源文件（check），还是修改软链接文件（check-soft），另一个文件中的数据都会发生改变。<br>●删除软链接文件，源文件不受影响。而删除源文件，软链接文件将找不到实际的数据，从而显示文件不存在。<br>●软链接会新建自己的inode信息和block，只是在block中不存储实际文件数据，而存储的是源文件的文件名及inode号。<br>●软链接可以链接目录。<br>●软链接可以跨分区。<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837477741747.jpg" alt=""></p>
+<h3 id="目录和文件都能操作的命令"><a href="#目录和文件都能操作的命令" class="headerlink" title="目录和文件都能操作的命令"></a>目录和文件都能操作的命令</h3><h4 id="rm"><a href="#rm" class="headerlink" title="rm"></a>rm</h4><p>删除文件或目录。<br>选项：</p>
+<p>-f:    强制删除（force）</p>
+<p>-i:    交互删除，在删除之前会询问用户</p>
+<p>-r:    递归删除，可以删除目录（recursive）<br>数据强制删除之后无法恢复，除非依赖第三方的数据恢复工具，如extundelete等。但要注意，数据恢复很难恢复完整的数据，一般能恢复70%～80%就很难得了。</p>
+<h4 id="cp"><a href="#cp" class="headerlink" title="cp"></a>cp</h4><p>复制文件和目录。</p>
+<p><code>[root@localhost ~]# cp [选项] 源文件 目标文件</code><br>选项：</p>
+<p>-a:    相当于-dpr选项的集合</p>
+<p>-d:    如果源文件为软链接（对硬链接无效），则复制出的目标文件也为软链接, 不加“-d”选项，实际复制的是软链接的源文件</p>
+<p>-i:    询问，如果目标文件已经存在，则会询问是否覆盖, 默认执行</p>
+<p>-l:    把目标文件建立为源文件的硬链接文件，而不是复制源文件</p>
+<p>-s:    把目标文件建立为源文件的软链接文件，而不是复制源文件</p>
+<p>-p:    复制后目标文件保留源文件的属性（包括所有者、所属组、权限和时间）当我们在执行数据备份、日志备份的时候，这些文件的时间可能是一个重要的参数，这就需要执行“-p”选项了。</p>
+<p>-r:    递归复制，用于复制目录</p>
+<h4 id="mv"><a href="#mv" class="headerlink" title="mv"></a>mv</h4><p>移动文件或改名。<br><code>[root@localhost ~]# mv [选项] 源文件 目标文件</code><br>选项：</p>
+<p>-f:    强制覆盖，如果目标文件已经存在，则不询问，直接强制覆盖</p>
+<p>-i:    交互移动，如果目标文件已经存在，则询问用户是否覆盖（默认选项）</p>
+<p> -n:    如果目标文件已经存在，则不会覆盖移动，而且不询问用户</p>
+<p> -v:    显示详细信息</p>
+<h3 id="权限管理命令"><a href="#权限管理命令" class="headerlink" title="权限管理命令"></a>权限管理命令</h3><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837515327033.png" alt=""><br>文件类型<br>-“-”：普通文件。<br>-“b”：块设备文件。这是一种特殊设备文件，存储设备都是这种文件，如分区文件/dev/sda1就是这种文件。<br>-“c”：字符设备文件。这也是特殊设备文件，输入设备一般都是这种文件，如鼠标、键盘等。<br>-“d”：目录文件。Linux中一切皆文件，所以目录也是文件的一种。<br>-“l”：软链接文件。<br>-“p”：管道符文件。这是一种非常少见的特殊设备文件。<br>-“s”：套接字文件。这也是一种特殊设备文件，一些服务支持Socket访问，就会产生这样的文件。</p>
+<p>所有者的权限</p>
+<ul>
+<li>r：代表read，是读取权限。</li>
+<li>w：代表write，是写权限。</li>
+<li>x：代表execute，是执行权限。<br>如果有字母，则代表拥有对应的权限；如果是“-”，则代表没有对应的权限。</li>
+</ul>
+<p>如果在文件的权限位中含有“.”，则表示这个文件受SELinux的安全规则管理。</p>
+<h4 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h4><p>修改文件的权限模式。<br><code>[root@localhost ~]# chmod [选项] 权限模式 文件名</code><br>选项：     </p>
+<p>-R:    递归设置权限，也就是给子目录中的所有文件设定权限<br>权限模式的格式是“[ugoa][[+-=][perms]]”，也就是“[用户身份][[赋予方式][权限]]”</p>
+<p>用户身份</p>
+<ul>
+<li>u：代表所有者（user）。</li>
+<li>g：代表所属组（group）。</li>
+<li>o：代表其他人（other）。</li>
+<li>a：代表全部身份（all）。</li>
+</ul>
+<p>赋予方式</p>
+<ul>
+<li>+：加入权限。</li>
+<li>-：减去权限。</li>
+<li>=：设置权限。</li>
+</ul>
+<p>权限</p>
+<ul>
+<li>r：读取权限（read）4  可以对文件执行cat、more、less、head、tail等文件查看命令。可以在目录下执行ls命令</li>
+<li>w：写权限（write）2  可以对文件执行vim、echo等修改文件数据的命令。注意：<strong>因为文件名保留在上级目录的block中，所以对文件拥有写权限，是不能删除文件本身的，而只能删除文件中的数据（也就是文件block中的内容）。要想删除文件名，需要对文件所在目录拥有写权限。</strong> 可以在目录下执行touch、rm、cp、mv命令。<strong>对目录来说，写（w）权限是最高权限。</strong></li>
+<li>x：执行权限（execute）1  <strong>对文件来说，执行（x）权限是最高权限。</strong>可以对目录执行cd命令</li>
+</ul>
+<p>数字权限的赋予方式更加简单<br>●644：这是文件的基本权限，代表所有者拥有读、写权限，而所属组和其他人拥有只读权限。<br>●755：这是文件的执行权限和目录的基本权限，代表所有者拥有读、写和执行权限，而所属组和其他人拥有读和执行权限。<br>●777：这是最大权限。在实际的生产服务器中，要尽力避免给文件或目录赋予这样的权限，这会造成一定的安全隐患。</p>
+<p>创建普通用户user的简单步骤：第一步，添加用户执行命令“useradd user”；第二步，设置用户密码“passwd user”，输入两次密码确认。执行命令“su – user”切换用户</p>
+<h4 id="chown"><a href="#chown" class="headerlink" title="chown"></a>chown</h4><p>修改文件和目录的所有者和所属组。<br><code>[root@localhost ~]# chown [选项] 所有者：所属组 文件或目录</code><br>选项：</p>
+<p> -R：    递归设置权限，也就是给子目录中的所有文件设置权限</p>
+<p>文件的所有者，才可以修改文件的权限。<br>在Linux中，每个用户建立之后，都会建立和用户名同名的用户组，作为这个用户的初始组，user用户组是自动建立的。</p>
+<h4 id="chgrp"><a href="#chgrp" class="headerlink" title="chgrp"></a>chgrp</h4><p>修改文件和目录的所属组</p>
+<h4 id="umask"><a href="#umask" class="headerlink" title="umask"></a>umask</h4><p>在Linux中，通过umask默认权限来给所有新建立的文件和目录赋予初始权限，这一点和Windows不太一样，Windows是通过继承上级目录的权限来给文件和目录赋予初始权限的。</p>
+<p>使用“-S”选项，会直接用字母来表示文件和目录的初始权限。<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837562195148.jpg" alt=""></p>
+<p>●<strong>对文件来讲，新建文件的默认最大权限是666</strong>，没有执行（x）权限。这是因为执行权限对文件来讲比较危险，不能在新建文件的时候默认赋予，而必须通过用户手工赋予。换算成字母就是“-rw-rw-rw-”；而umask的值是022，也换算成字母就是“—–w–w-”。把两个字母权限相减，得到的就是新建文件的默认权限：（-rw-rw-rw-）-（—–w–w-）=（-rw-r–r–）。<br>●<strong>对目录来讲，新建目录的默认最大权限是777</strong>。这是因为对目录而言，执行（x）权限仅仅代表进入目录，所以即使建立新文件时直接默认赋予，也没有什么危险。换算成字母就是“drwxrwxrwx”；而umask的值是022，也换算成字母就是“d—-w–w-”。也把两个字母权限相减，得到的就是新建目录的默认权限：（drwxrwxrwx）-（d—-w–w-）=（drwx-r-xr-x）。</p>
+<p>umask默认权限可以直接通过命令来进行修改, 如<code>umask 033</code>，不过，通过命令进行的修改只能临时生效，一旦重启或重新登录就会失效。如果想让修改永久生效，则需要修改对应的环境变量配置文件/etc/profile。</p>
+<h3 id="帮助命令"><a href="#帮助命令" class="headerlink" title="帮助命令"></a>帮助命令</h3><h4 id="man"><a href="#man" class="headerlink" title="man"></a>man</h4><p>显示联机帮助手册。<br><code>man [选项] 命令</code><br>选项：<br>-f：    查看命令拥有哪个级别的帮助<br>-k：    查看和命令相关的所有帮助</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837568773630.png" alt=""><br>man命令的快捷键</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837575529346.png" alt=""><br>man命令的帮助级别</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837575974912.jpg" alt=""><br>●whatis：这个命令的作用和man -f是一致的。<br>●apropos：这个命令的作用和man -k是一致的。</p>
+<p>Linux的命令很有意思，想知道这个命令是干什么的，可以执行whatis命令；想知道命令在哪里，可以执行whereis命令；想知道当前登录用户是谁，可以执行whoami命令。</p>
+<h4 id="info"><a href="#info" class="headerlink" title="info"></a>info</h4><p>info命令的帮助信息是一套完整的资料, 每个命令的帮助信息都会和书籍一样，拥有章节编号。<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837577510572.png" alt=""></p>
+<h4 id="help"><a href="#help" class="headerlink" title="help"></a>help</h4><p>能获取Shell内置命令的帮助，但在Linux中绝大多数命令是外部命令，所以help命令的作用非常有限。</p>
+<h4 id="–help"><a href="#–help" class="headerlink" title="–help"></a>–help</h4><p>绝大多数命令都可以使用“–help”选项来查看帮助，输出的帮助信息基本上是man命令的信息简要版。 </p>
+<h3 id="搜索命令"><a href="#搜索命令" class="headerlink" title="搜索命令"></a>搜索命令</h3><h4 id="whereis"><a href="#whereis" class="headerlink" title="whereis"></a>whereis</h4><p>查找二进制命令、源文件和帮助文档的命令。whereis命令<strong>不能搜索普通文件</strong>，而只能搜索系统命令。</p>
+<p>选项：<br>-b:    只查找二进制命令<br>-m:    只查找帮助文档</p>
+<h4 id="which"><a href="#which" class="headerlink" title="which"></a>which</h4><p>列出命令的所在路径。和whereis命令的区别在于，whereis命令可以在查找到二进制命令的同时，查找到帮助文档的位置；而which命令在查找到二进制命令的同时，如果这个命令有别名，则还可以找到别名命令。</p>
+<h4 id="locate"><a href="#locate" class="headerlink" title="locate"></a>locate</h4><p>按照文件名搜索文件。系统命令其实也是文件，也可以按照文件名来搜索系统命令。不能执行更复杂的搜索，比如按照权限、大小、修改时间等搜索文件。<br>选项：<br>-i:    忽略大小写</p>
+<p>搜索速度非常快，而且耗费系统资源非常小。这是因为locate命令不会直接搜索硬盘空间，而会先建立locate数据库，然后在数据库中按照文件名进行搜索，是快速的搜索命令。<strong>缺点是数据库不是实时更新的，而要等用户退出登录或重启系统时，locate数据库才会更新，所以我们无法查找到新建立的文件。</strong><br>可以通过updatedb命令来手工更新这个数据。</p>
+<p>同时，在locate执行搜索时，系统认为某些文件系统、某些文件类型和某些目录是没有搜索必要的，比如光盘、网盘、临时目录等，所以如/tmp/目录下的文件会被忽略</p>
+<h4 id="find"><a href="#find" class="headerlink" title="find"></a>find</h4><p>find是Linux中强大的搜索命令，不仅可以按照文件名搜索文件，还可以按照权限、大小、时间、inode号等来搜索文件。但是find命令是直接在硬盘中进行搜索的，如果指定的搜索范围过大，find命令就会消耗较大的系统资源，导致服务器压力过大。所以，在使用find命令搜索时，不要指定过大的搜索范围。</p>
+<p><code>find 搜索路径 [选项] 搜索内容</code><br>选项：<br>-name:     按照文件名搜索，搜索的文件名必须和搜索内容一致才能找到。即find命令是<strong>完全匹配的</strong><br>-iname:    按照文件名搜索，不区分文件名大小写<br>-inum:     按照inode号搜索<br>-size [+-]大小：     按照指定大小搜索文件。千字节必须是小写的“k”，而兆字节必须是大写的“M”。按照字节搜索，则需要加搜索单位“c”。<br>-atime [+-]时间：    按照文件访问时间搜索。如“-5”指的是5天内修改的文件，“5”指的是前5～6天那一天修改的文件，“+5”指的是6天前修改的文件。<br>-mtime [+-]时间：    按照文件数据修改时间搜索<br>-ctime [+-]时间：    按照文件状态修改时间搜索<br>-perm 权限模式： 查找文件权限刚好等于“权限模式”的文件<br>-perm -权限模式：查找文件权限全部包含“权限模式”的文件<br>-perm +权限模式：查找文件权限包含“权限模式”的任意一个权限的文件<br>-uid 用户ID:        按照用户ID查找所有者是指定ID的文件<br>-gid 组ID:         按照用户组ID查找所属组是指定ID的文件<br>-user 用户名：       按照用户名查找所有者是指定用户的文件<br>-group 组名：        按照组名查找所属组是指定用户组的文件<br>-nouser:           查找没有所有者的文件，主要用于查找垃圾文件。比如手工源码包安装的文件<br>-type d:       查找目录<br>-type f:       查找普通文件<br>-type l:       查找软链接文件<br>-a:    and逻辑与 如<code>find . -size +2k -a -type f</code><br>-o:    or逻辑或<br>-not:  not逻辑非</p>
+<p>-exec选项<br><code>find 搜索路径 [选项] 搜索内容 -exec 命令2 {} \;</code><br>“{}”和“\; ”是标准格式，只要执行“-exec”选项，这两个符号必须完整输入。其次，这个选项的作用其实是把find命令的结果交给由“-exec”调用的命令2来处理。“{}”就代表find命令的查找结果。<br><code>find . -perm 444 -exec ls -l {} \;</code>使用“-exec”选项，把find命令的结果直接交给“ls -l”命令处理</p>
+<p>-ok”选项和“-exec”选项的作用基本一致，区别在于：“-exec”的命令2会直接处理，而不询问；“-ok”的命令2在处理前会先询问用户是否这样处理，在得到确认命令后，才会执行。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/java/2020-03-08-线程池与生产者-消费者模型.html" rel="next" title="线程池与生产者/消费者模型">
+                <i class="fa fa-chevron-left"></i> 线程池与生产者/消费者模型
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">虚己以游世，乘物以游心</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#ext4"><span class="nav-number">1.</span> <span class="nav-text">ext4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#命令提示符"><span class="nav-number">2.</span> <span class="nav-text">命令提示符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录操作命令"><span class="nav-number">3.</span> <span class="nav-text">目录操作命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ls"><span class="nav-number">3.1.</span> <span class="nav-text">ls</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cd"><span class="nav-number">3.2.</span> <span class="nav-text">cd</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mkdir"><span class="nav-number">3.3.</span> <span class="nav-text">mkdir</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#rmdir"><span class="nav-number">3.4.</span> <span class="nav-text">rmdir</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tree"><span class="nav-number">3.5.</span> <span class="nav-text">tree</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件操作命令"><span class="nav-number">4.</span> <span class="nav-text">文件操作命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#touch"><span class="nav-number">4.1.</span> <span class="nav-text">touch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#stat"><span class="nav-number">4.2.</span> <span class="nav-text">stat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cat"><span class="nav-number">4.3.</span> <span class="nav-text">cat</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tac"><span class="nav-number">4.4.</span> <span class="nav-text">tac</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#more"><span class="nav-number">4.5.</span> <span class="nav-text">more</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#less"><span class="nav-number">4.6.</span> <span class="nav-text">less</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#head"><span class="nav-number">4.7.</span> <span class="nav-text">head</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#tail"><span class="nav-number">4.8.</span> <span class="nav-text">tail</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ln"><span class="nav-number">4.9.</span> <span class="nav-text">ln</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#硬链接"><span class="nav-number">4.9.1.</span> <span class="nav-text">硬链接</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#软链接"><span class="nav-number">4.9.2.</span> <span class="nav-text">软链接</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#目录和文件都能操作的命令"><span class="nav-number">5.</span> <span class="nav-text">目录和文件都能操作的命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#rm"><span class="nav-number">5.1.</span> <span class="nav-text">rm</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#cp"><span class="nav-number">5.2.</span> <span class="nav-text">cp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#mv"><span class="nav-number">5.3.</span> <span class="nav-text">mv</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#权限管理命令"><span class="nav-number">6.</span> <span class="nav-text">权限管理命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#chmod"><span class="nav-number">6.1.</span> <span class="nav-text">chmod</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#chown"><span class="nav-number">6.2.</span> <span class="nav-text">chown</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#chgrp"><span class="nav-number">6.3.</span> <span class="nav-text">chgrp</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#umask"><span class="nav-number">6.4.</span> <span class="nav-text">umask</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#帮助命令"><span class="nav-number">7.</span> <span class="nav-text">帮助命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#man"><span class="nav-number">7.1.</span> <span class="nav-text">man</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#info"><span class="nav-number">7.2.</span> <span class="nav-text">info</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#help"><span class="nav-number">7.3.</span> <span class="nav-text">help</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#–help"><span class="nav-number">7.4.</span> <span class="nav-text">–help</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#搜索命令"><span class="nav-number">8.</span> <span class="nav-text">搜索命令</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#whereis"><span class="nav-number">8.1.</span> <span class="nav-text">whereis</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#which"><span class="nav-number">8.2.</span> <span class="nav-text">which</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#locate"><span class="nav-number">8.3.</span> <span class="nav-text">locate</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#find"><span class="nav-number">8.4.</span> <span class="nav-text">find</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
