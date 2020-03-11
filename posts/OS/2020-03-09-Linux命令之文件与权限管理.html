@@ -139,7 +139,6 @@
 <meta property="og:description" content="ext4Linux目前使用的是ext4文件系统ext4文件系统会把分区主要分为两大部分（暂时不提超级块）：一小部分用于保存文件的inode（i节点）信息；剩余的大部分用于保存block信息。inode的默认大小为128 Byte，用来记录文件的权限（r、w、x）、文件的所有者和属组、文件的大小、文件的状态改变时间（ctime）、文件的最近一次读取时间（atime）、文件的最近一次修改时间（mtim">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/20200309215617.png">
-<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837529246539.png">
 <meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837341342034.jpg">
 <meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837345008436.png">
 <meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837358189224.jpg">
@@ -151,7 +150,7 @@
 <meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837575529346.png">
 <meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837575974912.jpg">
 <meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837577510572.png">
-<meta property="og:updated_time" content="2020-03-09T14:14:03.749Z">
+<meta property="og:updated_time" content="2020-03-10T02:49:17.407Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux命令之文件与权限管理">
 <meta name="twitter:description" content="ext4Linux目前使用的是ext4文件系统ext4文件系统会把分区主要分为两大部分（暂时不提超级块）：一小部分用于保存文件的inode（i节点）信息；剩余的大部分用于保存block信息。inode的默认大小为128 Byte，用来记录文件的权限（r、w、x）、文件的所有者和属组、文件的大小、文件的状态改变时间（ctime）、文件的最近一次读取时间（atime）、文件的最近一次修改时间（mtim">
@@ -429,7 +428,7 @@
         <h3 id="ext4"><a href="#ext4" class="headerlink" title="ext4"></a>ext4</h3><p>Linux目前使用的是ext4文件系统<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/20200309215617.png" alt=""><br>ext4文件系统会把分区主要分为两大部分（暂时不提超级块）：一小部分用于保存文件的inode（i节点）信息；剩余的大部分用于保存block信息。<br>inode的默认大小为128 Byte，用来记录文件的权限（r、w、x）、文件的所有者和属组、文件的大小、文件的状态改变时间（ctime）、文件的最近一次读取时间（atime）、文件的最近一次修改时间（mtime）、文件的数据真正保存的block编号。每个文件需要占用一个inode。</p>
 <p><strong>inode中是不记录文件名的，那是因为文件名记录在文件所在目录的block中。</strong></p>
 <a id="more"></a>
-<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/09/15837529246539.png" alt=""><br>也就是说，目录的block中记录的是这个目录下所有一级子文件和子目录的文件名及inode的对应；而文件的block中记录的才是文件实际的数据。</p>
+<p>也就是说，目录的block中记录的是这个目录下所有一级子文件和子目录的文件名及inode的对应；而文件的block中记录的才是文件实际的数据。</p>
 <p>当我们查找一个文件，比如/root/test时，要经过以下步骤：<br>●首先找到根目录的inode（<strong>根目录的inode是系统已知的，inode号是2</strong>），然后判断用户是否有权限访问根目录的block。<br>●如果有权限，则可以在根目录的block中访问到/root/的文件名及对应的inode号。<br>●通过/root/目录的inode号，可以查找到/root/目录的inode信息，接着判断用户是否有权限访问/root/目录的block。<br>●如果有权限，则可以从/root/目录的block中读取到test文件的文件名及对应的inode号。<br>●通过test文件的inode号，就可以找到test文件的inode信息，接着判断用户是否有权限访问test文件的block。<br>●如果有权限，则可以读取block中的数据，这样就完成了/root/test文件的读取与访问。</p>
 <h3 id="命令提示符"><a href="#命令提示符" class="headerlink" title="命令提示符"></a>命令提示符</h3><p><code>[root@localhost ~]#</code></p>
 <ul>
@@ -522,7 +521,7 @@
 </ul>
 <p>如果在文件的权限位中含有“.”，则表示这个文件受SELinux的安全规则管理。</p>
 <h4 id="chmod"><a href="#chmod" class="headerlink" title="chmod"></a>chmod</h4><p>修改文件的权限模式。<br><code>[root@localhost ~]# chmod [选项] 权限模式 文件名</code><br>选项：     </p>
-<p>-R:    递归设置权限，也就是给子目录中的所有文件设定权限<br>权限模式的格式是“[ugoa][[+-=][perms]]”，也就是“[用户身份][[赋予方式][权限]]”</p>
+<p>-R:    递归设置权限，也就是给子目录中的所有文件设定权限<br>权限模式的格式是<code>[ugoa][[+-=][perms]]</code>，也就是<code>[用户身份][[赋予方式][权限]]</code></p>
 <p>用户身份</p>
 <ul>
 <li>u：代表所有者（user）。</li>
@@ -625,6 +624,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/posts/Intern/2020-03-11-LC-字符串专题-一.html" rel="prev" title="LC-字符串专题(一)">
+                LC-字符串专题(一) <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -704,7 +707,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">82</span>
+                  <span class="site-state-item-count">83</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -726,7 +729,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-count">85</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
