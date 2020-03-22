@@ -303,6 +303,185 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/NLP/2019-10-12-Anaconda、py2neo和Neo4j搭建KG简单环境.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/NLP/2019-10-12-Anaconda、py2neo和Neo4j搭建KG简单环境.html" itemprop="url">Anaconda、py2neo和Neo4j搭建KG简单环境</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-12T23:57:30+08:00">
+                2019-10-12
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/" itemprop="url" rel="index">
+                    <span itemprop="name">NLP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  919
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="安装Anaconda"><a href="#安装Anaconda" class="headerlink" title="安装Anaconda"></a>安装Anaconda</h3><p><a href="https://www.anaconda.com/distribution/#download-section" target="_blank" rel="noopener">官网下载地址</a></p>
+<p>安装时不勾选<code>Add Anaconda to my PATH environment variable</code>因为勾选将会影响其他程序的使用</p>
+<p>勾选<code>Register Anaconda as my default Python 3.6</code></p>
+<h3 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h3><p><a href="https://zhuanlan.zhihu.com/p/32925500" target="_blank" rel="noopener">参考</a></p>
+<p>在Anaconda Prompt中输入 <code>conda list</code> ，可以查看已经安装的包名和版本号</p>
+<p>创建虚拟环境<code>conda create -n &lt;env_name&gt; &lt;package_names&gt;</code> 如 <code>conda create -n KGQA python=3.5</code></p>
+<p>激活环境<code>activate &lt;env_name&gt;</code>  退出<code>deactivate</code></p>
+<p>在当前环境中安装包 <code>conda install &lt;package_name&gt;</code> , 然鹅很多包都没法用conda渠道安装，还是要用pip才行。根据本项目安装了flask、py2neo、pyltp和bs4</p>
+<p>还可以用requirement.txt文件来批量安装依赖包<code>conda install --yes --file requirements.txt</code></p>
+<h3 id="pyltp包安装出错解决"><a href="#pyltp包安装出错解决" class="headerlink" title="pyltp包安装出错解决"></a>pyltp包安装出错解决</h3><p>期间报错</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PackagesNotFoundError: The following packages are not available from current channels: - pyltp</span><br></pre></td></tr></table></figure>
+<p>换成 <code>pip install -i https://pypi.tuna.tsinghua.edu.cn/simple pyltp</code> 命令进行安装 ，仍然不行, 说是找不到wheels</p>
+<p>找到了一个py3.5版本wheels源码链接,  <a href="https://www.jianshu.com/p/9518b5cf325a" target="_blank" rel="noopener">参看</a></p>
+<p>将下载好的文件放在此时Prompt命令行对应的文件夹中，如我的是 <code>(KGQA) C:\Users\18771</code> 然后执行<code>pip install pyltp-0.2.1-cp35-cp35m-win_amd64.whl</code> 即可安装成功wheels文件</p>
+<p>输入<code>conda list</code> 发现有了pyltp安装包</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/NLP/2019-10-12-Anaconda、py2neo和Neo4j搭建KG简单环境.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/Java/2019-10-11-Java前四章笔记.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1871,174 +2050,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/OS/2019-09-24-虚拟机安装Deepin.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liana_Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Anonymous World">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/OS/2019-09-24-虚拟机安装Deepin.html" itemprop="url">虚拟机安装Deepin</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-24T00:07:14+08:00">
-                2019-09-24
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/OS/" itemprop="url" rel="index">
-                    <span itemprop="name">OS</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  801
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>今天在学习一个项目的时候要用到虚拟机开数据库服务器，于是打开了我很久以前安装的虚拟机，发现里面是CentOS系统。看起来真的没有什么使用的欲望…可能是我没花太多心思去配置，但是怎么说呢，就是感觉有点原始…于是寻思着换个操作系统试试，之前的台式安过Ubuntu了，所以干脆试试国产的Deepin</p>
-<h3 id="安装Deepin操作系统"><a href="#安装Deepin操作系统" class="headerlink" title="安装Deepin操作系统"></a>安装Deepin操作系统</h3><p>首先，在VMware的虚拟机管理中删掉现在的虚拟机。我文件夹地址是<code>C:\Users\18771\Documents\Virtual Machines</code> 里面有一个虚拟机文件夹，突然发现这个机器占了7GB外加，心疼我仅100G可用的SSD…</p>
-<p>下载完Deepin镜像后，新建虚拟机 -&gt; 自定义 -&gt;  下一步 -&gt; 稍后安装操作系统 -&gt;  Linux Ubuntu64 -&gt;  下一步… -&gt; 创建新的虚拟盘 -&gt; 将虚拟盘存储为单个文件 -&gt; 下一步.. -&gt; 完成 -&gt; 编辑虚拟机设置 -&gt; 使用ISO镜像，选择下载好的Deepin -&gt; 开机 -&gt; 完成相应配置，用户名 ve**en  密码 123456</p>
-<p>安装完，界面确实挺惊艳的。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/OS/2019-09-24-虚拟机安装Deepin.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2093,7 +2104,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">86</span>
+                  <span class="site-state-item-count">87</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2115,7 +2126,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">85</span>
+                  <span class="site-state-item-count">86</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

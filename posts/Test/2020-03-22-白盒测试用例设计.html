@@ -1,0 +1,979 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="白盒测试," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="白盒测试又称结构测试、透明盒测试、逻辑驱动测试或基于代码的测试。白盒测试是一种测试用例的设计方法，盒子对应的是被测试的测试，”白盒”法全面了解程序内部逻辑结构、对所有逻辑路径进行测试。”白盒”法是穷举路径测试。测试者必须检查程序的内部结构，从检查程序的逻辑着手，得出测试数据。 静态白盒测试静态测试：不实际运行被测系统本身，检查文档内容、界面、代码规范等 静态白盒测试：不实际运行被测系统本身，检查和">
+<meta name="keywords" content="白盒测试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="白盒测试用例设计">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/Test/2020-03-22-白盒测试用例设计.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="白盒测试又称结构测试、透明盒测试、逻辑驱动测试或基于代码的测试。白盒测试是一种测试用例的设计方法，盒子对应的是被测试的测试，”白盒”法全面了解程序内部逻辑结构、对所有逻辑路径进行测试。”白盒”法是穷举路径测试。测试者必须检查程序的内部结构，从检查程序的逻辑着手，得出测试数据。 静态白盒测试静态测试：不实际运行被测系统本身，检查文档内容、界面、代码规范等 静态白盒测试：不实际运行被测系统本身，检查和">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_16-30-47.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_16-39-13.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_16-51-44.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_17-01-40.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_17-12-06.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_17-13-44.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_17-26-18.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_17-38-45.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_20-32-51.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_20-35-31.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/20200322204410.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_20-40-10.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_20-51-01.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_20-56-17.jpg">
+<meta property="og:updated_time" content="2020-03-22T13:22:23.217Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="白盒测试用例设计">
+<meta name="twitter:description" content="白盒测试又称结构测试、透明盒测试、逻辑驱动测试或基于代码的测试。白盒测试是一种测试用例的设计方法，盒子对应的是被测试的测试，”白盒”法全面了解程序内部逻辑结构、对所有逻辑路径进行测试。”白盒”法是穷举路径测试。测试者必须检查程序的内部结构，从检查程序的逻辑着手，得出测试数据。 静态白盒测试静态测试：不实际运行被测系统本身，检查文档内容、界面、代码规范等 静态白盒测试：不实际运行被测系统本身，检查和">
+<meta name="twitter:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_16-30-47.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/Test/2020-03-22-白盒测试用例设计.html"/>
+
+
+
+
+
+  <title>白盒测试用例设计 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/Test/2020-03-22-白盒测试用例设计.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">白盒测试用例设计</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-22T21:19:22+08:00">
+                2020-03-22
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Test/" itemprop="url" rel="index">
+                    <span itemprop="name">Test</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,501
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>白盒测试又称结构测试、透明盒测试、逻辑驱动测试或基于代码的测试。白盒测试是一种测试用例的设计方法，盒子对应的是被测试的测试，”白盒”法全面了解程序内部逻辑结构、对所有逻辑路径进行测试。”白盒”法是穷举路径测试。测试者必须检查程序的内部结构，从检查程序的逻辑着手，得出测试数据。</p>
+<h3 id="静态白盒测试"><a href="#静态白盒测试" class="headerlink" title="静态白盒测试"></a>静态白盒测试</h3><p>静态测试：不实际运行被测系统本身，检查文档内容、界面、代码规范等</p>
+<p>静态白盒测试：<strong>不实际运行</strong>被测系统本身，检查和审查代码的设计、结构，也称为结构化分析。尽早发现程序中的缺陷，可以发现30%-70%的缺陷，可以为黑盒测试人员提供测试思路</p>
+<p>代码检查应在编译和动态测试之前进行，在检查前，应准备好需求描述文档、程序设计文档、程序的源代码请当、代码编译标准和代码缺陷检查表等。在实际使用中，代码检查能快速找到缺陷，发现30%～70%的逻辑设计和编码缺陷，而且代码检查看到的问题本身而非征兆。</p>
+<a id="more"></a>
+<h4 id="1）桌面检查"><a href="#1）桌面检查" class="headerlink" title="1）桌面检查"></a>1）桌面检查</h4><p>这是一种传统的检查方法，由程序员检查自己编写的程序。程序员在程序通过编译之后，对源程序代码进行分析、检验，并补充相关文档，目的是发现程序中的错误。由于程序员熟悉自己的程序及其程序设计风格，桌面检查由程序员自己进行可以节省很多的检查时间，但应避免主观片面性</p>
+<h4 id="2）代码审查"><a href="#2）代码审查" class="headerlink" title="2）代码审查"></a>2）代码审查</h4><p>由若干程序员和测试员组成一个审查小组，通过阅读、讨论和争议，对程序进行静态分析的过程。</p>
+<p>代码审查分两步：第一步，小组负责人提前把设计规格说明书、控制流程图、程序文本及有关要求、规范等分发给小组成员，作为审查的依据。小组成员在充分阅读这些材料后，进入审查的第二步，召开程序审查会。在会上，首先由程序员逐句简介程序的逻辑。在此过程中，程序员或其他小组成员可以提出问题，展开讨论，审查错误是否存在。实践表明，程序员在讲解过程中能发现许多原来自己没有发现的错误，而讨论和争议则促进了问题的暴露。</p>
+<p>在会前，应当给审查小组每个成员准备一份常见错误的清单，把以往所有可能发生的常见错误罗列出来，供与会者对照检查，以提高审查的失效。这个常见的错误清单也成为检查表，它把程序中可能发生的各种错误进行分类，对每一类错误列出尽可能多的典型错误，然后把它们制成表格，供再审查时使用</p>
+<h4 id="3）代码走查"><a href="#3）代码走查" class="headerlink" title="3）代码走查"></a>3）代码走查</h4><p>与代码审查基本相同，分为两步，第一步也是把材料分给走查小组的每个成员，让他们认真研究程序，然后再开会。<strong>开会的程序与代码审查不同，不是简单地读程序和对照错误检查表进行检查，而是让与会者“充当”计算机，即首先由测试组成员为所测试程序准备一批有代表性的测试用例，提交给走查小组。走查小组开会，集体扮演计算机角色，让测试用例沿程序的逻辑运行一遍，随时记录程序的踪迹，供分析和讨论用。</strong></p>
+<p>人们借助测试用例的媒介作用，对程序的逻辑和功能提出各种疑问，结合问题开展热烈的讨论和争议，能够发现更多的问题。</p>
+<h4 id="4）代码扫描工具"><a href="#4）代码扫描工具" class="headerlink" title="4）代码扫描工具"></a>4）代码扫描工具</h4><p>代码检查非常耗费时间，而且代码检查需要知识和经验的积累。代码检查可以使用测试软件进行自动化测试，以利于提高测试效率，降低劳动强度</p>
+<p>现在白盒测试中源代码扫描越来越成为一种流行的技术，使用源代码扫描产品对软件进行代码扫描，一方面可以找出潜在的风险，从内对软件进行检测，提高代码的安全性，另一方面也可以进一步提高代码的质量。</p>
+<p>比较主流的工具有：Fortify公司的Fortify SCA，Security Innovation公司的Checkmarx Suite和Armorize公司的CodeSecure。</p>
+<h3 id="动态白盒测试"><a href="#动态白盒测试" class="headerlink" title="动态白盒测试"></a>动态白盒测试</h3><p>主要关注的是动态设计方法。动态分析的主要特点是当软件系统在模拟的或真实的环境中执行之前、之中和之后，对软件系统行为的分析。动态分析包含了程序在受控的环境下使用特定的期望结果进行正式的运行。它显示了一个系统在检查状态下是正确还是不正确。</p>
+<p>设计测试用例，根据测试用例执行被测程序(代码)，验证代码的逻辑结构是否满足需求</p>
+<h4 id="逻辑覆盖法"><a href="#逻辑覆盖法" class="headerlink" title="逻辑覆盖法"></a>逻辑覆盖法</h4><p>逻辑覆盖法是通过对程序逻辑结构的遍历实现程序的覆盖。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_16-30-47.jpg" alt=""></p>
+<p>根据覆盖目标的不同和覆盖源程序语句的详尽程度，逻辑覆盖又可分为： </p>
+<h5 id="1-语句覆盖-SC"><a href="#1-语句覆盖-SC" class="headerlink" title="1. 语句覆盖(SC)"></a>1. 语句覆盖(SC)</h5><p>语句覆盖是最基本的结构覆盖要求，<strong>在六种逻辑覆盖标准中是最弱的</strong>。语句覆盖要求设计足够多的测试用例，使得程序中每条语句至少被执行一次，尽可能达到100%的覆盖率</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_16-39-13.jpg" alt=""></p>
+<p>优点：可以很直观地从源代码得到测试用例，无须细分每条判定表达式。</p>
+<p>缺点：由于这种测试方法仅仅针对程序逻辑中显式存在的语句，但<strong>对于隐藏的条件和可能到达的隐式逻辑分支，是无法测试的</strong>。例如<strong>将上例中判断条件改成<code>if(x&gt;0||y&gt;0)</code> 也是可以通过测试的</strong>，所以单纯的语句覆盖不能准确的判断运算中的逻辑关系错误。</p>
+<h5 id="2-判定覆盖-DC"><a href="#2-判定覆盖-DC" class="headerlink" title="2. 判定覆盖(DC)"></a>2. 判定覆盖(DC)</h5><p>又称分支覆盖，设计若干个测试用例，运行所测程序，使程序中每个判断的取真分支和取假分支至少执行一次。即：程序中的每个分支至少执行一次。每个判断的取真、取假至少执行一次。</p>
+<p><strong>只要满足判定覆盖标准就一定满足语句覆盖标准。</strong></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_16-51-44.jpg" alt=""></p>
+<p>同样将上例中判断条件改成<code>if(x&gt;0||y&gt;0)</code> ，还是通过测试。所以判定覆盖会忽略条件中的or情况</p>
+<p>优点：判定覆盖比语句覆盖要多几乎一倍的测试路径，当然也就具有比语句覆盖更强的测试能力。同样判定覆盖也具有和语句覆盖一样的简单性，无须细分每个判定就可以得到测试用例。</p>
+<p>缺点：<strong>往往大部分的判定语句是由多个逻辑条件组合而成(如：判定语句中包含AND、 OR、CASE)。若仅仅判断其整个最终结果，而忽略每个条件的取值情况，必然会遗漏部分测试路径。</strong></p>
+<h5 id="3-条件覆盖-CC"><a href="#3-条件覆盖-CC" class="headerlink" title="3. 条件覆盖(CC)"></a>3. 条件覆盖(CC)</h5><p>条件覆盖设计足够多的测试用例，使得判定中的每个条件获得各种可能的结果，即每个条件至少有一次为真值，有一次为假值。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_17-01-40.jpg" alt=""></p>
+<p>由上图可知，虽然满足了条件100%覆盖，但是<strong>P1并没有覆盖到为T的情况</strong>。</p>
+<p>优点：显然条件覆盖比判定覆盖，增加了对符合判定情况的测试，增加了测试路径。</p>
+<p>缺点：要达到条件覆盖，需要足够多的测试用例，但<strong>条件覆盖并不能保证判定覆盖</strong>。条件覆盖只能保证每个条件至少有一次为真，而不考虑所有的判定结果。</p>
+<h5 id="4-判定条件覆盖-CC"><a href="#4-判定条件覆盖-CC" class="headerlink" title="4. 判定条件覆盖(CC)"></a>4. 判定条件覆盖(CC)</h5><p>设计足够多的测试用例，使得判定中每个条件的所有可能结果至少出现一次，每个判定本身所有可能结果也至少出现一次。</p>
+<p><strong>满足判定条件覆盖一定能够满足条件覆盖，判定覆盖和语句覆盖。</strong></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_17-12-06.jpg" alt=""></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_17-13-44.jpg" alt=""></p>
+<p>同样将上例中判断条件改成<code>if(x&gt;0||y&gt;0)</code> ，还是通过测试。所以判定条件覆盖还是会忽略条件中的or情况</p>
+<p>优点：判定/条件覆盖满足判定覆盖准则和条件覆盖准则，弥补了二者的不足。</p>
+<p>缺点：判定/条件覆盖准则的缺点是未考虑条件的组合情况。</p>
+<h5 id="5-条件组合覆盖-MCC"><a href="#5-条件组合覆盖-MCC" class="headerlink" title="5. 条件组合覆盖(MCC)"></a>5. 条件组合覆盖(MCC)</h5><p>要求设计足够多的测试用例，使得<strong>每个判定中</strong>条件结果的所有可能组合至少出现一次。— <strong>判定之间无需组合，所以条件组合的总数是各判定中条件组合数相加，而不是相乘。</strong></p>
+<p><strong>满足条件组合条件覆盖一定能够满足条件覆盖，判定覆盖，判定条件覆盖和语句覆盖。</strong></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_17-26-18.jpg" alt=""></p>
+<p>上图的问题是没有覆盖到路径：a-b-d-f</p>
+<p>优点：多重条件覆盖准则满足判定覆盖、条件覆盖和判定/条件覆盖准则。</p>
+<p>缺点：线性地增加了测试用例的数量。<strong>无能保证所有路径被执行</strong></p>
+<h5 id="6-路径覆盖"><a href="#6-路径覆盖" class="headerlink" title="6. 路径覆盖"></a>6. 路径覆盖</h5><p>设计足够的测试用例，覆盖程序中所有可能的路径。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_17-38-45.jpg" alt=""></p>
+<p>但是从上图可见，并未满足判定条件100%覆盖，自然也不能满足100%条件覆盖。</p>
+<p>优点：这种测试方法可以对程序进行彻底的测试，比前面五种的覆盖面都广。</p>
+<p>缺点：由于路径覆盖需要对所有可能的路径进行测试(包括<strong>循环，条件组合，分支选择</strong>等).那么需要设计大量、复杂的测试用例，使得工作量呈指数级增长。</p>
+<h4 id="基本路径测试法"><a href="#基本路径测试法" class="headerlink" title="基本路径测试法"></a>基本路径测试法</h4><p>在实际工作中，程序往往会包含大量的循环，分支等，那么用路径覆盖是很难全部覆盖的。</p>
+<p>基本路径测试法是在程序控制流图的基础上，通过分析控制构造的环路复杂性，<strong>导出基本可执行路径集合</strong>，从而设计测试用例的方法。设计出的测试用例要保证在测试中程序的语句覆盖100%，条件覆盖100%。</p>
+<h5 id="第一步：画出控制流图"><a href="#第一步：画出控制流图" class="headerlink" title="第一步：画出控制流图"></a>第一步：画出控制流图</h5><p>　　流程图用来描述程序控制结构。可将流程图映射到一个相应的流图(假设流程图的菱形决定框中不包含复合条件)。在流图中，每一个圆，称为流图的结点，代表一个或多个语句。一个处理方框序列和一个菱形决测框可被映射为一个结点，流图中的箭头，称为边或连接，代表控制流，类似于流程图中的箭头。一条边必须终止于一个结点，即使该结点并不代表任何语句(例如：if-else-then结构)。由边和结点限定的范围称为区域。计算区域时应包括图外部的范围。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_20-32-51.jpg" alt=""></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_20-35-31.jpg" alt=""></p>
+<p>流图只有二种图形符号：</p>
+<p>　　图中的每一个圆称为流图的结点，代表一条或多条语句。</p>
+<p>　　流图中的箭头称为边或连接，代表控制流</p>
+<p>在将程序流程图简化成控制流图时，应注意：</p>
+<p>　　1）在选择或多分支结构中，分支的汇聚处应有一个汇聚结点。</p>
+<p>　　2）边和结点圈定的范围叫做区域，当对区域计数时，图形外的区域也应记为一个区域。</p>
+<p>​        3）如果判断中的条件表达式是由一个或多个逻辑运算符 (OR, AND, NAND, NOR)连接的复合条件表达式，则需要<strong>改为一系列只有单条件的嵌套的判断</strong>。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/20200322204410.png" alt=""></p>
+<h5 id="第二步：计算圈复杂度"><a href="#第二步：计算圈复杂度" class="headerlink" title="第二步：计算圈复杂度"></a>第二步：计算圈复杂度</h5><p>　　圈复杂度是一种为程序逻辑复杂性提供定量测度的软件度量，将该度量用于计算程序的基本的独立路径数目，为确保所有语句至少执行一次的测试数量的上界。独立路径必须包含一条在定义之前不曾用到的边。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_20-40-10.jpg" alt=""></p>
+<h5 id="第三步：导出可执行路径"><a href="#第三步：导出可执行路径" class="headerlink" title="第三步：导出可执行路径"></a>第三步：导出可执行路径</h5><p>　　一条独立路径是指，和其他的独立路径相比，至少引入一个新处理语句或一个新判断的程序通路。V(G)值正好等于该程序的独立路径的条数。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_20-51-01.jpg" alt=""></p>
+<h5 id="第四步：设计测试用例"><a href="#第四步：设计测试用例" class="headerlink" title="第四步：设计测试用例"></a>第四步：设计测试用例</h5><p>　　为了确保基本路径集中的每一条路径的执行，根据判断结点给出的条件，选择适当的数据以保证某一条路径可以被测试到</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/22/2020-03-22_20-56-17.jpg" alt=""></p>
+<h3 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h3><p>白盒测试主要应用与单元测试阶段，一般先静态后动态。设计用例<strong>一般使用基本路径测试，重点模块使用多种覆盖率标准</strong>。</p>
+<p>优点</p>
+<p>a.迫使测试人员去仔细思考软件的实现</p>
+<p>b.可以检测代码中的每条分支和路径</p>
+<p>c.揭示隐藏在代码中的错误</p>
+<p>d.对代码的测试比较彻底</p>
+<p>e.最优化</p>
+<p>缺点</p>
+<p>a.代价昂贵</p>
+<p>b.无法检测代码中遗漏的路径和数据敏感性错误</p>
+<p>c.不验证规格的正确性</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/白盒测试/" rel="tag"><i class="fa fa-tag"></i> 白盒测试</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/Design-Pattern/2020-03-21-创建型模式之单例模式.html" rel="next" title="创建型模式之单例模式">
+                <i class="fa fa-chevron-left"></i> 创建型模式之单例模式
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">虚己以游世，乘物以游心</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">87</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">86</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#静态白盒测试"><span class="nav-number">1.</span> <span class="nav-text">静态白盒测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1）桌面检查"><span class="nav-number">1.1.</span> <span class="nav-text">1）桌面检查</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2）代码审查"><span class="nav-number">1.2.</span> <span class="nav-text">2）代码审查</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3）代码走查"><span class="nav-number">1.3.</span> <span class="nav-text">3）代码走查</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4）代码扫描工具"><span class="nav-number">1.4.</span> <span class="nav-text">4）代码扫描工具</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动态白盒测试"><span class="nav-number">2.</span> <span class="nav-text">动态白盒测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#逻辑覆盖法"><span class="nav-number">2.1.</span> <span class="nav-text">逻辑覆盖法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-语句覆盖-SC"><span class="nav-number">2.1.1.</span> <span class="nav-text">1. 语句覆盖(SC)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#2-判定覆盖-DC"><span class="nav-number">2.1.2.</span> <span class="nav-text">2. 判定覆盖(DC)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-条件覆盖-CC"><span class="nav-number">2.1.3.</span> <span class="nav-text">3. 条件覆盖(CC)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#4-判定条件覆盖-CC"><span class="nav-number">2.1.4.</span> <span class="nav-text">4. 判定条件覆盖(CC)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-条件组合覆盖-MCC"><span class="nav-number">2.1.5.</span> <span class="nav-text">5. 条件组合覆盖(MCC)</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#6-路径覆盖"><span class="nav-number">2.1.6.</span> <span class="nav-text">6. 路径覆盖</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#基本路径测试法"><span class="nav-number">2.2.</span> <span class="nav-text">基本路径测试法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#第一步：画出控制流图"><span class="nav-number">2.2.1.</span> <span class="nav-text">第一步：画出控制流图</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第二步：计算圈复杂度"><span class="nav-number">2.2.2.</span> <span class="nav-text">第二步：计算圈复杂度</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第三步：导出可执行路径"><span class="nav-number">2.2.3.</span> <span class="nav-text">第三步：导出可执行路径</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#第四步：设计测试用例"><span class="nav-number">2.2.4.</span> <span class="nav-text">第四步：设计测试用例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#总结"><span class="nav-number">3.</span> <span class="nav-text">总结</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

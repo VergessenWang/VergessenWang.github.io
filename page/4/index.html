@@ -303,6 +303,178 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/DL/2019-12-23-基于Caffe的Mnist数据集手写识别.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/DL/2019-12-23-基于Caffe的Mnist数据集手写识别.html" itemprop="url">基于Caffe的Mnist数据集手写识别</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-12-23T22:33:01+08:00">
+                2019-12-23
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DL/" itemprop="url" rel="index">
+                    <span itemprop="name">DL</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  475
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><a href="https://alberthg.github.io/2018/04/13/Caffe-Mnist/" target="_blank" rel="noopener">操作指南</a>——此文已非常之详细</p>
+<p>注意执行<code>convert-mnist-data</code>是在 Build\x64\Release\ 目录下，而不是存放数据的目录下, 所以用绝对路径定位到该exe文件</p>
+<p>训练集脚本：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">Users</span>\18771\<span class="title">Desktop</span>\<span class="title">caffenew</span>\<span class="title">caffe</span>-<span class="title">windows</span>\<span class="title">Build</span>\<span class="title">x64</span>\<span class="title">Release</span>\<span class="title">convert_mnist_data.exe</span> <span class="title">train</span>-<span class="title">images.idx3</span>-<span class="title">ubyte</span> <span class="title">train</span>-<span class="title">labels.idx1</span>-<span class="title">ubyte</span> <span class="title">mnist_train_lmdb</span>  </span></span><br><span class="line"><span class="function"><span class="title">pause</span></span></span><br></pre></td></tr></table></figure>
+<p>测试集脚本：</p>
+<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">C:\<span class="title">Users</span>\18771\<span class="title">Desktop</span>\<span class="title">caffenew</span>\<span class="title">caffe</span>-<span class="title">windows</span>\<span class="title">Build</span>\<span class="title">x64</span>\<span class="title">Release</span>\<span class="title">convert_mnist_data.exe</span> <span class="title">t10k</span>-<span class="title">images.idx3</span>-<span class="title">ubyte</span> <span class="title">t10k</span>-<span class="title">labels.idx1</span>-<span class="title">ubyte</span> <span class="title">mnist_test_lmdb</span>  </span></span><br><span class="line"><span class="function"><span class="title">pause</span></span></span><br></pre></td></tr></table></figure>
+<p>把<code>\examples\mnist</code>下的文件 <code>lenet_solver.prototxt</code>中的训练平台改为CPU  </p>
+<p><code>lenet_train_test.prototxt</code> 是要采用的训练模型的具体实现。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/DL/2019-12-23-基于Caffe的Mnist数据集手写识别.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/poetry/2019-12-11-困兽的悲剧.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1873,180 +2045,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/Java/2019-11-05-Java第9章-异常处理.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liana_Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Anonymous World">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/Java/2019-11-05-Java第9章-异常处理.html" itemprop="url">Java第9章 异常处理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-05T23:22:54+08:00">
-                2019-11-05
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1,767
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>Java的异常处理本质上是<strong>抛出异常</strong>(创建异常对象，交给运行系统处理)和<strong>捕获异常</strong>。—— 针对可恢复异常</p>
-<p>调用栈：main –&gt; method with an exception handler –&gt; method without an exception handler –&gt; method where error occurred</p>
-<p>当错误发生时(异常抛出)，会被反向传递至类型匹配的 exception handler 进行处理(捕获异常), 无法捕获将终止程序</p>
-<p>使用异常处理的好处：<strong>将正常代码与错误处理代码分离开；通过调用栈传递错误对象；对错误类型进行组织和区分</strong></p>
-<h3 id="异常分类"><a href="#异常分类" class="headerlink" title="异常分类"></a>异常分类</h3><p>三种类型的异常：</p>
-<ul>
-<li>检查性异常(编译异常)：最具代表的检查性异常是用户错误或问题引起的异常，这是程序员无法预见的。例如要打开一个不存在文件时，一个异常就发生了，这些异常在编译时<strong>不能被简单地忽略</strong>。—— IOException， 常见编译异常有：IOException（流传输异常），SQLException（数据库操作异常）等</li>
-<li>运行时异常： 这类异常在代码编写的时候不会被编译器所检测出来，是可以不需要被捕获，但是程序员也可以根据需要进行捕获抛出。Java规定，<strong>运行时异常将由Java运行时系统自动抛出，允许应用程序忽略运行时异常</strong>。—— RuntimeException，常见的RUNtimeException有：NullpointException（空指针异常），ClassCastException（类型转换异常），IndexOutOfBoundsException（数组越界异常）等。</li>
-<li>错误： 是指程序无法处理的错误，由 Java 虚拟机生成并抛出，大多数错误与代码编写者所执行的操作无关。例如jvm运行时出现的OutOfMemoryError以及Socket编程时出现的端口占用等程序无法处理的错误。—— Error</li>
-</ul>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/Java/2019-11-05-Java第9章-异常处理.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2101,7 +2099,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">86</span>
+                  <span class="site-state-item-count">87</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2123,7 +2121,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">85</span>
+                  <span class="site-state-item-count">86</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
