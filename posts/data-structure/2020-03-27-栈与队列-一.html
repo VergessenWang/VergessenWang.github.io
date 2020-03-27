@@ -1,0 +1,958 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="栈,队列," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Java中的栈类JAVA 中，使用 java.util.Stack 类的构造方法创建对象。 源码： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546class Stack&amp;lt;E&amp;gt; extends Vector&amp;lt;E&amp;gt; &amp;#123;    public Stack">
+<meta name="keywords" content="栈,队列">
+<meta property="og:type" content="article">
+<meta property="og:title" content="栈与队列(一)">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/Data-Structure/2020-03-27-栈与队列-一.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="Java中的栈类JAVA 中，使用 java.util.Stack 类的构造方法创建对象。 源码： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546class Stack&amp;lt;E&amp;gt; extends Vector&amp;lt;E&amp;gt; &amp;#123;    public Stack">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/11/20200311155141.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/27/20200327174357.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/27/20200327174547.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/27/20200327180301.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/27/20200327180826.png">
+<meta property="og:updated_time" content="2020-03-27T15:36:18.702Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="栈与队列(一)">
+<meta name="twitter:description" content="Java中的栈类JAVA 中，使用 java.util.Stack 类的构造方法创建对象。 源码： 12345678910111213141516171819202122232425262728293031323334353637383940414243444546class Stack&amp;lt;E&amp;gt; extends Vector&amp;lt;E&amp;gt; &amp;#123;    public Stack">
+<meta name="twitter:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/11/20200311155141.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/Data-Structure/2020-03-27-栈与队列-一.html"/>
+
+
+
+
+
+  <title>栈与队列(一) | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/Data-Structure/2020-03-27-栈与队列-一.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">栈与队列(一)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-27T23:29:51+08:00">
+                2020-03-27
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Data-Structure/" itemprop="url" rel="index">
+                    <span itemprop="name">Data Structure</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,856
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Java中的栈类"><a href="#Java中的栈类" class="headerlink" title="Java中的栈类"></a>Java中的栈类</h3><p>JAVA 中，使用 java.util.Stack 类的构造方法创建对象。</p>
+<p>源码：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Stack</span>&lt;<span class="title">E</span>&gt; <span class="keyword">extends</span> <span class="title">Vector</span>&lt;<span class="title">E</span>&gt; </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Stack</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> E <span class="title">push</span><span class="params">(E item)</span> </span>&#123;</span><br><span class="line">        addElement(item);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> item;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> E <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        E       obj;</span><br><span class="line">        <span class="keyword">int</span>     len = size();</span><br><span class="line"></span><br><span class="line">        obj = peek();</span><br><span class="line">        removeElementAt(len - <span class="number">1</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> obj;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> E <span class="title">peek</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span>     len = size();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (len == <span class="number">0</span>)</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> EmptyStackException();</span><br><span class="line">        <span class="keyword">return</span> elementAt(len - <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">empty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> size() == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">synchronized</span> <span class="keyword">int</span> <span class="title">search</span><span class="params">(Object o)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = lastIndexOf(o);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> (i &gt;= <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> size() - i;</span><br><span class="line">        &#125;            <span class="keyword">throw</span> <span class="keyword">new</span> EmptyStackException();</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** use serialVersionUID from JDK 1.0.2 for interoperability */</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> <span class="keyword">long</span> serialVersionUID = <span class="number">1224463164541339165L</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 基于vector实现stack</p>
+<a id="more"></a>
+<p> 构造方法 ： public <strong>Stack</strong>() 创建一个空 Stack。</p>
+<p>方法： </p>
+<ol>
+<li>public push （item ） 把项 压入栈顶。其作用与 addElement (item ) 相同。</li>
+<li>public pop () 移除栈顶对象，并作为函数的值 返回该对象。<br>返回：栈顶对象（Vector 对象的中的最后一项）<br>抛出异常 ： EmptyStackException 如果堆栈空</li>
+<li>public peek() 查看栈顶对象而不移除它<br>返回：栈顶对象（Vector 对象的中的最后一项）<br>抛出异常 ： EmptyStackException 如果堆栈式空的 </li>
+<li>public boolean empty （测试堆栈是否为空） 当且仅当堆栈中不含任何项时 返回 true，否则 返回 false.</li>
+<li>public int search (object o) 返回对象在堆栈中位置， 以 1 为基数， 如果对象 ｏ是栈中的一项，该方法返回距离　栈顶最近的出现位置到栈顶的距离；　栈中最上端项的距离。使用equals 方法比较 o 与 堆栈中的项 </li>
+</ol>
+<h3 id="设计一个具有getMin功能的栈"><a href="#设计一个具有getMin功能的栈" class="headerlink" title="设计一个具有getMin功能的栈"></a>设计一个具有getMin功能的栈</h3><p>实现一个特殊的栈,在实现栈的基本功能的基础上,再实现返回<br>栈中最小元素的操作。<br>【要求】<br>1.pop、push、getMin操作的时间复杂度都是O(1)。<br>2.设计的栈类型可以使用现成的栈结构。</p>
+<h4 id="思路1-两栈同步"><a href="#思路1-两栈同步" class="headerlink" title="思路1 两栈同步"></a>思路1 两栈同步</h4><p>用一个固定的位置保存最小值。但是还要考虑一个问题，如果有多个重复的最小值时，有pop和push时应该如何处理？是不是还有保存个数呢？这时隐约想起不知在哪看过的一个方法：同时用两个栈，最小值栈同步更新</p>
+<p>代码实现 Minstack.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Stack;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Minstack</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Stack&lt;Integer&gt; stack;</span><br><span class="line">    <span class="keyword">private</span> Stack&lt;Integer&gt; minStack;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Minstack</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        <span class="keyword">this</span>.minStack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">push</span><span class="params">(Integer item)</span></span>&#123;</span><br><span class="line">        stack.push(item);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span>(!minStack.empty())&#123;</span><br><span class="line">            Integer min = ((minStack.peek() - item) &gt; <span class="number">0</span> )? item:minStack.peek();</span><br><span class="line">            minStack.push(min);</span><br><span class="line">        &#125;<span class="keyword">else</span>&#123;</span><br><span class="line">            minStack.push(item);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> item;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">pop</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Integer moveout;</span><br><span class="line">        moveout = stack.pop();</span><br><span class="line">        minStack.pop();</span><br><span class="line">        <span class="keyword">return</span> moveout;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getMin</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!minStack.empty())&#123;</span><br><span class="line">            <span class="keyword">return</span> minStack.peek();</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">return</span> Integer.MIN_VALUE;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">empty</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> stack.size() == <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Integer[] list = &#123;<span class="number">2</span>,<span class="number">3</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">4</span>,<span class="number">2</span>,<span class="number">1</span>,<span class="number">0</span>,<span class="number">6</span>,<span class="number">7</span>&#125;;</span><br><span class="line">        Minstack minstack = <span class="keyword">new</span> Minstack();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span> ; i &lt; list.length; i++)&#123;</span><br><span class="line">            minstack.push(list[i]);</span><br><span class="line">            System.out.println(<span class="string">"入栈数为"</span>+ list[i] + <span class="string">"  栈中所有元素最小值为"</span>+ minstack.getMin());</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">while</span> (!minstack.empty())&#123;</span><br><span class="line">            System.out.print(<span class="string">"出栈数为"</span>+ minstack.pop());</span><br><span class="line">            <span class="keyword">if</span> (minstack.getMin() != Integer.MIN_VALUE)&#123;</span><br><span class="line">                System.out.println(<span class="string">"  栈中剩余元素最小值为"</span>+ minstack.getMin());</span><br><span class="line">            &#125;<span class="keyword">else</span>  System.out.println(<span class="string">"  栈中已无更多元素"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试结果</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/11/20200311155141.png" alt=""></p>
+<h4 id="思路2-两栈不同步"><a href="#思路2-两栈不同步" class="headerlink" title="思路2 两栈不同步"></a>思路2 两栈不同步</h4><p>非同步压入，如果待入栈元素更小或相等，则压入minStack; 否则，不压入。 这样的话，在弹出的时侯还需要做一次比较，相比于思路1是用比较的开销来节省了minStack的空间。</p>
+<h3 id="由两个栈组成的队列"><a href="#由两个栈组成的队列" class="headerlink" title="由两个栈组成的队列"></a>由两个栈组成的队列</h3><p>用两个栈实现队列，支持队列的基本操作：add poll peek </p>
+<h4 id="思路-倒腾来倒腾去"><a href="#思路-倒腾来倒腾去" class="headerlink" title="思路 倒腾来倒腾去"></a>思路 倒腾来倒腾去</h4><p>看过很多次的一个题目了，就是把第一个栈满了以后，把元素依次弹出到第二个栈中，这样就从第一个的逆序变成了第二个栈的正序，第二个栈就可以当队列使用了。</p>
+<p>队列的peek：查看首个元素，不会移除首个元素</p>
+<p>需要注意的问题是，什么时候去倒腾数据，避免产生顺序错乱问题, 暂时想到的方法是要进行poll或者peek操作时，先判断第二个栈是否为空。为空则倒腾一下，不为空，直接对现有数据进行操作。假定第一个栈没有空间限制，add操作就不用涉及到第二个栈了</p>
+<p>代码实现 Stacklist.java</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Stack;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Stacklist</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Stack&lt;Integer&gt; firstStack;</span><br><span class="line">    <span class="keyword">private</span> Stack&lt;Integer&gt; secondStack;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Stacklist</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.firstStack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        <span class="keyword">this</span>.secondStack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">add</span><span class="params">(Integer item)</span></span>&#123;</span><br><span class="line">        firstStack.push(item);</span><br><span class="line">        <span class="keyword">return</span> item;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">poll</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!secondStack.empty())&#123;</span><br><span class="line">            <span class="keyword">return</span> secondStack.pop();</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (!firstStack.empty())&#123;</span><br><span class="line">                secondStack.push(firstStack.pop());</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(!secondStack.empty())&#123;</span><br><span class="line">                <span class="keyword">return</span> secondStack.pop();</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"已无更多元素"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">peek</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!secondStack.empty())&#123;</span><br><span class="line">            <span class="keyword">return</span> secondStack.peek();</span><br><span class="line">        &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">            <span class="keyword">while</span> (!firstStack.empty())&#123;</span><br><span class="line">                secondStack.push(firstStack.pop());</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">if</span>(!secondStack.empty())&#123;</span><br><span class="line">                <span class="keyword">return</span> secondStack.peek();</span><br><span class="line">            &#125;<span class="keyword">else</span> <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"已无更多元素"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span></span>&#123;</span><br><span class="line">        Stacklist stacklist = <span class="keyword">new</span> Stacklist();</span><br><span class="line">        System.out.println(<span class="string">"元素 "</span>+stacklist.add(<span class="number">2</span>)+<span class="string">" 入队"</span>);</span><br><span class="line">        System.out.println(<span class="string">"元素 "</span>+stacklist.add(<span class="number">4</span>)+<span class="string">" 入队"</span>);</span><br><span class="line">        System.out.println(<span class="string">"队首元素为 "</span>+stacklist.peek());</span><br><span class="line">        System.out.println(<span class="string">"元素 "</span>+stacklist.poll()+<span class="string">" 出队"</span>);</span><br><span class="line">        System.out.println(<span class="string">"队首元素为 "</span>+stacklist.peek());</span><br><span class="line">        System.out.println(<span class="string">"元素 "</span>+stacklist.poll()+<span class="string">" 出队"</span>);</span><br><span class="line">        System.out.println(<span class="string">"队首元素为 "</span>+stacklist.peek());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>结果</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">元素 <span class="number">2</span> 入队</span><br><span class="line">元素 <span class="number">4</span> 入队</span><br><span class="line">队首元素为 <span class="number">2</span></span><br><span class="line">元素 <span class="number">2</span> 出队</span><br><span class="line">队首元素为 <span class="number">4</span></span><br><span class="line">元素 <span class="number">4</span> 出队</span><br></pre></td></tr></table></figure>
+<h4 id="代码优化"><a href="#代码优化" class="headerlink" title="代码优化"></a>代码优化</h4><p>自己写的时候就感觉到了…poll和peek重复的地方比较多, 有些相同的操作可以适当的分离成一个新的方法</p>
+<p>优化后：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Stack;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Stacklist</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Stack&lt;Integer&gt; firstStack;</span><br><span class="line">    <span class="keyword">private</span> Stack&lt;Integer&gt; secondStack;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Stacklist</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.firstStack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        <span class="keyword">this</span>.secondStack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">add</span><span class="params">(Integer item)</span></span>&#123;</span><br><span class="line">        firstStack.push(item);</span><br><span class="line">        <span class="keyword">return</span> item;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">poll</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(firstStack.empty() &amp;&amp; secondStack.empty())&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"已无更多元素"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        firstToSecond();</span><br><span class="line">        <span class="keyword">return</span> secondStack.pop();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">peek</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(firstStack.empty() &amp;&amp; secondStack.empty())&#123;</span><br><span class="line">            <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"已无更多元素"</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        firstToSecond();</span><br><span class="line">        <span class="keyword">return</span> secondStack.peek();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">firstToSecond</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(secondStack.empty())&#123;</span><br><span class="line">            <span class="keyword">while</span> (!firstStack.empty())&#123;</span><br><span class="line">                secondStack.push(firstStack.pop());</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>将两个栈均为空的判断放在最前面，判断起来会更加简洁，代码也更具有可读性。</p>
+<h3 id="递归函数和栈逆序"><a href="#递归函数和栈逆序" class="headerlink" title="递归函数和栈逆序"></a>递归函数和栈逆序</h3><p>一个栈依次压入1，2，3，4，5, 然后将栈转置。只能用递归函数实现，不能用其他数据结构。</p>
+<h4 id="错误思路"><a href="#错误思路" class="headerlink" title="错误思路"></a>错误思路</h4><p>要用递归去实现，首先考虑递归的出口，和每一步变化中递归返回值之间的关系。</p>
+<p>问题的关键在于：不能用额外的数据结构来保存中间弹出的数据。所以只能考虑用栈的返回值来保存了</p>
+<p>最初是这样写的，然后发现结果并没有变。。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reverse</span><span class="params">()</span></span>&#123;</span><br><span class="line">    Integer temp = stack.pop();</span><br><span class="line">    <span class="keyword">if</span>(stack.size() &gt; <span class="number">0</span>)    reverse();</span><br><span class="line">    stack.push(temp);</span><br><span class="line">    <span class="keyword">return</span> ;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>问题在于，拿到的数据还是只能按照原来的路径重新压入。</p>
+<h4 id="正确思路"><a href="#正确思路" class="headerlink" title="正确思路"></a>正确思路</h4><p>需要设计两个递归函数</p>
+<p><strong>递归函数一：将栈stack的栈底元素返回并移除。取完值后重新压栈</strong></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/27/20200327174357.png" alt=""></p>
+<p><strong>递归函数二：逆序一个栈，每层栈用 i 保存栈底值</strong></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/27/20200327174547.png" alt=""></p>
+<p>也就是说，一个函数用来取数，一个函数用来逆序。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Stack;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ReverseStack</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> Integer[] list;</span><br><span class="line">    <span class="keyword">private</span> Stack&lt;Integer&gt; stack;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ReverseStack</span><span class="params">(Integer[] List)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.list = List;</span><br><span class="line">        <span class="keyword">this</span>.stack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; list.length;i++)&#123;</span><br><span class="line">            <span class="keyword">this</span>.stack.push(list[i]);</span><br><span class="line">      &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Integer <span class="title">getLast</span><span class="params">()</span></span>&#123;</span><br><span class="line">        Integer result = stack.pop();</span><br><span class="line">        <span class="keyword">if</span>(stack.size() &gt; <span class="number">0</span>)&#123;</span><br><span class="line">            Integer last = getLast();</span><br><span class="line">            stack.push(result);</span><br><span class="line">            <span class="keyword">return</span> last;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> result;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">reverse</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(stack.size() == <span class="number">0</span>)   <span class="keyword">return</span> ;</span><br><span class="line">        Integer i = getLast();</span><br><span class="line">        reverse();</span><br><span class="line">        stack.push(i);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">result</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">while</span> (stack.size() != <span class="number">0</span>)&#123;</span><br><span class="line">            System.out.println(stack.pop());</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">//test</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Test</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        Integer[] list = &#123;<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>&#125;;</span><br><span class="line">        ReverseStack reverseStack = <span class="keyword">new</span> ReverseStack(list);</span><br><span class="line">        reverseStack.reverse();</span><br><span class="line">        System.out.println(<span class="string">"------ after reverse ------"</span>);</span><br><span class="line">        reverseStack.result();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>测试结果</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/27/20200327180301.png" alt=""></p>
+<h3 id="猫狗队列"><a href="#猫狗队列" class="headerlink" title="猫狗队列"></a>猫狗队列</h3><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/27/20200327180826.png" alt=""></p>
+<p>要求：</p>
+<p>● 用户可以调用add方法将cat类或dog类的实例放入队列中；</p>
+<p>● 用户可以调用pollAll方法，将队列中所有的实例按照进队列的先后顺序依次弹出；</p>
+<p>● 用户可以调用pollDog方法，将队列中dog类的实例按照进队列的先后顺序依次弹出；</p>
+<p>● 用户可以调用pollCat方法，将队列中cat类的实例按照进队列的先后顺序依次弹出；</p>
+<p>● 用户可以调用isEmpty方法，检查队列中是否还有dog或cat的实例；</p>
+<p>● 用户可以调用isDogEmpty方法，检查队列中是否有dog类的实例；</p>
+<p>● 用户可以调用isCatEmpty方法，检查队列中是否有cat类的实例。</p>
+<h4 id="初步思路"><a href="#初步思路" class="headerlink" title="初步思路"></a>初步思路</h4><p>这题考察的是面向对象中的继承重写问题，尝试着写了一下，有点问题，一是队列到底应该放在哪一个层次；二是没有实现接口时如何实例化。遇到了空指针问题，不知道如何写下去了。说到底还是基础不行啊..</p>
+<h4 id="参考思路"><a href="#参考思路" class="headerlink" title="参考思路"></a>参考思路</h4><p>给不同的实例添上时间戳。为了不改变原本的类，封装一个新类</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PetEnterQueue</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Pet pet;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> count;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">PetEnterQueue</span><span class="params">(Pet pet, <span class="keyword">long</span> count)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.pet = pet;</span><br><span class="line">        <span class="keyword">this</span>.count = count;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Pet <span class="title">getPet</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> pet;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">long</span> <span class="title">getCount</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> count;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">getEnterPetType</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.pet.getPetType();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>设置一个全局计数器，同时用两个队列分别放dog和cat  —-  我一开始的思路很有问题，我是打算两种放一起的。。然而线性表只能放同一种数据类型</p>
+<p><strong>所以从逻辑上来说这是一个混合队列，但是实现的时候，却要分别处理。时间戳主要是为了比较两个队列之间的先后顺序，可以看作是联系两个队列的桥梁</strong> — 更一般的来说，其实这个一个特殊的队列合并问题</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.LinkedList;</span><br><span class="line"><span class="keyword">import</span> java.util.Queue;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DogCatQueue</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Queue&lt;PetEnterQueue&gt; dogQ;</span><br><span class="line">    <span class="keyword">private</span> Queue&lt;PetEnterQueue&gt; catQ;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">long</span> count;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">DogCatQueue</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.dogQ = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        <span class="keyword">this</span>.catQ = <span class="keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">        <span class="keyword">this</span>.count = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span>  <span class="keyword">void</span> <span class="title">add</span><span class="params">(Pet pet)</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(pet.getPetType().equals(<span class="string">"dog"</span>)) <span class="keyword">this</span>.dogQ.add(<span class="keyword">new</span> PetEnterQueue(pet,<span class="keyword">this</span>.count++));</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">if</span>(pet.getPetType().equals(<span class="string">"cat"</span>)) <span class="keyword">this</span>.catQ.add(<span class="keyword">new</span> PetEnterQueue(pet,<span class="keyword">this</span>.count++));</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"err,not dog or cat"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 按题意这里是弹出dog cat中先进去的一个，而不是所有元素</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Pet <span class="title">pollAll</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!<span class="keyword">this</span>.isDogQueueEmpty() &amp;&amp; !<span class="keyword">this</span>.isCatQueueEmpty())&#123;</span><br><span class="line">            <span class="keyword">if</span>(<span class="keyword">this</span>.dogQ.peek().getCount() &lt; <span class="keyword">this</span>.catQ.peek().getCount())&#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">this</span>.dogQ.poll().getPet();</span><br><span class="line">            &#125;<span class="keyword">else</span> &#123;</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">this</span>.catQ.poll().getPet();</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(!<span class="keyword">this</span>.isDogQueueEmpty())&#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.dogQ.poll().getPet();</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">if</span>(!<span class="keyword">this</span>.isCatQueueEmpty()) &#123;</span><br><span class="line">            <span class="keyword">return</span> <span class="keyword">this</span>.catQ.poll().getPet();</span><br><span class="line">        &#125;<span class="keyword">else</span> <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"err,queue is empty"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Pet <span class="title">pollDog</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!<span class="keyword">this</span>.isDogQueueEmpty()) <span class="keyword">return</span> (Dog)<span class="keyword">this</span>.dogQ.poll().getPet();</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"err,dogqueue is empty"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> Pet <span class="title">pollCat</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(!<span class="keyword">this</span>.isCatQueueEmpty()) <span class="keyword">return</span> (Cat)<span class="keyword">this</span>.catQ.poll().getPet();</span><br><span class="line">        <span class="keyword">else</span> <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"err,catqueue is empty"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isEmpty</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.dogQ.isEmpty() &amp;&amp; <span class="keyword">this</span>.catQ.isEmpty();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isDogQueueEmpty</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.dogQ.isEmpty();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">isCatQueueEmpty</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">this</span>.catQ.isEmpty();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意Queue是用链表实现的。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/栈/" rel="tag"><i class="fa fa-tag"></i> 栈</a>
+          
+            <a href="/tags/队列/" rel="tag"><i class="fa fa-tag"></i> 队列</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/thinking/2020-03-26-西方的幻灭.html" rel="next" title="西方的幻灭">
+                <i class="fa fa-chevron-left"></i> 西方的幻灭
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">虚己以游世，乘物以游心</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">89</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">86</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Java中的栈类"><span class="nav-number">1.</span> <span class="nav-text">Java中的栈类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#设计一个具有getMin功能的栈"><span class="nav-number">2.</span> <span class="nav-text">设计一个具有getMin功能的栈</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#思路1-两栈同步"><span class="nav-number">2.1.</span> <span class="nav-text">思路1 两栈同步</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#思路2-两栈不同步"><span class="nav-number">2.2.</span> <span class="nav-text">思路2 两栈不同步</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#由两个栈组成的队列"><span class="nav-number">3.</span> <span class="nav-text">由两个栈组成的队列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#思路-倒腾来倒腾去"><span class="nav-number">3.1.</span> <span class="nav-text">思路 倒腾来倒腾去</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#代码优化"><span class="nav-number">3.2.</span> <span class="nav-text">代码优化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#递归函数和栈逆序"><span class="nav-number">4.</span> <span class="nav-text">递归函数和栈逆序</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#错误思路"><span class="nav-number">4.1.</span> <span class="nav-text">错误思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#正确思路"><span class="nav-number">4.2.</span> <span class="nav-text">正确思路</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#猫狗队列"><span class="nav-number">5.</span> <span class="nav-text">猫狗队列</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#初步思路"><span class="nav-number">5.1.</span> <span class="nav-text">初步思路</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#参考思路"><span class="nav-number">5.2.</span> <span class="nav-text">参考思路</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

@@ -134,11 +134,11 @@
 <meta name="keywords" content="栈">
 <meta property="og:type" content="article">
 <meta property="og:title" content="栈">
-<meta property="og:url" content="http://vergessenwang.github.io/posts/data-structure/2018-09-02-栈.html">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/Data-Structure/2018-09-02-栈.html">
 <meta property="og:site_name" content="Anonymous World">
 <meta property="og:description" content="定义  LIFO，仅在表尾进行插入删除操作的一种特殊线性表，是一种逻辑结构，故有多种实现方式。 实现  关键：指针和元素值的对应关系（有时指针指向当前元素——如在数组表示中初始指向-1，有时指向下一个元素——初始指向栈底，视具体情况而定）；指针如何移动（链表实现中）">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-11T15:37:46.300Z">
+<meta property="og:updated_time" content="2020-03-27T15:36:30.749Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="栈">
 <meta name="twitter:description" content="定义  LIFO，仅在表尾进行插入删除操作的一种特殊线性表，是一种逻辑结构，故有多种实现方式。 实现  关键：指针和元素值的对应关系（有时指针指向当前元素——如在数组表示中初始指向-1，有时指向下一个元素——初始指向栈底，视具体情况而定）；指针如何移动（链表实现中）">
@@ -171,7 +171,7 @@
 
 
 
-  <link rel="canonical" href="http://vergessenwang.github.io/posts/data-structure/2018-09-02-栈.html"/>
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/Data-Structure/2018-09-02-栈.html"/>
 
 
 
@@ -304,7 +304,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/data-structure/2018-09-02-栈.html">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/Data-Structure/2018-09-02-栈.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liana_Wang">
@@ -356,8 +356,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/data-structure/" itemprop="url" rel="index">
-                    <span itemprop="name">data_structure</span>
+                  <a href="/categories/Data-Structure/" itemprop="url" rel="index">
+                    <span itemprop="name">Data Structure</span>
                   </a>
                 </span>
 
@@ -453,7 +453,7 @@
 <h2 id="行编辑"><a href="#行编辑" class="headerlink" title="行编辑"></a>行编辑</h2><p>  原理：用户输入时可能出错，退格符#删一个，退行符@删一行，输入缓冲区接受一行字符后再存入到用户数据区。</p>
 <ol>
 <li>接受的字符不是全文结束符EOF或换行符</li>
-<li>#，退栈一个</li>
+<li>/#，退栈一个</li>
 <li>@ ClearStack 清空</li>
 <li>其他情况，正常进栈</li>
 <li>全文或每行结束，将栈内容送至调用过程的数据区，清空栈<br>拓展：注意该缓冲区与为解决主机和外设速度不匹配问题的打印数据缓冲区的区别，那个缓存区是用队列实现的，因打印要保证顺序不变；如果这里也要保证顺序不变，那就要加一个队列</li>
@@ -596,7 +596,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">88</span>
+                  <span class="site-state-item-count">89</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
