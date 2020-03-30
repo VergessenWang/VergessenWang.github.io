@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Anonymous World" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="之前已经学习过，测试方法大致可分为黑盒测试和白盒测试。Junit是一种白盒测试的工具 步骤 定义一个测试类：   类名：被测试类名Test 包名：xxx.xxx.xxx.test   定义测试方法：可以独立运行  方法名：test测试方法名 返回值：void 参数列表：空参 结果判断：Assertions.assertEquals(expected, result)    给方法加@Test注解,">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Junit5单元测试">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/Test/2020-03-30-Junit5单元测试.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="之前已经学习过，测试方法大致可分为黑盒测试和白盒测试。Junit是一种白盒测试的工具 步骤 定义一个测试类：   类名：被测试类名Test 包名：xxx.xxx.xxx.test   定义测试方法：可以独立运行  方法名：test测试方法名 返回值：void 参数列表：空参 结果判断：Assertions.assertEquals(expected, result)    给方法加@Test注解,">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/27/2020-03-29_18-06-02.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/27/20200328192446.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/27/20200328192655.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/27/2020-03-29_18-21-13.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/27/2020-03-28_19-01-16.jpg">
+<meta property="og:updated_time" content="2020-03-30T14:56:26.205Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Junit5单元测试">
+<meta name="twitter:description" content="之前已经学习过，测试方法大致可分为黑盒测试和白盒测试。Junit是一种白盒测试的工具 步骤 定义一个测试类：   类名：被测试类名Test 包名：xxx.xxx.xxx.test   定义测试方法：可以独立运行  方法名：test测试方法名 返回值：void 参数列表：空参 结果判断：Assertions.assertEquals(expected, result)    给方法加@Test注解,">
+<meta name="twitter:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/27/2020-03-29_18-06-02.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/Test/2020-03-30-Junit5单元测试.html"/>
+
+
+
+
+
+  <title>Junit5单元测试 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/Test/2020-03-30-Junit5单元测试.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Junit5单元测试</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-30T22:54:49+08:00">
+                2020-03-30
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Test/" itemprop="url" rel="index">
+                    <span itemprop="name">Test</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,964
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>之前已经学习过，测试方法大致可分为黑盒测试和白盒测试。Junit是一种白盒测试的工具</p>
+<h3 id="步骤"><a href="#步骤" class="headerlink" title="步骤"></a>步骤</h3><ol>
+<li><p>定义一个测试类： </p>
+<ul>
+<li>类名：被测试类名Test</li>
+<li>包名：xxx.xxx.xxx.test</li>
+</ul>
+</li>
+<li><p>定义测试方法：可以独立运行</p>
+<ul>
+<li>方法名：test测试方法名</li>
+<li>返回值：void</li>
+<li>参数列表：空参</li>
+<li>结果判断：<strong><code>Assertions.assertEquals(expected, result)</code></strong></li>
+</ul>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/27/2020-03-29_18-06-02.jpg" alt=""></p>
+</li>
+<li><p><strong>给方法加@Test注解</strong>, 这是对简单程序而言。</p>
+<p>如果是复杂项目如SpringBoot，就要用@SpringBootTest 。因为对象之间是有依赖的，<strong>直接new当前测试对象可能某些组成部分为null</strong> 。然后用@Autowired 将Bean注入；当没有真实数据时，可以用@MockBean 注解来模拟真实Bean, 此时需要相应的规则 , 如 <code>when(obj.func()).thenReturn()</code>；但是如果每次都要配置规则其实很麻烦，于是还可以用<strong>@SpyBean 注解，有规则按规则，无规则按默认</strong></p>
+</li>
+<li><p>导入Junit依赖  <code>import org.junit.jupiter.api.Test;</code> 最好选择Junit5</p>
+<p>还可以用JunitGenerator V2.0插件，在设置中进行配置，不过可选的只有Junit3和Junit4, 不建议使用</p>
+</li>
+</ol>
+<a id="more"></a>
+<p>更简单的方法是直接用IDEA中内置的Junit模块，<strong>方法名上右键GOTO-&gt;Test</strong></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/27/20200328192446.png" alt=""></p>
+<p>按需选择内容</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/27/20200328192655.png" alt=""></p>
+<h3 id="复用"><a href="#复用" class="headerlink" title="复用"></a>复用</h3><p>不同的模块之间，有些操作其实是一样的，因此就可以把一些复用的操作分离出来，如初始化资源申请等</p>
+<h4 id="Before-注解"><a href="#Before-注解" class="headerlink" title="@Before 注解"></a><strong>@Before</strong> 注解</h4><p>init()初始化方法，用于资源申请，所有测试方法执行之前</p>
+<p>@BeforeEach 每个测试都执行一次</p>
+<p>@BeforeAll 所有测试只执行一次，所以必须是<strong>static</strong></p>
+<h4 id="After-注解"><a href="#After-注解" class="headerlink" title="@After 注解"></a>@After 注解</h4><p>close()释放资源方法，在所有测试方法执行完后，都会自动执行该方法，即使结果出错了</p>
+<p>两种用法同上。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/27/2020-03-29_18-21-13.jpg" alt=""></p>
+<h3 id="异常测试"><a href="#异常测试" class="headerlink" title="异常测试"></a>异常测试</h3><p>测试时有时对可能发生的每种类型的异常进行测试</p>
+<h4 id="使用-Test注解"><a href="#使用-Test注解" class="headerlink" title="使用@Test注解"></a>使用@Test注解</h4><p>使用@Test注解自带的 <code>expected = Exception.class</code> 属性来断言需要抛出一个异常，如下： </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span>(expected = IllegalArgumentException.class)  </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testExpectedException2</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">  <span class="keyword">new</span> Person(<span class="string">'Joe'</span>, -<span class="number">1</span>);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p> 在运行测试的时候，此方法必须抛出异常，这个测试才算通过。</p>
+<p> 这种方法不能指定断言的异常信息，而且有一个潜在的问题：当被标记的这个测试方法中的任何一个操作抛出了相应的异常时，这个测试就会通过。这就意味着有可能抛出异常的地方并不是我们期望的那个操作。</p>
+<h4 id="使用try-catch"><a href="#使用try-catch" class="headerlink" title="使用try-catch"></a>使用try-catch</h4><p>这种写法看上去和实现类的写法很相似，当没有异常被抛出的时候fail方法会被调用，输出测试失败的信息。 </p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Test</span>  </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testExpectedException3</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">  <span class="keyword">try</span> &#123;  </span><br><span class="line">    <span class="keyword">new</span> Person(<span class="string">'Joe'</span>, -<span class="number">1</span>);  </span><br><span class="line">    fail(<span class="string">'Should have thrown an IllegalArgumentException because age is invalid!'</span>);  </span><br><span class="line">  &#125; <span class="keyword">catch</span> (IllegalArgumentException e) &#123;  </span><br><span class="line">    assertThat(e.getMessage(), containsString(<span class="string">'Invalid age'</span>));  </span><br><span class="line">  &#125;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="使用ExpectedException"><a href="#使用ExpectedException" class="headerlink" title="使用ExpectedException"></a>使用ExpectedException</h4><p>这种方法除了可以指定期望抛出的异常类型之外还可以指定在抛出异常时希望同时给出的异常信息。它需要在测试之前使用Rule标记来指定一个ExpectedException，并在测试相应操作之前指定期望的Exception类型。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Rule</span>  </span><br><span class="line"><span class="keyword">public</span> ExpectedException exception = ExpectedException.none();  </span><br><span class="line"></span><br><span class="line"><span class="meta">@Test</span>  </span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">testExpectedException</span><span class="params">()</span> </span>&#123;  </span><br><span class="line">  exception.expect(IllegalArgumentException.class);  </span><br><span class="line">  exception.expectMessage(containsString(<span class="string">'Invalid age'</span>));  </span><br><span class="line">  <span class="keyword">new</span> Person(<span class="string">'Joe'</span>, -<span class="number">1</span>);  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="参数化测试"><a href="#参数化测试" class="headerlink" title="参数化测试"></a>参数化测试</h3><p>主要使用的是 Junit5提供的@ParameterizedTest</p>
+<p>需要引入junit-jupiter-params，该包提供的注解类型有：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ValueSource</span></span><br><span class="line"><span class="meta">@EnumSource</span></span><br><span class="line"><span class="meta">@MethodSource</span></span><br><span class="line"><span class="meta">@CsvSource</span></span><br><span class="line"><span class="meta">@CsvFileSource</span></span><br><span class="line"><span class="meta">@ArgumentsSource</span></span><br></pre></td></tr></table></figure>
+<p>value source是最简单的参数源，通过注解可以直接指定携带的运行参数。</p>
+<ul>
+<li><strong>String values:</strong> @ValueSource(strings = {“foo”, “bar”, “baz”})</li>
+<li><strong>Double values:</strong> @ValueSource(doubles = {1.5D, 2.2D, 3.0D})</li>
+<li><strong>Long values:</strong> @ValueSource(longs = {2L, 4L, 8L})</li>
+<li><strong>Integer values:</strong> @ValueSource(ints = {2, 4, 8})</li>
+</ul>
+<p>示例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.jupiter.api.Assertions.assertEquals;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.params.ParameterizedTest;</span><br><span class="line"><span class="keyword">import</span> org.junit.jupiter.params.provider.ValueSource;</span><br><span class="line"> </span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ValueSourcesExampleTest</span> </span>&#123;</span><br><span class="line"> </span><br><span class="line">  <span class="meta">@ParameterizedTest</span></span><br><span class="line">  <span class="meta">@ValueSource</span>(ints = &#123;<span class="number">2</span>, <span class="number">4</span>, <span class="number">8</span>&#125;)</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">testNumberShouldBeEven</span><span class="params">(<span class="keyword">int</span> num)</span> </span>&#123;</span><br><span class="line">    assertEquals(<span class="number">0</span>, num % <span class="number">2</span>);</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="meta">@ParameterizedTest</span></span><br><span class="line">  <span class="meta">@ValueSource</span>(strings = &#123;<span class="string">"Radar"</span>, <span class="string">"Rotor"</span>, <span class="string">"Tenet"</span>, <span class="string">"Madam"</span>, <span class="string">"Racecar"</span>&#125;)</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">testStringShouldBePalindrome</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">    assertEquals(isPalindrome(word), <span class="keyword">true</span>);</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="meta">@ParameterizedTest</span></span><br><span class="line">  <span class="meta">@ValueSource</span>(doubles = &#123;<span class="number">2</span>.D, <span class="number">4</span>.D, <span class="number">8</span>.D&#125;)</span><br><span class="line">  <span class="function"><span class="keyword">void</span> <span class="title">testDoubleNumberBeEven</span><span class="params">(<span class="keyword">double</span> num)</span> </span>&#123;</span><br><span class="line">    assertEquals(<span class="number">0</span>, num % <span class="number">2</span>);</span><br><span class="line">  &#125;</span><br><span class="line"> </span><br><span class="line">  <span class="function"><span class="keyword">boolean</span> <span class="title">isPalindrome</span><span class="params">(String word)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> word.toLowerCase().equals(<span class="keyword">new</span> StringBuffer(word.toLowerCase()).reverse().toString());</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>其实批量输入最好是用CsvSource，使用示例如下</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">TwoSumTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@ParameterizedTest</span></span><br><span class="line">    <span class="meta">@CsvSource</span>(&#123;</span><br><span class="line">            <span class="string">"'[1, 1]', 2, '[0, 1]'"</span>,</span><br><span class="line">            <span class="string">"'[3, 2, 3]', 6, '[0, 2]'"</span>,</span><br><span class="line">            <span class="string">"'[2, 7, 11, 15]', 9, '[0, 1]'"</span></span><br><span class="line">    &#125;)</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">twoSum</span><span class="params">(</span></span></span><br><span class="line"><span class="function"><span class="params">            @ConvertWith(String2int.class)</span> <span class="keyword">int</span>[] nums,</span></span><br><span class="line"><span class="function">            <span class="keyword">int</span> target,</span></span><br><span class="line"><span class="function">            @<span class="title">ConvertWith</span><span class="params">(String2int.class)</span> <span class="keyword">int</span>[] expect</span></span><br><span class="line"><span class="function">    ) </span>&#123;</span><br><span class="line">        TwoSum solution = <span class="keyword">new</span> TwoSum();</span><br><span class="line">        assertArrayEquals(expect, solution.twoSum(nums, target));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>通过<code>@CsvSource</code>传入的每一项，就相当于一个csv文件的一行，是一个<code>String</code>。 每一行中，可以有若干列，这里是三列，代表测试函数的三个输入参数的一组值。 为了让值中包含分隔符<code>,</code>，需要用单引号<code>&#39;&#39;</code>包含。</p>
+<p>如果是基本数据类型，如<code>int</code>、<code>String</code>之类，<a href="http://junit.org/junit5/" target="_blank" rel="noopener">JUnit5</a>会尝试直接转换。 而如果是不常见的数据类型，则需要使用<code>@ConvertWith</code>。 上一段代码中的<code>@ConvertWith(String2int.class) int[] nums,</code>，就是在用一个自定义类<code>String2int.class</code>，把<code>String</code>类型转换为<code>int[]</code>。</p>
+<p><a href="https://note.qidong.name/2018/05/junit5-parameterized/" target="_blank" rel="noopener">CSVSource应用参考</a></p>
+<p><a href="https://www.ibm.com/developerworks/cn/java/j-junit5/" target="_blank" rel="noopener">JUnit 5 新特性</a></p>
+<p><a href="https://howtodoinjava.com/junit5/before-all-annotation-example/" target="_blank" rel="noopener">官方文档</a></p>
+<h2 id="单元测试理论"><a href="#单元测试理论" class="headerlink" title="单元测试理论"></a>单元测试理论</h2><p>单元测试是针对最小的功能单元编写测试代码，对java来说，就是<strong>针对单个方法</strong>的测试。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/27/2020-03-28_19-01-16.jpg" alt=""></p>
+<p>TDD三条规则：</p>
+<ul>
+<li>除非为了使一个失败的单元测试通过，否则不允许编写任何产品代码</li>
+<li>在一个单元测试中只允许编写刚好能导致失败的内容（编译错误也算）</li>
+<li>只允许编写刚好能够使一个失败的单元测试通过的产品代码</li>
+</ul>
+<p>对于一个软件，整体的测试过程是：<strong>单元测试 -&gt; 集成测试 -&gt; 系统测试 -&gt; 性能测试</strong></p>
+<h3 id="单元测试方法"><a href="#单元测试方法" class="headerlink" title="单元测试方法"></a>单元测试方法</h3><p>分为代码级别测试和模块级别测试</p>
+<p>代码级别测试：熟悉模块功能，内部逻辑与接口，编写测试用例</p>
+<ol>
+<li>接口测试：确保接口实现符合文档规范<ul>
+<li>调用本模块的输入参数是否正确(参数数目，属性，类型次序)</li>
+<li>是否修改了只读型参数</li>
+<li>全局量的定义在各模块是否一致</li>
+<li>在单元有多个入口的情况下，是否引用了与当前入口无关的参数</li>
+<li>常数是否当作变量来传递</li>
+</ul>
+</li>
+<li>数据结构测试：确保数据结构可用，例如数据库，文件，自定义的数据结构<ul>
+<li>不正确或不一致的数据类型说明</li>
+<li>使用尚未赋值或尚未初始化的变量</li>
+<li>错误的初始值或错误的缺省值</li>
+<li>变量名拼写错</li>
+<li>上溢/下溢或地址异常</li>
+</ul>
+</li>
+<li>路径测试：尽可能对每一条独立执行路径进行测试，满足某种覆盖标准<ul>
+<li>不同数据类型之间的比较</li>
+<li>错误的使用逻辑运算符或优先级</li>
+<li>关系表达式中比较运算出错</li>
+<li>循环终止条件或不可能出现</li>
+<li>迭代发散时不能退出</li>
+<li>错误的修改了循环变量</li>
+</ul>
+</li>
+<li>错误处理测试</li>
+<li>边界测试：对于边界值进行测试<ul>
+<li>普通合法数据是否正确处理</li>
+<li>普通非法数据是否正确处理</li>
+<li>边界内最接近边界的合法数据是否正确处理</li>
+<li>边界外最接近边界的非法数据是否正确处理</li>
+<li>N次循环的第0,1,n次是否有错</li>
+<li>运算或判断中取最大最小值时是否有错</li>
+<li>数据流，控制流中刚好等于/大于/小于确定比较值时是否出错</li>
+</ul>
+</li>
+</ol>
+<p>模块级别测试：主要是功能测试，通过黑盒测试方法</p>
+<p>其他测试项：性能，代码规范等</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/Data-Structure/2020-03-27-栈与队列-一.html" rel="next" title="栈与队列(一)">
+                <i class="fa fa-chevron-left"></i> 栈与队列(一)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">虚己以游世，乘物以游心</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">90</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">86</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#步骤"><span class="nav-number">1.</span> <span class="nav-text">步骤</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#复用"><span class="nav-number">2.</span> <span class="nav-text">复用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Before-注解"><span class="nav-number">2.1.</span> <span class="nav-text">@Before 注解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#After-注解"><span class="nav-number">2.2.</span> <span class="nav-text">@After 注解</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#异常测试"><span class="nav-number">3.</span> <span class="nav-text">异常测试</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用-Test注解"><span class="nav-number">3.1.</span> <span class="nav-text">使用@Test注解</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用try-catch"><span class="nav-number">3.2.</span> <span class="nav-text">使用try-catch</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#使用ExpectedException"><span class="nav-number">3.3.</span> <span class="nav-text">使用ExpectedException</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#参数化测试"><span class="nav-number">4.</span> <span class="nav-text">参数化测试</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单元测试理论"><span class="nav-number"></span> <span class="nav-text">单元测试理论</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#单元测试方法"><span class="nav-number">1.</span> <span class="nav-text">单元测试方法</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

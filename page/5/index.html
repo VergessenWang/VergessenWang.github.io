@@ -303,6 +303,190 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/Algorithm/2019-11-26-KMP算法.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/Algorithm/2019-11-26-KMP算法.html" itemprop="url">KMP算法</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-26T22:48:10+08:00">
+                2019-11-26
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,158
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>为了避免朴素匹配算法需要向左回溯导致效率较低的缺点，引进了无需回溯的KMP算法。</p>
+<h3 id="KMP算法"><a href="#KMP算法" class="headerlink" title="KMP算法"></a>KMP算法</h3><p>利用<strong>模式串P自身的重复模式</strong></p>
+<p>关注：</p>
+<ul>
+<li>匹配失败，是否发生在P的第一个字符处？<ul>
+<li>若当前轮匹配在进行第一个字符比较时就失败，那么<br>下一轮应该是比较T[i+1]和P[1] </li>
+</ul>
+</li>
+<li>P中是否有重复模式？ <ul>
+<li>若P中在当前轮成功匹配的子串的后缀与子串的前缀<br>无重复模式，那么下一轮应该是比较<strong>T[i]</strong>和P[1]</li>
+<li>若P中在当前轮成功匹配的子串的后缀与子串的前缀<br>有重复模式，那么下一轮应该是比较T[i]和P[next[j]]</li>
+<li>模式串的next[j] = ？ <strong>next[j]就是第j个元素前j-1个元素首尾重合部分个数加1</strong><ul>
+<li>规定任何一个串，next[1]=0</li>
+<li>next[i]= [P串中<strong>前 i-1 子串</strong>首尾最长匹配数 <strong>+ 1</strong>] —— 首尾重合<strong>不包括本身</strong></li>
+<li>其他情况，next[i]= 1</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/Algorithm/2019-11-26-KMP算法.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/Java/2019-11-07-Java第10章-泛型.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1890,180 +2074,6 @@ A[Wikipedia] -->B(预处理器 <br>schema定义<br>训练数据构造)
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/NLP/2019-10-28-KBQA中的一些问题.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liana_Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Anonymous World">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/NLP/2019-10-28-KBQA中的一些问题.html" itemprop="url">KBQA中的一些问题</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-28T00:57:09+08:00">
-                2019-10-28
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NLP/" itemprop="url" rel="index">
-                    <span itemprop="name">NLP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  596
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>QA知识来源：结构化知识(KB)、半结构化知识、非结构化知识、文本摘要、机器翻译</p>
-<p>这里的KB主要有：Freebase,DBPedia,Yago 等现有知识库</p>
-<p>知识库KB：RDF + SPARQL，问题—在<strong>高异质性</strong>的KB中写SPARQL语句很困难</p>
-<p>KBQA :  由于缩写、同义词、数学换算等可能导致<strong>失配</strong> —&gt; 同义转换 —&gt; 用CRF 计算候选匹配排名 —&gt; 有反馈的特定排名(要与用户交互，实现困难)</p>
-<p>统计方法和神经学习方法的主要区别：</p>
-<ul>
-<li>统计：人工设计规则和特征；从数据中学习权重</li>
-<li>神经：特征和权重都是从数据中学习来的，需要极大的训练数据集</li>
-</ul>
-<p>同义问题转换：从原始问句中抽象出实体(基于<strong>主题实体和上下文</strong>寻找抽象)，将含抽象实体的问题通过重排转为已有问题模板。通过问题类型接口（<strong>基于Bi-LSTM</strong>）获取答案。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/NLP/2019-10-28-KBQA中的一些问题.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2118,7 +2128,7 @@ A[Wikipedia] -->B(预处理器 <br>schema定义<br>训练数据构造)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">89</span>
+                  <span class="site-state-item-count">90</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
