@@ -303,6 +303,181 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/DataStructure/2020-03-11-LC-字符串专题-一.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/DataStructure/2020-03-11-LC-字符串专题-一.html" itemprop="url">LC-字符串专题(一)</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-11T23:30:28+08:00">
+                2020-03-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/DataStructure/" itemprop="url" rel="index">
+                    <span itemprop="name">DataStructure</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,798
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <h3 id="3-无重复字符的最长子串【中】"><a href="#3-无重复字符的最长子串【中】" class="headerlink" title="3 无重复字符的最长子串【中】"></a>3 无重复字符的最长子串【中】</h3><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/11/15819097350990.jpg" alt=""><br>思路：感觉有点难的亚子..因为重复出现的位置无法预料，那么下一次寻找的开始位置如何确定，难道用暴力解法依次遍历？首次，如何判断和记录重复，每次用一个哈希表？</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">lengthOfLongestSubstring</span><span class="params">(String s)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> n = s.length(), ans = <span class="number">0</span>;</span><br><span class="line">        Map&lt;Character, Integer&gt; map = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> end = <span class="number">0</span>, start = <span class="number">0</span>; end &lt; n; end++) &#123;</span><br><span class="line">            <span class="keyword">char</span> alpha = s.charAt(end);</span><br><span class="line">            <span class="keyword">if</span> (map.containsKey(alpha)) &#123;</span><br><span class="line">                start = Math.max(map.get(alpha), start);</span><br><span class="line">            &#125;</span><br><span class="line">            ans = Math.max(ans, end - start + <span class="number">1</span>);</span><br><span class="line">            map.put(s.charAt(end), end + <span class="number">1</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> ans;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>用<strong>滑动窗口</strong>替代复杂度为$O(n^2)$的暴力解法，核心是要记录下重复位置用于窗口滑动</li>
+<li>定义一个 <strong>map </strong>数据结构存储 (k, v)，<code>Map&lt;Character, Integer&gt; map = new HashMap&lt;&gt;();</code>其中 key 值为字符，value 值为字符位置 +1，加 1 表示从字符位置后一个才开始不重 复, 同时存位置的方法可以从始至终只用一个哈希表即可</li>
+<li><code>start = Math.max(map.get(alpha), start);</code>start取更大的值，一方面start保证不会后退；另一方面value 值为重复字符上一次的位置 +1，下一次的最长必不包含本次重复的这一段，故直接跳到本次重复第一个字符的下一位置<br>+无论是否更新 start，都会更新其 map 数据结构和结果 ans <code>ans = Math.max(ans, end - start + 1);</code></li>
+<li>字符串方法:string.length()  string.charAt(pos)</li>
+<li>hashmap方法:hashmap.containsKey(key)  hashmap.put(key,value)</li>
+<li>Math.max(value1,…)</li>
+<li>哈希表还可以直接用int[26] 来代替</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/DataStructure/2020-03-11-LC-字符串专题-一.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/OS/2020-03-09-Linux命令之文件与权限管理.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1881,176 +2056,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/database/2020-02-17-Docker中运行Neo4j.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liana_Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Anonymous World">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/database/2020-02-17-Docker中运行Neo4j.html" itemprop="url">Docker中运行Neo4j</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-17T20:29:15+08:00">
-                2020-02-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1,030
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>查看<a href="https://hub.docker.com/_/neo4j?tab=tags" target="_blank" rel="noopener">最新的Neo4j镜像版本</a> 此时最新为4.0</p>
-<p><code>docker pull neo4j:4.0</code> 拉取镜像4.0 </p>
-<p>报错Error response from daemon: Get <a href="https://registry-1.docker.io/v2/" target="_blank" rel="noopener">https://registry-1.docker.io/v2/</a>: dial tcp: lookup registry-1.docker.io on 10.0.2.3:53: read udp 10.0.2.15:51774-&gt;10.0.2.3:53: i/o timeout</p>
-<p>可能DNS解析有点问题，看了一下全都是美国弗吉尼亚的Amazon数据中心，应该是访问不到</p>
-<p>去找阿里云镜像，然后被满页的广告蒙蔽了双眼，一个多小时之后，我买了一台云服务器 ：D</p>
-<p>我是谁？我在哪？我刚才不是在学Docker吗？后来，我就开始搭服务器了。。。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/database/2020-02-17-Docker中运行Neo4j.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2105,7 +2110,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-count">93</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2127,7 +2132,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">86</span>
+                  <span class="site-state-item-count">87</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
