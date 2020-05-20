@@ -1,0 +1,928 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Vue," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="当获取到后端数据后，我们会把它按照一定的规则加载到写好的模板中，输出成在浏览器中显示的HTML，这个过程就称之为渲染。而Vue.js是在前端（即浏览器内）进行的模板渲染。 早期的Web项目一般是在服务器端进行渲染，服务器进程从数据库获取数据后，利用后端模板引擎，甚至于直接在HTML模板中嵌入后端语言（例如JSP），将数据加载进来生成HTML，然后通过网络传输到用户的浏览器中，然后被浏览器解析成可见">
+<meta name="keywords" content="Vue">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vue渲染方法">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/frontend/2020-05-20-Vue渲染方法.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="当获取到后端数据后，我们会把它按照一定的规则加载到写好的模板中，输出成在浏览器中显示的HTML，这个过程就称之为渲染。而Vue.js是在前端（即浏览器内）进行的模板渲染。 早期的Web项目一般是在服务器端进行渲染，服务器进程从数据库获取数据后，利用后端模板引擎，甚至于直接在HTML模板中嵌入后端语言（例如JSP），将数据加载进来生成HTML，然后通过网络传输到用户的浏览器中，然后被浏览器解析成可见">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/20/15899055673417.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/20/15899057576386.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/20/15899091351658.jpg">
+<meta property="og:updated_time" content="2020-05-20T09:59:21.538Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vue渲染方法">
+<meta name="twitter:description" content="当获取到后端数据后，我们会把它按照一定的规则加载到写好的模板中，输出成在浏览器中显示的HTML，这个过程就称之为渲染。而Vue.js是在前端（即浏览器内）进行的模板渲染。 早期的Web项目一般是在服务器端进行渲染，服务器进程从数据库获取数据后，利用后端模板引擎，甚至于直接在HTML模板中嵌入后端语言（例如JSP），将数据加载进来生成HTML，然后通过网络传输到用户的浏览器中，然后被浏览器解析成可见">
+<meta name="twitter:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/20/15899055673417.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/frontend/2020-05-20-Vue渲染方法.html"/>
+
+
+
+
+
+  <title>Vue渲染方法 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-05-20-Vue渲染方法.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Vue渲染方法</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-20T17:57:07+08:00">
+                2020-05-20
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,691
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>当获取到后端数据后，我们会把它按照一定的规则加载到写好的模板中，输出成在浏览器中显示的HTML，这个过程就称之为渲染。而Vue.js是在前端（即浏览器内）进行的模板渲染。</p>
+<p>早期的Web项目一般是在服务器端进行渲染，服务器进程从数据库获取数据后，利用后端模板引擎，甚至于直接在HTML模板中嵌入后端语言（例如JSP），将数据加载进来生成HTML，然后通过网络传输到用户的浏览器中，然后被浏览器解析成可见的页面。而前端渲染则是在浏览器里利用JS把数据和HTML模板进行组合。两种方式各有自己的优缺点，需要更具自己的业务场景来选择技术方案。</p>
+<p>前端渲染的优点在于：<br>① 业务分离，后端只需要提供数据接口，前端在开发时也不需要部署对应的后端环境，通过一些代理服务器工具就能远程获取后端数据进行开发，能够提升开发效率。<br>② 计算量转移，原本需要后端渲染的任务转移给了前端，<strong>减轻了服务器的压力</strong>。</p>
+<p>而后端渲染的优点在于：<br>① <strong>对搜索引擎友好</strong>。<br>② 首页加载时间短，后端渲染加载完成后就直接显示HTML，但前端渲染在加载完成后还需要有段js渲染的时间。</p>
+<p>Vue.js 2.0开始支持服务端渲染，从而让开发者在使用上有了更多的选择。</p>
+<a id="more"></a>
+<h3 id="条件渲染"><a href="#条件渲染" class="headerlink" title="条件渲染"></a>条件渲染</h3><p>为元素挂上v-if指令即可，与之配套的还有v-else-if和v-else。<code>v-if</code> 指令用于条件性地渲染一块内容。这块内容只会在指令的表达式返回除了 <code>false</code>，<code>0</code>，<code>&quot;&quot;</code>，<code>null</code>，<code>undefined</code> 和 <code>NaN</code> 外的值的时候被渲染。</p>
+<p>v-show也可以用于实现条件渲染，不过它只是简单地切换元素的CSS属性：display。</p>
+<h4 id="v-if和v-show的区别"><a href="#v-if和v-show的区别" class="headerlink" title="v-if和v-show的区别"></a>v-if和v-show的区别</h4><p>相对于v-if来说，v-show并不能算作真正的条件渲染，因为挂载它的多个元素之间并没有条件上下文关系。v-show判定为假的元素的display属性被赋值为none，不过仍保留在DOM中，而v-if判定为假的元素则根本没有在DOM中出现。<strong>v-if引起了dom操作级别的变化，而v-show仅发生了样式的变化，从切换的角度考虑，v-show消耗的性能要比v-if小。</strong></p>
+<p>除此之外，v-if切换时，Vue.js会有一个局部编译/卸载的过程，因为v-if中的模板也可能包括数据绑定或子组件。v-if会确保条件块在切换当中适当地销毁与中间内部的事件监听器和子组件。而且<strong>v-if是惰性的</strong>，如果在初始条件为假时，v-if本身什么都不会做，而v-show则仍会进行正常的操作，然后把css样式设置为display:none。</p>
+<p>几个注意点<br>●v-if会在切换中将组件上的事件监听器和子组件销毁和重建。当组件被销毁时，它将无法被任何方式获取，因为它已不存在于DOM中。<br>●在创建父组件时，如果子组件的v-if被判定为假，Vue不会对子组件做任何事情，直到第一次判定为真时。这在使用Vue生命周期钩子函数时要尤为注意，如果生命周期已走过组件创建的阶段，却仍无法获取组件对象，想一想，是不是v-if在作怪。<br>●<strong>一般来说，<code>v-if</code> 会牵涉到虚拟 DOM diff 算法，有更高的切换开销，而 <code>v-show</code> 有更高的初始渲染开销。因此，如果需要非常频繁地切换，则使用 <code>v-show</code> 较好；如果在运行时条件很少改变，则使用 <code>v-if</code> 较好。</strong><br>●v-show不支持template元素</p>
+<h3 id="列表渲染"><a href="#列表渲染" class="headerlink" title="列表渲染"></a>列表渲染</h3><p>v-for用于实现列表渲染，可以使用item in items或者item of items的语法</p>
+<p>语法<br><code>v-for = &#39; (item, index) in items&#39;</code><br>➢ item表示每次遍历得到的元素<br>➢ index表示item的索引，为可选参数<br>➢ items表示数组或者对象</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/20/15899055673417.jpg" alt=""><br>如上所示是一个双层循环。第一层遍历数组，第二层遍历数组中对象的键值对。在遍历对象时，是按Object.keys()的结果进行遍历，但是不能保证它的结果在不同的JavaScript引擎下是一致的。</p>
+<p>除了数组和对象，v-for还可以接受单个整数，用作循环次数</p>
+<p>Vue会把数组当作被观察者加入响应式系统中，当调用一些方法修改数组时，对应的视图将会同步更新。<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/20/15899057576386.png" alt=""></p>
+<p>上面这些数组操作方法，会<strong>直接改变原始数组</strong>称为<strong>变异方法</strong>，会促使视图自动更新。</p>
+<p>非变异方法，例如：filter()、slice()、concat()，他们都是返回一个新数组，那么，在 Vue 中使用到这些方法，怎么样才能促使视图更新呢？我们就必须使用<strong>数组替换法</strong>，将非变异方法返回的新数组直接赋值给的旧数组</p>
+<p>如：<code>this.nav = this.nav.slice(1,4)</code></p>
+<h4 id="采用set方法去更新值"><a href="#采用set方法去更新值" class="headerlink" title="采用set方法去更新值"></a>采用set方法去更新值</h4><p>因为Vue.js对data中数组的原生方法进行了封装，所以在改变数组时能触发视图更新，但以下两种情况是无法触发视图更新的：<br>① 通过索引直接修改数组元素，例如vm.items[0] = { title : ‘title-changed’}; —使用下标／键名为数组／对象设置成员时<br>② 无法直接修改“修改数组”的长度，例如：vm.items.length = 0</p>
+<p>对于第一种情况，Vue.js提供了<strong><code>$set</code>方法或者其他能引起原始数组改变的方法</strong>：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// Vue.set</span></span><br><span class="line">Vue.set(vm.items, indexOfItem, newValue)</span><br><span class="line"><span class="comment">// Array.prototype.splice</span></span><br><span class="line">vm.items.splice(indexOfItem, <span class="number">1</span>, newValue)</span><br></pre></td></tr></table></figure>
+<p>同样对于对象而言，由于 JavaScript 的限制，<strong>Vue 不能检测对象属性的添加或删除</strong>，直接进行修改操作是不会构成响应式，不会触发视图更新。必须使用 <strong><code>Vue.set(object, key, value)</code> 方法向嵌套对象添加响应式属性</strong></p>
+<h4 id="key属性"><a href="#key属性" class="headerlink" title="key属性"></a>key属性</h4><p>在列表渲染的时候，为了给 Vue 一个提示，以便它能跟踪每个节点的身份，从而重用和重新排序现有元素，你需要为每项提供一个唯一 <code>key</code> 属性。</p>
+<p>Vue1.0可以通过<strong>trace-by</strong>给数组设定唯一标识绑定，这样，Vue.js在渲染过程中会尽量复用原有对象的作用域及DOM元素。</p>
+<p>在Vue.js 2.2.0以上的版本里，当在组件中使用v-for时，<strong>key是必须的</strong>，然而，任何数据都不会被自动传递到组件里，因为组件有自己独立的作用域。为了把迭代数据传递到组件里，需要使用props：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">my-component</span> <span class="attr">v-for</span>=<span class="string">"(item, index) in items"</span>    <span class="attr">v-bind:item</span>=<span class="string">"item"</span>     <span class="attr">v-bind:index</span>=<span class="string">"index"</span>     <span class="attr">v-bind:key</span>=<span class="string">"item.id"</span>    &gt;</span><span class="tag">&lt;/<span class="name">my-component</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>不能自动将item注入到组件里的原因是，会使组件与v-for的运作紧密耦合。明确组件数据的来源能够使组件在其他场合重复使用。</p>
+<p>具体来说，当使用v-for更新已渲染过的元素列表时，默认用<strong>“就地复用”策略</strong>。如果数据项的顺序被改变，Vue.js将不会移动DOM元素来匹配数据项的顺序，而是简单复用此处每个元素，并且确保它在特定索引下显示已被渲染过的每个元素。这个默认的模式是高效的，但是只适用于不依赖子组件状态或临时DOM状态（如表单输入值）的列表渲染输出。所以为了给Vue.js一个提示，以便能跟踪每个节点的身份，从而重用和重新排序现有元素，开发者需要为每项提供一个唯一的key属性。</p>
+<h4 id="显示过滤"><a href="#显示过滤" class="headerlink" title="显示过滤"></a>显示过滤</h4><p>显示一个数组的过滤或排序副本，而不实际改变或重置原始数据。在这种情况下，可以创建返回过滤或排序数组的计算属性或者直接用方法。</p>
+<p>可以视为一种缓存？有点像数据库里的view</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">span</span> <span class="attr">v-for</span>=<span class="string">"number in oddNumber"</span>&gt;</span>&#123;&#123;number&#125;&#125;<span class="tag">&lt;/<span class="name">span</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">        el:<span class="string">'#app'</span>,</span></span><br><span class="line"><span class="undefined">        data:&#123;</span></span><br><span class="line"><span class="undefined">            numberArray:[1,2,3,4,5,6,7,8]</span></span><br><span class="line"><span class="undefined">        &#125;,</span></span><br><span class="line"><span class="undefined">        computed: &#123;</span></span><br><span class="line"><span class="javascript">            <span class="comment">//计算 numberArray 中为奇数的 oddNumber 奇数数组</span></span></span><br><span class="line"><span class="javascript">            oddNumber:<span class="function"><span class="keyword">function</span>(<span class="params"></span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">                <span class="keyword">return</span> <span class="keyword">this</span>.numberArray.filter(<span class="function"><span class="keyword">function</span>(<span class="params">number</span>)</span>&#123;</span></span><br><span class="line"><span class="javascript">                    <span class="keyword">return</span> number%<span class="number">2</span>===<span class="number">1</span></span></span><br><span class="line"><span class="undefined">                &#125;)</span></span><br><span class="line"><span class="undefined">            &#125;</span></span><br><span class="line"><span class="undefined">        &#125;,</span></span><br><span class="line"><span class="undefined">    &#125;)</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h3 id="同时使用"><a href="#同时使用" class="headerlink" title="同时使用"></a>同时使用</h3><p>两种渲染方式可以配合起来使用</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"> <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-if</span>=<span class="string">"numbers.length"</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">div</span> <span class="attr">v-for</span>=<span class="string">"item in numbers"</span>&gt;</span></span><br><span class="line">            &#123;&#123;item&#125;&#125;</span><br><span class="line">        <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">"color:red"</span> <span class="attr">v-else</span>&gt;</span>请添加数组元素<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="undefined"></span></span><br><span class="line"><span class="javascript">    <span class="keyword">var</span> app = <span class="keyword">new</span> Vue(&#123;</span></span><br><span class="line"><span class="javascript">        el:<span class="string">'#app'</span>,</span></span><br><span class="line"><span class="undefined">        data:&#123;</span></span><br><span class="line"><span class="undefined">            numbers:[1,2,3,4]</span></span><br><span class="line"><span class="undefined">        &#125;        </span></span><br><span class="line"><span class="undefined">    &#125;)</span></span><br><span class="line"><span class="undefined"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>对于这两种渲染方式，如何要同时处理多个DOM元素，可以放在<strong>template标签</strong>内。但template标签本身不会显示在DOM渲染结果中。注意v-show不支持template元素</p>
+<p>当它们处于<strong>同一节点</strong>，v-for的优先级比v-if更高，这意味着v-if将分别重复运行于每个v-for循环中。</p>
+<h3 id="Vue-js-2-0新特性"><a href="#Vue-js-2-0新特性" class="headerlink" title="Vue.js 2.0新特性"></a>Vue.js 2.0新特性</h3><p>与渲染有关的主要是两个方面，Render函数和服务端渲染。Render函数给开发者提供了自由度更高的模板编程能力，而不仅仅局限于之前的v-if/v-else指令。服务端渲染则为SPA项目提供了有利于SEO和网络情况慢的解决方案，弥补了纯粹前端渲染的一些弊端。</p>
+<h4 id="Render函数"><a href="#Render函数" class="headerlink" title="Render函数"></a>Render函数</h4><p>除了给定的两种渲染方式以外，还可以用render自定义渲染函数，通过参数动态地加载组件选项</p>
+<p>Render函数中主要提供了createElement方法<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/20/15899091351658.jpg" alt=""></p>
+<p>函数化组件是一个没有状态（data）和没有实例（this上下文）的一种组件类型，只通过render函数进行渲染，以及render函数中新增的context参数来传递上下文。由于不存在状态和上下文，组件的渲染开销就比较低，常用于不含具体模板，但根据所传参数可以生成具体类型组件的情况（有点类似于abstract class）</p>
+<h4 id="服务端渲染"><a href="#服务端渲染" class="headerlink" title="服务端渲染"></a>服务端渲染</h4><p>主要依赖于Vue-server-renderer，由它提供了方法将Vue.js实例转化成HTML字符串形式。</p>
+<p>这部分以后再看吧</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Vue/" rel="tag"><i class="fa fa-tag"></i> Vue</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/frontend/2020-05-19-Vue响应式原理.html" rel="next" title="Vue响应式原理">
+                <i class="fa fa-chevron-left"></i> Vue响应式原理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">虚己以游世，乘物以游心</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">97</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">86</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#条件渲染"><span class="nav-number">1.</span> <span class="nav-text">条件渲染</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#v-if和v-show的区别"><span class="nav-number">1.1.</span> <span class="nav-text">v-if和v-show的区别</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#列表渲染"><span class="nav-number">2.</span> <span class="nav-text">列表渲染</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#采用set方法去更新值"><span class="nav-number">2.1.</span> <span class="nav-text">采用set方法去更新值</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#key属性"><span class="nav-number">2.2.</span> <span class="nav-text">key属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#显示过滤"><span class="nav-number">2.3.</span> <span class="nav-text">显示过滤</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#同时使用"><span class="nav-number">3.</span> <span class="nav-text">同时使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Vue-js-2-0新特性"><span class="nav-number">4.</span> <span class="nav-text">Vue.js 2.0新特性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Render函数"><span class="nav-number">4.1.</span> <span class="nav-text">Render函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#服务端渲染"><span class="nav-number">4.2.</span> <span class="nav-text">服务端渲染</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
