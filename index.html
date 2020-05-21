@@ -303,6 +303,185 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-05-21-Vue生命周期.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/frontend/2020-05-21-Vue生命周期.html" itemprop="url">Vue生命周期</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-21T20:51:05+08:00">
+                2020-05-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  873
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>所谓“生命周期”，是指实例对象从构造函数开始执行（被创建）到被GC（Garbage Collection，垃圾回收）回收销毁的整个存在时期，在生命周期中被自动调用的函数叫作生命周期函数，也被形象地称为生命周期钩子函数。</p>
+<p>可以利用不同时期的钩子函数去完成不同的操作。例如需要在某个时期去获取后台数据、在某个时期去更新数据等。利用生命周期钩子函数可以精准定位到某个时期去完成一些特定的事情。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/20/15899797080493.png" alt=""></p>
+<ol>
+<li>beforeCreate：在实例开始初始化时同步调用，在组件实例刚被创建的时候增加一些loading事件。此时数据观测、事件等都尚未初始化。data不可见</li>
+<li>created：在实例创建之后调用。此时已完成数据观测、属性和方法的运算，watch/event事件回调。但尚未开始DOM编译，即未挂载到document中。$el属性不可见</li>
+<li>beforeMount：在mounted之前运行。相关render函数首次被调用</li>
+<li>mounted：在编译结束时调用。此时所有指令已生效，数据变化已能触发DOM更新，但不保证$el已插入文档。</li>
+<li>beforeUpdate：在实例挂载之后，再次更新实例（如更新data）时会调用该方法，此时尚未更新DOM结构。</li>
+<li>updated：在实例挂载之后，再次更新实例并更新完DOM结构后调用。注意监听的是DOM而不是数据。该钩子在服务器端渲染时不会被调用</li>
+<li>beforeDestroy：在开始销毁实例时调用，此刻实例仍然有效。该钩子在服务器端渲染时不会被调用</li>
+<li>destroyed：在实例被销毁之后调用。此时所有绑定和实例指令都已经解绑，子实例也被销毁。该钩子在服务器端渲染时不会被调用</li>
+<li>activated：需要配合动态组件keep-live属性使用。在动态组件初始化渲染的过程中调用该方法。</li>
+<li>deactivated：需要配合动态组件keep-live属性使用。在动态组件初始化移出的过程中调用该方法。</li>
+</ol>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/frontend/2020-05-21-Vue生命周期.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-05-20-Vue渲染方法.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1843,185 +2022,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/thinking/2020-03-26-西方的幻灭.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liana_Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Anonymous World">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/thinking/2020-03-26-西方的幻灭.html" itemprop="url">西方的幻灭</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-26T22:33:54+08:00">
-                2020-03-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/thinking/" itemprop="url" rel="index">
-                    <span itemprop="name">thinking</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1,054
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>不管是被定义为受害者，还是加害者，结局好像并无太大的不同。</p>
-<blockquote>
-<p>我们总是过于自卑，又过于自傲。</p>
-</blockquote>
-<p>我们不理解西方用生命换来的自由文化，也不理解日本拼命隐瞒的耻感意识。</p>
-<p>…</p>
-<p>(中间写了一些，后来都删掉了，这个话题还是不写了)</p>
-<p>我对zz其实并无太大兴趣，只想写点民族性的东西，那还是换个角度吧。</p>
-<p>今天看了浙大郑强教授05年的讲座，因其超前的预见性，颇有点触动。</p>
-<blockquote>
-<p>在灾难中跑得最快的一定是那些开奔驰宝马的人，抗在一线的一定是那些深山老林的边防战士。</p>
-</blockquote>
-<p>他的这句话，放在今天，换了角色同样适用。</p>
-<p>还有诸如从小学初中就被放到国外培养的孩子比长大后留学的孩子更加可怕，这些也有相应的新闻印证。当然这种“可怕”，是从我们自己民族和国家的角度去看的，他们自己会为摆脱了什么落后愚昧的东西而庆幸着，反过来要挥舞着自由民主的大旗，开始攻击自己的同胞，地位也似乎上了一级，变成俯视了。</p>
-<p>难道真是欧美一场大雨，就洗清了自己的骨头？</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/thinking/2020-03-26-西方的幻灭.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2076,7 +2076,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">97</span>
+                  <span class="site-state-item-count">98</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2098,7 +2098,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">86</span>
+                  <span class="site-state-item-count">85</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
