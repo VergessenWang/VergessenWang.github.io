@@ -1,0 +1,932 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="MVVM," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="MVC不是框架，不是设计模式，也不是软件架构，而是一种架构模式。 ● 框架（Framework）：是一个系统的可重用设计，表现为一组抽象的可交互方法。它就像若干类的构成，涉及若干构件，以及构件之间的相互依赖关系、责任分配和流程控制等。比如，C++语言的QT、MFC、GTK, Java语言的SSH、SSI, PHP语言的Smarty（MVC模式）, Python语言的Django（MTV模式）等。●">
+<meta name="keywords" content="MVVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MVC&amp;MVVM">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/frontend/2020-05-18-MVC-MVVM.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="MVC不是框架，不是设计模式，也不是软件架构，而是一种架构模式。 ● 框架（Framework）：是一个系统的可重用设计，表现为一组抽象的可交互方法。它就像若干类的构成，涉及若干构件，以及构件之间的相互依赖关系、责任分配和流程控制等。比如，C++语言的QT、MFC、GTK, Java语言的SSH、SSI, PHP语言的Smarty（MVC模式）, Python语言的Django（MTV模式）等。●">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/18/15897814849877.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/18/15897815102851.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/18/15897838630161.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/18/15897823026047.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/18/15897854618737.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/18/15897831909320.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/18/15897840659801.png">
+<meta property="og:updated_time" content="2020-05-21T13:05:08.523Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="MVC&amp;MVVM">
+<meta name="twitter:description" content="MVC不是框架，不是设计模式，也不是软件架构，而是一种架构模式。 ● 框架（Framework）：是一个系统的可重用设计，表现为一组抽象的可交互方法。它就像若干类的构成，涉及若干构件，以及构件之间的相互依赖关系、责任分配和流程控制等。比如，C++语言的QT、MFC、GTK, Java语言的SSH、SSI, PHP语言的Smarty（MVC模式）, Python语言的Django（MTV模式）等。●">
+<meta name="twitter:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/18/15897814849877.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/frontend/2020-05-18-MVC-MVVM.html"/>
+
+
+
+
+
+  <title>MVC&MVVM | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-05-18-MVC-MVVM.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">MVC&MVVM</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-18T18:17:35+08:00">
+                2020-05-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,004
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>MVC不是框架，不是设计模式，也不是软件架构，而是一种架构模式。</p>
+<p>● 框架（Framework）：是一个系统的可重用设计，表现为一组抽象的可交互方法。它就像若干类的构成，涉及若干构件，以及构件之间的相互依赖关系、责任分配和流程控制等。比如，C++语言的QT、MFC、GTK, Java语言的SSH、SSI, PHP语言的Smarty（MVC模式）, Python语言的Django（MTV模式）等。<br>● 设计模式（Design Pattern）：是一套被反复使用、多数人知晓的、经过分类的代码设计经验总结。其目的是为了代码的可重用性、让代码更容易被他人理解、保证代码的可靠性。比如，工厂模式、适配器模式和策略模式等。<br>● 软件架构（Software architecture）：是一系列相关的抽象模式，用于指导大型软件系统各个方面的设计。软件架构是一个系统的草图，软件体系结构是构建计算机软件实践的基础。<br>● 架构模式（风格）：也可以说成框架模式，一个架构模式描述软件系统里基本的结构组织或纲要。架构模式提供一些事先定义好的子系统，指定它们的责任，并给出把它们组织在一起的法则和指南。一个架构模式常常可以分解成很多个设计模式的联合使用。MVC模式就属于架构模式，还有MTV、MVP、CBD和ORM等。</p>
+<a id="more"></a>
+<h3 id="MVC"><a href="#MVC" class="headerlink" title="MVC"></a>MVC</h3><p>MVC模式是软件工程中的一种<strong>软件架构模式</strong>，把软件系统分为三个基本部分：模型（Model）、视图（View）和控制器（Controller）。</p>
+<p>模型负责数据的持久化（也就是存储）；视图负责数据的输入和显示，直接和用户交互的一层，如大家看到的网站的页面内容、在表单上输入的数据；控制器负责具体的业务逻辑，根据用户的请求内容操作相应的模型和视图。</p>
+<p>Controller本身不输出任何内容，也不做任何处理，它只是接收请求并决定调用哪个模型构件去处理请求，然后确定用哪个视图来显示返回的数据。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/18/15897814849877.png" alt=""></p>
+<p>中介模式通过一个中介对象来封装一系列的对象交互，使多个对象之间不需要显式地相互引用，从而使其耦合松散。<strong>MVC模式可以理解成对中介模式的一种延伸</strong></p>
+<p>外观模式的核心思想是：用一个简单的接口来封装一个复杂的系统，使这个系统更容易使用，也就是对软件进行分层，不同的层实现不同的功能。而 MVC 模式将这一思想应用到了极致</p>
+<h3 id="MVP"><a href="#MVP" class="headerlink" title="MVP"></a>MVP</h3><p>MVP是MVC的一个变种，在MVP中使用Presenter对视图和模型进行解耦。Presenter相当于MVC中的Controller，负责业务逻辑的处理；Model和View不能直接通信，只能通过Presenter间接地通信</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/18/15897815102851.png" alt=""></p>
+<p>Java的Spring MVC就是用的这种模式<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/18/15897838630161.png" alt=""></p>
+<h3 id="MVT"><a href="#MVT" class="headerlink" title="MVT"></a>MVT</h3><p>MTV 模式本质上与 MVC 模式没有什么差别，也是各组件之间保持松耦合关系，只是定义上有些许不同。</p>
+<p>Model（模型）：负责业务对象与数据库的对象（ORM）。<br>Template（模板）：负责如何把页面展示给用户。<br>View（视图）：负责业务逻辑，并在适当的时候调用Model和Template。</p>
+<p>Python的Django就是用这种模式实现的<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/18/15897823026047.png" alt=""></p>
+<h3 id="MVVM"><a href="#MVVM" class="headerlink" title="MVVM"></a>MVVM</h3><p>MVVM（Model-View-ViewModel）最早由微软提出，ViewModel指“Model of View”，即“视图的模型”，它将View的状态和行为抽象化，让我们可以将UI和业务逻辑分开，将原来MVC中的C（Controller）用VM（ViewModel）来取代，相当于对MVC做了拓展。</p>
+<p>在MVP中，Presenter负责协调和控制Model与View的工作，保证Model和View的数据实时同步和更新，但这个操作需要程序员写代码手动控制。而MVVM中ViewModel把View和Model的同步逻辑自动化了，以前Presenter负责的View和Model同步不再需要手动地进行操作，而是交给框架所提供的数据绑定功能来负责，只需要告诉它View显示的数据对应的是Model的哪一部分即可。<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/18/15897854618737.jpg" alt=""></p>
+<p>除了熟悉的这3部分之外，其实在MVVM的实现中还引入了一个隐式的Binder层，声明式数据和命令绑定在MVVM模式中就是通过它实现的。DataBinding是一个实现数据和View层绑定的框架，是构建MVVM模式的关键工具。<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/18/15897831909320.png" alt=""></p>
+<p><strong>双向数据绑定</strong>可以简单地理解为一个模板引擎，当视图改变时更新模型，当模型改变时更新视图。不同的框架实现双向数据绑定的技术有所不同，一般有以下3种</p>
+<ul>
+<li>数据劫持</li>
+<li>发布-订阅模式</li>
+<li>脏值检查</li>
+</ul>
+<p>Vue采用<strong>数据劫持和发布-订阅模式</strong>的方式。</p>
+<ul>
+<li>Observer：数据监听器</li>
+<li>Compiler：指定解析器</li>
+<li>Watcher：订阅者</li>
+</ul>
+<p>Observer用于监听数据变化，如果数据发生改变，不论是在View层还是Model层，Oberver都会知道，然后告诉Watcher。Compiler的作用是对数据进行解析，之后绑定指定的事件，在这里主要用于更新视图。<br>Vue.js数据绑定的流程：首先将需要绑定的数据用数据劫持方法找出来，之后用Observer监听这堆数据，如果数据发生变化，Observer就会告诉Watcher，然后Watcher会决定让哪个Compiler去做出相应的操作，这样就完成了数据的双向绑定。</p>
+<h3 id="虚拟DOM"><a href="#虚拟DOM" class="headerlink" title="虚拟DOM"></a>虚拟DOM</h3><p>虚拟DOM只是MVVM框架的一种实现方案，二者没有好坏之分。在流行的前端框架中，除了React采用虚拟DOM之外，其他MVVM系框架，如Angular、Vue、Avalon，采用的都是数据绑定。</p>
+<p>当有数据变化要进行对应的操作时，React检查是DOM结构层面的，而MVVM的检查则是数据层面的。MVVM的性能检测也根据检测层面的不同而有所不同：Angular的脏检查使得任何变动都会产生固定的更新的代价；而Vue/Avalon采用的依赖收集，使得在JS和DOM层面都会产生更新。</p>
+<p>· 脏检查：scope digest +必要DOM更新<br>· 依赖收集：重新收集依赖+必要DOM更新</p>
+<p>可以看出，Angular效率低的地方在于任何小变动都会引起界面的重绘，但是，当所有数据都变化的时候，Angular并不吃亏。依赖收集在初始化和数据变化的时候都需要重新收集依赖，在数据流比较小的时候几乎可以忽略，但在数据量比较大的时候就会产生一定的消耗。相比之下，React的变动检查则是DOM结构层面的，即使是全新的数据，只要渲染结果没有变化，也不需要重新绘制。</p>
+<p>Angular和Vue都提供了重绘的优化机制，即有效地复用实例和DOM元素。在优化的版本中，Angular和Vue采用了track by $index技术后比React的效率更高。</p>
+<p>所以在框架选择和技术性能分析的时候，要分清楚初始渲染、小量数据更新、大量数据更新这些不同的场合，以及DOM、脏检查MVVM、数据收集MVVM在不同场合各自的表现和优缺点，具体表现和区别如下。<br>· 初始渲染阶段：Virtual DOM &gt;脏检查≥依赖收集<br>· 小量数据更新时：依赖收集&gt;Virtual DOM +优化&gt;脏检查（无法优化）&gt; Virtual DOM无优化<br>· 大量数据更新时：脏检查+优化≥依赖收集+优化&gt;Virtual DOM（无优化）&gt; MVVM无优化</p>
+<h3 id="实际应用"><a href="#实际应用" class="headerlink" title="实际应用"></a>实际应用</h3><p>例如在浏览器端使用MVVM , 在服务器端可以使用MVC。而从宏观来看，前端又可视为view，后端又可视为model。<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/18/15897840659801.png" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/MVVM/" rel="tag"><i class="fa fa-tag"></i> MVVM</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/NLP/2020-05-13-NLP多文本分类Baseline复现.html" rel="next" title="NLP多文本分类Baseline复现">
+                <i class="fa fa-chevron-left"></i> NLP多文本分类Baseline复现
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/frontend/2020-05-19-Vue响应式原理.html" rel="prev" title="Vue响应式原理">
+                Vue响应式原理 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">虚己以游世，乘物以游心</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">99</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">85</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#MVC"><span class="nav-number">1.</span> <span class="nav-text">MVC</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVP"><span class="nav-number">2.</span> <span class="nav-text">MVP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVT"><span class="nav-number">3.</span> <span class="nav-text">MVT</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MVVM"><span class="nav-number">4.</span> <span class="nav-text">MVVM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#虚拟DOM"><span class="nav-number">5.</span> <span class="nav-text">虚拟DOM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实际应用"><span class="nav-number">6.</span> <span class="nav-text">实际应用</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
