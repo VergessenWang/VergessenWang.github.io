@@ -119,7 +119,7 @@
 
 
 
-  <meta name="keywords" content="Anonymous World" />
+  <meta name="keywords" content="Pytorch," />
 
 
 
@@ -130,17 +130,24 @@
 
 
 
-<meta name="description" content="开学五门考试终于完了，想来赵振刚老师和郭燕老师真是神仙老师啊，一个给我们布置了五次作业还在Q群里语音讲题，一个专门录了一套视频放到B站上，平时学习的较深，但是考试的时候都是很基础很细节的东西，教育不只为通过考试，这大概也是学习的真正意义。 于是有点放飞自我，翻了翻以前想看的电影，看完了《波西米亚狂想曲》和《鸟人》 听着皇后乐队的现场版，敲着这篇文章 一个一口豁牙不自觉露出傻笑然后用抿紧嘴巴羞涩低头">
+<meta name="description" content="使用TORCHTEXT进行语言翻译 pip install scapy 之后发现语言包下不下来。官方语言库 手动下载  en_core_web_sm-2.2.5.tar.gz  de_core_news_sm-2.2.5.tar.gz  但是github仍然下载受限 于是找到了网友分享的链接： en_core_web_sm-2.2.5：下载 x9vc 因为最终要做的是中英文翻译，直接找了一个中文库">
+<meta name="keywords" content="Pytorch">
 <meta property="og:type" content="article">
-<meta property="og:title" content="自我表达与被认同感">
-<meta property="og:url" content="http://vergessenwang.github.io/posts/movie/2019-09-10-自我表达与被认同感.html">
+<meta property="og:title" content="PytorchText语言翻译Tutorial使用">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/NLP/2020-05-27-PytorchText语言翻译Tutorial使用.html">
 <meta property="og:site_name" content="Anonymous World">
-<meta property="og:description" content="开学五门考试终于完了，想来赵振刚老师和郭燕老师真是神仙老师啊，一个给我们布置了五次作业还在Q群里语音讲题，一个专门录了一套视频放到B站上，平时学习的较深，但是考试的时候都是很基础很细节的东西，教育不只为通过考试，这大概也是学习的真正意义。 于是有点放飞自我，翻了翻以前想看的电影，看完了《波西米亚狂想曲》和《鸟人》 听着皇后乐队的现场版，敲着这篇文章 一个一口豁牙不自觉露出傻笑然后用抿紧嘴巴羞涩低头">
+<meta property="og:description" content="使用TORCHTEXT进行语言翻译 pip install scapy 之后发现语言包下不下来。官方语言库 手动下载  en_core_web_sm-2.2.5.tar.gz  de_core_news_sm-2.2.5.tar.gz  但是github仍然下载受限 于是找到了网友分享的链接： en_core_web_sm-2.2.5：下载 x9vc 因为最终要做的是中英文翻译，直接找了一个中文库">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-03-11T15:37:25.500Z">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/21/20200521222653.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/21/20200521230224.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/21/20200521234330.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/21/20200521235135.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/21/20200522011739.png">
+<meta property="og:updated_time" content="2020-05-27T15:49:50.178Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="自我表达与被认同感">
-<meta name="twitter:description" content="开学五门考试终于完了，想来赵振刚老师和郭燕老师真是神仙老师啊，一个给我们布置了五次作业还在Q群里语音讲题，一个专门录了一套视频放到B站上，平时学习的较深，但是考试的时候都是很基础很细节的东西，教育不只为通过考试，这大概也是学习的真正意义。 于是有点放飞自我，翻了翻以前想看的电影，看完了《波西米亚狂想曲》和《鸟人》 听着皇后乐队的现场版，敲着这篇文章 一个一口豁牙不自觉露出傻笑然后用抿紧嘴巴羞涩低头">
+<meta name="twitter:title" content="PytorchText语言翻译Tutorial使用">
+<meta name="twitter:description" content="使用TORCHTEXT进行语言翻译 pip install scapy 之后发现语言包下不下来。官方语言库 手动下载  en_core_web_sm-2.2.5.tar.gz  de_core_news_sm-2.2.5.tar.gz  但是github仍然下载受限 于是找到了网友分享的链接： en_core_web_sm-2.2.5：下载 x9vc 因为最终要做的是中英文翻译，直接找了一个中文库">
+<meta name="twitter:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/21/20200521222653.png">
 
 
 
@@ -170,13 +177,13 @@
 
 
 
-  <link rel="canonical" href="http://vergessenwang.github.io/posts/movie/2019-09-10-自我表达与被认同感.html"/>
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/NLP/2020-05-27-PytorchText语言翻译Tutorial使用.html"/>
 
 
 
 
 
-  <title>自我表达与被认同感 | Anonymous World</title>
+  <title>PytorchText语言翻译Tutorial使用 | Anonymous World</title>
   
 
 
@@ -303,7 +310,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/movie/2019-09-10-自我表达与被认同感.html">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/NLP/2020-05-27-PytorchText语言翻译Tutorial使用.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liana_Wang">
@@ -320,7 +327,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">自我表达与被认同感</h1>
+          <h1 class="post-title" itemprop="name headline">PytorchText语言翻译Tutorial使用</h1>
         
 
         <div class="post-meta">
@@ -332,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-10T11:44:37+08:00">
-                2019-09-10
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-27T23:48:51+08:00">
+                2020-05-27
               </time>
             
 
@@ -355,8 +362,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/movie/" itemprop="url" rel="index">
-                    <span itemprop="name">movie</span>
+                  <a href="/categories/NLP/" itemprop="url" rel="index">
+                    <span itemprop="name">NLP</span>
                   </a>
                 </span>
 
@@ -386,7 +393,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,117
+                  1,081
                 </span>
               
 
@@ -411,23 +418,72 @@
       
 
       
-        <p>开学五门考试终于完了，想来赵振刚老师和郭燕老师真是神仙老师啊，一个给我们布置了五次作业还在Q群里语音讲题，一个专门录了一套视频放到B站上，平时学习的较深，但是考试的时候都是很基础很细节的东西，教育不只为通过考试，这大概也是学习的真正意义。</p>
-<p>于是有点放飞自我，翻了翻以前想看的电影，看完了《波西米亚狂想曲》和《鸟人》</p>
-<p>听着皇后乐队的现场版，敲着这篇文章</p>
-<p>一个一口豁牙不自觉露出傻笑然后用抿紧嘴巴羞涩低头的野路子歌手，出道之路凭借超强的个性和天赋顺风顺水，偶尔遇到与制作人意见不合，没关系，冒险的结果是好的。乐队内部矛盾的激化，最后弗雷迪再经历一系列打击之后明白了谁是真正重要的人，虽然他最终为自己的出格付出了生命的代价，但总体来说这算是一个励志喜剧了，他的人生停在了辉煌的顶点。</p>
-<a id="more"></a>
-<p>一个有隔空移物超能力但除了用来开门没啥卵用的导演兼演员，本来靠演爆米花电影在好莱坞有了一席之地，却打算在百老汇也实战一番拳脚，他改编了卡佛的原著，并找到一个以体验为名行流氓之事的有那么一点点才华的配角，然而事情并没有那么顺利，作为电影情节来说，这是必然的。他似乎有轻微的精神分裂，或者说过去的成就对他影响太大，正如那位极有艺术家气质的女评论家所言，好莱坞就是请几个猴子去拍也会有大把的人涌进电影院去看，而戏剧不一样，它是艺术。最终，他穿着一条短裤跑过人潮汹涌的街区，并用自己鼻子上的鲜血换来了那位评论家所著的头条。这部电影的奥妙之处在于，一种电影现实与真实现实，被迫行为和神经质内心的交织。</p>
-<p>我喜欢把事物进行对比，这次也一样，虽然只是两部随机选择的电影。</p>
-<p>音乐和戏剧是两种比较典型而且个性较强的艺术形式，必然会带来个人情感表达与大众认同之间的冲突。</p>
-<p>弗雷迪不是一个好儿子，作为从印度来的移民，他的父亲始终恪守着“善言，善思，善行”的正派言行，而他似乎在最后生命即将终结的时候才浪子回头，请求朋友的原谅，参加为非洲筹款的慈善演唱。然而，从头到尾，你对他的那些可恶行径恨不起来，天才往往比较自我，他很有才华，That’s him ,  想反还会为他的误入歧途感到惋惜。</p>
-<p>里根也不是一个好父亲，他一心只想着挽救自己过气的事业，忽略了进过戒毒所的女儿。一开始他的演技平平无奇，自我怀疑让他几近崩溃，最终他把一个真实的自己展现在舞台上，他举着手型的枪，一本正经的说着台词，一开始你觉得很滑稽，然而你会幡然醒悟，他在说自己，明白他说：<em>我只想成为你希望的样子，我现在每分钟都祈祷能成为别人，只要不是我自己…我不存在，我甚至不在这里…一切都不重要了…</em> 时意味着什么。</p>
-<p>很多人隐藏着真实的自己，因为害怕被大众所遗弃，那种真实的丑陋，也许会带来骂名。这两部电影很好的融合了自我表达与被认同感之间的矛盾。有勇气揭露真实的人，才能让作品直指人心，这种勇气本身就已经值得钦佩。</p>
-<p>迎合大众的人往往带着面具，表达自我的大多有段曲折凄凉的经历。</p>
-<p>名利与真实，只是一个选择问题。</p>
-<p>关键是，你想成为谁。</p>
+        <p><a href="http://studyai.com/pytorch-1.4/beginner/torchtext_translation_tutorial.html" target="_blank" rel="noopener">使用TORCHTEXT进行语言翻译</a></p>
+<p><code>pip install scapy</code> 之后发现语言包下不下来。<a href="https://spacy.io/models/en" target="_blank" rel="noopener">官方语言库</a></p>
+<p>手动下载  <a href="https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.2.5/en_core_web_sm-2.2.5.tar.gz" target="_blank" rel="noopener">en_core_web_sm-2.2.5.tar.gz</a>  <a href="https://github.com/explosion/spacy-models/releases/download/de_core_news_sm-2.2.5/de_core_news_sm-2.2.5.tar.gz" target="_blank" rel="noopener">de_core_news_sm-2.2.5.tar.gz</a>  但是github仍然下载受限</p>
+<p>于是找到了网友分享的链接：</p>
+<p>en_core_web_sm-2.2.5：<a href="https://pan.baidu.com/s/1f3BLZE6DFc86OEeLzrBZnA" target="_blank" rel="noopener">下载</a> x9vc</p>
+<p>因为最终要做的是中英文翻译，直接找了一个中文库：<a href="https://github.com/howl-anderson/Chinese_models_for_SpaCy" target="_blank" rel="noopener">Chinese_models_for_SpaCy</a></p>
+<p>进入存放目录 <code>pip install en_core_web_sm-2.2.5.tar.gz</code> 进行安装</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">import</span> spacy</span><br><span class="line">&gt;&gt;&gt;nlp = spacy.load(<span class="string">"en_core_web_sm"</span>)</span><br></pre></td></tr></table></figure>
+<p>检测是否安装成功</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/21/20200521222653.png" alt=""></p>
+<p>为了方便使用本来想设置一下简写 <code>spacy link en_core_web_sm en</code> 但是spacy命令无法识别，可能要用管理员身份安装吧。但是因为用虚拟环境弄的，不想把路径弄坏了，就此作罢。</p>
+<p>然而导入中文包时出错</p>
 <blockquote>
-<p>命运青睐勇者。     —— 布莱恩·辛格 《波西米亚狂想曲》</p>
+<p>ValueError: could not broadcast input array from shape (128) into shape (96)</p>
 </blockquote>
+<a id="more"></a>
+<p>回头看了一下，spacy是2.2.4版本，然后issue有人遇到了同样的问题，<a href="https://github.com/howl-anderson/Chinese_models_for_SpaCy/issues/23" target="_blank" rel="noopener">好像并没有很好的解决方法？</a></p>
+<p>算了，用NLTK吧…</p>
+<p>吃惊，我居然装过了，我明明都还没下数据包呢</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/21/20200521230224.png" alt=""></p>
+<p>找了一下路径，想起来有一次在另一个虚拟环境的时候差点被这个路径问题弄疯…<a href="[https://vergessenwang.github.io/posts/NLP/2019-11-02-NLTK-LTP%E8%BF%9B%E8%A1%8C%E4%B8%AD%E6%96%87%E5%A4%84%E7%90%86.html](https://vergessenwang.github.io/posts/NLP/2019-11-02-NLTK-LTP进行中文处理.html">见此文</a>)</p>
+<p>看来不同的虚拟环境都可以扫描到。事实证明以前踩的坑还是有用的..</p>
+<hr>
+<p>过了一会德语包居然又能下了，于是还是用spacy, 先熟悉一下训练流程。</p>
+<h3 id="Jupyter使用"><a href="#Jupyter使用" class="headerlink" title="Jupyter使用"></a>Jupyter使用</h3><p><code>conda install jupyter notebook</code> 安装</p>
+<p><code>jupyter notebook</code> 启动8888端口，默认居然启动的是IE，复制CMD中的地址，注意要带上token, 就可以在其他浏览器打开了</p>
+<p>这不就是我之前在ModelArts里面用过的界面吗…原来那个也是Jupyter啊</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/21/20200521234330.png" alt="">右上角新建一个notebook</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/21/20200521235135.png" alt=""></p>
+<p>安装 texlive-xetex 便于导出为PDF</p>
+<ul>
+<li><code>H</code>：查看所有快捷键。</li>
+<li><code>S</code>：保存当前 Notebook 内容。</li>
+<li><code>P</code>：调出 Notebook 命令栏。</li>
+<li><code>B</code>：在当前单元格下方新建空白单元格。</li>
+<li><code>M</code>：将单元格格式转换为 Markdown。</li>
+<li><code>Y</code>：将单元格格式转换为 Code。</li>
+<li>连续按 <code>D</code>+<code>D</code>：删除当前单元格。（慎用，推荐使用 X 剪切单元格代替，因为其可以起到删除效果，且删错了还可以粘贴回来）</li>
+<li>连续按 <code>I</code>+<code>I</code>+<code>I</code>：强制中止内核（当某个单元格执行时间较长或卡住时，可以强行中止，中止后前序单元格状态依旧保留，非常好用。）</li>
+<li><code>Shift + Enter</code>：运行当前单元格内容。（当 Markdown 单元格处于编辑状态时，运行即可复原）</li>
+</ul>
+<h3 id="训练过程"><a href="#训练过程" class="headerlink" title="训练过程"></a>训练过程</h3><p>按照tutorial给的步骤尝试训练</p>
+<p>因为是手动下载的并且没有link <code>tokenizer_language=&quot;de&quot;</code> 要改成对应的下载包名 <code>en_core_web_sm</code> <code>de_core_news_sm</code></p>
+<p>开始训练了</p>
+<p>2000 years later….</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/21/20200522011739.png" alt=""></p>
+<p>小霸王这训练速度我裂开了….等我有钱了我也要买2080Ti</p>
+<hr>
+<p>换到台式机上，先装了Anoconda再安依赖包</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip install torch===1.5.0 torchvision===0.6.0 -f https://download.pytorch.org/whl/torch_stable.html</span><br></pre></td></tr></table></figure>
+<p><a href="https://download.pytorch.org/whl/torch_stable.html" target="_blank" rel="noopener">https://download.pytorch.org/whl/torch_stable.html</a>  半天下不下来，直接去网站下了，我服了</p>
+<p><a href="https://download.pytorch.org/whl/cu102/torch-1.5.0-cp37-cp37m-win_amd64.whl" target="_blank" rel="noopener">cu102/torch-1.5.0-cp37-cp37m-win_amd64.whl</a></p>
+<p><a href="https://download.pytorch.org/whl/cu102/torchvision-0.6.0-cp37-cp37m-win_amd64.whl" target="_blank" rel="noopener">cu102/torchvision-0.6.0-cp37-cp37m-win_amd64.whl</a>   </p>
+<p>然后 </p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda install cudatoolkit=10.2</span><br><span class="line">pip install tensorflow tensorboard jieba torchtext</span><br></pre></td></tr></table></figure>
+<p><a href="https://files.pythonhosted.org/packages/df/05/47bef6b21a7e6e2b660b464d9017eb15d485b9e5b33188d3002dfc8e5bb1/spacy-2.2.0-cp37-cp37m-win_amd64.whl" target="_blank" rel="noopener">spacy-2.2.0-cp37-cp37m-win_amd64.whl </a>   看看2.0版本能不能用中文包, 结果发现还是有问题。</p>
+<p>还是继续用2.2.4, 试了一下可以跑，但是速度10m一个epoch, 依然很慢</p>
+<p>检查了一下 发现 torch.cuda.is_available() == false , 原来没有用上显卡…虽然我的是几年前拉跨的960了，还是要物尽其用啊。</p>
+<p>尝试一下有没有什么解决方法：</p>
+<p>看了一个显卡驱动版本是388，先用驱动精灵升级到442,升级出现问题nvidia驱动和window版本不兼容,先更新系统。</p>
+<p>我的台式机，不愧是你，还是17年更新过一次。</p>
+<p><a href="https://www.geforce.cn/drivers" target="_blank" rel="noopener">https://www.geforce.cn/drivers</a> 下载英伟达官方驱动更新程序，尝试更新到445成功。</p>
+<p>再检查<code>torch.cuda.is_available()</code>变为true了</p>
+<p>再次运行，好啦，1m一个epoch，不愧是GPU啊，可以开始愉快的写模型了~</p>
+<h3 id="结合tensorboard"><a href="#结合tensorboard" class="headerlink" title="结合tensorboard"></a>结合tensorboard</h3><p>中途装了一下tensorflow由于版本问题并不能运行。</p>
+<p>于是看到一个叫tensorboardx的工具 <a href="https://github.com/lanpa/tensorboardX" target="_blank" rel="noopener">https://github.com/lanpa/tensorboardX</a></p>
 
       
     </div>
@@ -442,6 +498,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Pytorch/" rel="tag"><i class="fa fa-tag"></i> Pytorch</a>
+          
+        </div>
       
 
       
@@ -467,8 +529,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/CS/2019-09-09-组成原理.html" rel="next" title="组成原理">
-                <i class="fa fa-chevron-left"></i> 组成原理
+              <a href="/posts/frontend/2020-05-22-Vue异步更新原理.html" rel="next" title="Vue异步更新原理">
+                <i class="fa fa-chevron-left"></i> Vue异步更新原理
               </a>
             
           </div>
@@ -476,10 +538,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/posts/life/2019-09-16-中秋记叙.html" rel="prev" title="中秋记叙">
-                中秋记叙 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -531,8 +589,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -626,6 +693,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Jupyter使用"><span class="nav-number">1.</span> <span class="nav-text">Jupyter使用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练过程"><span class="nav-number">2.</span> <span class="nav-text">训练过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#结合tensorboard"><span class="nav-number">3.</span> <span class="nav-text">结合tensorboard</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
