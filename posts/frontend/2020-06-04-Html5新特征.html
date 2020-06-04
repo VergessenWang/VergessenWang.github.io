@@ -1,0 +1,1117 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="HTML," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="学习笔记源自：绿叶 HTML指的是HTML4.01，XHTML是HTML的过渡版，HTML5是HTML的升级版。 W3C官方地址：https://www.w3.org/TR/html5/MDN官方地址：https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/HTML5 新增元素">
+<meta name="keywords" content="HTML">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Html5新特征">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/frontend/2020-06-04-Html5新特征.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="学习笔记源自：绿叶 HTML指的是HTML4.01，XHTML是HTML的过渡版，HTML5是HTML的升级版。 W3C官方地址：https://www.w3.org/TR/html5/MDN官方地址：https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/HTML5 新增元素">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/album_temp_1591252457.PNG">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15910881336641.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15910891204424.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15910961457744.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911079224021.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911084189815.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911093942145.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911090855327.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911828669975.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911828992437.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911833246198.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911840585783.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911846368583.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911848399532.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911854450293.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911849078734.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911860637800.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911887090377.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911885476766.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911920947690.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911892431154.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911894494748.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911914696500.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911928893177.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911926913419.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911930640041.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911933222035.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911938531470.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911965690966.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911991210457.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911995012241.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15912008822206.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15912014572648.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15912024058783.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15912039988549.png">
+<meta property="og:updated_time" content="2020-06-04T07:20:33.578Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Html5新特征">
+<meta name="twitter:description" content="学习笔记源自：绿叶 HTML指的是HTML4.01，XHTML是HTML的过渡版，HTML5是HTML的升级版。 W3C官方地址：https://www.w3.org/TR/html5/MDN官方地址：https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/HTML5 新增元素">
+<meta name="twitter:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/album_temp_1591252457.PNG">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/frontend/2020-06-04-Html5新特征.html"/>
+
+
+
+
+
+  <title>Html5新特征 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-06-04-Html5新特征.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Html5新特征</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-04T14:33:49+08:00">
+                2020-06-04
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5,681
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>学习笔记源自：<a href="http://www.lvyestudy.com/blog/blog0005.aspx" target="_blank" rel="noopener">绿叶</a></p>
+<p>HTML指的是HTML4.01，XHTML是HTML的过渡版，HTML5是HTML的升级版。</p>
+<p>W3C官方地址：<a href="https://www.w3.org/TR/html5/" target="_blank" rel="noopener">https://www.w3.org/TR/html5/</a><br>MDN官方地址：<a href="https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/HTML5" target="_blank" rel="noopener">https://developer.mozilla.org/zh-CN/docs/Web/Guide/HTML/HTML5</a></p>
+<h3 id="新增元素"><a href="#新增元素" class="headerlink" title="新增元素"></a>新增元素</h3><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/album_temp_1591252457.PNG" alt=""></p>
+<a id="more"></a>
+<h4 id="结构元素"><a href="#结构元素" class="headerlink" title="结构元素"></a>结构元素</h4><p>HTML5新增的主要结构元素有6个：header、nav、article、aside、section、footer。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15910881336641.png" alt=""></p>
+<h5 id="header"><a href="#header" class="headerlink" title="header"></a>header</h5><p>在HTML5中，header元素一般用于3个地方：页面头部、文章头部（article元素）和区块头部（section元素）。</p>
+<p>当用于页面头部时，header元素一般用于包含网站名称、页面LOGO、顶部导航、介绍信息等</p>
+<p>当用于文章头部时（即article元素头部），header元素一般用于包含“文章标题”和“meta信息”两部分。所谓的meta信息，一般指的是作者、点赞数、评论数等</p>
+<p>当用于区块头部时（即section元素头部），header元素一般只包含区块的标题内容</p>
+<h5 id="nav"><a href="#nav" class="headerlink" title="nav"></a>nav</h5><p>在HTML5中，nav元素一般用于3个地方：<strong>顶部导航、侧栏导航和分页导航</strong>。</p>
+<p>一般情况下，主导航主要是使用无序列表来实现。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">nav</span> <span class="attr">id</span>=<span class="string">"nav"</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">        <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">nav</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<h5 id="article"><a href="#article" class="headerlink" title="article"></a>article</h5><p>article元素一般只会用于一个地方：文章内容部分。内部可以包含header元素、section元素和footer元素等。</p>
+<h5 id="aside"><a href="#aside" class="headerlink" title="aside"></a>aside</h5><p>aside元素一般用于表示跟周围区块相关的内容</p>
+<ul>
+<li>如果aside元素放在article元素或section元素之中，则aside内容必须与article内容或section内容紧密相关。</li>
+<li>如果aside元素放在article元素或section元素之外，则aside内容应该是与整个页面相关的，比如相关文章、相关链接、相关广告等。</li>
+</ul>
+<h5 id="section"><a href="#section" class="headerlink" title="section"></a>section</h5><p>section元素一般用于某一个<strong>需要标题内容</strong>的区块。如果页面某个区块不需要标题，直接使用div元素就可以了。</p>
+<p>在实际开发中，对于页面某一个区块，优先考虑语义化更好的article元素和aside元素，如果这两个都不符合，再考虑使用section元素。</p>
+<h5 id="footer"><a href="#footer" class="headerlink" title="footer"></a>footer</h5><p>footer元素一般用于两个地方：一个是“页面底部”，另一个是“文章底部”。<br>当用于页面底部时，footer元素一般包含友情链接、版权声明、备案信息等。<br>当用于文章底部时，也就是放在article元素内部时，footer元素一般包含“上一篇/下一篇导航”“文章分类”“发布信息”等。</p>
+<h4 id="表单元素"><a href="#表单元素" class="headerlink" title="表单元素"></a>表单元素</h4><h5 id="新增input元素类型"><a href="#新增input元素类型" class="headerlink" title="新增input元素类型"></a>新增input元素类型</h5><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15910891204424.jpg" alt=""></p>
+<p>email类型的文本框采用了浏览器内置的验证机制，而浏览器内置的验证机制必须使用submit按钮才会触发。</p>
+<p>tel/url类型文本框并不具备完备的验证功能，如果想要达到验证效果，则需要<strong>结合pattern属性</strong>来实现。</p>
+<p>当type属性取值为“range”时，我们可以通过拖动滑动条获取某一个范围内的数字。<code>&lt;input type=&quot;range&quot; min=&quot;最小值&quot; max=&quot;最大值&quot; step=&quot;间隔数&quot;/&gt;</code> 在实际开发中，range类型元素都是需要结合JavaScript来操作的</p>
+<p>number类型跟range类型功能非常相似，都是获取某一个范围内的数字。不过两者的外观不一样，其中number类型使用的是“微调按钮”，而range类型使用的是“滑块”。</p>
+<p>当type属性取值为“color”时，我们可以直接使用浏览器自带的取色工具来获取颜色值。<code>&lt;input type=&quot;color&quot; value=&quot;&quot;/&gt;</code>  value属性用于设置颜色初始值，格式必须是十六进制颜色值如<code>#F1F1F1</code>，不能是关键字</p>
+<p>当我们点击date类型元素时，浏览器会弹出自带的日历工具，以方便直接选取日期。value属性用于设置日期初始值，格式必须如“2018-05-20”</p>
+<p>time的value属性用于设置时间初始值，格式必须如“08:04”。</p>
+<p>month的value属性用于设置初始值，格式必须如“2018-08”</p>
+<p>week的value属性用于设置初始值，格式必须如“2018-W04”</p>
+<h5 id="其他表单元素"><a href="#其他表单元素" class="headerlink" title="其他表单元素"></a>其他表单元素</h5><p>新增了3个表单元素：output、datalist、keygen。</p>
+<p>使用output元素来定义表单元素的输出结果或计算结果。<code>&lt;output&gt;&lt;/output&gt;</code> output元素是一个行内元素，只不过它比span元素更具有语义化。<br>output元素一般放在form元素内部，并且配合其他表单元素（如文本框等）来使用。</p>
+<p>使用datalist元素来为文本框提供一个可选的列表。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15910961457744.jpg" alt=""></p>
+<p>如果想要把datalist绑定到某个文本框，需要<strong>设置该文本框的list属性值等于datalist的id值</strong>。</p>
+<p>使用keygen元素来生成页面的密钥。如果表单内部有keygen元素，则提交表单时，keygen元素将生成一对密钥：一个保存在客户端，称为“私密钥（Private Key）”；另一个发送到服务器，称为“公密钥（Public Key）”。<br>keygen元素主要是作为客户端安全保护的一种方法，不过它在各大浏览器中的兼容性很差</p>
+<h4 id="语义化元素"><a href="#语义化元素" class="headerlink" title="语义化元素"></a>语义化元素</h4><p>使用更具有语义化的address元素来为“整个页面”或者“某一个article元素”添加地址信息（电子邮件或真实地址）。<br>一般放在footer元素内部</p>
+<p><code>&lt;time datetime=&quot;时间&quot;&gt;&lt;/time&gt;</code>datetime属性中的时间是提供给搜索引擎看的，而time标签内的时间是提供给用户看的，两者内容可以一样也可以不一样。time元素与datetime属性的关系，有点类似于img元素与alt属性的关系。</p>
+<p>使用progress元素以进度条的形式来显示某一个任务的完成度，如上传文件、下载文件等。</p>
+<p><code>&lt;progress max=&quot;最大值&quot; value=&quot;当前值&quot;&gt;&lt;/progress&gt;</code></p>
+<p><code>&lt;meter min=&quot;最小值&quot; max=&quot;最大值&quot; value=&quot;当前值&quot;&gt;&lt;/meter&gt;</code> </p>
+<p>meter元素跟progress元素非常相似，都是以进度条形式来显示数据比例。不过，两者在语义上有很大的区别：</p>
+<ul>
+<li>meter元素一般用于显示静态数据比例。所谓的静态数据，指的是很少改变的数据，例如男生人数占全班人数的比例。</li>
+<li>progress元素一般用于显示动态数据比例。所谓“动态数据”，指的是会不断改变的数据，例如下载文件的进度。</li>
+</ul>
+<p>figure和figcaption这两个元素实现“图片+图注”效果</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">figure</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">""</span> <span class="attr">alt</span>=<span class="string">""</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">figcaption</span>&gt;</span><span class="tag">&lt;/<span class="name">figcaption</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">figure</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>使用fieldset元素来给表单元素进行分组。其中，legend元素用于定义某一组表单的标题。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">fieldset</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">legend</span>&gt;</span>表单组标题<span class="tag">&lt;/<span class="name">legend</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">fieldset</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>使用fieldset和legend有两个作用：增强表单的语义；定义fieldset元素的disabled属性来禁用整个组中的表单元素。</p>
+<h4 id="改良元素"><a href="#改良元素" class="headerlink" title="改良元素"></a>改良元素</h4><p>常用的是a元素的download属性，<code>&lt;a href=&quot;文件地址&quot; download=&quot;新文件名&quot;&gt;&lt;/a&gt;</code></p>
+<p>ol元素新增了一个reversed属性，用于设置列表顺序为降序显示。</p>
+<p>使用更具有语义化的small元素来表示“小字印刷体”的文字。small元素一般用于网站底部的免责声明、版权声明等</p>
+<p>HTML5为script元素新增了两个属性：defer和async。defer和async都是异步加载的，两者区别在于，异步加载外部JavaScript文件完成后何时执行。defer等到整个HTML文档加载完成才会执行，更符合大多数开发场景对脚本加载执行的要求。async加载完毕立即执行</p>
+<p><a href="https://blog.csdn.net/Roobert_Chao/article/details/88835813" target="_blank" rel="noopener">html加载顺序</a> </p>
+<p><a href="https://blog.csdn.net/liuliuliu_666/article/details/52997233" target="_blank" rel="noopener">怎样使低版本的IE浏览器支持HTML5新元素？</a></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911079224021.jpg" alt=""></p>
+<h3 id="新增属性"><a href="#新增属性" class="headerlink" title="新增属性"></a>新增属性</h3><h4 id="公共属性"><a href="#公共属性" class="headerlink" title="公共属性"></a>公共属性</h4><p>使用hidden属性来显示或隐藏某一个元素。</p>
+<p>使用draggable属性来定义某一个元素是否可以被拖动。draggable=”true”只能定义元素可以被拖动这一个行为，拖动后并不会改变元素的位置。</p>
+<p>使用contenteditable属性来定义某个元素的内容是否可以被编辑。</p>
+<p>使用<code>data-*</code>属性来为元素实现自定义属性。使用DOM操作中的obj.dataset.xxx来获取data-属性的值。<strong>自定义属性在JavaScript动画以及实际开发中用得是非常多的</strong></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911084189815.jpg" alt=""></p>
+<h4 id="input元素的新增属性"><a href="#input元素的新增属性" class="headerlink" title="input元素的新增属性"></a>input元素的新增属性</h4><p>autocomplete属性一般都是<strong>结合datalist元素</strong>来实现自动提示功能。适用于所有文本框型的input元素，包括text、password、email、url、tel等。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911093942145.jpg" alt=""></p>
+<p>使用autofocus属性来实现文本框自动获取焦点。</p>
+<p>使用placeholder属性为文本框添加提示内容。</p>
+<p>使用required属性来定义文本框输入内容不能为空。</p>
+<p><strong>使用pattern属性来为文本框添加验证功能。</strong>  <code>&lt;input type=&quot;text&quot; pattern=&quot;正则表达式&quot; /&gt;</code><br>email、url、tel这3个类型的input元素，本质上都内置了pattern属性，因此它们会自动进行相关匹配验证。</p>
+<p>关于正则, 之前写过一篇关于<a href="https://vergessenwang.github.io/posts/Java/2020-02-26-Java正则表达式.html">java的正则</a> 不过JS的正则还需要重新学习一下</p>
+<h4 id="form元素的新增属性"><a href="#form元素的新增属性" class="headerlink" title="form元素的新增属性"></a>form元素的新增属性</h4><p>使用novalidate属性来禁用form元素的所有文本框内置的验证功能。然后使用JavaScript来创建更为复杂且健全的验证</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911090855327.jpg" alt=""></p>
+<h3 id="元素拖放"><a href="#元素拖放" class="headerlink" title="元素拖放"></a>元素拖放</h3><p>仅给元素设置draggable=”true”，则该元素只具备可拖曳的特点，并不能改变元素的位置。如果想要拖动改变元素的位置，我们还需要结合元素拖放触发的事件来操作。<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911828669975.png" alt=""><br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911828992437.jpg" alt=""></p>
+<p>一般情况下我们需要操作3个事件：ondragstart、ondragover和ondrop。</p>
+<p>dataTransfer对象主要用于在“源元素”与“目标元素”之间传递数据。有两个最重要的方法：setData()和getData()。在整个拖曳过程中，具体操作是这样的：开始拖放源元素时（ondragstart事件），调用setData()方法保存数据；然后在放入目标元素时（ondrop事件），调用getData()方法读取数据。</p>
+<p><code>setData(format, data);</code>  <code>getData(format);</code></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911833246198.png" alt=""></p>
+<p>注意要调用event.preventDefault()方法来屏蔽元素的默认行为。</p>
+<h3 id="文件操作"><a href="#文件操作" class="headerlink" title="文件操作"></a>文件操作</h3><p>文件上传是使用input元素来实现的，其中type属性取值为”file”。</p>
+<p>文件上传input元素有两个重要属性：multiple和accept</p>
+<ul>
+<li><p>multiple属性表示“是否选择多个文件”。</p>
+</li>
+<li><p>accept属性用于设置文件的过滤类型（MIME类型）</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911840585783.png" alt=""></p>
+</li>
+</ul>
+<p><code>&lt;input type=&quot;file&quot; accept=&quot;image/jpeg, image/png&quot; multiple/&gt;</code></p>
+<p>在文件上传元素中，将会产生一个FileList对象，它是一个类数组对象，表示所有文件的集合。其中，每一个文件就是一个File对象。有如下属性：</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911846368583.png" alt=""></p>
+<p>在HTML5中，专门提供了一个文件操作的API，即FileReader对象。我们通过FileReader对象可以很方便地读取文件中的数据。<br>FileReader对象有5个方法：</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911848399532.png" alt=""></p>
+<p>在HTML5以前，我们一般都是先将本地图片上传到服务器，等上传成功后再由后台返回图片的地址在前端显示。到了HTML5时代，我们使用FileReader对象的readAsDataURL()方法，可以不经过后台而直接将本地图片显示在页面中，这样可以减少前后端的频繁交互，减少服务器端的压力。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911854450293.jpg" alt=""></p>
+<p>FileReader对象提供了6个事件，用于检测文件的读取状态：</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911849078734.png" alt=""></p>
+<p>在HTML5中，还新增了一个Blob对象，用于代表原始二进制数据。实际上，前面介绍的File对象也继承于Blob对象。<br><code>var blob = new Blob(dataArray, type);</code> 常用于下载链接的创建</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911860637800.jpg" alt=""></p>
+<p>在实际开发中，FileReader对象的readAsText()、readAsArrayBuffer()等方法可以读取文件数据，然后结合Blob对象下载文件的功能，就可以实现将数据导出文件备份到本地。当要恢复数据时，通过input元素上传备份文件，使用readAsText()、readAsArrayBuffer()等方法读取文件，即可恢复数据。</p>
+<h3 id="本地存储"><a href="#本地存储" class="headerlink" title="本地存储"></a>本地存储</h3><p>Cookie的限制：</p>
+<ul>
+<li>大小限制：大多数浏览器支持最大为4KB的Cookie。</li>
+<li>数量限制：大多数浏览器只允许每个站点存储20个Cookie，如果想要存储更多Cookie，则旧的Cookie将会被丢弃。</li>
+<li>有些浏览器还会对它们将接收的来自所有站点的Cookie总数做出绝对限制，通常为300个。</li>
+<li>Cookie默认情况下都会随着HTTP请求发送到后台，但是实际上大多数请求都是不需要Cookie的。</li>
+</ul>
+<p>HTML5新增了3种全新的数据存储方式：localStorage、sessionStorage和indexedDB。</p>
+<p><strong>localStorage用于永久保存客户端的少量数据，sessionStorage用于临时保存客户端的少量数据，而indexedDB用于永久保存客户端的大量数据。</strong></p>
+<h4 id="localStorage"><a href="#localStorage" class="headerlink" title="localStorage"></a>localStorage</h4><p>对于localStorage来说，每一个域名可以保存5MB数据。不同浏览器的localStorage数据是不可以共用的</p>
+<p>方法：<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911887090377.png" alt=""></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911885476766.jpg" alt=""></p>
+<p>统计访问数的例子：</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911920947690.jpg" alt=""></p>
+<h4 id="sessionStorage"><a href="#sessionStorage" class="headerlink" title="sessionStorage"></a>sessionStorage</h4><p>sessionStorage对象跟localStorage对象非常相似，两者有着完全相同的方法。localStorage和sessionStorage都是window对象下的子对象。也就是说，localStorage.getItem()其实是window.localStorage.getItem()的简写。</p>
+<p>sessionStorage对象保存的是“临时数据”，用户关闭浏览器后，数据就会丢失；而localStorage对象保存的是“永久数据”，用户关闭浏览器后，数据依然存在。</p>
+<p>在实际开发中，localStorage用得比较多</p>
+<h4 id="indexedDB"><a href="#indexedDB" class="headerlink" title="indexedDB"></a>indexedDB</h4><p>在本地数据库这个技术方向，最新的HTML5标准表示只支持indexedDB。该数据库是一种存储在客户端本地的<strong>NoSQL数据库</strong></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911892431154.jpg" alt=""></p>
+<p>indexedDB对象是window对象下的一个子对象，我们可以使用indexedDB对象的open()方法来创建或打开一个数据库。<br>open()方法有两个参数：第1个参数是数据库名；第2个参数是数据库版本号。</p>
+<p>window.indexedDB.open()方法返回一个请求对象，我们将其赋值给变量request。该请求对象有两个事件：onerror事件和onsuccess事件。onerror事件表示请求失败时触发的事件，onsuccess事件表示请求成功时触发的事件</p>
+<p><strong>e.target.result获取的是一个IDBDatabase对象。</strong>通过IDBDatabase对象，我们可以获取数据库的各种信息如数据库名、版本号等。数据库的增删查改操作，都是基于这个对象的</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911894494748.png" alt=""></p>
+<p>在indexedDB中，一个对象仓库就是一张表。</p>
+<p>使用IDBDatabase对象的createObjectStore()方法来创建一个新的对象仓库。创建对象仓库，都是在onupgradeneeded事件中执行的。因此，我们必须更新数据库版本号，以便触发onupgradeneeded事件。</p>
+<p>createObjectStore()方法有两个参数：第1个参数是“对象仓库名”；第2个参数用于设置对象仓库的主键。如果你想要让主键是一个递增的数字，可以使用下面这一句代码：<br><code>var store = db.createObjectStore(&quot;对象仓库名&quot;,{autoIncrement:true});</code></p>
+<p><strong>凡是对象仓库的增删查改，都是在请求对象request的onsuccess事件中操作的</strong>。当想要使用对象仓库进行增删查改操作时，我们都需要开始一个事务。<br>使用IDBDatabase对象的transaction()方法开启一个事务，返回的是一个事务对象，即transaction对象。transaction()方法有两个参数：第1个参数是“对象仓库名”，它是“字符串数组”；第2个参数是“事务模式”，有两个取值。</p>
+<ul>
+<li>“read”：只读；</li>
+<li>“readwrite”：可读写。</li>
+</ul>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911914696500.jpg" alt=""></p>
+<p>使用ObjectStore对象的add()方法往对象仓库中添加数据<br>调用objectStore对象的delete()方法来为对象仓库删除数据<br>使用get()方法来查询对象仓库的数据<br>使用put()方法来更新对象仓库的数据<br>使用clear()方法来清空对象仓库的数据</p>
+<h3 id="音频视频"><a href="#音频视频" class="headerlink" title="音频视频"></a>音频视频</h3><p>audio和video这两个元素大多数的属性和方法都是相同的<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911928893177.jpg" alt=""></p>
+<p>video元素autoplay、controls和loop属性无须多说。而preload属性表示是否预加载，它有3个取值：</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911926913419.png" alt=""></p>
+<p>一定要使用width和height这两个属性来定义视频的宽度和高度。如果没有定义，则浏览器显示的是视频原来的大小。如果视频本身过于大，则会影响页面布局。</p>
+<p>对于HTML5视频格式，主要有3种，分别是ogg、mp4和webm。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911930640041.png" alt=""></p>
+<p>兼容：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">video</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">type</span>=<span class="string">"vdieo/ogg"</span> <span class="attr">src</span>=<span class="string">"文件路径"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">type</span>=<span class="string">"video/mp4"</span> <span class="attr">src</span>=<span class="string">"文件路径"</span> /&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">source</span> <span class="attr">type</span>=<span class="string">"video/webm"</span> <span class="attr">src</span>=<span class="string">"文件路径"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">video</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<p>视频的默认样式一般比较难看，用户体验并不好。在自定义视频中，我们不仅需要使用CSS重新制作外观样式，还需要借助JavaScript来将播放、暂停、进度条显示、音量控制等功能实现才行。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911933222035.jpg" alt=""></p>
+<p>audio元素的属性跟video元素的属性几乎是一样的</p>
+<p>对于HTML5音频格式，主要有3种，分别是ogg、mp3和wav。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911938531470.png" alt=""></p>
+<h3 id="离线应用"><a href="#离线应用" class="headerlink" title="离线应用"></a>离线应用</h3><p>HTML5离线存储是基于一个新建的.appcache文件的<strong>缓存机制</strong>（不是存储技术），通过这个文件来解析清单中的离线存储资源，这些资源就会像Cookie一样被存储下来。之后当网络处于离线状态下时，浏览器会通过被离线存储的数据进行页面展示。</p>
+<p>所谓“离线存储”，指的是建立一个URL列表，该列表可以包含HTML文件、CSS文件、JavaScript文件和图片等。离线存储的<strong>容量上限为5MB</strong>，不适合用来大量存储图片文件，只适合用来保存静态图片，比如LOGO。</p>
+<p>页面头部加入manifest属性：manifest属性的取值是cache.manifest文件的路径。网站根目录下新建一个cache.manifest文件，文件格式如下：</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911965690966.jpg" alt=""></p>
+<p>更新方式：</p>
+<ul>
+<li>自动更新，指的是通过改变cache.manifest文件的内容来触发更新缓存。最有效的方法是修改cache.manifest文件内部的版本注释<code>version xx.xx.xx</code></li>
+<li>手动更新，指的是通过JavaScript事件来操作更新缓存。如使用applicationCache对象的update()方法来更新缓存</li>
+</ul>
+<h3 id="多线程"><a href="#多线程" class="headerlink" title="多线程"></a>多线程</h3><p><strong>JavaScript的执行环境是单线程的</strong>。</p>
+<p>在HTML5中，我们可以使用Web Worker创建一个“后台线程”来执行某一段耗时较长的JavaScript程序，而不会影响页面响应。</p>
+<p>Web Worker技术基本原理就是：在当前JavaScript的主线程中，使用Worker()构造函数新建一个worker实例，然后加载某一个JavaScript文件，发送给一个<strong>后台线程</strong>来处理（注意，这里是后台线程）。</p>
+<p>使用Worker()构造函数新建一个worker实例，其中，参数url表示需要发送到后台线程处理的JavaScript文件的路径。<br><code>worker.postMessage()</code>表示发送数据给worker线程，其中参数yourdata可以是数字、字符串、对象等。<br><code>worker.onmessage = function(e){};</code>表示接收worker发过来的数据，然后进行处理。在处理函数内部，我们可以使用e.data来获取发过来的数据。</p>
+<p>一个例子：<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911991210457.jpg" alt=""></p>
+<ul>
+<li>Web Worker由于使用的是后台线程，发送给后台线程的那个JavaScript文件的使用有一定的限制，例如无法访问DOM、无法访问全局变量或全局函数等。</li>
+<li>Web Worker依然可以使用定时器的4个函数：setTimeout()、clearTimeout()、setInterval()、clearInterval()。</li>
+<li>Web Worker不支持跨域加载JavaScript。</li>
+</ul>
+<h3 id="地理位置"><a href="#地理位置" class="headerlink" title="地理位置"></a>地理位置</h3><p><code>window.navigator.geolocation</code> 获取用户的地理位置信息。HTML5定位是针对手机端的</p>
+<p>geolocation对象有3个方法：</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15911995012241.png" alt=""></p>
+<p><code>navigator.geolocation.getCurrentPosition(function(position){  ……}, error, option);</code></p>
+<p>getCurrentPosition()方法有3个参数：第1个参数是一个回调函数，表示在成功获取到当前地理位置后才会执行；第2个参数也是一个回调函数，表示在获取当前地理位置失败时才会去执行；第3个参数是一些可选属性的列表，它包含多个属性。大多数情况下，我们只会用到第1个参数。</p>
+<p>如果想要获取当前位置的信息，都是在回调函数中利用position对象来获取。position对象有很多属性</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15912008822206.png" alt=""></p>
+<p>watchPosition()跟getCurrentPosition()方法非常相似，两者有着共同的参数。它会定期地自动获取位置信息，不需要我们手动刷新页面。<br>实际上，对于watchPosition()的效果，也可以使用getCurrentPosition()结合setInterval()来实现。</p>
+<p>watchPosition()方法会返回一个数字，我们可以把它保存在变量watchID中。当想要停止监视用户位置时，把这个watchID作为参数传递给clearWatch()方法就可以实现。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15912014572648.jpg" alt=""></p>
+<p><a href="http://lbsyun.baidu.com/index.php?title=jspopular" target="_blank" rel="noopener">百度地图API</a></p>
+<p><a href="http://lbsyun.baidu.com/jsdemo.htm#i5_1" target="_blank" rel="noopener">借助百度地图API来实现驾车线路规划</a></p>
+<h3 id="桌面通知"><a href="#桌面通知" class="headerlink" title="桌面通知"></a>桌面通知</h3><p>Notification API通知属于桌面性质的通知，它跟浏览器是脱离的，消息是置顶的。</p>
+<p><code>var notice = new Notification(title, options);</code> </p>
+<p>title是必选参数，表示通知框的标题内容；options是一个对象，用来设置一些可选参数。<br>其中options对象中的参数有很多</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15912024058783.png" alt=""></p>
+<p>Notification.permission表示调用Notification对象下的permission属性，这个属性用于获取用户的确认信息，也就是确认提示框返回的值。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/04/15912039988549.png" alt=""></p>
+<h3 id="Canvas"><a href="#Canvas" class="headerlink" title="Canvas"></a>Canvas</h3><p>HTML5有两个主要的2D图形技术：Canvas和SVG。</p>
+<ul>
+<li>Canvas是使用JavaScript动态生成的，SVG是使用XML静态描述的。</li>
+<li>Canvas是基于“位图”的，适用于像素处理和动态渲染，图形放大会影响质量；SVG是基于“矢量”的，图形放大不会影响质量。使用Canvas绘制出来的是一个“位图”，而使用SVG绘制出来的是一个“矢量图”。</li>
+<li>每次发生修改，Canvas需要重绘，而SVG不需要重绘。</li>
+</ul>
+<p>Canvas技术，指的就是使用Canvas元素结合JavaScript来绘制各种图形的技术。需要以下3步：</p>
+<p>①获取Canvas对象。<br>②获取上下文环境对象Context。<br>③开始绘制图形。</p>
+<p>即，使用document.getElementById()方法来获取Canvas对象（这是一个DOM对象），然后使用Canvas对象的getContext(“2d”)方法获取上下文环境对象Context，最后使用Context对象的属性和方法来绘制各种图形。</p>
+<p>Canvas是一个行内块元素（即inline-block），我们一般需要指定其3个属性：id、width和height。默认情况下，Canvas的宽度为300px，高度为150px。<strong>对于Canvas的宽度和高度，我们一定要在HTML属性中定义，而不是在CSS样式中定义。</strong></p>
+<p>低版本兼容问题：可以在低版本IE浏览器引入excanvas.js来使用Canvas，但是在功能上也会有很多限制，例如无法使用fillText()方法等。</p>
+<p><strong>W3C坐标系的y轴正方向是向下的。</strong></p>
+<p>在Canvas中，使用moveTo()和lineTo()方法可以画各种多边形，包括三角形、矩形、多边形等。moveTo的含义是“将画笔移到该点的位置，然后开始绘图”。lineTo的含义是“从起点开始画直线，一直画到终点坐标”。再用笔连线，即stroke()。</p>
+<p>哎，这块内容有点多，看不动了，以后再专门找时间看吧。。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/HTML/" rel="tag"><i class="fa fa-tag"></i> HTML</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/frontend/2020-06-01-CSS基础.html" rel="next" title="CSS基础">
+                <i class="fa fa-chevron-left"></i> CSS基础
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">虚己以游世，乘物以游心</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">105</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">88</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#新增元素"><span class="nav-number">1.</span> <span class="nav-text">新增元素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#结构元素"><span class="nav-number">1.1.</span> <span class="nav-text">结构元素</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#header"><span class="nav-number">1.1.1.</span> <span class="nav-text">header</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#nav"><span class="nav-number">1.1.2.</span> <span class="nav-text">nav</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#article"><span class="nav-number">1.1.3.</span> <span class="nav-text">article</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#aside"><span class="nav-number">1.1.4.</span> <span class="nav-text">aside</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#section"><span class="nav-number">1.1.5.</span> <span class="nav-text">section</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#footer"><span class="nav-number">1.1.6.</span> <span class="nav-text">footer</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#表单元素"><span class="nav-number">1.2.</span> <span class="nav-text">表单元素</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#新增input元素类型"><span class="nav-number">1.2.1.</span> <span class="nav-text">新增input元素类型</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#其他表单元素"><span class="nav-number">1.2.2.</span> <span class="nav-text">其他表单元素</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#语义化元素"><span class="nav-number">1.3.</span> <span class="nav-text">语义化元素</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#改良元素"><span class="nav-number">1.4.</span> <span class="nav-text">改良元素</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新增属性"><span class="nav-number">2.</span> <span class="nav-text">新增属性</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#公共属性"><span class="nav-number">2.1.</span> <span class="nav-text">公共属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#input元素的新增属性"><span class="nav-number">2.2.</span> <span class="nav-text">input元素的新增属性</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#form元素的新增属性"><span class="nav-number">2.3.</span> <span class="nav-text">form元素的新增属性</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#元素拖放"><span class="nav-number">3.</span> <span class="nav-text">元素拖放</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文件操作"><span class="nav-number">4.</span> <span class="nav-text">文件操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#本地存储"><span class="nav-number">5.</span> <span class="nav-text">本地存储</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#localStorage"><span class="nav-number">5.1.</span> <span class="nav-text">localStorage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#sessionStorage"><span class="nav-number">5.2.</span> <span class="nav-text">sessionStorage</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#indexedDB"><span class="nav-number">5.3.</span> <span class="nav-text">indexedDB</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#音频视频"><span class="nav-number">6.</span> <span class="nav-text">音频视频</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#离线应用"><span class="nav-number">7.</span> <span class="nav-text">离线应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多线程"><span class="nav-number">8.</span> <span class="nav-text">多线程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#地理位置"><span class="nav-number">9.</span> <span class="nav-text">地理位置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#桌面通知"><span class="nav-number">10.</span> <span class="nav-text">桌面通知</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Canvas"><span class="nav-number">11.</span> <span class="nav-text">Canvas</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
