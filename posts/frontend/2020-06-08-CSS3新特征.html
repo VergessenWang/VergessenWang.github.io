@@ -1,0 +1,1064 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="CSS," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="学习笔记源自：绿叶 新增速览新增选择器 新增属性">
+<meta name="keywords" content="CSS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CSS3新特征">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/frontend/2020-06-08-CSS3新特征.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="学习笔记源自：绿叶 新增速览新增选择器 新增属性">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914481967880.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915985145823.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915985198297.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914482354274.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15913362654486.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15913378586501.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15913366876879.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15913380227910.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15913383364928.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15913409677950.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15913421541859.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15913441720468.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15913448447811.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914276175259.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914288725952.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914289736446.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914292237987.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914292490006.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914304850906.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914309728556.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914320513484.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914337713381.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914332531138.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914339085946.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914345895890.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914346343600.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914347123228.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914347836694.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914349177747.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914351294809.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914418100575.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914426214438.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914426984830.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914429408035.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914429931095.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914430488064.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914430788780.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914472775823.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914476722436.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914478838248.jpg">
+<meta property="og:updated_time" content="2020-06-08T15:59:37.700Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="CSS3新特征">
+<meta name="twitter:description" content="学习笔记源自：绿叶 新增速览新增选择器 新增属性">
+<meta name="twitter:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914481967880.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/frontend/2020-06-08-CSS3新特征.html"/>
+
+
+
+
+
+  <title>CSS3新特征 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-06-08-CSS3新特征.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">CSS3新特征</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-08T23:49:41+08:00">
+                2020-06-08
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4,296
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>学习笔记源自：<a href="http://www.lvyestudy.com/blog/blog0005.aspx" target="_blank" rel="noopener">绿叶</a></p>
+<h3 id="新增速览"><a href="#新增速览" class="headerlink" title="新增速览"></a>新增速览</h3><p>新增选择器<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914481967880.png" alt=""></p>
+<p>新增属性</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915985145823.png" alt=""></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915985198297.png" alt=""></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914482354274.png" alt=""></p>
+<a id="more"></a>
+<h3 id="兼容性"><a href="#兼容性" class="headerlink" title="兼容性"></a>兼容性</h3><p><a href="https://www.caniuse.com" target="_blank" rel="noopener">查询浏览器兼容性</a></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15913362654486.jpg" alt=""></p>
+<p>处理浏览器兼容：根据内核加上前缀<br>对于低版本的IE6~IE8，可以借助behavior属性来引入ie-css3.htc这个扩展文件来实现</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15913378586501.jpg" alt=""></p>
+<p><a href="https://liulanmi.com/labs/core.html" target="_blank" rel="noopener">检测内核</a></p>
+<p>如我的iPad的Safari</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15913366876879.jpg" alt=""></p>
+<h3 id="新增选择器"><a href="#新增选择器" class="headerlink" title="新增选择器"></a>新增选择器</h3><h4 id="属性选择器"><a href="#属性选择器" class="headerlink" title="属性选择器"></a>属性选择器</h4><p>CSS3新增的3个属性选择器使得选择器具有通配符的功能，正则表达式<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15913380227910.png" alt=""><br>如匹配doc文件 <code>a[href$=&quot;doc&quot;]</code></p>
+<h4 id="子元素伪类选择器"><a href="#子元素伪类选择器" class="headerlink" title="子元素伪类选择器"></a>子元素伪类选择器</h4><p>第一类<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15913383364928.png" alt=""><br><strong>注意是父元素！</strong></p>
+<p>在实际开发中，子元素伪类选择器特别适合操作列表的不同样式，避免id和class泛滥，让结构与样式分离</p>
+<p>第二类<br>:first-of-type、:last-of-type、:nth-of-type(n)、:only-of-type<br>按类型选择</p>
+<p>:first-child在选择父元素下的子元素时，不仅要区分元素类型，还要求是第一个子元素。而:first-of-type在选择父元素下的子元素时，只需要区分元素类型，不要求是第一个子元素。</p>
+<h4 id="UI伪类选择器"><a href="#UI伪类选择器" class="headerlink" title="UI伪类选择器"></a>UI伪类选择器</h4><p>UI，全称“User Interface”，也就是用户界面。</p>
+<p>元素的状态包括：可用、不可用、选中、未选中、获取焦点、失去焦点等。UI伪类选择器的共同特点是：对于指定的样式，在默认状态下不起作用，只有当元素处于某种状态时才起作用。此外，大多数UI伪类选择器都是针对<strong>表单元素</strong>的。</p>
+<h5 id="focus"><a href="#focus" class="headerlink" title=":focus"></a>:focus</h5><p>具有该属性的元素：</p>
+<ul>
+<li>表单元素（按钮、单选框、复选框、文本框、下拉列表）</li>
+<li>超链接</li>
+</ul>
+<h5 id="selection"><a href="#selection" class="headerlink" title="::selection"></a>::selection</h5><p>定义页面中被选中文本的样式。</p>
+<p>单冒号往往都是伪类，而双冒号往往都是伪元素。为整个页面的选中文本定义样式，我们只需要使用::selection{}就可以实现。其中，::selection前面是不需要加任何元素的。</p>
+<h5 id="checked"><a href="#checked" class="headerlink" title=":checked"></a>:checked</h5><p>定义单选框或复选框被选中时的样式。</p>
+<h5 id="enabled和-disabled"><a href="#enabled和-disabled" class="headerlink" title=":enabled和:disabled"></a>:enabled和:disabled</h5><p>定义表单元素如文本框、单选框、复选框等，“可用”和“不可用”这两种状态时的样式</p>
+<h5 id="read-write和-read-only"><a href="#read-write和-read-only" class="headerlink" title=":read-write和:read-only"></a>:read-write和:read-only</h5><p>可以使用:read-write选择器来定义表单元素“可读写”时的样式，也可以使用:read-only选择器来定义表单元素“只读”时的样式。</p>
+<h4 id="其他伪类选择器"><a href="#其他伪类选择器" class="headerlink" title="其他伪类选择器"></a>其他伪类选择器</h4><p>使用:root选择器来选择HTML页面的根元素，也就是<html></html>。可以用来定义整个页面的背景</p>
+<p>使用:empty选择器来选择一个“不包含任何子元素和内容”的元素，也就是选择一个空元素。像HTML5的2048小游戏就可以用到:empty选择器</p>
+<p>使用:target选择器来选取页面中的某一个target元素。所谓的target元素，指的是id被当成页面的锚点链接来使用的元素。</p>
+<p>使用:not()选择器来选取某一个元素之外的所有元素。<br>例如对于“ul li:not(.first)”这个选择器，表示选择ul元素下除了第一个li元素之外的所有li元素。<strong>这个选择器非常重要，在实际开发中用得非常多</strong></p>
+<h3 id="文本样式"><a href="#文本样式" class="headerlink" title="文本样式"></a>文本样式</h3><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15913409677950.png" alt=""></p>
+<h4 id="text-shadow"><a href="#text-shadow" class="headerlink" title="text-shadow"></a>text-shadow</h4><p><code>text-shadow:x-offset y-offset blur color;</code> </p>
+<ul>
+<li>x-offset是“水平阴影”，值为正，则阴影向右偏移；如果值为负，则阴影向左偏移。</li>
+<li>y-offset是“垂直阴影”，值为正，则阴影向下偏移；如果值为负，则阴影向上偏移。</li>
+<li>blur是“模糊距离”，表示阴影的模糊程度。blur不能为负值。<br>可以为文本定义多个阴影，阴影效果会按从左到右的顺序应用到文本上，因此可能会出现相互覆盖的效果。常用于定义四个方向不同的效果</li>
+</ul>
+<h4 id="text-stroke"><a href="#text-stroke" class="headerlink" title="text-stroke"></a>text-stroke</h4><p>text-stroke是一个复合属性，它是由text-stroke-width和text-stroke-color两个子属性组成的。</p>
+<p>使用text-stroke配合color:transparent;，可以实现镂空文字。</p>
+<h4 id="text-overflow"><a href="#text-overflow" class="headerlink" title="text-overflow"></a>text-overflow</h4><p>text-overflow属性取值<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15913421541859.png" alt=""></p>
+<p>要想实现文本溢出时就显示省略号效果，我们还需要结合white-space和overflow这两个属性来实现，<code>overflow:hidden;white-space:nowrap;text-overflow:ellipsis;</code>这三个是固定搭配的</p>
+<p>想要实现这种多行文字的省略号效果，单纯使用CSS是无法实现的，必须借助JavaScript或jQuery才行。<br>这里推荐一个jQuery插件：jquery.dotdotdot.js</p>
+<h4 id="word-wrap、word-break"><a href="#word-wrap、word-break" class="headerlink" title="word-wrap、word-break"></a>word-wrap、word-break</h4><p>一般情况下，我们只会用到word-wrap:break-word;或word-break:break-all；这两个来实现强制换行</p>
+<p>前者按单词换行，后者会把单词截断。这两个属性都是针对英文页面来说的</p>
+<h4 id="font-face"><a href="#font-face" class="headerlink" title="@font-face"></a>@font-face</h4><p>把服务器中的字体文件下载到本地电脑，然后让浏览器端可以显示用户电脑没有安装的字体。</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">@font-face&#123;</span><br><span class="line">	font-family: 字体名称;</span><br><span class="line">	src:url(文件路径);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>然后使用font-family引用字体。</p>
+<p><strong>不建议使用@font-face来实现嵌入中文字体。</strong>这是因为中文字体文件大多数都是10MB以上。这么大的字体文件，会严重影响页面的加载速度，导致用户体验非常差。</p>
+<p>实际上，@font-face方法不仅可以用于嵌入字体，还可以用于实现<strong>字体图标</strong>技术（即iconfont）。</p>
+<h3 id="颜色样式"><a href="#颜色样式" class="headerlink" title="颜色样式"></a>颜色样式</h3><h4 id="opacity透明度"><a href="#opacity透明度" class="headerlink" title="opacity透明度"></a>opacity透明度</h4><p>opacity属性取值是一个数值，取值范围为0.0~1.0。其中0.0表示完全透明，1.0表示完全不透明。</p>
+<p><strong>opacity属性不仅作用于元素的背景颜色，还会作用于内部所有子元素以及文本内容。</strong></p>
+<p>opacity属性在实际开发中用得也比较多，大多数时候都是配合:hover来定义鼠标指针移动到某个按钮或图片上时，改变透明度来呈现动态的效果。</p>
+<h4 id="RGBA颜色"><a href="#RGBA颜色" class="headerlink" title="RGBA颜色"></a>RGBA颜色</h4><p>在RGB基础上增加了一个透明度通道Alpha。取值范围为0.0~1.0。</p>
+<p><strong>RGBA中的透明度只会针对当前设置的属性起作用。</strong></p>
+<h4 id="渐变"><a href="#渐变" class="headerlink" title="渐变"></a>渐变</h4><p><code>background:linear-gradient(方向, 开始颜色, 结束颜色)</code><br>线性渐变的“方向”取值有两种:一种是使用角度（单位为deg），另一种是使用关键字<br>线性渐变也可以接受一个“值列表”，用于同时定义多种颜色的线性渐变，颜色值之间用英文逗号隔开即可。<br><strong>线性渐变使用的是background属性，而不是background-color属性。</strong></p>
+<p><code>background:radial-gradient(position,shape size, start-color, stop-color)</code><br>position用于定义圆心位置，取值跟background-position属性取值一样。shape size用于定义形状大小，由两部分组成，shape定义形状，size定义大小。<br>position和shape size都是可选参数。如果省略，则表示采用默认值。start-color和stop-color都是必选参数，可以有多个颜色值。<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15913441720468.jpg" alt=""></p>
+<p>默认情况下，径向渐变的颜色节点是均匀分布的，不过我们可以为每一种颜色添加百分比，从而使得各个颜色节点不均匀分布。</p>
+<h3 id="边框样式"><a href="#边框样式" class="headerlink" title="边框样式"></a>边框样式</h3><p>在前端开发中，我们都是秉着“尽量少用图片”的原则。能用CSS实现的效果，就尽量不要用图片。因为每一个图片都会引发一次HTTP请求，加上图片体积大，会极大影响页面的加载速度。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15913448447811.png" alt=""></p>
+<h4 id="border-radius"><a href="#border-radius" class="headerlink" title="border-radius"></a>border-radius</h4><p>可以为四个角设置圆角半径，“左上角、右上角、右下角、左下角”</p>
+<p>上半圆实现原理：把高度（height）设为宽度（width）的一半，并且左上角和右上角的圆角半径定义与元素的高度一致，而右下角和左下角的圆角半径定义为0。</p>
+<p>圆的实现原理：元素的宽度和高度定义为相同值，4个角的圆角半径定义为宽度（或高度）的一半（或者50%）。</p>
+<p>实现椭圆: <code>border-radius:x/y;</code><br>原理如下：元素的宽度和高度不相等，其中4个角的圆角水平半径定义为宽度的一半，垂直半径定义为高度的一半。</p>
+<h4 id="box-shadow"><a href="#box-shadow" class="headerlink" title="box-shadow"></a>box-shadow</h4><p><code>box-shadow:x-offset y-offset blur spread color style;</code><br>spread：定义阴影的大小。<br>style：定义是外阴影还是内阴影。style取值有两种：outset（默认值）和inset。当x-offset和y-offset都为0时，阴影都是向外发散或者向内发散。</p>
+<p>多方向 <code>box-shadow:左阴影, 上阴影, 下阴影, 右阴影;</code></p>
+<h4 id="border-colors"><a href="#border-colors" class="headerlink" title="border-colors"></a>border-colors</h4><p>必须分别为4条边设定颜色。如果边框宽度（即border-width）为n个像素，则该边框可以使用n种颜色，即每像素显示一种颜色。</p>
+<p>border-colors兼容性较差</p>
+<h4 id="border-image"><a href="#border-image" class="headerlink" title="border-image"></a>border-image</h4><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914276175259.png" alt=""></p>
+<p>4条边的切割宽度，依次为上边、右边、下边、左边（顺时针）。<br>平铺方式：有3种取值，分别为repeat、round和stretch。</p>
+<p>各种图案尝试实现一下。</p>
+<h3 id="背景样式"><a href="#背景样式" class="headerlink" title="背景样式"></a>背景样式</h3><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914288725952.png" alt=""></p>
+<h4 id="background-size"><a href="#background-size" class="headerlink" title="background-size"></a>background-size</h4><p>background-size属性取值有两种：一种是长度值，如px、em、百分比等；另一种是使用关键字<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914289736446.png" alt=""><br>第一种某一边多出来会被剪切；第二种有一条边可能填不满。</p>
+<h4 id="background-origin"><a href="#background-origin" class="headerlink" title="background-origin"></a>background-origin</h4><p>使用background-origin属性来定义背景图片是从什么地方开始平铺的<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914292237987.png" alt=""><br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914292490006.png" alt=""></p>
+<p>background-origin往往都是配合background-position来使用的</p>
+<h4 id="background-clip"><a href="#background-clip" class="headerlink" title="background-clip"></a>background-clip</h4><p>属性值同上，默认左上角的部分被剪切。</p>
+<h3 id="动画效果"><a href="#动画效果" class="headerlink" title="动画效果"></a>动画效果</h3><p>CSS3中，动画效果包括3个部分：变形（transform）、过渡（transition）、动画（animation）。</p>
+<h4 id="transform"><a href="#transform" class="headerlink" title="transform"></a>transform</h4><p>transform属性的变形方法：<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914304850906.png" alt=""></p>
+<p>平移有3种情况： translateX()、translateY()、translate()。</p>
+<p>缩放也有3种情况：scaleX()、scaleY()、scale()。当x或y取值为0~1时，元素进行缩小；当x或y取值大于1时，元素进行放大。</p>
+<p>倾斜也有3种情况：skewX()、skewY()、skew()。倾斜度数，单位为deg（即degree的缩写）。如果度数为正，则表示元素沿x轴方向逆时针倾斜或沿y轴方向顺时针倾斜<br>如transform:skewX(30deg)<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914309728556.png" alt=""><br>其实skewX()方法的变形原理是这样的：由于元素限定了高度为100px，而skewX()方法是沿着x轴方向倾斜的，因此只要倾斜角度不超过180°，元素都会保持100px的高度，同时为了保持倾斜，元素只能沿着x轴方向拉长本身。</p>
+<p><code>transform: rotate(angle);</code> 参数angle表示元素相对于中心原点旋转的度数，单位为deg。如果度数为正，则表示顺时针旋转；如果度数为负，则表示逆时针旋转。</p>
+<p>默认情况下，CSS3的各种变形（平移、缩放、倾斜等）都是以元素的<strong>中心原点</strong>进行变形的。<br><strong>可以使用transform-origin属性来改变元素的中心原点。</strong></p>
+<h4 id="transition"><a href="#transition" class="headerlink" title="transition"></a>transition</h4><p>使用transition属性将元素的某一个属性<strong>从“一个属性值”在指定的时间内平滑地过渡到“另一个属性值”</strong>。凡是涉及CSS3过渡，我们都是<strong>结合:hover伪类</strong>来实现过渡效果的</p>
+<p><code>transition: 过渡属性 过渡时间 过渡方式 延迟时间;</code></p>
+<p>transition是一个复合属性，主要包括4个子属性：<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914320513484.png" alt=""></p>
+<p>在实际开发中，当有多个CSS属性需要实现过渡效果时，直接定义transition-property属性取值为all。即所有在hover中发生了改变的属性</p>
+<p>transition-timing-function属性取不同值<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914337713381.png" alt=""></p>
+<p>transition属性分别写在“普通状态”和“悬浮状态”内的不同：移入时效果两者没有区别，但是如果把transition属性写在普通状态内，移出时会有过渡效果；如果把transition属性写在悬浮状态内，移出时没有过渡效果。</p>
+<p>实践下遮罩层介绍，手风琴效果等。</p>
+<h4 id="animation"><a href="#animation" class="headerlink" title="animation"></a>animation</h4><p>transition属性只能实现一次性的动画效果，而animation属性可以实现连续性的动画效果。</p>
+<p><code>animation:动画名称 持续时间 动画方式 延迟时间 动画次数 动画方向;</code><br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914332531138.png" alt=""></p>
+<p>定义动画</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@<span class="keyword">keyframes</span> 动画名&#123;</span><br><span class="line">    0%&#123;&#125;</span><br><span class="line">    ……</span><br><span class="line">    100%&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>0%表示动画的开始，100%表示动画的结束，0%和100%是必须的。不过，一个@keyframes规则可以由多个百分比组成，每一个百分比都可以定义自身的CSS样式，从而形成一系列的动画效果。如果仅仅只有0%和100%这两个百分比，可以使用关键字from和to来代替</p>
+<p>然后使用animation属性来“调用动画”</p>
+<p>animation-iteration-count属性取值有两种：一种是“正整数”，另一种是“infinite”</p>
+<p>animation-direction属性取值有3个<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914339085946.png" alt=""></p>
+<p>使用animation-play-state属性来定义动画的播放状态。属性只有两个取值，running和paused</p>
+<p>实践：了解一些酷炫动画的具体实现。</p>
+<h3 id="多列布局"><a href="#多列布局" class="headerlink" title="多列布局"></a>多列布局</h3><p>浮动布局比较灵活，但不容易控制；定位布局可以精准定位，但是却不够灵活。</p>
+<p>在CSS3中，多列布局常用的属性有<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914345895890.png" alt=""></p>
+<p>column-count属性取值有两种<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914346343600.png" alt=""></p>
+<p>column-width属性取值有两种<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914347123228.png" alt=""><br>body就会自动根据容器宽度、每列宽度、内容多少这三者来计算列数。</p>
+<p>column-gap属性取值有两个<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914347836694.png" alt=""></p>
+<p>column-rule属性跟border属性是非常相似的</p>
+<p>column-span属性取值只有两种<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914349177747.png" alt=""></p>
+<p>实践：瀑布流布局</p>
+<h3 id="滤镜效果"><a href="#滤镜效果" class="headerlink" title="滤镜效果"></a>滤镜效果</h3><p>在CSS3中，所有的滤镜效果都是使用filter属性来实现的。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914351294809.png" alt=""></p>
+<p>brightness()方法的取值是一个百分比，其中0%~100%表示减弱图片的亮度，例如0%就是完全黑色；100%以上表示增强图片的亮度，例如200%就是将亮度提高2倍。</p>
+<p>grayscale()方法的取值是一个百分比，其中0%表示不做任何修改，100%表示完全灰度（即黑白图片）。</p>
+<p>复古滤镜，也叫褐色滤镜。</p>
+<p>反色，指的是将红、绿、蓝3个通道的像素取各自的相反值。</p>
+<p>hue-rotate()方法的取值是一个度数，单位为deg（即degree的缩写）。其中，0deg表示不旋转，360deg表示旋转360°，也就是相当于一个循环。</p>
+<p><code>drop-shadow(x-offset y-offset blur color);</code> </p>
+<h3 id="弹性盒子模型"><a href="#弹性盒子模型" class="headerlink" title="弹性盒子模型"></a>弹性盒子模型</h3><p>通过弹性盒子模型，我们可以轻松地创建自适应浏览器窗口的“流动布局”以及自适应字体大小的弹性布局，使得响应式布局的实现更加容易。</p>
+<p><strong>在使用弹性盒子模型之前，必须为父元素定义“display:flex;”或“display:inline-flex;”</strong></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914418100575.png" alt=""><br>重点掌握flex、flex-flow、order、justify-content、align-items</p>
+<p>flex-grow属性取值是一个数值，默认值为0。当取值为0时，表示不索取<strong>父元素的剩余空间</strong>；当取值大于0时，表示索取父元素的剩余空间（即子元素放大）。取值越大，索取得越多。<br>在使用flex-grow时，一般是不需要对弹性盒子内部的子元素定义宽度或高度的，否则会影响flex容器的比例分配。——即直接将父元素所有空间按比例分配</p>
+<p>flex-shrink属性用于定义弹性盒子内部子元素的缩小比例。也就是当所有子元素宽度之和大于父元素的宽度时，子元素如何缩小自己的宽度。</p>
+<p><strong>flex-grow和flex-shrink是互斥的，不可能同时生效。flex-grow的默认值为0，而flex-shrink的默认值为1。</strong></p>
+<p>flex-basis就是width的替代品，它们都用来定义<strong>子元素</strong>的宽度。只不过在弹性盒子中，flex-basis的语义会比width更好。<strong>如果某一个子元素同时设置flex-basis和width，那么flex-basis的值会覆盖width的值。</strong>flex-basis属性取值有两个：一个是“auto”，即该子元素的宽度是根据内容多少来定的；另一个是“长度值”</p>
+<p>flex-direction属性取值有4个，flex-direction属性是在弹性盒子（即<strong>父元素</strong>）上定义的。<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914426214438.png" alt=""></p>
+<p>flex-wrap属性常见取值有3个<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914426984830.png" alt=""></p>
+<p>使用order属性来定义弹性盒子内部“<strong>子元素</strong>”的排列顺序。order属性取值是一个正整数，即序号</p>
+<p>justify-content属性取值<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914429408035.png" alt=""><br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914429931095.png" alt=""></p>
+<p>align-items属性取值<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914430488064.png" alt=""><br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914430788780.png" alt=""></p>
+<p>实现块元素在其父元素的水平居中和垂直居中很简单，只需要在其父元素中添加以下代码即可：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">display</span>: <span class="selector-tag">flex</span>;</span><br><span class="line"><span class="selector-tag">justify-content</span>: <span class="selector-tag">center</span>;</span><br><span class="line"><span class="selector-tag">align-items</span>: <span class="selector-tag">center</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="其他样式"><a href="#其他样式" class="headerlink" title="其他样式"></a>其他样式</h3><p>使用outline属性来定义表单中文本框的轮廓线样式，可以把轮廓线看成是一条特殊的边框来理解。<br>如</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">input</span><span class="selector-attr">[type="text"]</span><span class="selector-pseudo">:focus</span> &#123;</span><br><span class="line">    <span class="attribute">outline</span>:<span class="number">1px</span> solid red;    &#125;</span><br></pre></td></tr></table></figure>
+<p>使用initial属性直接将某个CSS属性重置为它的默认值，initial取值可以用于任何HTML元素上的任何CSS属性。</p>
+<p>使用calc()函数通过“计算”的方式来定义某一个属性的取值。只能使用加（+）、减（-）、乘（*）和除（/）这4种运算。表达式中有加号（+）和减号（-）时，其前后必须有空格。在自适应布局中涉及不同单位之间的运算时用得非常多。</p>
+<p>举例：三列平分布局<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914472775823.jpg" alt=""></p>
+<p>overflow-x和overflow-y这两个属性都有4种取值<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914476722436.jpg" alt=""></p>
+<p>使用pointer-events属性来定义元素是否禁用鼠标单击事件。pointer-events属性是一个与JavaScript有关的属性。<strong>比较常见的用法是获取验证码。</strong><br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914478838248.jpg" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/frontend/2020-06-06-Vue中使用BootstrapVue.html" rel="next" title="Vue中使用BootstrapVue">
+                <i class="fa fa-chevron-left"></i> Vue中使用BootstrapVue
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">虚己以游世，乘物以游心</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">107</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">88</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#新增速览"><span class="nav-number">1.</span> <span class="nav-text">新增速览</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#兼容性"><span class="nav-number">2.</span> <span class="nav-text">兼容性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#新增选择器"><span class="nav-number">3.</span> <span class="nav-text">新增选择器</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#属性选择器"><span class="nav-number">3.1.</span> <span class="nav-text">属性选择器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子元素伪类选择器"><span class="nav-number">3.2.</span> <span class="nav-text">子元素伪类选择器</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#UI伪类选择器"><span class="nav-number">3.3.</span> <span class="nav-text">UI伪类选择器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#focus"><span class="nav-number">3.3.1.</span> <span class="nav-text">:focus</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#selection"><span class="nav-number">3.3.2.</span> <span class="nav-text">::selection</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#checked"><span class="nav-number">3.3.3.</span> <span class="nav-text">:checked</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#enabled和-disabled"><span class="nav-number">3.3.4.</span> <span class="nav-text">:enabled和:disabled</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#read-write和-read-only"><span class="nav-number">3.3.5.</span> <span class="nav-text">:read-write和:read-only</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#其他伪类选择器"><span class="nav-number">3.4.</span> <span class="nav-text">其他伪类选择器</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#文本样式"><span class="nav-number">4.</span> <span class="nav-text">文本样式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#text-shadow"><span class="nav-number">4.1.</span> <span class="nav-text">text-shadow</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#text-stroke"><span class="nav-number">4.2.</span> <span class="nav-text">text-stroke</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#text-overflow"><span class="nav-number">4.3.</span> <span class="nav-text">text-overflow</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#word-wrap、word-break"><span class="nav-number">4.4.</span> <span class="nav-text">word-wrap、word-break</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#font-face"><span class="nav-number">4.5.</span> <span class="nav-text">@font-face</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#颜色样式"><span class="nav-number">5.</span> <span class="nav-text">颜色样式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#opacity透明度"><span class="nav-number">5.1.</span> <span class="nav-text">opacity透明度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RGBA颜色"><span class="nav-number">5.2.</span> <span class="nav-text">RGBA颜色</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#渐变"><span class="nav-number">5.3.</span> <span class="nav-text">渐变</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#边框样式"><span class="nav-number">6.</span> <span class="nav-text">边框样式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#border-radius"><span class="nav-number">6.1.</span> <span class="nav-text">border-radius</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#box-shadow"><span class="nav-number">6.2.</span> <span class="nav-text">box-shadow</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#border-colors"><span class="nav-number">6.3.</span> <span class="nav-text">border-colors</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#border-image"><span class="nav-number">6.4.</span> <span class="nav-text">border-image</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#背景样式"><span class="nav-number">7.</span> <span class="nav-text">背景样式</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#background-size"><span class="nav-number">7.1.</span> <span class="nav-text">background-size</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#background-origin"><span class="nav-number">7.2.</span> <span class="nav-text">background-origin</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#background-clip"><span class="nav-number">7.3.</span> <span class="nav-text">background-clip</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#动画效果"><span class="nav-number">8.</span> <span class="nav-text">动画效果</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#transform"><span class="nav-number">8.1.</span> <span class="nav-text">transform</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#transition"><span class="nav-number">8.2.</span> <span class="nav-text">transition</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#animation"><span class="nav-number">8.3.</span> <span class="nav-text">animation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#多列布局"><span class="nav-number">9.</span> <span class="nav-text">多列布局</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#滤镜效果"><span class="nav-number">10.</span> <span class="nav-text">滤镜效果</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#弹性盒子模型"><span class="nav-number">11.</span> <span class="nav-text">弹性盒子模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#其他样式"><span class="nav-number">12.</span> <span class="nav-text">其他样式</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
