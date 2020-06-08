@@ -1,0 +1,1074 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JS," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="学习笔记源自：绿叶 对于CSS来说，外部CSS文件只能在head中引入。对于JavaScript来说，外部JavaScript文件不仅可以在head中引入，还可以在body中引入。引入外部CSS文件使用的是“link标签”，而引入外部JavaScript文件使用的是“script标签”。 基本语法变量变量由字母、下划线、$或数字组成，并且第一个字母必须是字母、下划线或$。区分大小写 变量不能是系统">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JavaScript基础">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/frontend/2020-06-09-JavaScript基础.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="学习笔记源自：绿叶 对于CSS来说，外部CSS文件只能在head中引入。对于JavaScript来说，外部JavaScript文件不仅可以在head中引入，还可以在body中引入。引入外部CSS文件使用的是“link标签”，而引入外部JavaScript文件使用的是“script标签”。 基本语法变量变量由字母、下划线、$或数字组成，并且第一个字母必须是字母、下划线或$。区分大小写 变量不能是系统">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914495892532.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915196022093.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915199181131.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915203102528.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915204567110.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915230079691.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915207902440.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915213638306.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915231436305.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915415875719.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915455902547.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915456348400.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915457631395.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915489474630.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915491160036.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915485557692.png">
+<meta property="og:updated_time" content="2020-06-08T16:08:22.019Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JavaScript基础">
+<meta name="twitter:description" content="学习笔记源自：绿叶 对于CSS来说，外部CSS文件只能在head中引入。对于JavaScript来说，外部JavaScript文件不仅可以在head中引入，还可以在body中引入。引入外部CSS文件使用的是“link标签”，而引入外部JavaScript文件使用的是“script标签”。 基本语法变量变量由字母、下划线、$或数字组成，并且第一个字母必须是字母、下划线或$。区分大小写 变量不能是系统">
+<meta name="twitter:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914495892532.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/frontend/2020-06-09-JavaScript基础.html"/>
+
+
+
+
+
+  <title>JavaScript基础 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-06-09-JavaScript基础.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JavaScript基础</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-09T00:04:38+08:00">
+                2020-06-09
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  6,108
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>学习笔记源自：<a href="http://www.lvyestudy.com/blog/blog0007.aspx" target="_blank" rel="noopener">绿叶</a></p>
+<p>对于CSS来说，外部CSS文件只能在head中引入。对于JavaScript来说，外部JavaScript文件不仅可以在head中引入，还可以在body中引入。引入外部CSS文件使用的是“link标签”，而引入外部JavaScript文件使用的是“script标签”。</p>
+<h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><p>变量由字母、下划线、<code>$</code>或数字组成，并且第一个字母必须是字母、下划线或$。区分大小写</p>
+<p>变量不能是系统关键字和保留字。</p>
+<a id="more"></a>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15914495892532.jpg" alt=""></p>
+<p>所有JavaScript变量都由var声明。</p>
+<p>常量名全部采用大写形式</p>
+<h4 id="数据类型"><a href="#数据类型" class="headerlink" title="数据类型"></a>数据类型</h4><p>基本数据类型有5种：数字、字符串、布尔值、未定义值和空值。<br>常见的引用数据类型只有一种：对象（数组也是属于对象的一种）。</p>
+<h5 id="null跟undefined的区别？"><a href="#null跟undefined的区别？" class="headerlink" title="null跟undefined的区别？"></a>null跟undefined的区别？</h5><figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">console</span>.log(<span class="literal">null</span>==<span class="literal">undefined</span>);    <span class="comment">//true  因为两者都默认转换成了false</span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="literal">undefined</span>);    <span class="comment">//"undefined"  </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="keyword">typeof</span> <span class="literal">null</span>);       <span class="comment">//"object"  </span></span><br><span class="line"><span class="built_in">console</span>.log(<span class="literal">null</span>===<span class="literal">undefined</span>);    <span class="comment">//false   "==="表示绝对相等，null和undefined类型是不一样的，所以输出“false”</span></span><br></pre></td></tr></table></figure>
+<p>null和undefined转换成number数据类型<br>null 默认转成 0<br>undefined 默认转成 NaN</p>
+<p>null表示”没有对象”，即该处不应该有值。典型用法是：<br>（1） 作为函数的参数，表示该函数的参数不是对象。<br>（2） 作为对象原型链的终点。</p>
+<p>undefined表示”缺少值”，就是此处应该有一个值，但是还没有被赋值。典型用法是<br>（1）变量被声明了，但没有赋值时，就等于undefined。<br>（2) 调用函数时，应该提供的参数没有提供，该参数等于undefined。<br>（3）对象没有赋值的属性，该属性的值为undefined。<br>（4）函数没有return返回值时，默认返回undefined。</p>
+<h5 id="显式类型转换"><a href="#显式类型转换" class="headerlink" title="显式类型转换"></a>显式类型转换</h5><p>将字符串转换为数字，有两种方式。<br>Number（　）。只能将纯“数字型字符串”转换为数字<br>parseInt（　）和parseFloat（　）。提取“首字母为数字的任意字符串”中的数字，可以接受第1个字符是加号或减号。<br><strong>提取类似”100px”这种字符串中的数字，这个时候我们就应该使用parseInt（　）和parseFloat（　）</strong><br>如果数字是小数，则parseInt（　）和parseFloat（　）两个方法返回的结果是不一样的，我们可以利用这个特点，来判断一个数是整数，还是小数。</p>
+<p>将数字转换为字符串，也有两种方式。<br>与空字符串相加。 使用更多<br>toString（　）。</p>
+<p><strong>这些转换在一些跟数位有关的算法题中很常用。</strong></p>
+<h5 id="内置对象"><a href="#内置对象" class="headerlink" title="内置对象"></a>内置对象</h5><p>常用的内置对象有4种。</p>
+<p>字符串对象：String。</p>
+<ul>
+<li>length属性来获取字符串的长度。</li>
+<li>toLowerCase（　）方法将大写字符串转化为小写字符串，toUpperCase（　）方法将小写字符串转化为大写字符串。</li>
+<li>charAt（　）方法来获取字符串中的某一个字符。<code>var char=str.charAt（i）;</code></li>
+<li>substring（　）方法来截取字符串的某一部分。substring（start,end）的截取范围为“<strong>[start,end）</strong>”当end省略时，截取的范围为“start到结尾”。</li>
+<li>replace（　）方法来用一个字符串替换另外一个字符串的某一部分。replace（　）方法有两种使用形式：一种是直接使用字符串来替换，另外一种是使用<strong>正则表达式</strong>来替换。正则只会替换第一个匹配的</li>
+<li>split（　）方法把一个字符串分割成一个数组，<strong>分割符可以是一个字符、多个字符或一个正则表达式</strong>。split（　）方法有两个参数：第1个参数表示分割符，第2个参数表示获取“分割之后的前n个元素”。split（””）可以用来分割字符串的每一个字符。<strong>数组join（　）方法一般都是配合字符串的split（　）方法来使用的。</strong></li>
+<li>indexOf（　）方法可以找出“某个指定字符串”在字符串中“首次出现”的下标位置</li>
+<li>lastIndexOf（　）方法可以找出“某个指定字符串”在字符串中“最后出现”的下标位置。如果字符串中不包含“指定字符串”,indexOf（　）或lastIndexOf（　）会返回<strong>-1</strong>。</li>
+<li>两个字符之间比较的是ASCII码的大小</li>
+<li>isNaN（　）函数来判断一个值是否为NaN值。NaN，意为Not a Numer（非数字）。</li>
+</ul>
+<p>数组对象：Array。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> 数组名=<span class="keyword">new</span> <span class="built_in">Array</span>（元素<span class="number">1</span>,元素<span class="number">2</span>,……,元素n）;　　<span class="comment">//完整形式</span></span><br><span class="line"><span class="keyword">var</span> 数组名=[元素<span class="number">1</span>,元素<span class="number">2</span>,……,元素n];　　　　　　　<span class="comment">//简写形式</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>length属性来获取数组的长度。</li>
+<li>slice（　）方法获取数组的某一部分。slice（start,end）的截取范围为[start,end）</li>
+<li>unshift（　）方法在数组开头添加新元素</li>
+<li>shift（　）方法删除数组中的第一个元素</li>
+<li><strong>push（　）方法在数组结尾添加新元素</strong>，不需要知道数组有多少个元素</li>
+<li>pop（　）方法删除数组的最后一个元素</li>
+<li>sort（　）方法对数组中的所有元素进行大小比较，<strong>可以将排序函数作为参数</strong></li>
+<li>reverse（　）方法实现数组中所有元素的反向排列</li>
+<li>join（　）方法将数组中的所有元素连接成一个字符串。默认情况下，一般会采用英文逗号（,）作为连接符。<code>str1.split（&quot;*&quot;）.join（&quot;#&quot;）</code> 即可实现符号替换</li>
+<li>数组是可以存储“不同数据类型”的数据的，只不过在实际开发中极少这样做。</li>
+</ul>
+<p>日期对象：Date。<br>创建一个日期对象，必须使用new关键字。其中Date对象的方法有很多，主要分为两大类：getXxx（　）和setXxx（　）。<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915196022093.png" alt=""><br>注意<strong>getMonth（　）方法的返回值是0（一月）到11（十二月）之间的整数</strong><br>此外还要注意，要获取当前的“日”，不是使用getDay（　），而是使用<strong>getDate（　），getDay（　）是用来获取星期几的，返回数字，有时需要用预设汉字数组转为汉字</strong><br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915199181131.png" alt=""><br>set比get能设置更多的信息</p>
+<p>数值对象：Math。<br>Math对象不需要使用new关键字来创造，而可以直接使用它的属性和方法。<br>Math对象的属性都是常量<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915203102528.png" alt=""><br><code>120*Math.PI/180    //120°</code><br>Math对象中的方法（常用）<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915204567110.png" alt=""><br>atan2（x）能够精确判断角度对应哪一个角，而atan（x）不能。大多数用的是atan2（x）<br>random（　）方法的范围是<strong>[0, 1）</strong></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915230079691.jpg" alt=""></p>
+<p>例子：随机生成验证码<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915207902440.jpg" alt=""></p>
+<h4 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h4><p>根据作用域，变量可以分为全局变量和局部变量。<br>全局变量一般在主程序中定义，其有效范围是从定义开始，一直到整个程序结束。也就是全局变量在任何地方都可以使用。<br>局部变量一般在函数中定义，其有效范围只限于在函数中。也就是局部变量只能在函数中使用，函数之外是不能使用函数中定义的变量的。</p>
+<p>JavaScript代码是从上到下执行的，JavaScript遇到函数定义部分会直接跳过（忽略掉），只有遇到函数调用时才会返回执行函数定义部分。也就是说，函数定义之后只有被调用才有意义。</p>
+<p>JavaScript的函数调用方式有很多，常见的有以下4种。</p>
+<ul>
+<li>直接调用。</li>
+<li>在表达式中调用。</li>
+<li>在超链接中调用，指的是在a元素的href属性中用“javascript：函数名”的形式来调用函数。当用户点击超链接时，就会调用该函数。</li>
+<li>在事件中调用。如鼠标移动，点击等</li>
+</ul>
+<h5 id="嵌套函数"><a href="#嵌套函数" class="headerlink" title="嵌套函数"></a>嵌套函数</h5><p>可以在一个函数的内部定义另外一个函数。但是在内部定义的函数只能在内部调用，如果在外部调用，就会出错。</p>
+<p>嵌套函数的功能非常强大，并且跟JavaScript最重要的一个概念“闭包”有重要的关系。</p>
+<p>一句话理解闭包：内部的嵌套函数可以访问到外部函数的变量，即使这个外部函数已经执行完毕退出了。</p>
+<h3 id="DOM"><a href="#DOM" class="headerlink" title="DOM"></a>DOM</h3><p>DOM，全称是“Document Object Model（文档对象模型）”，它是由W3C定义的一个标准。</p>
+<p>DOM采用的是“树形结构”，用“树节点”的形式来表示页面中的每一个元素。每一个元素就是一个节点，而每一个节点就是一个对象。也就是说，我们在操作元素时，其实就是<strong>把这个元素看成一个对象，然后使用这个对象的属性和方法来进行相关操作</strong></p>
+<p><strong>节点和元素是不一样的概念，节点是包括元素的。</strong>DOM节点共有12种类型，但是常见的只有下面3种。<br>元素节点。<br>属性节点。<br>文本节点。<br>属性节点和文本节点看起来像是元素节点的一部分，但实际上，它们是独立的节点，<strong>并不属于元素节点</strong>。<br><strong>只有元素节点才可以拥有子节点</strong>，属性节点和文本节点都无法拥有子节点。</p>
+<p>可以使用nodeType属性来判断一个节点的类型。<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915213638306.png" alt=""></p>
+<h4 id="节点操作（元素节点）"><a href="#节点操作（元素节点）" class="headerlink" title="节点操作（元素节点）"></a>节点操作（元素节点）</h4><h5 id="获取元素节点"><a href="#获取元素节点" class="headerlink" title="获取元素节点"></a>获取元素节点</h5><p>获取的是一个DOM对象，我们在给变量命名的时候，习惯性地以英文“o”开头</p>
+<ul>
+<li>getElementById（　）类似于CSS中的id选择器</li>
+<li>getElementsByTagName（　）类似于CSS中的“元素选择器”。获取的是一个“类数组”（也叫伪数组），只能使用数组的<strong>length属性以及下标</strong></li>
+<li>getElementsByClassName（　）类似于CSS中的class选择器。</li>
+<li>querySelector（　）和querySelectorAll（　）使用CSS选择器的语法来获取所需要的元素。前者获取第一个。实际上调用了CSS选择器，性能不太好</li>
+<li>getElementsByName（　）<strong>只用于表单元素</strong>，一般只用于单选按钮和复选框。<br>document.title和document.body 一个页面只有一个title元素和一个body元素</li>
+</ul>
+<p>注意<strong>element</strong>的单复数，如果是数组必须加索引才能访问到元素</p>
+<p>getElementById（　）前面只可以接document，也就是document.getElementById（　）。getElementsByTagName（　）前面不仅可以接document，还可以接其他DOM对象。<br>getElementById（　）和getElementsByClassName（　）不可以操作动态创建的DOM元素，而getElementsByTagName（　）可以操作动态创建的DOM元素。</p>
+<h5 id="创建元素"><a href="#创建元素" class="headerlink" title="创建元素"></a>创建元素</h5><p>使用createElement（　）来创建一个元素节点，也可以使用createTextNode（　）来创建一个文本节点，然后可以将元素节点与文本节点“组装”成我们平常看到的“有文本内容的元素”。这种方式又被称为“动态DOM操作”。所谓的“动态DOM”，指的是使用JavaScript创建的元素。这个元素一开始在HTML中是不存在的。<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915231436305.jpg" alt=""></p>
+<p>在操作动态DOM时，设置元素class用的是<strong>className</strong>而不是class，因为JavaScript有很多关键字和保留字，其中class已经作为保留字了</p>
+<h5 id="插入元素"><a href="#插入元素" class="headerlink" title="插入元素"></a>插入元素</h5><p>插入元素有以下两种方法。<br>appendChild（　）把一个新元素插入到父元素的内部子元素的“末尾”。<br>insertBefore（　）将一个新元素插入到父元素中的某一个子元素“之前”。A.insertBefore（B,ref）则表示在ref之前插入B。</p>
+<p>这两种插入元素的方法都需要<strong>先获取父元素</strong>才可以操作。</p>
+<h5 id="删除元素"><a href="#删除元素" class="headerlink" title="删除元素"></a>删除元素</h5><p>使用removeChild（　）方法来删除父元素下的某个子元素。<br>如<code>oUl.removeChild（oUl.lastElementChild）;</code></p>
+<h5 id="复制元素"><a href="#复制元素" class="headerlink" title="复制元素"></a>复制元素</h5><p><code>obj.cloneNode（bool）</code><br>参数obj表示被复制的元素，而参数bool是一个布尔值，取值如下。<br>1或true：表示复制元素本身以及复制该元素下的所有子元素。<br>0或false：表示仅仅复制元素本身，不复制该元素下的子元素。</p>
+<h5 id="替换元素"><a href="#替换元素" class="headerlink" title="替换元素"></a>替换元素</h5><p><code>A.replaceChild（new,old）;</code></p>
+<p>综上可知，要实现节点的各种操作，必须先找到父元素才行。</p>
+<h4 id="HTML属性操作（属性节点）"><a href="#HTML属性操作（属性节点）" class="headerlink" title="HTML属性操作（属性节点）"></a>HTML属性操作（属性节点）</h4><h5 id="使用对象属性"><a href="#使用对象属性" class="headerlink" title="使用对象属性"></a>使用对象属性</h5><p>使用obj.attr这种方式，不仅可以获取静态HTML元素的属性值，还可以获取动态创建的DOM元素中的属性值</p>
+<p>要获取一个元素的class，写成oBtn.class是错误的，正确的写法是oBtn.className。</p>
+<p>在实际开发中，在更多的情况下，我们要获取的是表单元素的值。其中文本框、单选按钮、复选框、下拉列表中的值，都是通过<strong>value</strong>属性来获取的。</p>
+<h5 id="使用对象方法"><a href="#使用对象方法" class="headerlink" title="使用对象方法"></a>使用对象方法</h5><p>关于操作HTML元素的属性，JavaScript为我们提供了4种方法。</p>
+<ul>
+<li>getAttribute（　） 注意参数要加引号，不仅可以用来获取静态HTML元素的属性值，还可以用来获取动态DOM元素中的属性值</li>
+<li>setAttribute（　）</li>
+<li>removeAttribute（　）在更多情况下是<strong>结合class属性来“整体”控制元素的样式属性的</strong></li>
+<li>hasAttribute（　）直接使用removeAttribute（　）删除元素的属性的做法是不太正确的，比较严谨的做法是先用hasAttribute（　）判断这个属性是否存在，只有存在，才去删除。</li>
+</ul>
+<p>使用obj.attr（也就是对象属性方式）是无法获取<strong>自定义属性值</strong>的，只能用getAttribute（”attr”）（也就是对象方法方式）来实现。<br>同样地，对于自定义属性的值的设置，我们也只能用setAttribute（　）方法来实现。<br>想要删除元素的某个属性，我们只能使用removeAttribute（　）这一个方法。</p>
+<p>记住：<strong>只有“对象方法方式”才可以操作自定义属性。</strong></p>
+<h4 id="CSS属性操作"><a href="#CSS属性操作" class="headerlink" title="CSS属性操作"></a>CSS属性操作</h4><p>获取CSS属性值<code>getComputedStyle（obj）.attr</code><br>需要注意的是，这里的属性名使用的是<strong>“骆驼峰型”</strong>的CSS属性名。如font-size应该写成fontSize</p>
+<p>getComputedStyle（　）方法其实有两种写法：getComputedStyle（obj）.attr和getComputed Style（obj）[“attr”]。实际上，凡是对象的属性都有这两种写法。后者常用于通过get获得的字符串用于设置。</p>
+<p>设置一个CSS属性的值，有两种方式可以实现。</p>
+<ul>
+<li><p>style对象。<code>obj.style.attr=&quot;值&quot;;</code> 这种方式设置的是“行内样式”</p>
+</li>
+<li><p>cssText属性。同时设置多个CSS属性，这也是在元素的style属性中添加的。cssText的值是一个字符串。<strong>注意，这个字符串中的属性名不再使用骆驼峰型的写法，而是使用平常的CSS写法</strong>因为变量中是不允许出现中划线的<br><code>oDiv.style.cssText=&quot;width:100px;height:100px;border:1px solid gray;&quot;;</code></p>
+<p><strong>在实际开发的时候，如果要为一个元素同时设置多个CSS属性，我们很少使用cssText来实现，而更倾向于使用操作HTML属性的方式给元素加上一个class属性值，从而整体地给元素添加上样式。</strong></p>
+</li>
+</ul>
+<p>获取CSS属性值，不可以用obj.style.attr或obj.style.cssText吗？为什么一定要用getComputedStyle（　）呢？<br><strong>obj.style.attr只可以获取元素style属性中设置的CSS属性，对于内部样式或者外部样式，它是没办法获取的。</strong><br>getComputedStyle（　），从名字上就可以看出来，意思是get computed style（获取计算后的样式）。所谓“计算后的样式”，是指不管是内部样式，还是行内样式，最终获取的是根据CSS优先级计算后的结果。</p>
+<h4 id="DOM遍历"><a href="#DOM遍历" class="headerlink" title="DOM遍历"></a>DOM遍历</h4><p>使用parentNode属性来获得某个元素的父元素。</p>
+<p>使用以下两组方式来获得父元素中的所有子元素或某个子元素。<br>childNodes、firstChild、lastChild。<br>children、firstElementChild、lastElementChild。更常用</p>
+<p>使用childNodes、firstChild、lastChild这几个方法来操作元素节点非常麻烦，因为它们都把文本节点（一般是空白节点）算进来了</p>
+<p>使用以下2组方式来获得兄弟元素。<br>previousSibling、nextSibling。<br>previousElementSibling、nextElementSibling。</p>
+<p>跟查找子元素的两组方式一样，previousSibling和nextSibling查找出来的可能是文本节点（一般是空白节点），因此如果只操作元素节点，建议使用previousElementSibling和nextElementSibling。</p>
+<h4 id="innerHTML和innerText"><a href="#innerHTML和innerText" class="headerlink" title="innerHTML和innerText"></a>innerHTML和innerText</h4><p>使用innerHTML属性很方便地获取和设置一个元素的“<strong>内部元素</strong>”，也可以使用innerText属性获取和设置一个元素的“内部文本”。</p>
+<p>innerHTML后面的字符串要换行只要在每一行后面加上个反斜杠（\）就可以了</p>
+<p>使用appedChild（　）方法需要依次设置属性值。<br>innerHTML属性可以直接很多属性。</p>
+<h5 id="document-write（-）和innerHTML之间有什么区别？"><a href="#document-write（-）和innerHTML之间有什么区别？" class="headerlink" title="document.write（　）和innerHTML之间有什么区别？"></a>document.write（　）和innerHTML之间有什么区别？</h5><ul>
+<li>write是DOM方法,向文档写入HTML表达式或Java代码，可列出多个参数，参数被顺序添加到文档中。innerHTML是DOM属性,设置或返回调用元素开始结束标签之间的HTML元素。</li>
+<li>document.write 会直接写入文档流中, 如果在文档渲染完毕后调用会迫使浏览器重新渲染,innerHtML 仅仅修改DOM 内部的内容.document.write会重绘整个页面，而innerHTML是可以重绘页面的某一部分.</li>
+<li>通过document.write插入&lt;&gt;元素会自动执行其中的脚本；大多数浏览器中，通过innerHTML插入&lt;&gt;元素并不会执行其中的脚本。</li>
+<li>innerHTML很多情况下都优于document.write，其原因在于其允许更精确的控制要刷新页面的那一个部分。</li>
+</ul>
+<h3 id="事件"><a href="#事件" class="headerlink" title="事件"></a>事件</h3><p>其实从本质上来说，事件调用方式用于操作元素的属性。只不过这个属性不是一般的属性，而是“事件属性”。</p>
+<h4 id="调用方法"><a href="#调用方法" class="headerlink" title="调用方法"></a>调用方法</h4><p>在JavaScript中，调用事件的方式有两种。</p>
+<ol>
+<li>在script标签中调用。  更常用</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">obj.事件名=function()&#123;</span><br><span class="line">	……</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>如果多个元素都要调用，可以写成一个专门的函数。再将函数赋值给事件</p>
+<ol start="2">
+<li>在元素中调用。</li>
+</ol>
+<h4 id="事件类型"><a href="#事件类型" class="headerlink" title="事件类型"></a>事件类型</h4><p>JavaScript常见的事件共有以下5种。</p>
+<h5 id="页面事件"><a href="#页面事件" class="headerlink" title="页面事件"></a>页面事件</h5><p>onload表示文档加载完成后再执行的一个事件。一般地，只有在想要“获取页面中某一个元素”的时候才会用到。因为<strong>在默认情况下，浏览器是从上到下来解析一个页面的。如果没有加载完就会出现解析错误。</strong>但是如果script中只定义了函数，在元素中进行调用，则不会报错。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">window.onload=function()&#123;</span><br><span class="line">	……</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>onbeforeunload表示离开页面之前触发的一个事件。</p>
+<h5 id="鼠标事件"><a href="#鼠标事件" class="headerlink" title="鼠标事件"></a>鼠标事件</h5><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915415875719.png" alt=""><br>onmouseover和onmouseout分别用于控制鼠标“移入”和“移出”这两种状态，如在<strong>下拉菜单导航</strong>中，鼠标移入会显示二级导航，鼠标移出则会收起二级导航。</p>
+<p>在实际开发中，onmousedown、onmouseup和onmousemove经常配合实现拖拽、抛掷等效果</p>
+<h5 id="键盘事件"><a href="#键盘事件" class="headerlink" title="键盘事件"></a>键盘事件</h5><p>键盘按下：onkeydown。<br>键盘松开：onkeyup。</p>
+<h5 id="表单事件"><a href="#表单事件" class="headerlink" title="表单事件"></a>表单事件</h5><p>onfocus表示获取焦点时触发的事件，而onblur表示失去焦点时触发的事件，两者是相反的操作。一般用于单行文本框和多行文本框。focus（　）是一个方法，仅仅用于让元素获取焦点。而onfocus是一个属性，它是用于事件操作的。</p>
+<p>当我们选中“单行文本框”或“多行文本框”中的内容时，就会触发onselect事件。select（　）是一个方法，仅仅用于全选文本。而onselect是一个属性，它是用于事件操作的。</p>
+<p>onchange事件常用于“具有多个选项的表单元素”的操作，选择某一项时触发。</p>
+<p><strong>选择下拉列表的某一项时，触发的是onchange事件，而不是onselect事件。onselect事件仅仅在选择文本框中的内容时才会触发</strong></p>
+<h5 id="编辑事件"><a href="#编辑事件" class="headerlink" title="编辑事件"></a>编辑事件</h5><p>使用oncopy事件来防止页面内容被复制。</p>
+<p>使用onselectstart事件来防止页面内容被选取。</p>
+<p>使用oncontextmenu事件来禁止使用鼠标右键。</p>
+<h4 id="事件监听与处理"><a href="#事件监听与处理" class="headerlink" title="事件监听与处理"></a>事件监听与处理</h4><p>事件处理器通过操作HTML属性的方式来实现，如<code>oBtn.onclick=function（　）{……};</code><strong>事件处理器不能为一个元素添加多个相同事件。</strong></p>
+<p>事件监听器又称为“绑定事件”。<strong>可以为同一个元素添加多个相同的事件</strong><code>obj.addEventListener（type ,fn ,false）</code><br>type是一个字符串，指的是事件类型。如单击事件用click，鼠标移入用mouseover等。一定要注意，这个事件类型是<strong>不需要加上“on”前缀</strong>的。<br>fn是一个函数名，或是一个匿名函数。<br>false表示事件冒泡阶段调用。</p>
+<p>解绑<code>obj.removeEventListener（type ,fn ,false）;</code><br>如果你想使用removeEventListener（　）方法来解除一个事件，那么在使用addEventListener（　）添加事件的时候，就一定要用<strong>定义函数</strong>（不能是匿名函数）的形式。</p>
+<p>removeEventListener（　）只可以解除“事件监听器”添加的事件，不可以解除“事件处理器”添加的事件。如果要解除“事件处理器”添加的事件，我们可以使用“<strong>obj.事件名 = null;</strong>”来实现</p>
+<h4 id="event对象"><a href="#event对象" class="headerlink" title="event对象"></a>event对象</h4><p>当一个事件发生的时候，这个事件有关的详细信息都会临时保存到一个指定的地方，这个地方就是event对象。</p>
+<p>每次调用一个事件的时候，JavaScript都会默认给这个事件函数加上一个隐藏的参数，这个参数就是event对象。一般来说，<strong>event对象是作为事件函数的第1个参数传入的</strong>。<br>其实e只是一个变量名，它存储的是一个event对象。也就是说，e可以换成其他名字，如ev、event、a等</p>
+<p>使用event对象的type属性来获取事件的类型。</p>
+<p>获取键盘中的键对应的键码，可以使用event对象的keyCode属性。e.keyCode返回的是一个数字，而e.shiftKey、e.ctrlKey、e.altKey返回的都是布尔值（true或false）</p>
+<h4 id="事件操作中的this"><a href="#事件操作中的this" class="headerlink" title="事件操作中的this"></a>事件操作中的this</h4><p>哪个DOM对象（元素节点）调用了this所在的函数，那么this指向的就是哪个DOM对象。</p>
+<p>主要用在定义的<strong>事件被不同的元素调用时</strong>，可以方便地设置对应元素的属性值。其实这就是典型的<strong>闭包</strong>问题。</p>
+<p>在事件函数中，如果想要使用当前的元素节点，我们应该尽量使用this来代替oBtn、oLi[i]等写法。</p>
+<h3 id="window对象"><a href="#window对象" class="headerlink" title="window对象"></a>window对象</h3><p><strong>一个浏览器窗口就是一个window对象</strong></p>
+<p>window对象下面又分为很多对象。window对象及下面这些location、navigator等子对象，由于都是用于操作浏览器窗口的，所以我们又称之为“<strong>BOM</strong>”，也就是Browser Object Module（浏览器对象模型）。<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915455902547.png" alt=""></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915456348400.png" alt=""></p>
+<h4 id="window对象的常用方法"><a href="#window对象的常用方法" class="headerlink" title="window对象的常用方法"></a>window对象的常用方法</h4><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915457631395.png" alt=""><br>对于window对象，无论是它的属性，还是方法，都可以省略window前缀。</p>
+<p><code>window.open（url,target）</code><br>url为空，则表示打开一个空白窗口。空白窗口很有用，我们可以使用document.write（　）往空白窗口输出文本，甚至输出一个HTML页面。<br>target表示打开方式，它的取值跟a标签中target属性的取值是一样的，常用取值有两个：_blank（默认值）和_self。<br>实际上，window.open（　）就像函数调用一样，<strong>会返回新窗口对应的window对象。</strong><br>如果你打开的是同一个域名下的页面或空白窗口，就可以像上面那样操作新窗口的元素或样式；但是如果你打开的是另外一个域名下的页面，是不允许操作新窗口的内容的，因为涉及<strong>跨域</strong>的问题。</p>
+<p>alert（　）对话框一般只用于提示文字。<br>confirm（　）对话框不仅提示文字，还提供确认。根据不同布尔值可以设置不同的操作。<br>prompt（　）对话框不仅会提示文字，还会返回一个字符串。</p>
+<p><code>setTimeout（code,time）;</code><br>参数code可以是一段代码，可以是一个函数，也可以是一个函数名。<br>参数time是时间，单位为毫秒，表示要过多长时间才执行code中的代码。</p>
+<p>定义一个变量timer，用于保存setTimeout（　）这个定时器，以便使用clearTimeout（timer）来暂停。</p>
+<p>setInterval（　）跟setTimeout（　）语法是一样的，唯一不同的是可以重复执行无数次。</p>
+<p>为了避免重复点击开启多个定时器，最好在开始时清除一下。</p>
+<h4 id="document对象"><a href="#document对象" class="headerlink" title="document对象"></a>document对象</h4><p>document是浏览器为每个窗口内的HTML页面创建的对象。</p>
+<p>document对象常用的属性<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915489474630.png" alt=""></p>
+<ul>
+<li>document.URL和window.location.href都可以获取当前页面的URL，但是它们也有区别：document.URL只能获取不能设置，<strong>window.location.href既可以获取也可以设置。</strong></li>
+<li>document.referrer 可以通过它来统计“用户都是通过什么方式来到你的网站的”。</li>
+</ul>
+<p>document对象常用的方法<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915491160036.png" alt=""></p>
+<h4 id="location对象"><a href="#location对象" class="headerlink" title="location对象"></a>location对象</h4><p>location对象的属性<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/08/15915485557692.png" alt=""></p>
+<p>地址“?”后面的这些内容，也叫作querystring（查询字符串），一般用于数据库查询。</p>
+<p>井号（#）一般用于锚点链接</p>
+<h4 id="navigator对象"><a href="#navigator对象" class="headerlink" title="navigator对象"></a>navigator对象</h4><p><code>window.navigator.userAgent</code> 获取浏览器的类型。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JS/" rel="tag"><i class="fa fa-tag"></i> JS</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/frontend/2020-06-08-CSS3新特征.html" rel="next" title="CSS3新特征">
+                <i class="fa fa-chevron-left"></i> CSS3新特征
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">虚己以游世，乘物以游心</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">108</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">89</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本语法"><span class="nav-number">1.</span> <span class="nav-text">基本语法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#变量"><span class="nav-number">1.1.</span> <span class="nav-text">变量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#数据类型"><span class="nav-number">1.2.</span> <span class="nav-text">数据类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#null跟undefined的区别？"><span class="nav-number">1.2.1.</span> <span class="nav-text">null跟undefined的区别？</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#显式类型转换"><span class="nav-number">1.2.2.</span> <span class="nav-text">显式类型转换</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#内置对象"><span class="nav-number">1.2.3.</span> <span class="nav-text">内置对象</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数"><span class="nav-number">1.3.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#嵌套函数"><span class="nav-number">1.3.1.</span> <span class="nav-text">嵌套函数</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DOM"><span class="nav-number">2.</span> <span class="nav-text">DOM</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#节点操作（元素节点）"><span class="nav-number">2.1.</span> <span class="nav-text">节点操作（元素节点）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#获取元素节点"><span class="nav-number">2.1.1.</span> <span class="nav-text">获取元素节点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#创建元素"><span class="nav-number">2.1.2.</span> <span class="nav-text">创建元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#插入元素"><span class="nav-number">2.1.3.</span> <span class="nav-text">插入元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#删除元素"><span class="nav-number">2.1.4.</span> <span class="nav-text">删除元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#复制元素"><span class="nav-number">2.1.5.</span> <span class="nav-text">复制元素</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#替换元素"><span class="nav-number">2.1.6.</span> <span class="nav-text">替换元素</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#HTML属性操作（属性节点）"><span class="nav-number">2.2.</span> <span class="nav-text">HTML属性操作（属性节点）</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#使用对象属性"><span class="nav-number">2.2.1.</span> <span class="nav-text">使用对象属性</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#使用对象方法"><span class="nav-number">2.2.2.</span> <span class="nav-text">使用对象方法</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CSS属性操作"><span class="nav-number">2.3.</span> <span class="nav-text">CSS属性操作</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DOM遍历"><span class="nav-number">2.4.</span> <span class="nav-text">DOM遍历</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#innerHTML和innerText"><span class="nav-number">2.5.</span> <span class="nav-text">innerHTML和innerText</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#document-write（-）和innerHTML之间有什么区别？"><span class="nav-number">2.5.1.</span> <span class="nav-text">document.write（　）和innerHTML之间有什么区别？</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件"><span class="nav-number">3.</span> <span class="nav-text">事件</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#调用方法"><span class="nav-number">3.1.</span> <span class="nav-text">调用方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件类型"><span class="nav-number">3.2.</span> <span class="nav-text">事件类型</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#页面事件"><span class="nav-number">3.2.1.</span> <span class="nav-text">页面事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#鼠标事件"><span class="nav-number">3.2.2.</span> <span class="nav-text">鼠标事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#键盘事件"><span class="nav-number">3.2.3.</span> <span class="nav-text">键盘事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#表单事件"><span class="nav-number">3.2.4.</span> <span class="nav-text">表单事件</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#编辑事件"><span class="nav-number">3.2.5.</span> <span class="nav-text">编辑事件</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件监听与处理"><span class="nav-number">3.3.</span> <span class="nav-text">事件监听与处理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#event对象"><span class="nav-number">3.4.</span> <span class="nav-text">event对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件操作中的this"><span class="nav-number">3.5.</span> <span class="nav-text">事件操作中的this</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#window对象"><span class="nav-number">4.</span> <span class="nav-text">window对象</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#window对象的常用方法"><span class="nav-number">4.1.</span> <span class="nav-text">window对象的常用方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#document对象"><span class="nav-number">4.2.</span> <span class="nav-text">document对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#location对象"><span class="nav-number">4.3.</span> <span class="nav-text">location对象</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#navigator对象"><span class="nav-number">4.4.</span> <span class="nav-text">navigator对象</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
