@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="AJAX,CROS," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="部分内容学习自：Javascript权威指南 XHRAjax的全称是Asynchronous JavaScript And XML，即异步JavaScript和XML。Ajax通过在浏览器和服务器之间添加Ajax中间层，允许浏览器异步发送请求，同时允许动态加载服务器响应。 用户在浏览页面的同时可以发送请求，浏览器无须频繁地重新加载新页面，服务器的响应不再是整个页面内容，而只是必须更新的部分数据。A">
+<meta name="keywords" content="AJAX,CROS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AJAX通信:XHR&amp;JSONP">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/frontend/2020-06-11-AJAX通信-XHR-JSONP.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="部分内容学习自：Javascript权威指南 XHRAjax的全称是Asynchronous JavaScript And XML，即异步JavaScript和XML。Ajax通过在浏览器和服务器之间添加Ajax中间层，允许浏览器异步发送请求，同时允许动态加载服务器响应。 用户在浏览页面的同时可以发送请求，浏览器无须频繁地重新加载新页面，服务器的响应不再是整个页面内容，而只是必须更新的部分数据。A">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/11/15917165552089.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/11/15917202596592.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/11/15917195985453.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/11/15917205111045.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/11/15917210491017.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/11/15917903425877.jpg">
+<meta property="og:updated_time" content="2020-06-11T15:54:49.171Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="AJAX通信:XHR&amp;JSONP">
+<meta name="twitter:description" content="部分内容学习自：Javascript权威指南 XHRAjax的全称是Asynchronous JavaScript And XML，即异步JavaScript和XML。Ajax通过在浏览器和服务器之间添加Ajax中间层，允许浏览器异步发送请求，同时允许动态加载服务器响应。 用户在浏览页面的同时可以发送请求，浏览器无须频繁地重新加载新页面，服务器的响应不再是整个页面内容，而只是必须更新的部分数据。A">
+<meta name="twitter:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/11/15917165552089.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/frontend/2020-06-11-AJAX通信-XHR-JSONP.html"/>
+
+
+
+
+
+  <title>AJAX通信:XHR&JSONP | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-06-11-AJAX通信-XHR-JSONP.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">AJAX通信:XHR&JSONP</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-11T23:51:09+08:00">
+                2020-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,572
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>部分内容学习自：Javascript权威指南</p>
+<h2 id="XHR"><a href="#XHR" class="headerlink" title="XHR"></a>XHR</h2><p>Ajax的全称是Asynchronous JavaScript And XML，即异步JavaScript和XML。Ajax通过在浏览器和服务器之间添加Ajax中间层，允许浏览器异步发送请求，同时允许动态加载服务器响应。</p>
+<p>用户在浏览页面的同时可以发送请求，浏览器无须频繁地重新加载新页面，服务器的响应不再是整个页面内容，而只是必须更新的部分数据。Ajax 可以减轻服务器和带宽的负担，提供更好的服务响应。</p>
+<p>Ajax应用的主要特点是使用脚本操纵HTTP和Web服务器进行数据交换，不会导致页面重载。避免页面重载（这是Web初期的标准做法）的能力使Web应用感觉更像传统的桌面应用。Web应用可以使用Ajax技术把用户的交互数据记录到服务器中；也可以开始只显示简单页面，之后按需加载额外的数据和页面组件来提升应用的启动时间。</p>
+<p>浏览器通过 JavaScript 代码向服务器发送请求，JavaScript 代码负责解析服务器的响应数据，并把样式表加到数据上，然后在现有网页中显示出来。</p>
+<p>XML是Ajax的核心技术吗？<br>以JSON作为数据交换格式不仅更加简单，而且网络传输的数据量更小，因此JSON逐渐取代了Ajax技术中XML的地位。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/11/15917165552089.png" alt=""></p>
+<p>Ajax使用JavaScript来回传送数据，<strong>XMLHttpRequest</strong>是Ajax的核心。浏览器在XMLHttpRequest类上定义了它们的HTTP API。<strong>这个类的每个实例都表示一个独立的请求/响应对</strong>，并且这个对象的属性和方法允许指定请求细节和提取响应数据。</p>
+<p><strong>XMLHttpRequest不是协议级的HTTP API而是浏览器级的API。浏览器需要考虑cookie、重定向、缓存和代理，但代码只需要担心请求和响应。</strong></p>
+<p>JavaScript主要完成如下事情：</p>
+<ul>
+<li>创建XMLHttpRequest对象。通过XMLHttpRequest向服务器发送请求。</li>
+<li>创建回调函数，监视服务器响应状态，在服务器响应完成后，回调函数启动。</li>
+<li>回调函数通过DOM动态更新HTML页面。</li>
+</ul>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest" target="_blank" rel="noopener">官方API</a></p>
+<a id="more"></a>
+<h3 id="请求设置"><a href="#请求设置" class="headerlink" title="请求设置"></a>请求设置</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">function reqListener () &#123;</span><br><span class="line">  console.log(this.responseText);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">var oReq = new XMLHttpRequest();</span><br><span class="line">oReq.addEventListener(&quot;load&quot;, reqListener);</span><br><span class="line">oReq.open(&quot;GET&quot;, &quot;http://www.example.org/example.txt&quot;);</span><br><span class="line">oReq.send();</span><br></pre></td></tr></table></figure>
+<h4 id="open（）"><a href="#open（）" class="headerlink" title="open（）"></a>open（）</h4><p>open（）的第一个参数指定HTTP方法或动作。这个字符串不区分大小写，但通常大家用大写字母来匹配HTTP协议。“GET”和“POST”方法是得到广泛支持的。“GET”用于常规请求，它适用于当URL完全指定请求资源，当请求对服务器没有任何副作用以及当服务器的响应是可缓存时。“POST”方法常用于HTML表单。它在请求主体中包含额外数据（表单数据）且这些数据常存储到服务器上的数据库中（副作用）。相同URL的重复POST请求从服务器得到的响应可能不同，同时不应该缓存使用这个方法的请求。<br>当提交表单的目标仅仅是一个只读查询，GET比POST更合适。<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/11/15917202596592.jpg" alt=""></p>
+<p>除了“GET”和“POST”之外，XMLHttpRequest规范也允许把“DELETE”、“HEAD”、“OPTIONS”和“PUT”作为o p e n（）的第1个参数。（“CONNECT”、“TRACE”和“TRACK”因为安全风险已被明确禁止。）</p>
+<p>open（）的第2个参数是URL，它是请求的主题。这是相对于文档的URL，这个文档包含调用open（）的脚本。如果指定绝对URL、协议、主机和端口通常必须匹配所在文档的对应内容：<strong>跨域的请求通常会报错</strong>。</p>
+<p>通过 XMLHttpRequest 生成的请求可以有两种方式来获取数据，异步模式或同步模式。请求的类型是由这个 XMLHttpRequest 对象的 open() 方法的第三个参数async的值决定的。如果该参数的值为 false，则该 XMLHttpRequest请求以同步模式进行，否则该过程将以异步模式完成。</p>
+<p>如果请求一个受密码保护的URL，把用户名和密码作为第4个和第5个参数传递给open（）</p>
+<h4 id="setRequestHeader（）"><a href="#setRequestHeader（）" class="headerlink" title="setRequestHeader（）"></a>setRequestHeader（）</h4><p>用post方法常需要设置头部信息，如 <code>request.setRequestHeader（&quot;Content-Type&quot;, &quot;application/x-www-form-urlencoded&quot;）;</code></p>
+<p>以下首部无法自定义，有些是浏览器自动处理的，有些是为了防止伪造。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/11/15917195985453.jpg" alt=""></p>
+<p>如果对相同的头调用setRequestHeader（）多次，新值不会取代之前指定的值，相反，HTTP请求将包含这个头的多个副本或这个头将指定多个值。</p>
+<h4 id="send（）"><a href="#send（）" class="headerlink" title="send（）"></a>send（）</h4><p>GET请求绝对没有主体，所以应该传递null或省略这个参数。POST请求通常拥有主体，同时它应该匹配使用setRequestHeader（）指定的“Content-Type”头。</p>
+<p>对于混合格式，XHR2定义了新的FormData API，它容易实现多部分请求主体。首先，使用FormData（）构造函数创建FormData对象，然后按需多次调用这个对象的append（）方法把个体“部分”（可以是字符串、File或Blob对象）添加到请求中。最后，把FormData对象传递给send（）方法。send（）方法将对请求定义合适的边界字符串和设置“Content-Type”头。</p>
+<h3 id="响应获取"><a href="#响应获取" class="headerlink" title="响应获取"></a>响应获取</h3><p>为了在响应准备就绪时得到通知，必须监听XMLHttpRequest对象上的readystatechange事件。每次readyState属性改变都会触发readystatechange事件。readyState值：</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/11/15917205111045.png" alt=""></p>
+<p>为了监听readystatechange事件，请<strong>把事件处理函数设置为XMLHttpRequest对象的onreadystatechange属性</strong>。也能使用addEventListener（）</p>
+<p><strong>以下内容要会手写</strong><br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/11/15917210491017.jpg" alt=""></p>
+<p>XMLHttpRequest也支持同步响应。如果把false作为第3个参数传递给open（），那么send（）方法将阻塞直到请求完成。在这种情况下，不需要使用事件处理程序：一旦send（）返回，仅需要检查XMLHttpRequest对象的status和responseText属性。</p>
+<p>使用getResponseHeader（）和getAllResponseHeaders（）能查询响应头。</p>
+<p>status和statusText属性以数字和文本的形式返回HTTP状态码。</p>
+<p><strong>响应主体可以从responseText属性中得到文本形式的，从responseXML属性中得到Document形式的。</strong>对象或数组这样的结构化数据作为其响应，应该传输JSON编码，可以把responseText属性传递给JSON.parse（）</p>
+<p>JSON.parse()【从一个字符串中解析出json对象】<br>JSON.stringify()【从一个对象中解析出字符串】</p>
+<h3 id="abort（）"><a href="#abort（）" class="headerlink" title="abort（）"></a>abort（）</h3><p>调用abort（）的主要原因是完成取消或超时请求消耗的时间太长或当响应变得无关时。假设使用XMLHttpRequest为文本输入域请求自动完成推荐。如果用户在服务器的建议达到之前输入了新字符，这时等待请求不再有趣，应该中止。</p>
+<hr>
+<h2 id="jsonp策略"><a href="#jsonp策略" class="headerlink" title="jsonp策略"></a>jsonp策略</h2><p>通过 XHR 实现 Ajax 通信的一个主要限制，来源于跨域安全策略。默认情况下，XHR 对象只能访 问与包含它的页面位于同一个域中的资源。这种安全策略可以预防某些恶意行为。</p>
+<p>CORS（Cross-Origin Resource Sharing，跨源资源共享）是 W3C 的一个工作草案，定义了在必须访 问跨源资源时，浏览器与服务器应该如何沟通。CORS 背后的基本思想，就是使用自定义的 HTTP 头部 让浏览器与服务器进行沟通，从而决定请求或响应是应该成功，还是应该失败。</p>
+<p>比如一个简单的使用 GET 或 POST 发送的请求，它没有自定义的头部，而主体内容是 text/plain。在 发送该请求时，需要给它附加一个额外的 Origin 头部，其中包含请求页面的源信息（协议、域名和端 口），以便服务器根据这个头部信息来决定是否给予响应。</p>
+<p>下面是 Origin 头部的一个示例：</p>
+<p><code>Origin: http://www.nczonline.net</code></p>
+<p>如果服务器认为这个请求可以接受，就在 Access-Control-Allow-Origin 头部中回发相同的源 信息（如果是公共资源，可以回发”*”）。例如：</p>
+<p><code>Access-Control-Allow-Origin: http://www.nczonline.net</code></p>
+<p>如果没有这个头部，或者有这个头部但源信息不匹配，浏览器就会驳回请求。正常情况下，浏览器 会处理请求。注意，请求和响应都不包含 cookie 信息。</p>
+<p>因为同源策略，浏览器不允许原始脚本查找跨域文档的内容。使用XMLHttpRequest，文档内容都是通过responseText属性暴露，所以<strong>同源策略不允许XMLHttpRequest进行跨域请求。</strong></p>
+<p>有一些安全细节需要了解。首先，如果给XMLHttpRequest的open（）方法传入用户名和密码，那么它们绝对不会通过跨域请求发送（这使分布式密码破解攻击成为可能）。除外，<strong>跨域请求通常也不会包含其他任何的用户证书：cookie和HTTP身份验证令牌</strong>（token）通常不会作为请求的内容部分发送且任何作为跨域响应来接收的cookie都会丢弃。如果跨域请求需要这几种凭证才能成功，那么必须在用send（）发送请求前设置XMLHttpRequest的<strong>withCredentials属性为true</strong>。这样做不常见，但测试withCredentials的存在性是测试浏览器是否支持CORS的一种方法。</p>
+<p>XMLHttpRequest只是AJAX的一种实现方法。</p>
+<p><code>&lt;script&gt;</code>元素并未真正受限于同源策略：它加载并执行任何来源的脚本。使得<code>&lt;script&gt;</code>元素成为取代XMLHttpRequest的主流Ajax传输协议。</p>
+<p>只须设置<code>&lt;script&gt;</code>元素的src属性（假如它还没插入到document中，需要插入进去），插入操作触发HTTP请求以下载src属性所指向的URL。使用基于<code>&lt;script&gt;</code>的Ajax传输协议时，服务器的响应采用JSON编码的数据格式，当执行脚本时，JavaScript解析器能自动将其“解码”。由于它使用JSON数据格式，因此这种Ajax传输协议也叫做“JSONP”。</p>
+<p>P代表“填充”或“前缀”，追加“?json”（或&amp;json） 保证返回一个JSONP响应</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/11/15917903425877.jpg" alt=""></p>
+<p>为了使用<code>&lt;script&gt;</code>元素进行Ajax传输，<strong>必须允许Web页面可以执行远程服务器发送过来的任何JavaScript代码</strong>。这意味着对于不可信的服务器，不应该采取该技术</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/AJAX/" rel="tag"><i class="fa fa-tag"></i> AJAX</a>
+          
+            <a href="/tags/CROS/" rel="tag"><i class="fa fa-tag"></i> CROS</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/frontend/2020-06-10-CSS练习：渐变风格登录界面.html" rel="next" title="CSS练习：渐变风格登录界面">
+                <i class="fa fa-chevron-left"></i> CSS练习：渐变风格登录界面
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">虚己以游世，乘物以游心</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">111</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#XHR"><span class="nav-number">1.</span> <span class="nav-text">XHR</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#请求设置"><span class="nav-number">1.1.</span> <span class="nav-text">请求设置</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#open（）"><span class="nav-number">1.1.1.</span> <span class="nav-text">open（）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#setRequestHeader（）"><span class="nav-number">1.1.2.</span> <span class="nav-text">setRequestHeader（）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#send（）"><span class="nav-number">1.1.3.</span> <span class="nav-text">send（）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应获取"><span class="nav-number">1.2.</span> <span class="nav-text">响应获取</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#abort（）"><span class="nav-number">1.3.</span> <span class="nav-text">abort（）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#jsonp策略"><span class="nav-number">2.</span> <span class="nav-text">jsonp策略</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
