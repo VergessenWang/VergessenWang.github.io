@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JS," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="学习自：JS忍者秘籍 推荐Mozilla的HTML5指南，可通过https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5查看。 Mozilla也为DOM提供了一份报告，可以通过https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model进行查看。 Web">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS进阶：函数">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/frontend/2020-06-15-JS进阶：函数.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="学习自：JS忍者秘籍 推荐Mozilla的HTML5指南，可通过https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5查看。 Mozilla也为DOM提供了一份报告，可以通过https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model进行查看。 Web">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/15/15918699125344.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/15/15918694292390.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/15/15918705919647.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/15/15921545945003.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/15/15921554454156.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/15/15922158741520.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/15/15922209772362.png">
+<meta property="og:updated_time" content="2020-06-15T13:54:46.937Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS进阶：函数">
+<meta name="twitter:description" content="学习自：JS忍者秘籍 推荐Mozilla的HTML5指南，可通过https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5查看。 Mozilla也为DOM提供了一份报告，可以通过https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model进行查看。 Web">
+<meta name="twitter:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/15/15918699125344.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/frontend/2020-06-15-JS进阶：函数.html"/>
+
+
+
+
+
+  <title>JS进阶：函数 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-06-15-JS进阶：函数.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JS进阶：函数</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-15T21:49:15+08:00">
+                2020-06-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,960
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>学习自：JS忍者秘籍</p>
+<p>推荐Mozilla的HTML5指南，可通过<a href="https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5查看。" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/Guide/HTML/HTML5查看。</a></p>
+<p>Mozilla也为DOM提供了一份报告，可以通过<a href="https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model进行查看。" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model进行查看。</a></p>
+<h3 id="Web应用的生命周期"><a href="#Web应用的生命周期" class="headerlink" title="Web应用的生命周期"></a>Web应用的生命周期</h3><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/15/15918699125344.png" alt=""></p>
+<h4 id="页面构建"><a href="#页面构建" class="headerlink" title="页面构建"></a>页面构建</h4><p>每当解析到脚本元素时，浏览器就会停止从HTML构建DOM，并开始执行JavaScript代码。JavaScript代码由浏览器的JavaScript引擎执行，例如，Firefox的Spidermonkey引擎，Chrome和Opera和V8引擎和Edge的（IE的）Chakra引擎。</p>
+<p>浏览器<strong>暴露给JavaScript引擎</strong>的主要全局对象是window对象，它代表了包含着一个页面的窗口。全局window对象会存在于整个页面的生存期之间，在它上面存储着所有的JavaScript变量。所以所有在某个JavaScript代码执行期间用户创建的全局变量都能正常地被其他脚本元素中的JavaScript代码所访问到。</p>
+<p>下面两个步骤都会一直交替执行。<br>1．将HTML构建为DOM。<br>2．执行JavaScript代码。</p>
+<p>最后，当浏览器处理完所有HTML元素后，页面构建阶段就结束了。随后浏览器就会进入应用生命周期的第二部分：事件处理。</p>
+<a id="more"></a>
+<h4 id="事件处理"><a href="#事件处理" class="headerlink" title="事件处理"></a>事件处理</h4><p>浏览器执行环境的核心思想基于：同一时刻只能执行一个代码片段，即所谓的<strong>单线程</strong>执行模型。所以，浏览器需要一种方式来跟踪已经发生但尚未处理的事件。为实现这个目标，浏览器使用了<strong>事件队列</strong></p>
+<p>事件是异步的，如下类型的事件会在其他类型事件中发生。<br>● 浏览器事件，例如当页面加载完成后或无法加载时；<br>● 网络事件，例如来自服务器的响应（Ajax事件和服务器端事件）；<br>● 用户事件，例如鼠标单击、鼠标移动和键盘事件；<br>● 计时器事件，当timeout时间到期或又触发了一次时间间隔。</p>
+<p>事件处理器是当某个特定事件发生后我们希望执行的函数。有两种方式注册事件。</p>
+<p>● 通过把函数赋给某个特殊属性；<br><code>window.onload = function（ ）{};</code>通过这种方式，事件处理器就会注册到load事件上（当DOM已经就绪并全部构建完成，就会触发这个事件）。<br><strong>这种做法会带来缺点：对于某个事件只能注册一个事件处理器。也就是说，一不小心就会将上一个事件处理器改写掉。</strong></p>
+<p>● 通过使用内置addEventListener方法。让我们能够注册尽可能多的事件</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/15/15918694292390.png" alt=""></p>
+<h3 id="函数"><a href="#函数" class="headerlink" title="函数"></a>函数</h3><p>JavaScript中最关键的概念是：函数是第一类对象（first-class objects），或者说它们被称作<strong>一等公民</strong>（first-class citizens）。JavaScript中函数拥有对象的所有能力，也因此函数可被作为任意其他类型对象来对待。</p>
+<p>如具有动态创建和分配的属性。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/15/15918705919647.png" alt=""></p>
+<h4 id="回调函数"><a href="#回调函数" class="headerlink" title="回调函数"></a>回调函数</h4><p>第一类对象的特点之一是，它能够作为参数传入函数。对于函数而言，这项特性也表明：如果我们将某个函数作为参数传入另一个函数，传入函数会在应用程序执行的<strong>未来某个时间点才执行</strong>。大家所知道的更一般的概念是回调函数（callback function）。</p>
+<p>更通俗的理解是<strong>被其他函数在稍后的某个合适时间点“再回来调用”。</strong></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> values = [<span class="number">0</span>, <span class="number">3</span>, <span class="number">2</span>, <span class="number">5</span>, <span class="number">7</span>, <span class="number">4</span>, <span class="number">8</span>, <span class="number">1</span>];</span><br><span class="line">values.sort(<span class="function"><span class="keyword">function</span>(<span class="params">value1, value2</span>) </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> value1- value2;      &#125;);</span><br></pre></td></tr></table></figure>
+<p>匿名函数的好处：当一个函数不会在代码的多处位置被调用时，该特性可以<strong>避免用非必须的名字污染全局命名空间。</strong></p>
+<h4 id="函数声明和函数表达式"><a href="#函数声明和函数表达式" class="headerlink" title="函数声明和函数表达式"></a>函数声明和函数表达式</h4><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/15/15921545945003.png" alt=""></p>
+<p>最后4个表达式都是<strong>立即调用函数</strong>。首先创建了一个函数，然后立即调用这个新创建的函数。这种函数叫作立即调用函数表达式（IIFE）</p>
+<p>函数声明和函数表达式除了在代码中的位置不同以外，还有一个更重要的不同点是：<strong>对于函数声明来说，函数名是强制性的，而对于函数表达式来说，函数名则完全是可选的。</strong><br>函数声明必须具有函数名是因为它们是独立语句。一个函数的基本要求是它应该能够被调用，所以它必须具有一种被引用方式，于是唯一的方式就是通过它的名字。</p>
+<h4 id="箭头函数"><a href="#箭头函数" class="headerlink" title="箭头函数"></a>箭头函数</h4><p>箭头函数是JavaScript标准中的ES6新增项</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/15/15921554454156.png" alt=""></p>
+<h4 id="形参和实参"><a href="#形参和实参" class="headerlink" title="形参和实参"></a>形参和实参</h4><p>如果实参的数量大于形参，那么额外的实参不会赋值给任何形参。反之，如果形参的数量大于实参，那么那些没有对应实参的形参则会被设为undefined。</p>
+<h4 id="剩余参数和默认参数"><a href="#剩余参数和默认参数" class="headerlink" title="剩余参数和默认参数"></a>剩余参数和默认参数</h4><p>都已被加入ES6标准。</p>
+<p>为函数的最后一个命名参数前加上省略号（…）前缀，这个参数就变成了一个叫作剩余参数的<strong>数组</strong>，数组内包含着传入的剩余的参数。</p>
+<p>只有函数的<strong>最后一个参数</strong>才能是剩余参数。试图把省略号放在不是最后一个形参的任意形参之前都会报错，错误以SyntaxError: parameter after rest parameter的形式展现。</p>
+<p>JavaScript不支持函数重载，对于参数不足的情况，可以用创建默认参数的方式为函数的形参赋值。</p>
+<p>可以为默认参数赋任何值，它既可以是数字或者字符串这样的原始类型，也可以是对象、数组，甚至函数这样的复杂类型。每次函数调用时都会从左到右求得参数的值，<strong>并且当对后面的默认参数赋值时可以引用前面的默认参数</strong>，但是会降低可读性。</p>
+<p>适当地使用默认参数——避免空值，或作为配置函数的简单标记能够带来简洁优雅的代码。</p>
+<h4 id="隐式函数参数this和arguments"><a href="#隐式函数参数this和arguments" class="headerlink" title="隐式函数参数this和arguments"></a>隐式函数参数this和arguments</h4><p><strong>参数this表示被调用函数的上下文对象，而arguments参数表示函数调用过程中传递的所有参数。</strong>两者会被静默地传递给函数，并且可以像函数体内显式声明的参数一样被正常访问。</p>
+<p>arguments对象有一个名为length的属性，表示实参的确切个数。通过数组索引的方式可以获取单个参数的值。但它并非JavaScript数组，如果你尝试在arguments对象上使用数组的方法，会发现最终会报错。arguments对象仅是一个<strong>类数组</strong>的结构。而剩余参数是真正的Array实例</p>
+<p>arguments对象可作为函数参数的别名。如果为arguments[0]赋一个新值，那么，同时也会改变第一个参数的值。将arguments对象作为函数参数的别名使用时会影响代码的可读性，因此在JavaScript提供的严格模式（strict mode）中将无法再使用它。</p>
+<p>this参数的指向不仅是由定义函数的方式和位置决定的，同时还严重受到函数调用方式的影响。</p>
+<p>函数的调用方式影响this的取值。</p>
+<ul>
+<li>如果作为函数调用，在非严格模式下，this指向全局window对象；在严格模式下，this指向undefined。</li>
+<li>作为方法调用，this通常指向调用的对象。</li>
+<li>作为构造函数调用，this指向新创建的对象。</li>
+<li>通过call或apply调用，this指向call或apply的第一个参数。<br>● 箭头函数没有单独的this值，this在箭头函数创建时确定。<br>● 所有函数均可使用bind方法，创建新函数，并绑定到bind方法传入的参数上。被绑定的函数与原始函数具有一致的行为。</li>
+</ul>
+<p>可以通过4种方式调用一个函数：</p>
+<p>● 作为一个函数(function)直接被调用。当以这种方式调用时，函数上下文（this关键字的值）有两种可能性：<strong>在非严格模式下，它将是全局上下文（window对象），而在严格模式下，它将是undefined。</strong></p>
+<p>● 作为一个方法(method)关联在一个对象上，实现面向对象编程。当函数作为某个对象的方法被调用时，<strong>该对象</strong>会成为函数的上下文，并且在函数内部可以通过参数访问到。这样你就可以通过this在任何方法中引用该方法的“宿主”对象</p>
+<p>通过this返回的函数上下文取决于whatsMyContext的调用方式。<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/15/15922158741520.png" alt=""></p>
+<p>● 作为一个构造函数(constructor)new实例化一个新的对象。</p>
+<p><strong>不要把函数的构造器和构造函数混为一谈。<code>new Function(&#39;a&#39;, &#39;b&#39;, &#39;return a+b&#39;)</code>函数的构造器将动态创建的字符串创建为函数。构造函数是我们用来创建和初始化对象实例的函数。</strong></p>
+<p>使用关键字new调用函数会触发以下几个动作。<br>1．创建一个新的空对象。<br>2．该对象作为this参数传递给构造函数，从而成为构造函数的函数上下文。<br>3．新构造的对象作为new运算符的返回值。</p>
+<p>当构造函数自身有返回值时会是什么结果？<br>● 如果构造函数返回一个对象，则该对象将作为整个表达式的值返回，而传入构造函数的this将被丢弃。<br>● 但是，如果构造函数返回的是非对象类型，则忽略返回值，返回新创建的对象。</p>
+<h5 id="解决函数上下问题"><a href="#解决函数上下问题" class="headerlink" title="解决函数上下问题"></a>解决函数上下问题</h5><p>● 通过函数的apply或者call方法</p>
+<p>浏览器的事件处理系统将把调用的上下文定义为事件触发的目标元素，因此常会产生一些问题。</p>
+<p>使用apply和call方法可以显式地指定任何对象作为函数的上下文。</p>
+<p>使用apply方法调用函数，需要为其传递两个参数：作为函数上下文的对象和一个<strong>数组</strong>作为函数调用的参数。call方法的使用方式类似，不同点在于是直接以<strong>参数列表</strong>的形式，而不再是作为数组传递。<strong>apply和call之间唯一的不同之处在于如何传递参数</strong>如果有一组无关的值，则直接使用call方法。若已有参数是数组类型，apply方法是更佳选择。</p>
+<p>在执行回调函数时可能会经常用到。</p>
+<p>forEach遍历函数将每个元素传给回调函数，将当前元素作为回调函数的上下文。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/15/15922209772362.png" alt=""><br>使用call方法调用回调函数，将当前遍历到的元素作为第一个参数，循环索引作为第二个参数，使得当前元素作为函数上下文，循环索引作为回调函数的参数。</p>
+<p>使用箭头函数绕过函数上下文。箭头函数没有单独的this值。箭头函数的this与声明所在的上下文的相同。</p>
+<p>箭头函数在构造函数内部，this指向新创建的对象本身。在全局代码中定义对象字面量，在字面量中定义箭头函数，那么箭头函数内的this指向全局window对象</p>
+<p>函数还可访问bind方法创建新函数。无论使用哪种方法调用，bind方法创建的新函数与原始函数的函数体相同，新函数被绑定到指定的对象上。</p>
+<p><strong>所有函数均可访问bind方法，可以创建并返回一个新函数，并绑定在传入的对象上</strong></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JS/" rel="tag"><i class="fa fa-tag"></i> JS</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/frontend/2020-06-11-AJAX通信-XHR-JSONP.html" rel="next" title="AJAX通信:XHR&JSONP">
+                <i class="fa fa-chevron-left"></i> AJAX通信:XHR&JSONP
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">虚己以游世，乘物以游心</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">112</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Web应用的生命周期"><span class="nav-number">1.</span> <span class="nav-text">Web应用的生命周期</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#页面构建"><span class="nav-number">1.1.</span> <span class="nav-text">页面构建</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#事件处理"><span class="nav-number">1.2.</span> <span class="nav-text">事件处理</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#函数"><span class="nav-number">2.</span> <span class="nav-text">函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#回调函数"><span class="nav-number">2.1.</span> <span class="nav-text">回调函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#函数声明和函数表达式"><span class="nav-number">2.2.</span> <span class="nav-text">函数声明和函数表达式</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#箭头函数"><span class="nav-number">2.3.</span> <span class="nav-text">箭头函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#形参和实参"><span class="nav-number">2.4.</span> <span class="nav-text">形参和实参</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#剩余参数和默认参数"><span class="nav-number">2.5.</span> <span class="nav-text">剩余参数和默认参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#隐式函数参数this和arguments"><span class="nav-number">2.6.</span> <span class="nav-text">隐式函数参数this和arguments</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#解决函数上下问题"><span class="nav-number">2.6.1.</span> <span class="nav-text">解决函数上下问题</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
