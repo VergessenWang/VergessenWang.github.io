@@ -119,7 +119,7 @@
 
 
 
-  <meta name="keywords" content="Neo4j,Docker," />
+  <meta name="keywords" content="JS," />
 
 
 
@@ -130,18 +130,25 @@
 
 
 
-<meta name="description" content="查看最新的Neo4j镜像版本 此时最新为4.0 docker pull neo4j:4.0 拉取镜像4.0  报错Error response from daemon: Get https://registry-1.docker.io/v2/: dial tcp: lookup registry-1.docker.io on 10.0.2.3:53: read udp 10.0.2.15:5177">
-<meta name="keywords" content="Neo4j,Docker">
+<meta name="description" content="事件循环除了事件，还要保持浏览器执行的其他操作。这些操作被称为任务，并且分为两类：宏任务（或通常称为任务）和微任务。事件循环的实现至少应该含有一个用于宏任务的队列和至少一个用于微任务的队列。两种队列在同一时刻都只执行一个任务 事件循环基于两个基本原则：● 一次处理一个任务。● 一个任务开始后直到运行完成，不会被其他任务中断。 宏任务的例子很多，包括创建主文档对象、解析HTML、执行主线（或全局）J">
+<meta name="keywords" content="JS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Docker中运行Neo4j">
-<meta property="og:url" content="http://vergessenwang.github.io/posts/database/2020-02-17-Docker中运行Neo4j.html">
+<meta property="og:title" content="JS进阶：事件循环与代理">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/frontend/2020-06-17-JS进阶：事件循环与代理.html">
 <meta property="og:site_name" content="Anonymous World">
-<meta property="og:description" content="查看最新的Neo4j镜像版本 此时最新为4.0 docker pull neo4j:4.0 拉取镜像4.0  报错Error response from daemon: Get https://registry-1.docker.io/v2/: dial tcp: lookup registry-1.docker.io on 10.0.2.3:53: read udp 10.0.2.15:5177">
+<meta property="og:description" content="事件循环除了事件，还要保持浏览器执行的其他操作。这些操作被称为任务，并且分为两类：宏任务（或通常称为任务）和微任务。事件循环的实现至少应该含有一个用于宏任务的队列和至少一个用于微任务的队列。两种队列在同一时刻都只执行一个任务 事件循环基于两个基本原则：● 一次处理一个任务。● 一个任务开始后直到运行完成，不会被其他任务中断。 宏任务的例子很多，包括创建主文档对象、解析HTML、执行主线（或全局）J">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-17T12:32:38.061Z">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/17/15923758236468.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/17/15923774420137.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/17/15923832855891.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/17/15923835069397.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/17/15923835241752.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/17/15923874900656.png">
+<meta property="og:updated_time" content="2020-06-17T15:04:35.860Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Docker中运行Neo4j">
-<meta name="twitter:description" content="查看最新的Neo4j镜像版本 此时最新为4.0 docker pull neo4j:4.0 拉取镜像4.0  报错Error response from daemon: Get https://registry-1.docker.io/v2/: dial tcp: lookup registry-1.docker.io on 10.0.2.3:53: read udp 10.0.2.15:5177">
+<meta name="twitter:title" content="JS进阶：事件循环与代理">
+<meta name="twitter:description" content="事件循环除了事件，还要保持浏览器执行的其他操作。这些操作被称为任务，并且分为两类：宏任务（或通常称为任务）和微任务。事件循环的实现至少应该含有一个用于宏任务的队列和至少一个用于微任务的队列。两种队列在同一时刻都只执行一个任务 事件循环基于两个基本原则：● 一次处理一个任务。● 一个任务开始后直到运行完成，不会被其他任务中断。 宏任务的例子很多，包括创建主文档对象、解析HTML、执行主线（或全局）J">
+<meta name="twitter:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/17/15923758236468.png">
 
 
 
@@ -171,13 +178,13 @@
 
 
 
-  <link rel="canonical" href="http://vergessenwang.github.io/posts/database/2020-02-17-Docker中运行Neo4j.html"/>
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/frontend/2020-06-17-JS进阶：事件循环与代理.html"/>
 
 
 
 
 
-  <title>Docker中运行Neo4j | Anonymous World</title>
+  <title>JS进阶：事件循环与代理 | Anonymous World</title>
   
 
 
@@ -304,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/database/2020-02-17-Docker中运行Neo4j.html">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-06-17-JS进阶：事件循环与代理.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liana_Wang">
@@ -321,7 +328,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Docker中运行Neo4j</h1>
+          <h1 class="post-title" itemprop="name headline">JS进阶：事件循环与代理</h1>
         
 
         <div class="post-meta">
@@ -333,8 +340,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-17T20:29:15+08:00">
-                2020-02-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-17T23:03:06+08:00">
+                2020-06-17
               </time>
             
 
@@ -356,8 +363,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/database/" itemprop="url" rel="index">
-                    <span itemprop="name">database</span>
+                  <a href="/categories/frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend</span>
                   </a>
                 </span>
 
@@ -387,7 +394,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,030
+                  1,447
                 </span>
               
 
@@ -412,51 +419,33 @@
       
 
       
-        <p>查看<a href="https://hub.docker.com/_/neo4j?tab=tags" target="_blank" rel="noopener">最新的Neo4j镜像版本</a> 此时最新为4.0</p>
-<p><code>docker pull neo4j:4.0</code> 拉取镜像4.0 </p>
-<p>报错Error response from daemon: Get <a href="https://registry-1.docker.io/v2/" target="_blank" rel="noopener">https://registry-1.docker.io/v2/</a>: dial tcp: lookup registry-1.docker.io on 10.0.2.3:53: read udp 10.0.2.15:51774-&gt;10.0.2.3:53: i/o timeout</p>
-<p>可能DNS解析有点问题，看了一下全都是美国弗吉尼亚的Amazon数据中心，应该是访问不到</p>
-<p>去找阿里云镜像，然后被满页的广告蒙蔽了双眼，一个多小时之后，我买了一台云服务器 ：D</p>
-<p>我是谁？我在哪？我刚才不是在学Docker吗？后来，我就开始搭服务器了。。。</p>
+        <h3 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h3><p>除了事件，还要保持浏览器执行的其他操作。这些操作被称为任务，并且分为两类：宏任务（或通常称为任务）和微任务。事件循环的实现至少应该含有一个用于宏任务的队列和至少一个用于微任务的队列。两种队列在同一时刻都只执行一个任务</p>
+<p>事件循环基于两个基本原则：<br>● 一次处理一个任务。<br>● 一个任务开始后直到运行完成，不会被其他任务中断。</p>
+<p>宏任务的例子很多，包括<strong>创建主文档对象、解析HTML、执行主线（或全局）JavaScript代码</strong>，更改当前URL以及各种事件，如<strong>页面加载、输入、网络事件和定时器事件</strong>。从浏览器的角度来看，宏任务代表一个个离散的、独立工作单元。运行完任务后，浏览器可以继续其他调度，如重新渲染页面的UI或执行垃圾回收。</p>
+<p>而微任务是更小的任务。微任务更新应用程序的状态，但必须在浏览器任务继续执行其他任务之前执行，浏览器任务包括重新渲染页面的UI。微任务的案例包括<strong>promise回调函数、DOM发生变化</strong>等。微任务需要尽可能快地、通过<strong>异步</strong>方式执行，同时不能产生全新的微任务。微任务使得我们能够在重新渲染UI之前执行指定的行为，避免不必要的UI重绘，UI重绘会使应用程序的状态不连续。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/17/15923758236468.png" alt=""></p>
+<p><strong>注意处理宏任务和微任务队列之间的区别：单次循环迭代中，最多处理一个宏任务（其余的在队列中等待），而队列中的所有微任务都会被处理。</strong>所有微任务会在下一次渲染之前执行完成，因为它们的目标是在渲染前更新应用程序状态。</p>
+<p>如果要达到每秒60帧（60 fps）的速度，理想情况下，单个任务和该任务附属的所有微任务，都应在16ms内完成。</p>
+<p>事件监测和添加任务是独立于事件循环的，尽管主线程仍在执行，仍然可以向队列添加任务。</p>
 <a id="more"></a>
-<p>一天之后，我回来了。继续学这个</p>
-<hr>
-<h3 id="云服务器"><a href="#云服务器" class="headerlink" title="云服务器"></a>云服务器</h3><p>在云服务器中 <code>docker pull neo4j</code> 默认拉取 lasted 版本，这时速度依然很慢</p>
-<p><a href="https://blog.csdn.net/julien71/article/details/79760919" target="_blank" rel="noopener">添加阿里云地址</a>   速度起飞….</p>
-<p><code>docker run -it -d -p 7474:7474 -p 7687:7687 neo4j:4.0</code> 7474端口用于管理界面，7687端口用于登录连接neo4j服务端 。采用后台运行方式启动，返回一个containerid</p>
-<p>然而在云服务器还要进行安全组端口配置</p>
-<p>这里试了几次都有点问题，不太明白是哪里出了问题，难度是没装java？或者是防火墙没关？</p>
-<p>先<a href="http://www.imooc.com/article/75277" target="_blank" rel="noopener">装sdkman</a>来管理java，先装个java8 不得不说挺方便的，不用自己去改环境变量了 <code>java -version</code> 查看的版本为1.8</p>
-<p>折腾了一会放弃了，还是在电脑上运行把。</p>
-<hr>
-<h3 id="Windows"><a href="#Windows" class="headerlink" title="Windows"></a>Windows</h3><p>同样添加一下<a href="https://www.imooc.com/article/48684" target="_blank" rel="noopener">toolbox镜像加速</a> </p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">docker-machine ssh default</span><br><span class="line">sudo sed -i &quot;s|EXTRA_ARGS=&apos;|EXTRA_ARGS=&apos;--registry-mirror=阿里云镜像加速地址 |g&quot; /var/lib/boot2docker/profile</span><br><span class="line">exit</span><br><span class="line">docker-machine restart default</span><br></pre></td></tr></table></figure>
-<p>这里使用的是我自己阿里云控制台里的镜像加速地址</p>
-<p>重启之后提示 <code>docker info</code> 无法查看信息，提示 You may need to re-run the <code>docker-machine env</code> command.</p>
-<p><code>docker-machine env default</code> 根据查询结果 输入 <code>eval $(&quot;C:\Program Files\Docker Toolbox\docker-machine.exe&quot; env default)</code></p>
-<p>再次 <code>docker info</code> 查看信息成功，重新拉取neo4j, 很快的样子</p>
-<p>二十分钟过后….好吧，并不快….</p>
-<p>运行<code>docker run -d -p 7474:7474 -p 7687:7687 neo4j</code> 在浏览器依然没有显示？？</p>
-<p>怎么回事，之前用neo4j的bin文件运行是没有问题的，难道是docker的原因？</p>
-<p>这时我想到了，docker实际上是一个虚拟机，那么在浏览器用localhost的访问当然是不行的，所以找到docker的IP 为 192.168.99.100</p>
-<p>再访问 <a href="http://192.168.99.100:7474/browser/" target="_blank" rel="noopener">http://192.168.99.100:7474/browser/</a> 就有界面了</p>
-<hr>
-<h3 id="云服务器-1"><a href="#云服务器-1" class="headerlink" title="云服务器"></a>云服务器</h3><p>这时我又回到云服务器，试图找出存在的问题</p>
-<p>用<code>docker ps -a</code> 命令 </p>
-<p>我发现在本机运行时</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS              PORTS                                                      NAMES</span><br><span class="line"><span class="number">2</span>d9721591b68        neo4j               "/sbin/tini -g -- /d…"   <span class="number">53</span> minutes ago      Up <span class="number">48</span> minutes       <span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span>:<span class="number">7474</span>-&gt;<span class="number">7474</span>/tcp, <span class="number">7473</span>/tcp, <span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span>.<span class="number">0</span>:<span class="number">7687</span>-&gt;<span class="number">7687</span>/tcp   jolly_goldberg</span><br></pre></td></tr></table></figure>
-<p>状态为UP ， 端口也映射成功</p>
-<p>但是云服务器上的却是 Exited (1)</p>
-<figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">CONTAINER ID        IMAGE               COMMAND                  CREATED             STATUS                      PORTS               NAMES</span><br><span class="line"><span class="number">28</span>ba3f7d0527        neo4j               "/sbin/tini -g -- /d…"   <span class="number">10</span> seconds ago      Exited (<span class="number">1</span>) <span class="number">9</span> seconds ago                        fervent_ptolemy</span><br><span class="line"><span class="number">0</span>ba0cba50e7d        neo4j               "/sbin/tini -g -- /d…"   <span class="number">11</span> minutes ago      Exited (<span class="number">1</span>) <span class="number">11</span> minutes ago                       sad_pascal</span><br><span class="line"><span class="number">03</span>f239d99289        neo4j:<span class="number">4</span>.<span class="number">0</span>           "/sbin/tini -g -- /d…"   <span class="number">3</span> hours ago         Exited (<span class="number">1</span>) <span class="number">3</span> hours ago                          tender_shannon</span><br><span class="line"><span class="number">78</span>df828be80b        hello-world         "/hello"                 <span class="number">23</span> hours ago        Exited (<span class="number">0</span>) <span class="number">23</span> hours ago                         suspicious_mestorf</span><br></pre></td></tr></table></figure>
-<p>也就是说，neo4j并没有正常的运行起来</p>
-<p>去掉后台运行参数-d 后重新运行，报错 /var/lib/neo4j/bin/neo4j: line 238: /var/lib/neo4j/conf/neo4j.conf: Permission denied</p>
-<p>出现了访问限制。</p>
-<p>然而我并没有找到这个/var/lib/neo4j 这个目录，应该是要修改镜像文件吧。然而docker一般都是部署的已经写好的代码，所以用在云服务器上用docker运行neo4j的话，其实还要对源码进行相应的修改，构建自己的镜像，这个以后真正要部署的时候再说吧，也就是上传源码的事</p>
-<p>话说回来，我一定非要在docker中运行neo4j吗…</p>
-<hr>
-<h3 id="linux"><a href="#linux" class="headerlink" title="linux"></a>linux</h3><p>又开始折腾了，这次是在linux系统上装了Docker 和Neo4J </p>
-<p><code>sudo docker run --publish=7474:7474 --publish=7687:7687 neo4j</code>  </p>
-<p>成功运行起来了, 使用默认账户密码neo4j/neo4j 登陆</p>
+<p>请注意事件处理函数的发生频率以及执行耗时。例如，处理鼠标移动（mouse-move）事件时应当特别小心。因为移动鼠标将导致大量的事件进入队列，因此在鼠标移动的处理函数中执行任何复杂操作都可能导致Web应用的糟糕体验。</p>
+<h4 id="setTimeout和setInterval"><a href="#setTimeout和setInterval" class="headerlink" title="setTimeout和setInterval"></a>setTimeout和setInterval</h4><p>当JavaScript忙于执行时，在浏览器上的用户交互会变得迟钝，甚至无响应。由于当JavaScript执行时，重新渲染页面的更新都被暂停，浏览器将会卡顿，看起来似乎处于假死状态。</p>
+<p>计时器能够有效地中止一段JavaScript的执行，直到一段时间之后，还可以把代码的各个部分分解成片段，这些片段的执行消耗时间不足以导致浏览器挂起。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/17/15923774420137.png" alt=""></p>
+<p>这些方法都是挂载在window对象（全局上下文）的方法。与事件循环类型不同，这些方法不是JavaScript本身定义的，而是由宿主环境提供的（如浏览器或Node.js）</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/17/15923832855891.png" alt=""></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/17/15923835069397.png" alt=""></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/17/15923835241752.png" alt=""></p>
+<p><strong>如果队列中已经存在一个间隔计时器，那么就不会创建一个新的间隔计时器。</strong></p>
+<p>计时器提供一种异步延迟执行代码片段的能力，至少要延迟指定的毫秒数。因为JavaScript单线程的本质，我们<strong>只能控制计时器何时被加入队列中，而无法控制何时执行</strong>。</p>
+<h3 id="事件代理"><a href="#事件代理" class="headerlink" title="事件代理"></a>事件代理</h3><p>DOM是元素的分层树，发生在一个元素（target）上的事件通常是通过DOM进行代理的，有以下两种机制。<br>1．捕获——首先被顶部元素捕获，并依次向下传递。<br>2．冒泡——事件<strong>首先通过捕获</strong>，从顶部元素传递到目标元素。当到达目标元素时，激活冒泡模式，从目标元素传回到顶部元素。</p>
+<p>可以向addEventListener传递参数，很容易地选择希望的事件处理顺序。第3个参数如果传入true，将采用事件捕获；如果传入false，则采用事件冒泡。因此，某种意义上来说，W3C标准更倾向于优先选择事件冒泡，<strong>默认是事件冒泡</strong>。</p>
+<p>首先从上到下进行捕获，如果遇到捕获模式的元素就执行事件。接着向下捕获直到底部元素，然后转为冒泡模式，从底部到顶部依次处理</p>
+<p><strong>this关键字指向的是事件处理器注册的元素，不一定是发生事件的元素。</strong></p>
+<p><strong>通过事件代理，我们必须确保代理的元素是目标元素的祖先元素。这样，我们可以确定单击事件最终会冒泡到事件代理注册的元素上。</strong></p>
+<p>比如，我们要为一个被激活的表格添加样式，可以创建唯一的处理器，注册到比单元格更高层级的元素上，通过冒泡可以处理所有的单元格单击事件。我们知道单元格是表格的后代元素，通过event.target即可获得被单击的元素。this指向注册的祖先元素</p>
+<p>通过内置的CustomEvent构造函数和dispatchEvent方法，创建和分发自定义事件，减少应用程序不同部分之间的耦合。</p>
+<p>如加载动画时实现：<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/17/15923874900656.png" alt=""></p>
 
       
     </div>
@@ -474,9 +463,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Neo4j/" rel="tag"><i class="fa fa-tag"></i> Neo4j</a>
-          
-            <a href="/tags/Docker/" rel="tag"><i class="fa fa-tag"></i> Docker</a>
+            <a href="/tags/JS/" rel="tag"><i class="fa fa-tag"></i> JS</a>
           
         </div>
       
@@ -504,8 +491,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/DataStructure/2020-02-16-LC-链表专题-一.html" rel="next" title="LC-链表专题(一)">
-                <i class="fa fa-chevron-left"></i> LC-链表专题(一)
+              <a href="/posts/frontend/2020-06-16-JS进阶：闭包和作用域.html" rel="next" title="JS进阶：闭包和作用域">
+                <i class="fa fa-chevron-left"></i> JS进阶：闭包和作用域
               </a>
             
           </div>
@@ -513,10 +500,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/posts/Java/2020-02-19-JVM数据分区.html" rel="prev" title="JVM数据分区">
-                JVM数据分区 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -682,7 +665,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#云服务器"><span class="nav-number">1.</span> <span class="nav-text">云服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Windows"><span class="nav-number">2.</span> <span class="nav-text">Windows</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#云服务器-1"><span class="nav-number">3.</span> <span class="nav-text">云服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#linux"><span class="nav-number">4.</span> <span class="nav-text">linux</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#事件循环"><span class="nav-number">1.</span> <span class="nav-text">事件循环</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#setTimeout和setInterval"><span class="nav-number">1.1.</span> <span class="nav-text">setTimeout和setInterval</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#事件代理"><span class="nav-number">2.</span> <span class="nav-text">事件代理</span></a></li></ol></div>
             
 
           </div>

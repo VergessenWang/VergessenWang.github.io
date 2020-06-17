@@ -303,6 +303,185 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/NLP/2020-05-13-NLP多文本分类Baseline复现.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/NLP/2020-05-13-NLP多文本分类Baseline复现.html" itemprop="url">NLP多文本分类Baseline复现</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-13T08:48:38+08:00">
+                2020-05-13
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/" itemprop="url" rel="index">
+                    <span itemprop="name">NLP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  817
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p><a href="https://github.com/Yan2013/NLP2020/tree/classification" target="_blank" rel="noopener">助教给的源码地址</a></p>
+<p>首先创建一个新的虚拟环境 <code>conda create -n NLP2020 python=3.7</code></p>
+<p>激活环境，进入文件目录，安装依赖<code>pip install -r requirement_dev.txt</code></p>
+<p>报错：</p>
+<blockquote>
+<p>ERROR: Could not install packages due to an EnvironmentError: [WinError 5] 拒绝访问。: ‘C:\Users\18771\AppData\Local\Temp\pip-uninstall-5kehbgst\pip.exe’<br>Consider using the <code>--user</code> option or check the permissions.</p>
+</blockquote>
+<p>按描述加上<code>--user</code> ，安装成功但有警告</p>
+<blockquote>
+<p>WARNING: The script twine.exe is installed in ‘C:\Users\18771\AppData\Roaming\Python\Python37\Scripts’ which is not on PATH.<br>Consider adding this directory to PATH or, if you prefer to suppress this warning, use –no-warn-script-location.</p>
+</blockquote>
+<p>于是还是用管理员方式运行Anaconda Prompt, 重新安装了一下，顺便升级了pip <code>python -m pip install --upgrade pip</code></p>
+<p>按README继续安装其他依赖</p>
+<figure class="highlight sh"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">pytorch==1.4.0</span><br><span class="line">cudatoolkit==9.2</span><br><span class="line">tensorboard==2.2.1</span><br><span class="line">scikit-learn==0.22</span><br><span class="line">jieba==0.42.1</span><br></pre></td></tr></table></figure>
+<p>由于没有GPU，我就没有安装cudatoolkit</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/NLP/2020-05-13-NLP多文本分类Baseline复现.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/NLP/2020-05-12-用Pytorch进行深度学习.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1844,178 +2023,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/Java/2020-03-13-GC机制.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liana_Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Anonymous World">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/Java/2020-03-13-GC机制.html" itemprop="url">GC机制</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-03-13T15:33:45+08:00">
-                2020-03-13
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Java/" itemprop="url" rel="index">
-                    <span itemprop="name">Java</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  9,758
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="对象分配、布局和访问"><a href="#对象分配、布局和访问" class="headerlink" title="对象分配、布局和访问"></a>对象分配、布局和访问</h3><h4 id="创建"><a href="#创建" class="headerlink" title="创建"></a>创建</h4><p>当Java虚拟机遇到一条字节码new指令时，首先将去检查这个指令的参数<strong>是否能在常量池中定位到一个类的符号引用</strong>，并且检查这个符号引用代表的类是否已被加载、解析和初始化过。如果没有，那必须先执行相应的类加载过程</p>
-<p>对象所需内存的大小在类加载完成后便可完全确定，当使用Serial、ParNew等带压缩整理过程的收集器时，系统采用的分配算法是<strong>指针碰撞</strong>，堆中内存是绝对规整的，分配内存就仅仅是把那个指针向空闲空间方向挪动一段与对象大小相等的距离；而当使用CMS这种基于清除（Sweep）算法的收集器时，理论上就只能采用较为复杂的<strong>空闲列表</strong>来分配内存。在分配的时候从列表中找到一块足够大的空间划分给对象实例，并更新列表上的记录</p>
-<p>线程安全问题有两种可选方案：一种是对分配内存空间的动作进行同步处理——实际上虚拟机是采用<strong>CAS配上失败重试</strong>的方式保证更新操作的原子性；另外一种是把内存分配的动作按照线程划分在不同的空间之中进行，即每个线程在Java堆中预先分配一小块内存，称为<strong>本地线程分配缓冲</strong>（Thread Local Allocation Buffer，TLAB），哪个线程要分配内存，就在哪个线程的本地缓冲区中分配，只有本地缓冲区用完了，分配新的缓存区时才需要同步锁定。虚拟机是否使用TLAB，可以通过-XX：+/-UseTLAB参数来设定。</p>
-<p>在eden中内存分配完成之后，虚拟机必须将分配到的内存空间（但不包括对象头）都<strong>初始化为零值</strong>，如果使用了TLAB的话，这一项工作也可以提前至TLAB分配时顺便进行。这步操作保证了对象的实例字段在Java代码中可以不赋初始值就直接使用，使程序能访问到这些字段的数据类型所对应的零值。</p>
-<p>接下来，Java虚拟机还要对对象进行必要的设置，例如这个对象是哪个类的实例、如何才能找到类的元数据信息、对象的哈希码（实际上对象的哈希码会延后到真正调用Object::hashCode()方法时才计算）、对象的GC分代年龄等信息。这些信息存放在对象的<strong>对象头</strong>（Object Header）之中。</p>
-<p>在上面工作都完成之后，从虚拟机的视角来看，一个新的对象已经产生了。但是从Java程序的视角看来，对象创建才刚刚开始——构造函数，即Class文件中的<init>()方法还没有执行，所有的字段都为默认的零值，new指令之后会接着<strong>执行<init>()方法</init></strong>，按照程序员的意愿对对象进行初始化，这样一个真正可用的对象才算完全被构造出来。</init></p>
-<p>将<strong>对象引用入栈</strong>，继续执行下一条指令</p>
-<h4 id="布局"><a href="#布局" class="headerlink" title="布局"></a>布局</h4><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/03/13/15839323567882.jpg" alt=""><br>在HotSpot虚拟机里，对象在堆内存中的存储布局可以划分为三个部分：对象头（Header）、实例数据（Instance Data）和对齐填充（Padding）。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/Java/2020-03-13-GC机制.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2070,7 +2077,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">113</span>
+                  <span class="site-state-item-count">114</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
