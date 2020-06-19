@@ -303,6 +303,184 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/NLP/2019-10-10-NER中的编码转换.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/NLP/2019-10-10-NER中的编码转换.html" itemprop="url">NER中的编码转换</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-10T23:57:45+08:00">
+                2019-10-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/" itemprop="url" rel="index">
+                    <span itemprop="name">NLP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  952
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>命名实体识别(NER)的作用：<strong>关系抽取</strong>、事件抽取、<strong>知识图谱</strong>(分构建和应用两个方向，构建目前人工干预还是需要很多)、问答系统、机器翻译…</p>
+<p>通用实体分类：人名、地名、组织机构名、日期时间、专用名词</p>
+<p>学术上的分类：</p>
+<ul>
+<li>三大类：实体类、时间类、数字类</li>
+<li>七小类：人名、地名、组织机构名、时间、日期、货币、百分比</li>
+</ul>
+<h3 id="相关算法"><a href="#相关算法" class="headerlink" title="相关算法"></a>相关算法</h3><p>早期：基于字典，基于规则</p>
+<p>传统ML：HMM  MEMM  CRF</p>
+<p>DL:  RNN-CRF  CNN-CRF</p>
+<p>学术界近期方法：<u>注意力模型，迁移学习，半监督学习</u>  —— 有时间了解下</p>
+<p>BiLSTM + CRF</p>
+<p>从双向神经网络输出的结果为什么还要经过CRF的处理？—— 输出的是一系列标签的概率，而且每个字之间是相互独立的，利用CRF的<strong>条件转移概率矩阵</strong>，可以改善输出结果</p>
+<p>本次主要学习实体抽取前对中文字的词性标注后的编码转换，这是进行更深入信息抽取的基础工作</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/NLP/2019-10-10-NER中的编码转换.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/OS/2019-10-09-VMware无法在Windows运行问题解决.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1850,176 +2028,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/life/2019-09-16-中秋记叙.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liana_Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Anonymous World">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/life/2019-09-16-中秋记叙.html" itemprop="url">中秋记叙</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-09-16T01:06:17+08:00">
-                2019-09-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/life/" itemprop="url" rel="index">
-                    <span itemprop="name">life</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  413
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>一月的时候，我背着穿到上海的四件毛衣，在微雨而几乎无人的下午，独自一人在拙政园里闲逛。空气潮湿而阴冷，墙愈白，瓦愈黑。地上的树叶落了一层，塘里枯败的荷枝耷拉着，几只灰褐的鸳鸯自顾戏水。一整个的园子，仿佛从没人来过。</p>
-<p>留得残荷听雨声，大概是这样的意境。</p>
-<p>而今中秋同瑞哥还有时节再游一趟，却又是另一种心情。</p>
-<p>强烈的日光照的云天通透，园里的树叶郁郁葱葱，掩去了大半的热浪，到底是古人避暑的地方。小孩子指着鱼儿叽叽喳喳，风伴着阵阵蝉鸣。田田荷叶簇拥着接近成熟的莲蓬的高枝，偶尔在边缘遇见几朵睡过头而迟来的荷花。</p>
-<p>水光潋滟晴方好，大概是这样的意境。</p>
-<p>而后还有留园的青苔古树，窗里春秋；网师园的游园惊梦，灯影风声；苏博的吴地遗珍；裕兴记的六月黄面；松鹤楼的松鼠桂鱼，还有苦乐共享的夜谈。</p>
-<p>一个人独自生活的时候，其实是很坚强的，一旦被感情包裹，就会变得很脆弱，因为对信任的人打开了门。很多遥远而隐秘的事情，拿来作为笑谈，倒也很有意思。</p>
-<p>大概所有觉得幸运的时刻，此后都要用寂寞来偿还。</p>
-<p>送走二人后，一个人回到学校，默默喝了两瓶豆奶。</p>
-<p>一瓶敬友情，一瓶敬明天。</p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2074,7 +2082,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">114</span>
+                  <span class="site-state-item-count">115</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -2085,7 +2093,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -2096,7 +2104,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">92</span>
+                  <span class="site-state-item-count">93</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
