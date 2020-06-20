@@ -119,7 +119,7 @@
 
 
 
-  <meta name="keywords" content="Anonymous World" />
+  <meta name="keywords" content="CSS," />
 
 
 
@@ -130,17 +130,24 @@
 
 
 
-<meta name="description" content="大概知识点Java基础良好 —- 容器，GC， 多线程 熟悉Spring等主流Web框架 —- java web, cloud 掌握WEB后端开发技术: 协议、架构、存储、缓存、安全等  对ERP有一定的概念，javascript &amp;amp; abap 大数据—HANA相关，内存数据库 细节知识点 设计模式—单例的各种实现，模式的JDK动态，及为什么要动态 类加载器 新生代和老年代 —-GC  标">
+<meta name="description" content="flex布局本质上是令所有子元素排列在一条轴线上，尽管在子元素较多时可以回行显示，但逻辑上仍是同一行。—— 一维 grid布局的思路是对早年间table布局的升华，即把网页看成有若干行和列的网格，然后让各元素分别与网络线对齐。—— 二维 flex布局和grid布局不是互相替代的关系，而是互相合作的关系，在一个复杂的页面中，通常用grid做全局化粗粒度的布局，然后再用flex布局对每个网格进行细粒度">
+<meta name="keywords" content="CSS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="冲鸭，向着S公司">
-<meta property="og:url" content="http://vergessenwang.github.io/posts/Intern/2020-02-05-冲鸭，向着S公司.html">
+<meta property="og:title" content="CSS进阶：Grid布局">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/frontend/2020-06-20-CSS进阶：Grid布局.html">
 <meta property="og:site_name" content="Anonymous World">
-<meta property="og:description" content="大概知识点Java基础良好 —- 容器，GC， 多线程 熟悉Spring等主流Web框架 —- java web, cloud 掌握WEB后端开发技术: 协议、架构、存储、缓存、安全等  对ERP有一定的概念，javascript &amp;amp; abap 大数据—HANA相关，内存数据库 细节知识点 设计模式—单例的各种实现，模式的JDK动态，及为什么要动态 类加载器 新生代和老年代 —-GC  标">
+<meta property="og:description" content="flex布局本质上是令所有子元素排列在一条轴线上，尽管在子元素较多时可以回行显示，但逻辑上仍是同一行。—— 一维 grid布局的思路是对早年间table布局的升华，即把网页看成有若干行和列的网格，然后让各元素分别与网络线对齐。—— 二维 flex布局和grid布局不是互相替代的关系，而是互相合作的关系，在一个复杂的页面中，通常用grid做全局化粗粒度的布局，然后再用flex布局对每个网格进行细粒度">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2020-02-05T16:19:25.408Z">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/20/15925576003634.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/20/15925628795535.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/20/15925592526967.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/20/15925615515671.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/20/15925631258231.jpg">
+<meta property="og:updated_time" content="2020-06-20T15:41:44.433Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="冲鸭，向着S公司">
-<meta name="twitter:description" content="大概知识点Java基础良好 —- 容器，GC， 多线程 熟悉Spring等主流Web框架 —- java web, cloud 掌握WEB后端开发技术: 协议、架构、存储、缓存、安全等  对ERP有一定的概念，javascript &amp;amp; abap 大数据—HANA相关，内存数据库 细节知识点 设计模式—单例的各种实现，模式的JDK动态，及为什么要动态 类加载器 新生代和老年代 —-GC  标">
+<meta name="twitter:title" content="CSS进阶：Grid布局">
+<meta name="twitter:description" content="flex布局本质上是令所有子元素排列在一条轴线上，尽管在子元素较多时可以回行显示，但逻辑上仍是同一行。—— 一维 grid布局的思路是对早年间table布局的升华，即把网页看成有若干行和列的网格，然后让各元素分别与网络线对齐。—— 二维 flex布局和grid布局不是互相替代的关系，而是互相合作的关系，在一个复杂的页面中，通常用grid做全局化粗粒度的布局，然后再用flex布局对每个网格进行细粒度">
+<meta name="twitter:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/20/15925576003634.jpg">
 
 
 
@@ -170,13 +177,13 @@
 
 
 
-  <link rel="canonical" href="http://vergessenwang.github.io/posts/Intern/2020-02-05-冲鸭，向着S公司.html"/>
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/frontend/2020-06-20-CSS进阶：Grid布局.html"/>
 
 
 
 
 
-  <title>冲鸭，向着S公司 | Anonymous World</title>
+  <title>CSS进阶：Grid布局 | Anonymous World</title>
   
 
 
@@ -303,7 +310,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/Intern/2020-02-05-冲鸭，向着S公司.html">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-06-20-CSS进阶：Grid布局.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liana_Wang">
@@ -320,7 +327,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">冲鸭，向着S公司</h1>
+          <h1 class="post-title" itemprop="name headline">CSS进阶：Grid布局</h1>
         
 
         <div class="post-meta">
@@ -332,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-02-05T23:52:11+08:00">
-                2020-02-05
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-20T23:38:34+08:00">
+                2020-06-20
               </time>
             
 
@@ -355,8 +362,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Intern/" itemprop="url" rel="index">
-                    <span itemprop="name">Intern</span>
+                  <a href="/categories/frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend</span>
                   </a>
                 </span>
 
@@ -386,7 +393,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  648
+                  791
                 </span>
               
 
@@ -411,56 +418,38 @@
       
 
       
-        <h3 id="大概知识点"><a href="#大概知识点" class="headerlink" title="大概知识点"></a>大概知识点</h3><p>Java基础良好 —- 容器，GC， 多线程</p>
-<p>熟悉Spring等主流Web框架 —- java web, cloud</p>
-<p>掌握WEB后端开发技术: 协议、架构、存储、缓存、安全等 </p>
-<p>对ERP有一定的概念，javascript &amp; abap</p>
-<p>大数据—HANA相关，内存数据库</p>
-<h3 id="细节知识点"><a href="#细节知识点" class="headerlink" title="细节知识点"></a>细节知识点</h3><ul>
-<li>设计模式—单例的各种实现，模式的JDK动态，及为什么要动态</li>
-<li>类加载器</li>
-<li>新生代和老年代 —-GC  标记算法</li>
-<li>数据库 —– 触发器和存储过程</li>
-<li>基于oracle的一种数据库 —- 该公司会用的</li>
-<li>索引、优化、如何处理非常多的数据</li>
-<li>优化sql，让模糊查询走索引：%匹配符不能在字符前面</li>
-<li>redis</li>
-</ul>
+        <p>flex布局本质上是令所有子元素排列在一条轴线上，尽管在子元素较多时可以回行显示，但逻辑上仍是<strong>同一行</strong>。—— 一维</p>
+<p>grid布局的思路是对早年间table布局的升华，即把网页看成有若干<strong>行和列的网格</strong>，然后让各元素分别与网络线对齐。—— 二维</p>
+<p>flex布局和grid布局不是互相替代的关系，而是互相合作的关系，在一个复杂的页面中，通常<strong>用grid做全局化粗粒度的布局，然后再用flex布局对每个网格进行细粒度的布局。</strong></p>
+<p><strong>注意：float，display: inline-block，display: table-cell，vertical-align 和 column-* 属性对网格项无效。</strong></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/20/15925576003634.jpg" alt=""></p>
 <a id="more"></a>
+<h3 id="父元素-网格容器-Grid-Container-属性"><a href="#父元素-网格容器-Grid-Container-属性" class="headerlink" title="父元素 网格容器(Grid Container) 属性"></a>父元素 网格容器(Grid Container) 属性</h3><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/20/15925628795535.jpg" alt=""></p>
+<p>若要使用grid布局，需先在父元素上声明display: grid;，这样它的所有直系子元素就会成为grid元素。inline-grid ：生成一个内联网格</p>
+<p>grid-template-columns用于规定每一行要分成几列，以及每列的尺寸，repeat(4, 1fr)表示把一行平均分成4份，1fr是一个长度单位，表示平分之后的1份的宽度。</p>
+<p>网格线默认网格线会自动分配正数和负数名称。也可以明确的指定网格线(Grid Line)名称</p>
+<p><code>grid-template-columns: [first] 40px [line2] 50px [line3] …</code></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/20/15925592526967.png" alt=""></p>
+<p>grid-template-areas给网格区域重命名，重复网格区域的名称导致内容跨越这些单元格，即名字相同的属于同一区域。一个点号（.）代表一个空单元格</p>
+<p>注意<strong>每一行都需要有相同数量的单元格。</strong></p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">…</span><br><span class="line"><span class="selector-class">.item-d</span> &#123;</span><br><span class="line">  <span class="attribute">grid-area</span>: footer;</span><br><span class="line">&#125;</span><br><span class="line"> </span><br><span class="line"><span class="selector-class">.container</span> &#123;</span><br><span class="line">  <span class="attribute">grid-template-columns</span>: <span class="number">50px</span> <span class="number">50px</span> <span class="number">50px</span> <span class="number">50px</span>;</span><br><span class="line">  <span class="attribute">grid-template-rows</span>: auto;</span><br><span class="line">  <span class="attribute">grid-template-areas</span>: </span><br><span class="line">    <span class="string">"header header header header"</span></span><br><span class="line">    <span class="string">"main main . sidebar"</span></span><br><span class="line">    <span class="string">"footer footer footer footer"</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>当你使用这种语法时，区域两端的网格线实际上会自动命名。如果你的网格区域的名字是 foo，该区域的起始行网格线 和 起始列网格线 的名称将为 foo-start，而最后一条行网格线 和 最后一条列网格线 的名称将为 foo-end。这意味着某些网格线可能有多个名字</p>
+<p> column-gap 和 row-gap指定网格线(grid lines)的大小，设置列/行之间间距的宽度。</p>
+<p><code>justify-items: start | end | center | stretch;</code>items在区域内的对齐方式，align-items同理</p>
+<p><code>justify-content: start | end | center | stretch | space-around | space-between | space-evenly;</code>  content在container的对齐方式，align-content同理</p>
+<p>grid-auto-columns / grid-auto-rows 自动放置算法，设置多出来的项目的宽高</p>
+<p><code>grid-auto-flow: row | column | row dense | column dense</code></p>
 <ul>
-<li>线程安全，锁 —- 并发控制</li>
-<li>启动线程的方式：Thread.start，线程池自动启动,callable</li>
-<li>消息队列</li>
-<li>快排：说了各种复杂度、稳定性和思想</li>
-<li>红黑树：不会</li>
-<li>加密算法底层 —-安全</li>
-<li>TCP建立连接为什么需要三次</li>
-<li>应用层协议有哪些</li>
-<li>邮件的正则</li>
-<li>xml转json</li>
-<li>JUC包</li>
-<li>项目主要是做什么，数据库是怎样的</li>
+<li>row：告诉自动布局算法依次填充每行，根据需要添加新行 （默认）</li>
+<li>column：告诉自动布局算法依次填入每列，根据需要添加新列</li>
+<li>dense：告诉自动布局算法在稍后出现较小的网格项时，尝试填充网格中较早的空缺</li>
 </ul>
-<h3 id="例题"><a href="#例题" class="headerlink" title="例题"></a>例题</h3><ol>
-<li>m*n 个格子，从左边的最底层走到最右边的最上层，每一步只能往上或者往前走一步，问有多少种走法？</li>
-<li>内连接，左连接，全连接输出。</li>
-<li>设计一个基类，和两个子类，子类分别实现递归与非递归斐波列切数列。</li>
-<li>图的深度与广度遍历输出交通灯</li>
-<li>observer 模式</li>
-<li>JVM 中能实现一种实例的三种方法</li>
-<li>WCF 中的 ABC 分别代表什么</li>
-<li>三盏灯与三个开关，怎么样能够一个人进入连接开关和灯。</li>
-<li>运用Design Pattern改进CopyFactory类，实现必须具有产品标准。</li>
-<li>先有鸡还是先有蛋，阐述理由？</li>
-<li>线程在什么情况下会进入等待队列？列出3种情况。</li>
-<li>数据库中某表只有1列，具有相同record，在没有index，key的情况下取出第5和第7行的结果。写出一种解决方案。</li>
-<li>Implement the simplest singleton pattern(initialize if if necessary).</li>
-<li>Name three sort algorithms you are familiar with. Write out the correct or der by the average time complexity.</li>
-<li>Write code to sort a duplex direction linklist. The node T has overridden the comparision operators</li>
-</ol>
-<h3 id="形式"><a href="#形式" class="headerlink" title="形式"></a>形式</h3><p>一个小时，四道算法题，四道Sql题 —- 大概10分钟一道算法题？？？</p>
-<h3 id="实习"><a href="#实习" class="headerlink" title="实习"></a>实习</h3><p>全年招聘，有上海、西安、成都、南京四个地点。暑期有VT项目</p>
-<p>BTW: thoughtworks 也可以关注下，毕竟 全球最佳女性科技人员雇主…</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/20/15925615515671.jpg" alt=""></p>
+<h3 id="子元素-网格项-Grid-Items-属性"><a href="#子元素-网格项-Grid-Items-属性" class="headerlink" title="子元素 网格项(Grid Items) 属性"></a>子元素 网格项(Grid Items) 属性</h3><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/20/15925631258231.jpg" alt=""></p>
+<p>使用 grid-column 和 grid-row 来定位网格项</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.item-a</span> &#123;</span><br><span class="line">  <span class="attribute">grid-column</span>: <span class="number">1</span> / <span class="number">2</span>;</span><br><span class="line">  <span class="attribute">grid-row</span>: <span class="number">2</span> / <span class="number">3</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>grid-area 名称引用</p>
+<p><code>justify-self</code> 设置单个item样式</p>
 
       
     </div>
@@ -475,6 +464,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
+          
+        </div>
       
 
       
@@ -500,8 +495,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/Java/2020-02-03-神奇Docker.html" rel="next" title="神奇Docker">
-                <i class="fa fa-chevron-left"></i> 神奇Docker
+              <a href="/posts/Nodejs/2020-06-19-Nodejs连接到Mongodb.html" rel="next" title="Nodejs连接到Mongodb">
+                <i class="fa fa-chevron-left"></i> Nodejs连接到Mongodb
               </a>
             
           </div>
@@ -510,8 +505,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/Project/2020-02-07-云服务器ECS中配置Nginx和Docker.html" rel="prev" title="云服务器ECS中配置Nginx和Docker">
-                云服务器ECS中配置Nginx和Docker <i class="fa fa-chevron-right"></i>
+              <a href="/posts/frontend/2020-06-20-JS进阶：作用域链与内存管理.html" rel="prev" title="JS进阶：作用域链与内存管理">
+                JS进阶：作用域链与内存管理 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -678,7 +673,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#大概知识点"><span class="nav-number">1.</span> <span class="nav-text">大概知识点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#细节知识点"><span class="nav-number">2.</span> <span class="nav-text">细节知识点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#例题"><span class="nav-number">3.</span> <span class="nav-text">例题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#形式"><span class="nav-number">4.</span> <span class="nav-text">形式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实习"><span class="nav-number">5.</span> <span class="nav-text">实习</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#父元素-网格容器-Grid-Container-属性"><span class="nav-number">1.</span> <span class="nav-text">父元素 网格容器(Grid Container) 属性</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#子元素-网格项-Grid-Items-属性"><span class="nav-number">2.</span> <span class="nav-text">子元素 网格项(Grid Items) 属性</span></a></li></ol></div>
             
 
           </div>
