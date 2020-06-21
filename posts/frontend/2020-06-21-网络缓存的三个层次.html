@@ -1,0 +1,956 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="HTTP," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="学习自：深入分布式缓存 不涉及操作系统和硬件的缓存，根据在软件系统中所处位置的不同，缓存大体可以分为三类：❑ 客户端缓存；❑ 服务端缓存；❑ 网络中的缓存。 缓存是系统调优时常用且行之有效的手段 主流的缓存算法（1）Least-Recently-Used（LRU）替换掉最近被请求最少的对象，这种传统策略在实际中应用最广。在CPU缓存淘汰和虚拟内存系统中效果很好。然而在直接应用与代理缓存中效果欠佳，">
+<meta name="keywords" content="HTTP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络缓存的三个层次">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/frontend/2020-06-21-网络缓存的三个层次.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="学习自：深入分布式缓存 不涉及操作系统和硬件的缓存，根据在软件系统中所处位置的不同，缓存大体可以分为三类：❑ 客户端缓存；❑ 服务端缓存；❑ 网络中的缓存。 缓存是系统调优时常用且行之有效的手段 主流的缓存算法（1）Least-Recently-Used（LRU）替换掉最近被请求最少的对象，这种传统策略在实际中应用最广。在CPU缓存淘汰和虚拟内存系统中效果很好。然而在直接应用与代理缓存中效果欠佳，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/21/15927236664851.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/21/15927267716778.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/21/15927276180802.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/21/15927282549508.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/21/15927272188160.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/21/15927294491172.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/21/15927248427774.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/21/15927250692887.png">
+<meta property="og:updated_time" content="2020-06-21T15:55:31.423Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网络缓存的三个层次">
+<meta name="twitter:description" content="学习自：深入分布式缓存 不涉及操作系统和硬件的缓存，根据在软件系统中所处位置的不同，缓存大体可以分为三类：❑ 客户端缓存；❑ 服务端缓存；❑ 网络中的缓存。 缓存是系统调优时常用且行之有效的手段 主流的缓存算法（1）Least-Recently-Used（LRU）替换掉最近被请求最少的对象，这种传统策略在实际中应用最广。在CPU缓存淘汰和虚拟内存系统中效果很好。然而在直接应用与代理缓存中效果欠佳，">
+<meta name="twitter:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/21/15927236664851.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/frontend/2020-06-21-网络缓存的三个层次.html"/>
+
+
+
+
+
+  <title>网络缓存的三个层次 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-06-21-网络缓存的三个层次.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">网络缓存的三个层次</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-21T23:51:33+08:00">
+                2020-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,577
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>学习自：深入分布式缓存</p>
+<p>不涉及操作系统和硬件的缓存，根据在软件系统中所处位置的不同，缓存大体可以分为三类：<br>❑ 客户端缓存；<br>❑ 服务端缓存；<br>❑ 网络中的缓存。</p>
+<p>缓存是系统调优时常用且行之有效的手段</p>
+<h3 id="主流的缓存算法"><a href="#主流的缓存算法" class="headerlink" title="主流的缓存算法"></a>主流的缓存算法</h3><p>（1）Least-Recently-Used（LRU）<br>替换掉最近被请求最少的对象，这种传统策略在实际中应用最广。在CPU缓存淘汰和虚拟内存系统中效果很好。然而在直接应用与代理缓存中效果欠佳，因为Web访问的时间局部性常常变化很大。<br><strong>浏览器就一般使用了LRU作为缓存算法。新的对象会被放在缓存的顶部，当缓存达到了容量极限，底部的对象被去除，方法就是把最新被访问的缓存对象放到缓存池的顶部。</strong></p>
+<p>（2）Least-Frequently-Used（LFU）<br>替换掉访问次数最少的缓存，这一策略意图是保留最常用的、最流行的对象，替换掉很少使用的那些数据。然而，有的文档可能有很高的使用频率，但之后再也不会用到。传统的LFU策略没有提供任何移除这类文件的机制，因此会导致“缓存污染”，即一个先前流行的缓存对象会在缓存中驻留很长时间，这样，就阻碍了新进来可能会流行的对象对它的替代。<br>…</p>
+<h3 id="客户端缓存"><a href="#客户端缓存" class="headerlink" title="客户端缓存"></a>客户端缓存</h3><h4 id="页面缓存"><a href="#页面缓存" class="headerlink" title="页面缓存"></a>页面缓存</h4><p>页面缓存是将之前渲染的页面保存为文件，当用户再次访问时可以避开网络连接，从而减少负载，提升性能和用户体验。随着单页面应用（Single Page Application, SPA）的广泛使用，加之HTML5支持了离线缓存和本地存储，大部分BS应用的页面缓存都可以举重若轻了。</p>
+<p><a href="https://vergessenwang.github.io/posts/frontend/2020-06-04-Html5新特征.html">之前的笔记</a></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/21/15927236664851.png" alt=""></p>
+<p>1）当浏览器访问了一个包含manifest属性的页面时，如果应用的缓存不存在，浏览器会加载文档，获取所有在清单文件中列出的文件，生成初始缓存。<br>2）当对该文档再次访问时，浏览器会直接从应用缓存中加载页面以及在清单文件中列出的资源。同时，浏览器还会向window.applicationCache对象发送一个表示检查的事件，以获取清单文件。<br>3）如果当前缓存的清单副本是最新的，浏览器将向window.applicationCache对象发送一个表示无须更新的事件，从而结束更新过程。<strong>如果在服务端修改了任何缓存资源，必须同时修改清单文件</strong>，这样浏览器才能知道要重新获取资源。<br>4）如果清单文件已经改变，那么文件中列出的所有文件会被重新获取并放到一个临时缓存中。对于每个加入到临时缓存中的文件，浏览器会向window.applicationCache对象发送一个表示进行中的事件。<br>5）一旦所有文件都获取成功，它们会自动移动到真正的离线缓存中，并向window. applicationCache对象发送一个表示已经缓存的事件。鉴于文档早已经从缓存加载到浏览器中，所以<strong>更新后的文档不会重新渲染，直到页面重新加载。</strong></p>
+<a id="more"></a>
+<h4 id="浏览器缓存"><a href="#浏览器缓存" class="headerlink" title="浏览器缓存"></a>浏览器缓存</h4><h5 id="HTTP相关字段"><a href="#HTTP相关字段" class="headerlink" title="HTTP相关字段"></a>HTTP相关字段</h5><p><a href="https://vergessenwang.github.io/posts/network/2020-06-10-HTTP-报文，缓存，Cookie与HTTPS.html">之前相关笔记</a></p>
+<p><a href="https://blog.csdn.net/csdnnews/article/details/89324384" target="_blank" rel="noopener">一篇非常详细的解读</a></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/21/15927267716778.png" alt=""></p>
+<p>如果在浏览器设置缓存，通常有两个主要作用。<br>•对用户来说，减少请求可以更快地加载页面，节省流量<br>•对网站来说，减少带宽压力和费用。</p>
+<p><strong>对于浏览器来说，如何缓存一个资源是服务器端制定的策略，自己只是根据服务器的“指令”来执行而已</strong>。<br>服务器通过对每个资源的<strong>HTTP响应头</strong>设置属性和值，来发出自己的缓存指令。</p>
+<p>HTTP1.0提供了一些很基本的缓存特性，例如在服务器侧设置Expires跟Last-Modified的HTTP头</p>
+<p>HTTP 1.1有了较大的增强，缓存系统被形式化了，引入了实体标签e-tag和属性Cache-Control。e-tag是文件或对象的唯一标识，这意味着可以请求一个资源，以及提供所持有的文件，然后询问服务器这个文件是否有变化。如果某一个文件的e-tag是有效的，那么服务器会生成304-Not Modified应答，并提供正确文件的e-tag，否则，发送200-OK应答。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/21/15927276180802.png" alt=""></p>
+<p>Last-Modified/ETag与Cache-Control/Expires的作用是不一样的，如果检测到本地的缓存还在有效的时间范围内，浏览器则直接使用本地缓存，不会发送任何请求。两者一起使用时，<strong>Cache-Control/Expires的优先级要高于Last-Modified/ETag。</strong>即当本地副本根据Cache-Control/Expires发现还在有效期内时，则不会再次发送请求去服务器询问修改时间（Last-Modified）或实体标识（e-tag）了。</p>
+<p>Cache-Control与Expires的功能一致，都是指明当前资源的有效期。只不过<strong>Cache-Control的选择更多，设置更细致</strong>，如果同时设置的话，其优先级高于Expires。</p>
+<p>Expires的值是一个日期，表示某日期之前都不再询问。<br>Cache-Control的值是：max-age=7776000, max-age的单位是秒，从浏览器接收到文件之后开始计时。</p>
+<p>一般情况下，使用Cache-Control/Expires会配合Last-Modified/ETag一起使用，因为即使服务器设置缓存时间，<strong>当用户点击“刷新”按钮时，浏览器会忽略缓存继续向服务器发送请求</strong>，这时Last-Modified/ETag将能够很好利用服务端的返回码304，从而减少响应开销。</p>
+<p>•对于动态生成的HTML页面使用HTTPS头：Cache-Control: no-cache。<br>•对于静态HTML页面使用HTTPS头：Last-Modified。</p>
+<h5 id="强缓存"><a href="#强缓存" class="headerlink" title="强缓存"></a>强缓存</h5><p>强缓存：不会向服务器发送请求，直接从缓存中读取资源</p>
+<p>通过设置Expires 和 Cache-Control实现</p>
+<p>强缓存<strong>判断是否缓存的依据来自于是否超出某个时间或者某个时间段</strong>，而不关心服务器端文件是否已经更新，这可能会导致加载文件不是服务器端最新的内容，那我们如何获知服务器端内容是否已经发生了更新呢？此时我们需要用到协商缓存策略。</p>
+<h5 id="协商缓存"><a href="#协商缓存" class="headerlink" title="协商缓存"></a>协商缓存</h5><p>强制缓存失效后，浏览器携带缓存标识向服务器发起请求，由服务器根据缓存标识决定是否使用缓存的过程</p>
+<p>通过设置Last-Modified 和 ETag 实现</p>
+<ul>
+<li>协商缓存生效，返回304和Not Modified</li>
+<li>协商缓存失效，返回200和请求结果</li>
+</ul>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/21/15927282549508.png" alt=""></p>
+<p>通常会取响应头中的 Date 减去 Last-Modified 值的 10% 作为缓存时间。</p>
+<p><strong>我们可以通过查看服务器的log，查看304响应与200响应的比例，来做出一个合理的缓存策略。</strong></p>
+<h5 id="缓存位置"><a href="#缓存位置" class="headerlink" title="缓存位置"></a>缓存位置</h5><p>从缓存位置上来说分为四种，并且各自有优先级，当依次查找缓存且都没有命中的时候，才会去请求网络。</p>
+<ul>
+<li>Service Worker</li>
+<li>Memory Cache</li>
+<li>Disk Cache</li>
+<li>Push Cache</li>
+</ul>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/21/15927272188160.png" alt=""></p>
+<p>是用户在浏览器如何操作时，会触发怎样的缓存策略。主要有 3 种：</p>
+<p>打开网页，地址栏输入地址： 查找 disk cache 中是否有匹配。如有则使用；如没有则发送网络请求。</p>
+<p>普通刷新 (F5)：因为 TAB 并没有关闭，因此 memory cache 是可用的，会被优先使用(如果匹配的话)。其次才是 disk cache。</p>
+<p>强制刷新 (Ctrl + F5)：浏览器不使用缓存，因此发送的请求头部均带有 Cache-control:no-cache(为了兼容，还带了 Pragma:no-cache),服务器直接返回 200 和最新内容。</p>
+<h3 id="网络中的缓存"><a href="#网络中的缓存" class="headerlink" title="网络中的缓存"></a>网络中的缓存</h3><h4 id="Web代理缓存"><a href="#Web代理缓存" class="headerlink" title="Web代理缓存"></a>Web代理缓存</h4><p><strong>正向代理隐藏客户端，反向代理隐藏服务器端，透明代理隐藏代理服务器。</strong></p>
+<p>在使用正向代理时，一般需要在浏览器的设置窗口中的“代理服务器”一栏中填写正向代理的IP地址</p>
+<p>正向代理多用于中小企业网络环境，Cache设备作为企业网的出口网关提供代理服务、内容缓存、Internet访问控制、安全认证等功能。</p>
+<p>反向代理服务器部署与应用服务器部署在同一网络环境中，应用服务器借助反向代理对外提供服务，反向代理提供负载分担和安全隔离作用。</p>
+<h4 id="边缘缓存"><a href="#边缘缓存" class="headerlink" title="边缘缓存"></a>边缘缓存</h4><p>如果反向代理服务器能够做到和用户来自同一个网络，那么用户访问反向代理服务器，就会得到很高质量的响应速度，所以可以将这样的反向代理缓存称为边缘缓存。</p>
+<p>边缘缓存在网络上位于靠近用户的一侧，可以处理来自不同用户的请求，主要用于向用户提供静态的内容，以减少应用服务器的介入。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/21/15927294491172.png" alt=""></p>
+<p><strong>边缘缓存中典型的商业化服务就是CDN</strong>。CDN是Content Delivery Network的简称，即“内容分发网络”</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/21/15927248427774.png" alt=""></p>
+<p>通过HTTP响应头中的Cache-control: max-age的字段来设置CDN边缘节点的数据缓存时间。</p>
+<p>一般地，CDN边缘节点对开发者来说是透明的，开发者可以通过CDN服务商提供的“刷新缓存”接口来清理位于CDN边缘节点上的缓存数据。</p>
+<h3 id="服务端缓存"><a href="#服务端缓存" class="headerlink" title="服务端缓存"></a>服务端缓存</h3><p>简单了解一下一个多级缓存实例</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/21/15927250692887.png" alt=""></p>
+<p>Nginx应用服务器的本地缓存解决了热点数据的缓存问题，Redis分布式缓存集群减少了访问回源率，Tomcat应用集群使用的平台级缓存防止了相关缓存失效/崩溃之后的冲击，数据库缓存提升数据库查询时的效率。正是多级缓存的使用，才能保障系统具备优良的性能。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/HTTP/" rel="tag"><i class="fa fa-tag"></i> HTTP</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/frontend/2020-06-20-JS进阶：作用域链与内存管理.html" rel="next" title="JS进阶：作用域链与内存管理">
+                <i class="fa fa-chevron-left"></i> JS进阶：作用域链与内存管理
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/posts/frontend/2020-06-21-JS进阶：数组.html" rel="prev" title="JS进阶：数组">
+                JS进阶：数组 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">虚己以游世，乘物以游心</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">119</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#主流的缓存算法"><span class="nav-number">1.</span> <span class="nav-text">主流的缓存算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#客户端缓存"><span class="nav-number">2.</span> <span class="nav-text">客户端缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#页面缓存"><span class="nav-number">2.1.</span> <span class="nav-text">页面缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#浏览器缓存"><span class="nav-number">2.2.</span> <span class="nav-text">浏览器缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#HTTP相关字段"><span class="nav-number">2.2.1.</span> <span class="nav-text">HTTP相关字段</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#强缓存"><span class="nav-number">2.2.2.</span> <span class="nav-text">强缓存</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#协商缓存"><span class="nav-number">2.2.3.</span> <span class="nav-text">协商缓存</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#缓存位置"><span class="nav-number">2.2.4.</span> <span class="nav-text">缓存位置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#网络中的缓存"><span class="nav-number">3.</span> <span class="nav-text">网络中的缓存</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Web代理缓存"><span class="nav-number">3.1.</span> <span class="nav-text">Web代理缓存</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#边缘缓存"><span class="nav-number">3.2.</span> <span class="nav-text">边缘缓存</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#服务端缓存"><span class="nav-number">4.</span> <span class="nav-text">服务端缓存</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

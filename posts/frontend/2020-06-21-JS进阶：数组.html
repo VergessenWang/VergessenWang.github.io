@@ -1,0 +1,948 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="JS," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="学习自：JS权威指南 JavaScript数组的有一些特性是其他对象所没有的：  当有新的元素添加到列表中时，自动更新length属性。 设置length为一个较小值将截断数组。 从Array.prototype中继承一些有用的方法。 其类属性为“Array”。  JavaScript数组是JavaScript对象的特殊形式，使用方括号访问数组元素就像用方括号访问对象的属性一样。JavaScrip">
+<meta name="keywords" content="JS">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JS进阶：数组">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/frontend/2020-06-21-JS进阶：数组.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="学习自：JS权威指南 JavaScript数组的有一些特性是其他对象所没有的：  当有新的元素添加到列表中时，自动更新length属性。 设置length为一个较小值将截断数组。 从Array.prototype中继承一些有用的方法。 其类属性为“Array”。  JavaScript数组是JavaScript对象的特殊形式，使用方括号访问数组元素就像用方括号访问对象的属性一样。JavaScrip">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/21/15927511018822.jpg">
+<meta property="og:updated_time" content="2020-06-21T16:03:53.169Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JS进阶：数组">
+<meta name="twitter:description" content="学习自：JS权威指南 JavaScript数组的有一些特性是其他对象所没有的：  当有新的元素添加到列表中时，自动更新length属性。 设置length为一个较小值将截断数组。 从Array.prototype中继承一些有用的方法。 其类属性为“Array”。  JavaScript数组是JavaScript对象的特殊形式，使用方括号访问数组元素就像用方括号访问对象的属性一样。JavaScrip">
+<meta name="twitter:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/21/15927511018822.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/frontend/2020-06-21-JS进阶：数组.html"/>
+
+
+
+
+
+  <title>JS进阶：数组 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-06-21-JS进阶：数组.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">JS进阶：数组</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-21T23:57:29+08:00">
+                2020-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,266
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>学习自：JS权威指南</p>
+<p>JavaScript数组的有一些特性是其他对象所没有的：</p>
+<ul>
+<li>当有新的元素添加到列表中时，自动更新length属性。</li>
+<li>设置length为一个较小值将截断数组。</li>
+<li>从Array.prototype中继承一些有用的方法。</li>
+<li>其类属性为“Array”。</li>
+</ul>
+<p>JavaScript数组是JavaScript对象的特殊形式，使用方括号访问数组元素就像用方括号访问对象的属性一样。JavaScript将指定的数字索引值转换成字符串——索引值1变成“1”——然后将其作为属性名来使用。</p>
+<p>JavaScript数组的索引是基于零的32位数值：第一个元素的索引为0，最大可能的索引为4294967294（2^32-2），数组最大能容纳4294967295个元素。所有的索引都是属性名，但只有在0～2^32-2之间的整数属性名才是索引。</p>
+<p><strong>注意，可以使用负数或非整数来索引数组。这种情况下，数值转换为字符串，字符串作为属性名来用。</strong>这意味着JavaScript数组<strong>没有“越界”错误</strong>的概念。当试图查询任何对象中不存在的属性时，不会报错，只会得到undefined值。</p>
+<p>因为对象是属性集合，<strong>使用hashmap结构来存储</strong>，不像静态语言中数组是一块连续的区域，因此不存在数组越界的情况。查找属性名时，遍历hashmap，如果找不到匹配的属性名，返回undefined。</p>
+<p>JavaScript数组是动态的：根据需要它们会增长或缩减，并且在创建数组时无须声明一个固定的大小或者在数组大小变化时无须重新分配空间。</p>
+<ul>
+<li><p>如果为一个数组元素赋值，它的索引i大于或等于现有数组的长度时，length属性的值将设置为i+1。这时数组可能是稀疏的。</p>
+</li>
+<li><p>设置length属性为一个小于当前长度的非负整数n时，当前数组中那些索引值大于或等于n的元素将从中删除</p>
+</li>
+<li><p>在ECMAScript 5中，可以用Object.defineProperty（）让数组的length属性变成只读的</p>
+<p><code>Object.defineProperty（a, ”length“,  {writable: false}）;</code></p>
+</li>
+</ul>
+<p>数组继承自<strong>Array.prototype</strong>中的属性，它定义了一套丰富的数组操作方法</p>
+<a id="more"></a>
+<h3 id="基本方法"><a href="#基本方法" class="headerlink" title="基本方法"></a>基本方法</h3><p><a href="https://vergessenwang.github.io/posts/frontend/2020-06-09-JavaScript基础.html">简单方法</a></p>
+<p>数组直接量中的值不一定要是常量；它们可以是任意的表达式：</p>
+<p><code>var table = [base, base+1, base+2, base+3];</code></p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> count = [<span class="number">1</span>,,<span class="number">3</span>]; <span class="comment">// 数组有3个元素，中间的那个元素值为undefined</span></span><br><span class="line"><span class="keyword">var</span> undefs = [,,];  <span class="comment">// 数组有2个元素，都是undefined</span></span><br></pre></td></tr></table></figure>
+<p>数组直接量的语法允许有可选的结尾的逗号，故[,,]只有两个元素而非三个。</p>
+<p><code>delete a[1];</code>  对一个数组元素使用<strong>delete不会修改数组的length属性</strong>，也不会将元素从高索引处移下来填充已删除属性留下的空白，会变成稀疏数组。</p>
+<p>Array.join（）方法是String.split（）方法的逆向操作</p>
+<p>当不带参数调用sort（）时，数组元素以<strong>字母表顺序</strong>排序（如有必要将临时转化为字符串进行比较）</p>
+<p>Array.concat（）方法创建并返回一个<strong>新数组</strong>，它的元素包括调用concat（）的原始数组的元素和concat（）的每个参数。如果这些参数中的任何一个自身是数组，则连接的是数组的元素，而非数组本身。但要注意，concat（）不会递归扁平化数组的数组。concat（）也不会修改调用的数组。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>];</span><br><span class="line">a.concat（<span class="number">4</span>, <span class="number">5</span>）        <span class="comment">// 返回[1,2,3,4,5]</span></span><br><span class="line">a.concat（[<span class="number">4</span>,<span class="number">5</span>]）;      <span class="comment">// 返回[1,2,3,4,5]</span></span><br><span class="line">a.concat（[<span class="number">4</span>,<span class="number">5</span>],[<span class="number">6</span>,<span class="number">7</span>]） <span class="comment">// 返回[1,2,3,4,5,6,7]</span></span><br><span class="line">a.concat（<span class="number">4</span>, [<span class="number">5</span>,[<span class="number">6</span>,<span class="number">7</span>]]）<span class="comment">// 返回[1,2,3,4,5,[6,7]]</span></span><br></pre></td></tr></table></figure>
+<p>Array.slice（）方法，如果只指定一个参数，返回的数组将包含从开始位置到数组结尾的所有元素。如参数中出现负数，它表示相对于数组中最后一个元素的位置。例如，参数-1指定了最后一个元素，而-3指定了倒数第三个元素。注意，slice（）不会修改调用的数组。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line">a.slice（<span class="number">0</span>,<span class="number">3</span>）;    <span class="comment">// 返回[1,2,3]</span></span><br><span class="line">a.slice（<span class="number">3</span>）;      <span class="comment">// 返回[4,5]</span></span><br><span class="line">a.slice（<span class="number">1</span>,<span class="number">-1</span>）;   <span class="comment">// 返回[2,3,4]</span></span><br><span class="line">a.slice（<span class="number">-3</span>,<span class="number">-2</span>）;  <span class="comment">// 返回[3]</span></span><br></pre></td></tr></table></figure>
+<p>Array.splice（）方法是在数组中插入或删除元素的通用方法。不同于slice（）和concat（），splice（）会<strong>修改调用的数组</strong>。</p>
+<p>splice（）的前两个参数指定了需要删除的数组元素。第一个参数指定了插入和（或）删除的起始位置。第二个参数指定了应该从数组中删除的元素的个数。如果省略第二个参数，从起始点开始到数组结尾的所有元素都将被删除。紧随其后的任意个数的参数指定了需要插入到数组中的元素，从第一个参数指定的位置开始插入。</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>,<span class="number">6</span>,<span class="number">7</span>,<span class="number">8</span>];</span><br><span class="line">a.splice（<span class="number">4</span>）;    <span class="comment">// 返回[5,6,7,8]; a是[1,2,3,4]</span></span><br><span class="line">a.splice（<span class="number">1</span>,<span class="number">2</span>）;  <span class="comment">// 返回[2,3]; a是[1,4]</span></span><br><span class="line">a.splice（<span class="number">1</span>,<span class="number">1</span>）;  <span class="comment">// 返回[4]; a是[1]</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">var</span> a = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line">a.splice（<span class="number">2</span>,<span class="number">0</span>,<span class="string">'a'</span>,<span class="string">'b'</span>）; <span class="comment">// 返回[]; a是[1,2,'a','b',3,4,5]</span></span><br><span class="line">a.splice（<span class="number">2</span>,<span class="number">2</span>,[<span class="number">1</span>,<span class="number">2</span>],<span class="number">3</span>）; <span class="comment">// 返回['a','b']; a是[1,2,[1,2],3,3,4,5]</span></span><br></pre></td></tr></table></figure>
+<p>toString（）方法输出用逗号分隔的字符串列表。注意，输出不包括方括号或其他任何形式的包裹数组值的分隔符。与不使用任何参数调用join（）方法返回的字符串是一样的。</p>
+<p><code>[1, [2,&#39;c&#39;]].toString（）   // 生成&#39;1,2,c&#39;</code></p>
+<h3 id="ES6新方法"><a href="#ES6新方法" class="headerlink" title="ES6新方法"></a>ES6新方法</h3><p>大多数方法的第一个参数接收一个<strong>函数</strong>，并且对数组的每个元素（或一些元素）调用一次该函数。<strong>如果是稀疏数组，对不存在的元素不调用传递的函数。</strong></p>
+<p>调用提供的函数使用三个参数：数组元素、元素的索引和数组本身。</p>
+<p>遍历常用forEach（）方法：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> data = [<span class="number">1</span>,<span class="number">2</span>,<span class="number">3</span>,<span class="number">4</span>,<span class="number">5</span>];</span><br><span class="line">data.forEach（<span class="function"><span class="keyword">function</span>（<span class="title">v</span>, <span class="title">i</span>, <span class="title">a</span>）</span>&#123; a[i] = v + <span class="number">1</span>; &#125;）;</span><br></pre></td></tr></table></figure>
+<p>要提前终止遍历，必须把forEach（）方法放在一个try块中，并能抛出一个异常。</p>
+<p>map（）方法将调用的数组的每个元素传递给指定的函数，并返回一个数组，它包含该函数的<strong>返回值</strong>。map（）返回的是新数组：它不修改调用的数组。如果是稀疏数组，返回的也是相同方式的稀疏数组：它具有相同的长度，相同的缺失元素。</p>
+<p><code>b = a.map（function（x）{ return x*x; }）;</code></p>
+<p>fliter（）方法返回的数组元素是调用的数组的一个子集。传递的函数是用来逻辑判定的：该函数返回true或false。返回值为true或能转化为true的值，那么传递给判定函数的元素就是这个子集的成员，它将被添加到一个作为返回值的数组中。filter（）会<strong>跳过稀疏数组中缺少的元素</strong>，它的返回数组总是稠密的。为了压缩稀疏数组的空缺，可使用：</p>
+<p><code>a = a.filter（function（x）{ return x !== undefined &amp;&amp; x != null; }）;</code></p>
+<p>every（）方法就像数学中的“针对所有”的量词：当且仅当针对数组中的所有元素调用判定函数都返回true，它才返回true</p>
+<p>some（）方法就像数学中的“存在”的量词：当数组中至少有一个元素调用判定函数返回true，它就返回true；并且当且仅当数值中的所有元素调用判定函数都返回false，它才返回false</p>
+<p><strong>注意，一旦every（）和some（）确认该返回什么值它们就会停止遍历数组元素。</strong>——短路</p>
+<p>reduce（）多一个参数用于存储上一次化简函数的返回值，当不指定初始值调用reduce（）时，它将使用数组的第一个元素作为其初始值。</p>
+<p><code>var max = a.reduce（function（x,y）{ return（x&gt;y）?x:y; }）;</code></p>
+<p>reduceRight（）优先顺序是从右到左</p>
+<p>indexOf（）和lastIndexOf（）搜索整个数组中具有给定值的元素，第一个参数是需要搜索的值，第二个参数是可选的：它指定数组中的一个索引，从那里开始搜索。返回找到的第一个元素的索引或者如果没有找到就<strong>返回-1</strong>。</p>
+<h3 id="判断数组类型"><a href="#判断数组类型" class="headerlink" title="判断数组类型"></a>判断数组类型</h3><p>typeof操作符在这里帮不上忙：对数组它返回“对象”</p>
+<p>instanceof操作符只能用于简单的情形</p>
+<p>ES6新增 Array.isArray（）函数，实现原理：</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">var</span> isArray = <span class="built_in">Function</span>.isArray || <span class="function"><span class="keyword">function</span>（<span class="title">o</span>）</span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">typeof</span> o === <span class="string">"object"</span> &amp;&amp;</span><br><span class="line">        <span class="built_in">Object</span>.prototype.toString.call（o）=== <span class="string">"[object Array]"</span>;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<h3 id="类数组对象"><a href="#类数组对象" class="headerlink" title="类数组对象"></a>类数组对象</h3><p>把拥有一个数值length属性和对应非负整数属性的对象看做一种类型的数组。</p>
+<p>Arguments对象就是一个类数组对象。在客户端JavaScript中，一些DOM方法（如document.getElementsByTagName（））也返回类数组对象。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/21/15927511018822.jpg" alt=""></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/JS/" rel="tag"><i class="fa fa-tag"></i> JS</a>
+          
+        </div>
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/frontend/2020-06-21-网络缓存的三个层次.html" rel="next" title="网络缓存的三个层次">
+                <i class="fa fa-chevron-left"></i> 网络缓存的三个层次
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">虚己以游世，乘物以游心</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">119</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">93</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本方法"><span class="nav-number">1.</span> <span class="nav-text">基本方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#ES6新方法"><span class="nav-number">2.</span> <span class="nav-text">ES6新方法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#判断数组类型"><span class="nav-number">3.</span> <span class="nav-text">判断数组类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#类数组对象"><span class="nav-number">4.</span> <span class="nav-text">类数组对象</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

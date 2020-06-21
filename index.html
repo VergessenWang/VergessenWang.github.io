@@ -303,6 +303,366 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-06-21-JS进阶：数组.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/frontend/2020-06-21-JS进阶：数组.html" itemprop="url">JS进阶：数组</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-21T23:57:29+08:00">
+                2020-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,266
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>学习自：JS权威指南</p>
+<p>JavaScript数组的有一些特性是其他对象所没有的：</p>
+<ul>
+<li>当有新的元素添加到列表中时，自动更新length属性。</li>
+<li>设置length为一个较小值将截断数组。</li>
+<li>从Array.prototype中继承一些有用的方法。</li>
+<li>其类属性为“Array”。</li>
+</ul>
+<p>JavaScript数组是JavaScript对象的特殊形式，使用方括号访问数组元素就像用方括号访问对象的属性一样。JavaScript将指定的数字索引值转换成字符串——索引值1变成“1”——然后将其作为属性名来使用。</p>
+<p>JavaScript数组的索引是基于零的32位数值：第一个元素的索引为0，最大可能的索引为4294967294（2^32-2），数组最大能容纳4294967295个元素。所有的索引都是属性名，但只有在0～2^32-2之间的整数属性名才是索引。</p>
+<p><strong>注意，可以使用负数或非整数来索引数组。这种情况下，数值转换为字符串，字符串作为属性名来用。</strong>这意味着JavaScript数组<strong>没有“越界”错误</strong>的概念。当试图查询任何对象中不存在的属性时，不会报错，只会得到undefined值。</p>
+<p>因为对象是属性集合，<strong>使用hashmap结构来存储</strong>，不像静态语言中数组是一块连续的区域，因此不存在数组越界的情况。查找属性名时，遍历hashmap，如果找不到匹配的属性名，返回undefined。</p>
+<p>JavaScript数组是动态的：根据需要它们会增长或缩减，并且在创建数组时无须声明一个固定的大小或者在数组大小变化时无须重新分配空间。</p>
+<ul>
+<li><p>如果为一个数组元素赋值，它的索引i大于或等于现有数组的长度时，length属性的值将设置为i+1。这时数组可能是稀疏的。</p>
+</li>
+<li><p>设置length属性为一个小于当前长度的非负整数n时，当前数组中那些索引值大于或等于n的元素将从中删除</p>
+</li>
+<li><p>在ECMAScript 5中，可以用Object.defineProperty（）让数组的length属性变成只读的</p>
+<p><code>Object.defineProperty（a, ”length“,  {writable: false}）;</code></p>
+</li>
+</ul>
+<p>数组继承自<strong>Array.prototype</strong>中的属性，它定义了一套丰富的数组操作方法</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/frontend/2020-06-21-JS进阶：数组.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-06-21-网络缓存的三个层次.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/frontend/2020-06-21-网络缓存的三个层次.html" itemprop="url">网络缓存的三个层次</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-21T23:51:33+08:00">
+                2020-06-21
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,577
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>学习自：深入分布式缓存</p>
+<p>不涉及操作系统和硬件的缓存，根据在软件系统中所处位置的不同，缓存大体可以分为三类：<br>❑ 客户端缓存；<br>❑ 服务端缓存；<br>❑ 网络中的缓存。</p>
+<p>缓存是系统调优时常用且行之有效的手段</p>
+<h3 id="主流的缓存算法"><a href="#主流的缓存算法" class="headerlink" title="主流的缓存算法"></a>主流的缓存算法</h3><p>（1）Least-Recently-Used（LRU）<br>替换掉最近被请求最少的对象，这种传统策略在实际中应用最广。在CPU缓存淘汰和虚拟内存系统中效果很好。然而在直接应用与代理缓存中效果欠佳，因为Web访问的时间局部性常常变化很大。<br><strong>浏览器就一般使用了LRU作为缓存算法。新的对象会被放在缓存的顶部，当缓存达到了容量极限，底部的对象被去除，方法就是把最新被访问的缓存对象放到缓存池的顶部。</strong></p>
+<p>（2）Least-Frequently-Used（LFU）<br>替换掉访问次数最少的缓存，这一策略意图是保留最常用的、最流行的对象，替换掉很少使用的那些数据。然而，有的文档可能有很高的使用频率，但之后再也不会用到。传统的LFU策略没有提供任何移除这类文件的机制，因此会导致“缓存污染”，即一个先前流行的缓存对象会在缓存中驻留很长时间，这样，就阻碍了新进来可能会流行的对象对它的替代。<br>…</p>
+<h3 id="客户端缓存"><a href="#客户端缓存" class="headerlink" title="客户端缓存"></a>客户端缓存</h3><h4 id="页面缓存"><a href="#页面缓存" class="headerlink" title="页面缓存"></a>页面缓存</h4><p>页面缓存是将之前渲染的页面保存为文件，当用户再次访问时可以避开网络连接，从而减少负载，提升性能和用户体验。随着单页面应用（Single Page Application, SPA）的广泛使用，加之HTML5支持了离线缓存和本地存储，大部分BS应用的页面缓存都可以举重若轻了。</p>
+<p><a href="https://vergessenwang.github.io/posts/frontend/2020-06-04-Html5新特征.html">之前的笔记</a></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/21/15927236664851.png" alt=""></p>
+<p>1）当浏览器访问了一个包含manifest属性的页面时，如果应用的缓存不存在，浏览器会加载文档，获取所有在清单文件中列出的文件，生成初始缓存。<br>2）当对该文档再次访问时，浏览器会直接从应用缓存中加载页面以及在清单文件中列出的资源。同时，浏览器还会向window.applicationCache对象发送一个表示检查的事件，以获取清单文件。<br>3）如果当前缓存的清单副本是最新的，浏览器将向window.applicationCache对象发送一个表示无须更新的事件，从而结束更新过程。<strong>如果在服务端修改了任何缓存资源，必须同时修改清单文件</strong>，这样浏览器才能知道要重新获取资源。<br>4）如果清单文件已经改变，那么文件中列出的所有文件会被重新获取并放到一个临时缓存中。对于每个加入到临时缓存中的文件，浏览器会向window.applicationCache对象发送一个表示进行中的事件。<br>5）一旦所有文件都获取成功，它们会自动移动到真正的离线缓存中，并向window. applicationCache对象发送一个表示已经缓存的事件。鉴于文档早已经从缓存加载到浏览器中，所以<strong>更新后的文档不会重新渲染，直到页面重新加载。</strong></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/frontend/2020-06-21-网络缓存的三个层次.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-06-20-JS进阶：作用域链与内存管理.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1686,350 +2046,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/network/2020-06-10-HTTP-报文，缓存，Cookie与HTTPS.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liana_Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Anonymous World">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/network/2020-06-10-HTTP-报文，缓存，Cookie与HTTPS.html" itemprop="url">HTTP:报文，缓存，Cookie与HTTPS</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-10T23:20:05+08:00">
-                2020-06-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/network/" itemprop="url" rel="index">
-                    <span itemprop="name">network</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  4,725
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>笔记学习自：图解HTTP</p>
-<p>当年HTTP协议的出现主要是为了解决文本传输的难题。1997年1月公布的HTTP/1.1是目前主流的HTTP协议版本。</p>
-<h3 id="HTTP方法"><a href="#HTTP方法" class="headerlink" title="HTTP方法"></a>HTTP方法</h3><p>GET方法用来请求访问已被URI识别的资源。<strong>指定的资源经服务器端解析后返回响应内容。</strong>也就是说，如果请求的资源是文本，那就保持原样返回；如果是像CGI（Common Gateway Interface，通用网关接口）那样的程序，则返回经过执行后的输出结果。</p>
-<p>POST方法用来传输实体的主体。</p>
-<p>get和post区别:<br>get是以实体的方式得到由请求 URI 所指定资源的信息。<br>post方式: 用来向服务器发出请求，要求它接收被附在请求后的实体，并把它请求 URI 所指定资源的附加新子项，所以 post 请求可能会导致新的资源的建立和 / 或已有资源的修改。</p>
-<p>PUT方法用来传输文件。在请求报文的主体中包含文件内容，然后保存到请求URI指定的位置。鉴于HTTP/1.1的PUT方法自身不带验证机制，一般的Web网站不使用该方法。</p>
-<p>DELETE方法用来删除文件，是与PUT相反的方法。</p>
-<p>HEAD方法和GET方法一样，只是不返回报文主体部分。用于<strong>确认URI的有效性及资源更新的日期时间</strong>等。使用GET方法时，对应请求资源的实体会作为响应返回；而使用HEAD方法时，对应请求资源的实体主体不随报文首部作为响应返回</p>
-<p>OPTIONS方法用来查询针对请求URI指定的资源支持的方法。如：</p>
-<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/10/15916361409723.png" alt=""></p>
-<p>TRACE方法是让Web服务器端将之前的请求通信环回给客户端的方法。发送请求时，在Max-Forwards首部字段中填入数值，每经过一个服务器端就将该数字减1，当数值刚好减到0时，就停止继续传输，最后接收到请求的服务器端则返回状态码200 OK的响应。客户端通过TRACE方法可以查询发送出去的请求是怎样被加工修改/篡改的。</p>
-<p>CONNECT方法要求在与代理服务器通信时建立隧道，实现用隧道协议进行TCP通信。主要使用SSL（Secure Sockets Layer，安全套接层）和TLS（Transport Layer Security，传输层安全）协议把通信内容加密后经网络隧道传输。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/network/2020-06-10-HTTP-报文，缓存，Cookie与HTTPS.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-06-09-JavaScript基础.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liana_Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Anonymous World">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/frontend/2020-06-09-JavaScript基础.html" itemprop="url">JavaScript基础</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-09T00:04:38+08:00">
-                2020-06-09
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/frontend/" itemprop="url" rel="index">
-                    <span itemprop="name">frontend</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  6,108
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>学习笔记源自：<a href="http://www.lvyestudy.com/blog/blog0007.aspx" target="_blank" rel="noopener">绿叶</a></p>
-<p>对于CSS来说，外部CSS文件只能在head中引入。对于JavaScript来说，外部JavaScript文件不仅可以在head中引入，还可以在body中引入。引入外部CSS文件使用的是“link标签”，而引入外部JavaScript文件使用的是“script标签”。</p>
-<h3 id="基本语法"><a href="#基本语法" class="headerlink" title="基本语法"></a>基本语法</h3><h4 id="变量"><a href="#变量" class="headerlink" title="变量"></a>变量</h4><p>变量由字母、下划线、<code>$</code>或数字组成，并且第一个字母必须是字母、下划线或$。区分大小写</p>
-<p>变量不能是系统关键字和保留字。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/frontend/2020-06-09-JavaScript基础.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2084,7 +2100,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">117</span>
+                  <span class="site-state-item-count">119</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

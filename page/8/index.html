@@ -303,6 +303,366 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/Java/2019-11-07-Java第10章-泛型.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/Java/2019-11-07-Java第10章-泛型.html" itemprop="url">Java第10章 泛型</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-07T20:19:35+08:00">
+                2019-11-07
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Java/" itemprop="url" rel="index">
+                    <span itemprop="name">Java</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,291
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>泛型的目的是为了实现类型的通用性，那为什么不用 Object 向上转型的方法呢？如果集合里面数据很多，某一个数据转型出现错误，在编译期是无法发现的。但是在运行期会发生java.lang.ClassCastException。泛型一方面让我们只能往集合中添加<strong>一种类型</strong>的数据，同时可以让我们在<strong>编译期</strong>就发现这些错误，避免运行时异常的发生，提升代码的健壮性。</p>
+<p>Java 泛型（generics）是 JDK 5 中引入的一个新特性, 泛型提供了编译时<strong>类型安全检测机制</strong>，该机制允许程序员在编译时检测到非法的类型。泛型的本质是<strong>参数化类型</strong>，也就是说所操作的数据类型被指定为一个参数</p>
+<p>对于泛型，只是允许程序员在编译时检测到非法的类型而已。但是在运行期时，其中的泛型标志会变化为 <strong>Object 类型</strong>。</p>
+<h3 id="泛型方法"><a href="#泛型方法" class="headerlink" title="泛型方法"></a>泛型方法</h3><p>泛型方法既可以存在于泛型类中，也可以存在于普通的类中。如果使用泛型方法可以解决问题，那么应该<strong>尽量使用泛型方法</strong>。</p>
+<p>定义泛型方法的规则：</p>
+<ul>
+<li><p>所有泛型方法声明都有一个类型参数声明部分（由尖括号分隔），该类型参数声明部分在方法<strong>返回类型之前</strong></p>
+<p>如 <code>public static &lt; E &gt; void printArray( E[] inputArray ){}</code></p>
+</li>
+<li><p>每一个类型参数声明部分包含一个或多个类型参数，参数间用逗号隔开。一个泛型参数，也被称为一个类型变量，是用于指定一个泛型类型名称的标识符。</p>
+</li>
+<li><p>类型参数<strong>能被用来声明返回值类型</strong>，并且能作为泛型方法得到的实际参数类型的占位符。</p>
+</li>
+<li><p>泛型方法体的声明和其他方法一样。注意<strong>类型参数只能代表引用型类型，不能是原始类型</strong>（像int,double,char的等）</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Pair&lt;<span class="keyword">int</span>, <span class="keyword">char</span>&gt; p = <span class="keyword">new</span> Pair&lt;&gt;(<span class="number">8</span>, <span class="string">'a'</span>); <span class="comment">// compile-time error</span></span><br><span class="line">Pair&lt;Integer, Character&gt; p = <span class="keyword">new</span> Pair&lt;&gt;(<span class="number">8</span>, <span class="string">'a'</span>);</span><br><span class="line">Pair&lt;Integer, Character&gt; p = <span class="keyword">new</span> Pair&lt;&gt;(Integer.valueOf(<span class="number">8</span>), <span class="keyword">new</span> Character(<span class="string">'a'</span>));</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/Java/2019-11-07-Java第10章-泛型.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/network/2019-11-06-高网第5章-IP交付与路由.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/network/2019-11-06-高网第5章-IP交付与路由.html" itemprop="url">高网第5章 IP交付与路由</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-11-06T23:09:26+08:00">
+                2019-11-06
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/network/" itemprop="url" rel="index">
+                    <span itemprop="name">network</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  942
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>网络层本质上一个<strong>软件包</strong>  —— 所以对我们来说，网络并不是完全抽象的</p>
+<p>在异构的网络中，通信能力、分组长度限制和时延都是不一样的，所以采用面向连接的方式比较困难—— IP协议，无连接，尽最大努力交付，<strong>适合异构网络互连</strong></p>
+<p>对于路由器而言，其功能由于采用end - to - end 原则而被简化，只能尽最大努力交付，只关注与它相邻的路由 —— <strong>进步空间：更多跳的路由</strong></p>
+<h4 id="交付-delivery-——物理层和链路层"><a href="#交付-delivery-——物理层和链路层" class="headerlink" title="交付(delivery)——物理层和链路层"></a>交付(delivery)——物理层和链路层</h4><ol>
+<li>用分组目的IP地址查路由表  Forwarding :   <strong>目的IP &amp; 路由表项的掩码 ==？ 路由表项的IP地址</strong></li>
+<li>找出匹配项中下一跳IP地址的物理地址：下一跳IP地址–&gt;  <strong>ARP</strong> –&gt; 目的物理地址<ul>
+<li>ARP： 将IP与MAC地址进行绑定，完成<strong>从网络层到链路层</strong>的切换</li>
+</ul>
+</li>
+<li>将IP分组和目的物理地址一起交给链路层</li>
+</ol>
+<p>一次交付过程包含0或多个间接交付+1个直接交付（最后的交付）</p>
+<p>分组:（源IP地址，目的IP地址）<strong>保持不变</strong></p>
+<p>帧:（源物理地址，目的物理地址）<strong>逐跳改变</strong></p>
+<p>通过上面的两种地址，解决了<strong>网关IP和目的IP冲突</strong>的问题</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/network/2019-11-06-高网第5章-IP交付与路由.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/Java/2019-11-05-Java第9章-异常处理.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1704,361 +2064,6 @@ A[Wikipedia] -->B(预处理器 <br>schema定义<br>训练数据构造)
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/network/2019-10-26-Socket编程实践.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liana_Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Anonymous World">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/network/2019-10-26-Socket编程实践.html" itemprop="url">Socket编程实践</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-26T19:30:03+08:00">
-                2019-10-26
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/network/" itemprop="url" rel="index">
-                    <span itemprop="name">network</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  2,333
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>之前写过<a href="https://vergessenwang.github.io/posts/network/2019-08-11-TCP-IP协议下Socket编程原理.html">socket编程的原理</a> ,  正好高级网络实验课要写socket程序，故总结一下实践中的一些问题。</p>
-<h2 id="Winsock实现"><a href="#Winsock实现" class="headerlink" title="Winsock实现"></a>Winsock实现</h2><p>由于我的系统是windows，所以采用Winsock接口。</p>
-<p>MFC提供了两个类用以封装Windows Sockets API</p>
-<ul>
-<li>CAsyncSocket类：具有一定网络编程经验的开发人员</li>
-<li>CSocket类：由CAsyncSocket类派生，简化网络编程</li>
-</ul>
-<p>需要包含Winsock2.h，Winsock32.dll和ws2_32.lib</p>
-<p>端口选择：端口1024以前的端口号都是系统保留的或是作为公共服务的，应尽量选择大于1024的端口号</p>
-<h3 id="WinSock初始化"><a href="#WinSock初始化" class="headerlink" title="WinSock初始化"></a>WinSock初始化</h3><p>Windows 下的 socket 程序依赖 Winsock.dll 或 ws2_32.dll，必须提前加载。</p>
-<p>调用任何一个Winsock函数之前都必须检查协议栈安装情况，使用函数WSAStartup() 调用winsock DLL</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/network/2019-10-26-Socket编程实践.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/life/2019-10-16-不能用一种猛兽克制另一种猛兽.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liana_Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Anonymous World">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/life/2019-10-16-不能用一种猛兽克制另一种猛兽.html" itemprop="url">不能用一种猛兽克制另一种猛兽</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-16T22:08:32+08:00">
-                2019-10-16
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/life/" itemprop="url" rel="index">
-                    <span itemprop="name">life</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  547
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>可能我身体里的电池是二手的，新奇和幻灭交织着，加剧了消耗，在极短时间将其拔空。</p>
-<p>在椅子上呆坐了一会，预感到它即将从虚空的深渊里爬出来。</p>
-<blockquote>
-<p>我们不能看到一个人生命中全部的雪，每个人都在他自己的生命里，孤独地过冬。</p>
-</blockquote>
-<p>我坐在从起点站出发去往市里的公车上，头倚着窗户，脑海里盘旋着这句话。</p>
-<p>我喜欢坐起点出发的公车，喜欢在非节假日，一个人逛街。当我的情绪被耗干的时候。</p>
-<p>车上零星的上来几个老头老太太，到小学门口下车，挤成一团，早早地等着他们的小祖宗。路过很多绿河青柳，桥的名字都一律地很有诗意。很有人间气息，可我面无表情。</p>
-<p>要飘到高空的时候，得用什么东西把自己绑住。于是我在一个个商场里进进出出。为了克制一只猛兽，我放出了另一只猛兽。它沉沉压着我的双肩，像浸过水的稻草。直到连体力都被抽干。</p>
-<p>它们嗅了嗅干枯的躯壳，终于渐渐离去了。</p>
-<p>坐着等公交的时候，心算了一下好像被多收了钱。可是完全不想动。最终还是回去找了她们重算，这样多的钱就可以打滴滴了。</p>
-<p>总是这样，用各种莫名其妙的借口。消耗。</p>
-<p>重又坐到宿舍的椅子上，反思着白天发生的事情。</p>
-<p>每个人都是一个正弦波，频率和相位一致，才能共振。否则，要么充斥着恼人的冲突，要么甚至合为一条无波的曲线。</p>
-<p>我的振幅太小了，大概始终只能当个谐波。被迫提高振幅，就会加剧消耗。又给自己找了一个完美借口。</p>
-<p>八点了，想起来还没吃饭。拖着游魂般的步子，路过玩滑板的少年。</p>
-<p>真实的灵魂，不能直视。</p>
-<blockquote>
-<p>明日又在大地中完整，这才是我打碎一切的真情。</p>
-</blockquote>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2113,7 +2118,7 @@ A[Wikipedia] -->B(预处理器 <br>schema定义<br>训练数据构造)
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">117</span>
+                  <span class="site-state-item-count">119</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
