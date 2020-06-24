@@ -143,7 +143,11 @@
 <meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/16/15923151357049.png">
 <meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/16/15923152907492.png">
 <meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/16/15923154453799.png">
-<meta property="og:updated_time" content="2020-06-16T15:22:45.144Z">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/24/15929594637038.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/24/15929594760117.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/24/15929594989389.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/24/15929588472698.png">
+<meta property="og:updated_time" content="2020-06-24T08:46:23.951Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS进阶：闭包和作用域">
 <meta name="twitter:description" content="首先我们来看一个常见的问题  为什么用let声明的时候，显示的是1,2,3,4；而用var声明的时候就显示5,5,5,5呢？ 这其中涉及到两个问题：1.var和let的作用域 2. setTimeout的异步 今天先解决第一个问题。">
@@ -393,7 +397,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,330
+                  1,946
                 </span>
               
 
@@ -447,6 +451,25 @@
 <p>因此我们可以直接使用函数的引用，而不需要强制指定函数的定义顺序。</p>
 <p><strong>需要注意的是，这种情况仅针对函数声明有效。函数表达式与箭头函数都不在此过程中，而是在程序执行过程中执行定义的。</strong></p>
 <p>变量提升。例如，变量的声明提升至函数顶部，函数的声明提升至全局代码顶部。变量和函数的声明并没有实际发生移动。只是在代码执行之前，先在词法环境中进行注册。</p>
+<h3 id="变量提升"><a href="#变量提升" class="headerlink" title="变量提升"></a>变量提升</h3><p>变量提升就好比JavaScript引擎用一个很小的代码起重机将所有var声明和function函数声明都<strong>举起到所属作用域的最高处</strong>。</p>
+<p>预解析处理的工作主要是变量提升和给变量分配内存，具体过程是在每个作用域中查找var声明的变量、函数定义和命名参数（函数参数），找到它们后，在当前作用域中给它们分配内存，并给它们设置初始值。预解析设置的初始值分别是：对于var声明的变量，初始值为undefinded；对函数定义，变量名为函数名，函数变量的初始值为函数定义本身；对命名参数，如果函数调用时没有指定参数值，则命名参数的初始值为undefined，如果函数调用时指定了参数值，则命名参数的初始值为指定的参数值。</p>
+<p>var声明支持变量提升，而const和let声明不支持变量提升。</p>
+<p>如果你使用了一个从未声明过的变量，程序运行会直接抛出异常。但是如果代码中有过对此变量的声明，无论在声明前使用还是在声明后使用，程序都不会抛出异常。</p>
+<p>还有一点，如果你直接对一个未经声明的变量进行赋值，就相当于直接在全局作用域中创建了这样一个变量</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/24/15929594637038.jpg" alt=""></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/24/15929594760117.png" alt=""></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/24/15929594989389.jpg" alt=""></p>
+<p>注意只是把声明进行了提升。</p>
+<p>JavaScript解释器在对代码进行扫描时，会将全局作用域中声明的变量和函数先定义为全局符号，运行到具体声明处才进行赋值。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/24/15929588472698.png" alt=""></p>
+<p>i和sum都成了全局变量，name也被声明过了。</p>
+<p>存在形参的情况</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params">a</span>) </span>&#123;</span><br><span class="line">    <span class="built_in">console</span>.log(a)</span><br><span class="line">    <span class="keyword">var</span> a = <span class="number">2</span></span><br><span class="line">    <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">    <span class="built_in">console</span>.log(a)</span><br><span class="line">&#125;</span><br><span class="line">fn(<span class="number">1</span>)</span><br></pre></td></tr></table></figure>
+<p>这个题目，最终会输出function a(){} 和 2</p>
+<p>因为如果函数体内的变量名和形参的变量名重复时，则不会进行普通变量的编译赋值 undefined 的过程。但是，如果存在该变量是函数时，那么则会进行函数变量的编译赋值，即直接指向函数在堆空间中的地址。</p>
+<p>所以，实际上是</p>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">fn</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">var</span> a = <span class="literal">undefined</span></span><br><span class="line">    a = <span class="number">1</span></span><br><span class="line">    a = <span class="function"><span class="keyword">function</span> <span class="title">a</span>(<span class="params"></span>) </span>&#123;&#125;</span><br><span class="line">    <span class="built_in">console</span>.log(a)</span><br><span class="line">    a = <span class="number">2</span></span><br><span class="line">    <span class="built_in">console</span>.log(<span class="number">2</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><a href="https://blog.csdn.net/wu_xianqiang/article/details/78966755" target="_blank" rel="noopener">注意点</a></p>
 
       
     </div>
@@ -585,7 +608,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">119</span>
+                  <span class="site-state-item-count">121</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -670,7 +693,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#var、let与const"><span class="nav-number">1.</span> <span class="nav-text">var、let与const</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注册标识符的过程"><span class="nav-number">2.</span> <span class="nav-text">注册标识符的过程</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#var、let与const"><span class="nav-number">1.</span> <span class="nav-text">var、let与const</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注册标识符的过程"><span class="nav-number">2.</span> <span class="nav-text">注册标识符的过程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#变量提升"><span class="nav-number">3.</span> <span class="nav-text">变量提升</span></a></li></ol></div>
             
 
           </div>

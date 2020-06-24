@@ -303,6 +303,352 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-06-24-JS进阶：原型链与继承.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/frontend/2020-06-24-JS进阶：原型链与继承.html" itemprop="url">JS进阶：原型链与继承</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-24T16:49:28+08:00">
+                2020-06-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,075
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>学习自：JS忍者秘籍</p>
+<p><strong>在JavaScript中，可通过原型实现继承。</strong></p>
+<p>原型是定义属性和功能的一种便捷方式，对象可以访问原型上的属性和功能。原型类似于经典的面向对象语言中的类（class）。JavaScript使用new操作符，通过构造函数初始化新对象，但是没有真正的类定义。</p>
+<p>每个对象都含有原型的引用，当查找属性时，若对象本身不具有该属性，则会查找原型上是否有该属性。</p>
+<p>内置的方法<code>Object.setPrototypeOf</code>需要传入两个对象作为参数，并将第二个对象设置为第一个对象的原型。</p>
+<p>每个对象都可以有一个原型，每个对象的原型也可以拥有一个原型，以此类推，形成一个原型链。<strong>查找特定属性将会被委托在整个原型链上</strong>，只有当没有更多的原型可以进行查找时，才会停止查找。</p>
+<ul>
+<li>每个函数都有一个原型对象</li>
+<li>每一个函数的原型都具有一个constructor属性，该属性指向函数本身。</li>
+<li>constructor对象的原型设置为新创建的对象的原型。</li>
+</ul>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/24/15928083047843.png" alt=""><br>对象ninja2创建完成时，对象ninja2的原型被设置为Ninja的原型。即，我们将一个函数作为构造函数使用时，<strong>构造器的原型对象将被设置为函数的原型</strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">函数&#123;</span><br><span class="line">  原型属性：原型对象&#123;</span><br><span class="line">                     constructor：函数本身</span><br><span class="line">                     其他属性</span><br><span class="line">                     &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/frontend/2020-06-24-JS进阶：原型链与继承.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-06-24-CSS进阶：层叠和继承.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/frontend/2020-06-24-CSS进阶：层叠和继承.html" itemprop="url">CSS进阶：层叠和继承</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-24T16:41:47+08:00">
+                2020-06-24
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  319
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>学习自：深入解析CSS</p>
+<p>层叠的规则</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/24/15929039618348.png" alt=""></p>
+<p>层叠值——作为层叠结果，应用到一个元素上的特定属性的值。</p>
+<p>CSS 优先级法则总结：<br>A  选择器都有一个权值，权值越大越优先；<br>B  当权值相等时，后出现的样式表设置要优于先出现的样式表设置；<br>C  创作者的规则高于浏览者：即网页编写者设置的CSS 样式的优先权高于浏览器所设置的样式；<br>D  继承的CSS 样式不如后来指定的CSS 样式；<br>E  在同一组属性设置中标有“!important”规则的优先级最大；</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/frontend/2020-06-24-CSS进阶：层叠和继承.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-06-21-JS进阶：数组.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1272,7 +1618,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,447
+                  1,455
                 </span>
               
 
@@ -1298,7 +1644,8 @@
 
       
         
-          <h3 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h3><p>除了事件，还要保持浏览器执行的其他操作。这些操作被称为任务，并且分为两类：宏任务（或通常称为任务）和微任务。事件循环的实现至少应该含有一个用于宏任务的队列和至少一个用于微任务的队列。两种队列在同一时刻都只执行一个任务</p>
+          <p>学习自：JS忍者秘籍</p>
+<h3 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h3><p>除了事件，还要保持浏览器执行的其他操作。这些操作被称为任务，并且分为两类：宏任务（或通常称为任务）和微任务。事件循环的实现至少应该含有一个用于宏任务的队列和至少一个用于微任务的队列。两种队列在同一时刻都只执行一个任务</p>
 <p>事件循环基于两个基本原则：<br>● 一次处理一个任务。<br>● 一个任务开始后直到运行完成，不会被其他任务中断。</p>
 <p>宏任务的例子很多，包括<strong>创建主文档对象、解析HTML、执行主线（或全局）JavaScript代码</strong>，更改当前URL以及各种事件，如<strong>页面加载、输入、网络事件和定时器事件</strong>。从浏览器的角度来看，宏任务代表一个个离散的、独立工作单元。运行完任务后，浏览器可以继续其他调度，如重新渲染页面的UI或执行垃圾回收。</p>
 <p>而微任务是更小的任务。微任务更新应用程序的状态，但必须在浏览器任务继续执行其他任务之前执行，浏览器任务包括重新渲染页面的UI。微任务的案例包括<strong>promise回调函数、DOM发生变化</strong>等。微任务需要尽可能快地、通过<strong>异步</strong>方式执行，同时不能产生全新的微任务。微任务使得我们能够在重新渲染UI之前执行指定的行为，避免不必要的UI重绘，UI重绘会使应用程序的状态不连续。</p>
@@ -1444,7 +1791,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,330
+                  1,946
                 </span>
               
 
@@ -1687,370 +2034,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-06-11-AJAX通信-XHR-JSONP.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liana_Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Anonymous World">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/frontend/2020-06-11-AJAX通信-XHR-JSONP.html" itemprop="url">AJAX通信:XHR&JSONP</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-11T23:51:09+08:00">
-                2020-06-11
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/frontend/" itemprop="url" rel="index">
-                    <span itemprop="name">frontend</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  2,572
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>部分内容学习自：Javascript权威指南</p>
-<h2 id="XHR"><a href="#XHR" class="headerlink" title="XHR"></a>XHR</h2><p>Ajax的全称是Asynchronous JavaScript And XML，即异步JavaScript和XML。Ajax通过在浏览器和服务器之间添加Ajax中间层，允许浏览器异步发送请求，同时允许动态加载服务器响应。</p>
-<p>用户在浏览页面的同时可以发送请求，浏览器无须频繁地重新加载新页面，服务器的响应不再是整个页面内容，而只是必须更新的部分数据。Ajax 可以减轻服务器和带宽的负担，提供更好的服务响应。</p>
-<p>Ajax应用的主要特点是使用脚本操纵HTTP和Web服务器进行数据交换，不会导致页面重载。避免页面重载（这是Web初期的标准做法）的能力使Web应用感觉更像传统的桌面应用。Web应用可以使用Ajax技术把用户的交互数据记录到服务器中；也可以开始只显示简单页面，之后按需加载额外的数据和页面组件来提升应用的启动时间。</p>
-<p>浏览器通过 JavaScript 代码向服务器发送请求，JavaScript 代码负责解析服务器的响应数据，并把样式表加到数据上，然后在现有网页中显示出来。</p>
-<p>XML是Ajax的核心技术吗？<br>以JSON作为数据交换格式不仅更加简单，而且网络传输的数据量更小，因此JSON逐渐取代了Ajax技术中XML的地位。</p>
-<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/11/15917165552089.png" alt=""></p>
-<p>Ajax使用JavaScript来回传送数据，<strong>XMLHttpRequest</strong>是Ajax的核心。浏览器在XMLHttpRequest类上定义了它们的HTTP API。<strong>这个类的每个实例都表示一个独立的请求/响应对</strong>，并且这个对象的属性和方法允许指定请求细节和提取响应数据。</p>
-<p><strong>XMLHttpRequest不是协议级的HTTP API而是浏览器级的API。浏览器需要考虑cookie、重定向、缓存和代理，但代码只需要担心请求和响应。</strong></p>
-<p>JavaScript主要完成如下事情：</p>
-<ul>
-<li>创建XMLHttpRequest对象。通过XMLHttpRequest向服务器发送请求。</li>
-<li>创建回调函数，监视服务器响应状态，在服务器响应完成后，回调函数启动。</li>
-<li>回调函数通过DOM动态更新HTML页面。</li>
-</ul>
-<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest" target="_blank" rel="noopener">官方API</a></p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/frontend/2020-06-11-AJAX通信-XHR-JSONP.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-06-10-CSS练习：渐变风格登录界面.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liana_Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Anonymous World">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/frontend/2020-06-10-CSS练习：渐变风格登录界面.html" itemprop="url">CSS练习：渐变风格登录界面</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-10T23:33:49+08:00">
-                2020-06-10
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/frontend/" itemprop="url" rel="index">
-                    <span itemprop="name">frontend</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  187
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>学习自<a href="https://b23.tv/P86kC0" target="_blank" rel="noopener">视频</a></p>
-<p>效果：</p>
-<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/10/深度截图_选择区域_20200610221935.png" alt=""></p>
-<p>主要学到的知识点：</p>
-<ul>
-<li>配色的重要性</li>
-<li><code>background-image: linear-gradient(to bottom right,rgb(114,135,254),rgb(130,88,186));</code> 线性渐变颜色对比</li>
-<li><code>margin: 0 auto;</code>  login 主体内容自动居中</li>
-<li><code>box-shadow: 0 10px 50px 0px rgb(59,45,159);</code>  阴影方向与渐变的一致性</li>
-<li><code>border-top-left-radius: 15px;</code> 圆角</li>
-<li><code>display: inline-block;</code> 行内布局</li>
-<li><code>border-bottom: 3px solid rgb(237,221,22);</code> 重要内容加下边框突出</li>
-<li><code>outline: 0;</code>  input 去除轮廓线</li>
-<li>hover + transition 实现颜色变化</li>
-<li><code>::-webkit-input-placeholder {color: rgb(199,191,219);}</code>  专门用于占位符的颜色设置</li>
-<li><code>height: calc(100% - 120px);</code>  计算出的高度</li>
-</ul>
-<p>一个BUG：</p>
-<p>​    发送框不知道为什么会跑到上面去了… 回头再好好看一下<code>position: relative;</code>和<code>position: absolute;</code></p>
-
-          
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2100,7 +2088,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">119</span>
+                  <span class="site-state-item-count">121</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

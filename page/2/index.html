@@ -303,6 +303,365 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-06-11-AJAX通信-XHR-JSONP.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/frontend/2020-06-11-AJAX通信-XHR-JSONP.html" itemprop="url">AJAX通信:XHR&JSONP</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-11T23:51:09+08:00">
+                2020-06-11
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  2,572
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>部分内容学习自：Javascript权威指南</p>
+<h2 id="XHR"><a href="#XHR" class="headerlink" title="XHR"></a>XHR</h2><p>Ajax的全称是Asynchronous JavaScript And XML，即异步JavaScript和XML。Ajax通过在浏览器和服务器之间添加Ajax中间层，允许浏览器异步发送请求，同时允许动态加载服务器响应。</p>
+<p>用户在浏览页面的同时可以发送请求，浏览器无须频繁地重新加载新页面，服务器的响应不再是整个页面内容，而只是必须更新的部分数据。Ajax 可以减轻服务器和带宽的负担，提供更好的服务响应。</p>
+<p>Ajax应用的主要特点是使用脚本操纵HTTP和Web服务器进行数据交换，不会导致页面重载。避免页面重载（这是Web初期的标准做法）的能力使Web应用感觉更像传统的桌面应用。Web应用可以使用Ajax技术把用户的交互数据记录到服务器中；也可以开始只显示简单页面，之后按需加载额外的数据和页面组件来提升应用的启动时间。</p>
+<p>浏览器通过 JavaScript 代码向服务器发送请求，JavaScript 代码负责解析服务器的响应数据，并把样式表加到数据上，然后在现有网页中显示出来。</p>
+<p>XML是Ajax的核心技术吗？<br>以JSON作为数据交换格式不仅更加简单，而且网络传输的数据量更小，因此JSON逐渐取代了Ajax技术中XML的地位。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/11/15917165552089.png" alt=""></p>
+<p>Ajax使用JavaScript来回传送数据，<strong>XMLHttpRequest</strong>是Ajax的核心。浏览器在XMLHttpRequest类上定义了它们的HTTP API。<strong>这个类的每个实例都表示一个独立的请求/响应对</strong>，并且这个对象的属性和方法允许指定请求细节和提取响应数据。</p>
+<p><strong>XMLHttpRequest不是协议级的HTTP API而是浏览器级的API。浏览器需要考虑cookie、重定向、缓存和代理，但代码只需要担心请求和响应。</strong></p>
+<p>JavaScript主要完成如下事情：</p>
+<ul>
+<li>创建XMLHttpRequest对象。通过XMLHttpRequest向服务器发送请求。</li>
+<li>创建回调函数，监视服务器响应状态，在服务器响应完成后，回调函数启动。</li>
+<li>回调函数通过DOM动态更新HTML页面。</li>
+</ul>
+<p><a href="https://developer.mozilla.org/zh-CN/docs/Web/API/XMLHttpRequest/Using_XMLHttpRequest" target="_blank" rel="noopener">官方API</a></p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/frontend/2020-06-11-AJAX通信-XHR-JSONP.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-06-10-CSS练习：渐变风格登录界面.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/frontend/2020-06-10-CSS练习：渐变风格登录界面.html" itemprop="url">CSS练习：渐变风格登录界面</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-10T23:33:49+08:00">
+                2020-06-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  187
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>学习自<a href="https://b23.tv/P86kC0" target="_blank" rel="noopener">视频</a></p>
+<p>效果：</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/10/深度截图_选择区域_20200610221935.png" alt=""></p>
+<p>主要学到的知识点：</p>
+<ul>
+<li>配色的重要性</li>
+<li><code>background-image: linear-gradient(to bottom right,rgb(114,135,254),rgb(130,88,186));</code> 线性渐变颜色对比</li>
+<li><code>margin: 0 auto;</code>  login 主体内容自动居中</li>
+<li><code>box-shadow: 0 10px 50px 0px rgb(59,45,159);</code>  阴影方向与渐变的一致性</li>
+<li><code>border-top-left-radius: 15px;</code> 圆角</li>
+<li><code>display: inline-block;</code> 行内布局</li>
+<li><code>border-bottom: 3px solid rgb(237,221,22);</code> 重要内容加下边框突出</li>
+<li><code>outline: 0;</code>  input 去除轮廓线</li>
+<li>hover + transition 实现颜色变化</li>
+<li><code>::-webkit-input-placeholder {color: rgb(199,191,219);}</code>  专门用于占位符的颜色设置</li>
+<li><code>height: calc(100% - 120px);</code>  计算出的高度</li>
+</ul>
+<p>一个BUG：</p>
+<p>​    发送框不知道为什么会跑到上面去了… 回头再好好看一下<code>position: relative;</code>和<code>position: absolute;</code></p>
+
+          
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/network/2020-06-10-HTTP-报文，缓存，Cookie与HTTPS.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1681,361 +2040,11 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-05-29-模板引擎.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liana_Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Anonymous World">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/frontend/2020-05-29-模板引擎.html" itemprop="url">模板引擎</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-29T00:02:40+08:00">
-                2020-05-29
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/frontend/" itemprop="url" rel="index">
-                    <span itemprop="name">frontend</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1,657
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>模板引擎不属于特定技术领域，是为了使用户界面与业务数据（内容）分离而产生的，是跨领域跨平台的概念。严格的模板引擎的定义是，输入模板字符串+数据，得到渲染过的字符串（页面）。</p>
-<p>后端服务器的资源是有限的，并且对数据的处理是随着用户数量的增加而叠加的，用户的每一次操作，页面渲染都是在消耗服务器资源，少量的用户操作或许不会导致服务器卡顿，但是当出现成千上万甚至更多的用户时，可能仅是网络请求就会让服务器无响应甚至宕机（参照春运）。而如果将页面的渲染放在用户端（前端），用户只有一个，几十毫秒的渲染时间跟请求延迟比起来根本算不上瓶颈，所以既可以提高用户的体验，同时也减轻了服务器的压力。</p>
-<p>通常我们将渲染方法设计为render()，参数就是模板路径和数据。render()我们可以将其看成是一个约定接口，接受相同参数，最后返回HTML片段。这样的方法我们都视作实现了这个接口。<br>如：<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/21/15900510553052.jpg" alt=""></p>
-<p>形成模板技术的也就如下4个要素。<br>❑ 模板语言。<br>❑ 包含模板语言的模板文件。<br>❑ 拥有动态数据的数据对象。<br>❑ 模板引擎。</p>
-<p>实现上，从<strong>正则替换的方式到拼写字符串直接输入，再到AST解析</strong>，存在各种输出页面内容的方式，但从定义上来说都是差不多的。</p>
-<p>前端模板引擎分为两种，基于字符串的模板引擎和基于JavaScript的模板引擎。</p>
-<p>模板引擎主要有以下几个步骤。<br>❑ 语法分解。提取出普通字符串和表达式，这个过程通常用正则表达式匹配出来<br>❑ 处理表达式。将标签表达式转换成普通的语言表达式。<br>❑ 生成待执行的语句。<br>❑ 与数据一起执行，生成最终字符串。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/frontend/2020-05-29-模板引擎.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/NLP/2020-05-27-PytorchText语言翻译Tutorial使用.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liana_Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Anonymous World">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/NLP/2020-05-27-PytorchText语言翻译Tutorial使用.html" itemprop="url">PytorchText语言翻译Tutorial使用</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-05-27T23:48:51+08:00">
-                2020-05-27
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NLP/" itemprop="url" rel="index">
-                    <span itemprop="name">NLP</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1,081
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p><a href="http://studyai.com/pytorch-1.4/beginner/torchtext_translation_tutorial.html" target="_blank" rel="noopener">使用TORCHTEXT进行语言翻译</a></p>
-<p><code>pip install scapy</code> 之后发现语言包下不下来。<a href="https://spacy.io/models/en" target="_blank" rel="noopener">官方语言库</a></p>
-<p>手动下载  <a href="https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.2.5/en_core_web_sm-2.2.5.tar.gz" target="_blank" rel="noopener">en_core_web_sm-2.2.5.tar.gz</a>  <a href="https://github.com/explosion/spacy-models/releases/download/de_core_news_sm-2.2.5/de_core_news_sm-2.2.5.tar.gz" target="_blank" rel="noopener">de_core_news_sm-2.2.5.tar.gz</a>  但是github仍然下载受限</p>
-<p>于是找到了网友分享的链接：</p>
-<p>en_core_web_sm-2.2.5：<a href="https://pan.baidu.com/s/1f3BLZE6DFc86OEeLzrBZnA" target="_blank" rel="noopener">下载</a> x9vc</p>
-<p>因为最终要做的是中英文翻译，直接找了一个中文库：<a href="https://github.com/howl-anderson/Chinese_models_for_SpaCy" target="_blank" rel="noopener">Chinese_models_for_SpaCy</a></p>
-<p>进入存放目录 <code>pip install en_core_web_sm-2.2.5.tar.gz</code> 进行安装</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">import</span> spacy</span><br><span class="line">&gt;&gt;&gt;nlp = spacy.load(<span class="string">"en_core_web_sm"</span>)</span><br></pre></td></tr></table></figure>
-<p>检测是否安装成功</p>
-<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/05/21/20200521222653.png" alt=""></p>
-<p>为了方便使用本来想设置一下简写 <code>spacy link en_core_web_sm en</code> 但是spacy命令无法识别，可能要用管理员身份安装吧。但是因为用虚拟环境弄的，不想把路径弄坏了，就此作罢。</p>
-<p>然而导入中文包时出错</p>
-<blockquote>
-<p>ValueError: could not broadcast input array from shape (128) into shape (96)</p>
-</blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/NLP/2020-05-27-PytorchText语言翻译Tutorial使用.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/13/">13</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -2085,7 +2094,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">119</span>
+                  <span class="site-state-item-count">121</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>

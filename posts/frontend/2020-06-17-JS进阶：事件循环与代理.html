@@ -130,13 +130,13 @@
 
 
 
-<meta name="description" content="事件循环除了事件，还要保持浏览器执行的其他操作。这些操作被称为任务，并且分为两类：宏任务（或通常称为任务）和微任务。事件循环的实现至少应该含有一个用于宏任务的队列和至少一个用于微任务的队列。两种队列在同一时刻都只执行一个任务 事件循环基于两个基本原则：● 一次处理一个任务。● 一个任务开始后直到运行完成，不会被其他任务中断。 宏任务的例子很多，包括创建主文档对象、解析HTML、执行主线（或全局）J">
+<meta name="description" content="学习自：JS忍者秘籍 事件循环除了事件，还要保持浏览器执行的其他操作。这些操作被称为任务，并且分为两类：宏任务（或通常称为任务）和微任务。事件循环的实现至少应该含有一个用于宏任务的队列和至少一个用于微任务的队列。两种队列在同一时刻都只执行一个任务 事件循环基于两个基本原则：● 一次处理一个任务。● 一个任务开始后直到运行完成，不会被其他任务中断。 宏任务的例子很多，包括创建主文档对象、解析HTML">
 <meta name="keywords" content="JS">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JS进阶：事件循环与代理">
 <meta property="og:url" content="http://vergessenwang.github.io/posts/frontend/2020-06-17-JS进阶：事件循环与代理.html">
 <meta property="og:site_name" content="Anonymous World">
-<meta property="og:description" content="事件循环除了事件，还要保持浏览器执行的其他操作。这些操作被称为任务，并且分为两类：宏任务（或通常称为任务）和微任务。事件循环的实现至少应该含有一个用于宏任务的队列和至少一个用于微任务的队列。两种队列在同一时刻都只执行一个任务 事件循环基于两个基本原则：● 一次处理一个任务。● 一个任务开始后直到运行完成，不会被其他任务中断。 宏任务的例子很多，包括创建主文档对象、解析HTML、执行主线（或全局）J">
+<meta property="og:description" content="学习自：JS忍者秘籍 事件循环除了事件，还要保持浏览器执行的其他操作。这些操作被称为任务，并且分为两类：宏任务（或通常称为任务）和微任务。事件循环的实现至少应该含有一个用于宏任务的队列和至少一个用于微任务的队列。两种队列在同一时刻都只执行一个任务 事件循环基于两个基本原则：● 一次处理一个任务。● 一个任务开始后直到运行完成，不会被其他任务中断。 宏任务的例子很多，包括创建主文档对象、解析HTML">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/17/15923758236468.png">
 <meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/17/15923774420137.png">
@@ -144,10 +144,10 @@
 <meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/17/15923835069397.png">
 <meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/17/15923835241752.png">
 <meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/17/15923874900656.png">
-<meta property="og:updated_time" content="2020-06-17T15:04:35.860Z">
+<meta property="og:updated_time" content="2020-06-24T08:40:11.733Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JS进阶：事件循环与代理">
-<meta name="twitter:description" content="事件循环除了事件，还要保持浏览器执行的其他操作。这些操作被称为任务，并且分为两类：宏任务（或通常称为任务）和微任务。事件循环的实现至少应该含有一个用于宏任务的队列和至少一个用于微任务的队列。两种队列在同一时刻都只执行一个任务 事件循环基于两个基本原则：● 一次处理一个任务。● 一个任务开始后直到运行完成，不会被其他任务中断。 宏任务的例子很多，包括创建主文档对象、解析HTML、执行主线（或全局）J">
+<meta name="twitter:description" content="学习自：JS忍者秘籍 事件循环除了事件，还要保持浏览器执行的其他操作。这些操作被称为任务，并且分为两类：宏任务（或通常称为任务）和微任务。事件循环的实现至少应该含有一个用于宏任务的队列和至少一个用于微任务的队列。两种队列在同一时刻都只执行一个任务 事件循环基于两个基本原则：● 一次处理一个任务。● 一个任务开始后直到运行完成，不会被其他任务中断。 宏任务的例子很多，包括创建主文档对象、解析HTML">
 <meta name="twitter:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/17/15923758236468.png">
 
 
@@ -394,7 +394,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  1,447
+                  1,455
                 </span>
               
 
@@ -419,7 +419,8 @@
       
 
       
-        <h3 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h3><p>除了事件，还要保持浏览器执行的其他操作。这些操作被称为任务，并且分为两类：宏任务（或通常称为任务）和微任务。事件循环的实现至少应该含有一个用于宏任务的队列和至少一个用于微任务的队列。两种队列在同一时刻都只执行一个任务</p>
+        <p>学习自：JS忍者秘籍</p>
+<h3 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h3><p>除了事件，还要保持浏览器执行的其他操作。这些操作被称为任务，并且分为两类：宏任务（或通常称为任务）和微任务。事件循环的实现至少应该含有一个用于宏任务的队列和至少一个用于微任务的队列。两种队列在同一时刻都只执行一个任务</p>
 <p>事件循环基于两个基本原则：<br>● 一次处理一个任务。<br>● 一个任务开始后直到运行完成，不会被其他任务中断。</p>
 <p>宏任务的例子很多，包括<strong>创建主文档对象、解析HTML、执行主线（或全局）JavaScript代码</strong>，更改当前URL以及各种事件，如<strong>页面加载、输入、网络事件和定时器事件</strong>。从浏览器的角度来看，宏任务代表一个个离散的、独立工作单元。运行完任务后，浏览器可以继续其他调度，如重新渲染页面的UI或执行垃圾回收。</p>
 <p>而微任务是更小的任务。微任务更新应用程序的状态，但必须在浏览器任务继续执行其他任务之前执行，浏览器任务包括重新渲染页面的UI。微任务的案例包括<strong>promise回调函数、DOM发生变化</strong>等。微任务需要尽可能快地、通过<strong>异步</strong>方式执行，同时不能产生全新的微任务。微任务使得我们能够在重新渲染UI之前执行指定的行为，避免不必要的UI重绘，UI重绘会使应用程序的状态不连续。</p>
@@ -584,7 +585,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">119</span>
+                  <span class="site-state-item-count">121</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
