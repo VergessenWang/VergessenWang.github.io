@@ -119,7 +119,7 @@
 
 
 
-  <meta name="keywords" content="CNN,LSTM," />
+  <meta name="keywords" content="CSS," />
 
 
 
@@ -130,18 +130,22 @@
 
 
 
-<meta name="description" content="在对神经网络类算法模型一无所知的时候，我就曾想过信息与时序的问题，并陷入混乱中…今天开始看BiLSTM的原理时，才发现早就有了相应的解决方案… 神经网络的灵感来自于人脑神经元的工作方式，然而为了在计算机中实现，依然是个跟加权有关的数学问题，权重决定了信息的重要程度。每个节点虽然有多个输入输出，但是一种状态下只是二值问题。神经网络的隐藏层越多，处理复杂问题的能力也就越强。 历史模型的局限普通的神经网">
-<meta name="keywords" content="CNN,LSTM">
+<meta name="description" content="学习自：深入解析CSS 一种使用经验是：用rem设置字号，用px设置边框，用em设置其他大部分属性，尤其是内边距、外边距和圆角（用百分比设置容器宽度）使用无单位的值设置行高。使用自定义属性定义颜色 emem是最常见的相对长度单位，适合基于特定的字号进行排版。在CSS中，1em等于当前元素的字号 当设置padding、height、width、border-radius等属性时，使用em会很方便。这">
+<meta name="keywords" content="CSS">
 <meta property="og:type" content="article">
-<meta property="og:title" content="LSTM模型浅析">
-<meta property="og:url" content="http://vergessenwang.github.io/posts/NLP/2019-10-29-LSTM模型浅析.html">
+<meta property="og:title" content="CSS进阶：相对单位">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/frontend/2020-06-28-CSS进阶：相对单位.html">
 <meta property="og:site_name" content="Anonymous World">
-<meta property="og:description" content="在对神经网络类算法模型一无所知的时候，我就曾想过信息与时序的问题，并陷入混乱中…今天开始看BiLSTM的原理时，才发现早就有了相应的解决方案… 神经网络的灵感来自于人脑神经元的工作方式，然而为了在计算机中实现，依然是个跟加权有关的数学问题，权重决定了信息的重要程度。每个节点虽然有多个输入输出，但是一种状态下只是二值问题。神经网络的隐藏层越多，处理复杂问题的能力也就越强。 历史模型的局限普通的神经网">
+<meta property="og:description" content="学习自：深入解析CSS 一种使用经验是：用rem设置字号，用px设置边框，用em设置其他大部分属性，尤其是内边距、外边距和圆角（用百分比设置容器宽度）使用无单位的值设置行高。使用自定义属性定义颜色 emem是最常见的相对长度单位，适合基于特定的字号进行排版。在CSS中，1em等于当前元素的字号 当设置padding、height、width、border-radius等属性时，使用em会很方便。这">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2019-10-28T16:09:33.769Z">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932407446713.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932413589031.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932421645271.png">
+<meta property="og:updated_time" content="2020-06-28T15:07:47.422Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="LSTM模型浅析">
-<meta name="twitter:description" content="在对神经网络类算法模型一无所知的时候，我就曾想过信息与时序的问题，并陷入混乱中…今天开始看BiLSTM的原理时，才发现早就有了相应的解决方案… 神经网络的灵感来自于人脑神经元的工作方式，然而为了在计算机中实现，依然是个跟加权有关的数学问题，权重决定了信息的重要程度。每个节点虽然有多个输入输出，但是一种状态下只是二值问题。神经网络的隐藏层越多，处理复杂问题的能力也就越强。 历史模型的局限普通的神经网">
+<meta name="twitter:title" content="CSS进阶：相对单位">
+<meta name="twitter:description" content="学习自：深入解析CSS 一种使用经验是：用rem设置字号，用px设置边框，用em设置其他大部分属性，尤其是内边距、外边距和圆角（用百分比设置容器宽度）使用无单位的值设置行高。使用自定义属性定义颜色 emem是最常见的相对长度单位，适合基于特定的字号进行排版。在CSS中，1em等于当前元素的字号 当设置padding、height、width、border-radius等属性时，使用em会很方便。这">
+<meta name="twitter:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932407446713.png">
 
 
 
@@ -171,13 +175,13 @@
 
 
 
-  <link rel="canonical" href="http://vergessenwang.github.io/posts/NLP/2019-10-29-LSTM模型浅析.html"/>
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/frontend/2020-06-28-CSS进阶：相对单位.html"/>
 
 
 
 
 
-  <title>LSTM模型浅析 | Anonymous World</title>
+  <title>CSS进阶：相对单位 | Anonymous World</title>
   
 
 
@@ -304,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/NLP/2019-10-29-LSTM模型浅析.html">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-06-28-CSS进阶：相对单位.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Liana_Wang">
@@ -321,7 +325,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">LSTM模型浅析</h1>
+          <h1 class="post-title" itemprop="name headline">CSS进阶：相对单位</h1>
         
 
         <div class="post-meta">
@@ -333,8 +337,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2019-10-29T00:07:36+08:00">
-                2019-10-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-28T23:03:27+08:00">
+                2020-06-28
               </time>
             
 
@@ -356,8 +360,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/NLP/" itemprop="url" rel="index">
-                    <span itemprop="name">NLP</span>
+                  <a href="/categories/frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend</span>
                   </a>
                 </span>
 
@@ -387,7 +391,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  948
+                  912
                 </span>
               
 
@@ -412,35 +416,29 @@
       
 
       
-        <p>在对神经网络类算法模型一无所知的时候，我就曾想过信息与时序的问题，并陷入混乱中…今天开始看BiLSTM的原理时，才发现早就有了相应的解决方案…</p>
-<p>神经网络的灵感来自于人脑神经元的工作方式，然而为了在计算机中实现，依然是个跟加权有关的数学问题，权重决定了信息的重要程度。每个节点虽然有多个输入输出，但是一种状态下只是<strong>二值问题</strong>。神经网络的隐藏层越多，处理复杂问题的能力也就越强。</p>
-<h3 id="历史模型的局限"><a href="#历史模型的局限" class="headerlink" title="历史模型的局限"></a>历史模型的局限</h3><p>普通的神经网络(NN)：各输入层之间没有运算连接，无法表示<strong>上下文</strong>关系</p>
-<ul>
-<li>$h_t = sigmoid(W_x * x_t + b)$</li>
-</ul>
-<p>循环神经网络(RNN):  其实比较类似于<strong>进位加法链</strong>，上一次运算的结果会加入到下一次运算中。这种基于时序的处理，只包含了上文信息，而忽略了<strong>下文信息</strong>。如果用增加依赖步数的方式，会导致把精力都集中在记忆大量的输入信息上，从而使建模能力下降。还有一个问题是RNN比较难以训练，逐步求导的梯度下降方式可能产生<strong>梯度爆炸</strong>问题</p>
-<ul>
-<li>$h_t = tanh(W_x <em> x_t + W_h </em> h_{t-1} +b)$</li>
-</ul>
-<p>双向循环神经网络(BRNN): 再增加一个向后的网络，使得未来信息被包含进来。然而，仍然存在存取的上下文信息范围有限的问题，<strong>随着网络环路的不断递归，隐含层的影响是会不断衰减的，即长期依赖问题</strong>，这就引出了关于权重的考虑，什么样的信息是重要的，需要在后续的计算中一直保留呢？ 于是出现了 LSTM</p>
-<p>长短期记忆(LSTM):  核心是基于门函数的<strong>自我衡量</strong>的机制，通过记忆门与遗忘门来控制之前的影响，相比于RNN，多了一个输入和输出，它们控制的是长期记忆。LSTM用细胞状态来表示内部复杂的处理过程。</p>
-<p><strong>双向长短期记忆(BiLSTM)</strong>: 即增加一个反向的LSTM。两个方向的结果拼接后得最终结果。</p>
-<p><strong>门控循环单元（GRU）</strong>：将忘记和输入门结合成一个“更新门”，它还合并了单元状态和隐藏状态，并做了一些其他更改。由此产生的模型比标准的LSTM模型更简单，并且越来越受欢迎。</p>
+        <p>学习自：深入解析CSS</p>
+<p>一种使用经验是：用rem设置字号，用px设置边框，用em设置其他大部分属性，尤其是内边距、外边距和圆角（用百分比设置容器宽度）使用无单位的值设置行高。使用自定义属性定义颜色</p>
+<h3 id="em"><a href="#em" class="headerlink" title="em"></a>em</h3><p>em是最常见的相对长度单位，适合基于特定的字号进行排版。在CSS中，1em等于当前元素的<strong>字号</strong></p>
+<p>当设置padding、height、width、border-radius等属性时，使用em会很方便。这是因为当元素继承了不同的字号，或者用户改变了字体设置时，这些属性会跟着元素均匀地缩放。</p>
+<p>如果声明font-size: 1.2em，会发生什么呢？一个字号当然不能等于自己的1.2倍。实际上，这个font-size是根据继承的字号来计算的。</p>
+<p>同时用它指定一个元素的字号和其他属性。这时，浏览器<strong>必须先计算字号，然后使用这个计算值去算出其余的属性值</strong>。</p>
+<p>可能会出现嵌套列表的文字缩小的问题。于是，更好的选择是用rem设置字号</p>
+<h3 id="rem"><a href="#rem" class="headerlink" title="rem"></a>rem</h3><p>rem是root em的缩写。rem不是相对于当前元素，而是<strong>相对于根元素的单位</strong>。不管在文档的什么位置使用rem,1.2rem都会有相同的计算值：1.2乘以根元素的字号。</p>
+<p>根节点有一个伪类选择器（:root），可以用来选中它自己。这等价于类型选择器html，但是<strong>html的优先级相当于一个类名，而不是一个标签</strong>。</p>
+<h3 id="视口的相对单位"><a href="#视口的相对单位" class="headerlink" title="视口的相对单位"></a>视口的相对单位</h3><p>视口——浏览器窗口里网页可见部分的边框区域。它不包括浏览器的地址栏、工具栏、状态栏。</p>
+<p>❑ vh：视口高度的1/100。<br>❑ vw：视口宽度的1/100。<br>❑ vmin：视口宽、高中较小的一方的1/100（IE9中叫vm，而不是vmin）。<br>❑ vmax：视口宽、高中较大的一方的1/100</p>
+<p>比如，50vw等于视口宽度的一半，25vh等于视口高度的25%。vmin取决于宽和高中较小的一方，这可以<strong>保证元素在屏幕方向变化时适应屏幕</strong>。在横屏时，vmin取决于高度；在竖屏时，则取决于宽度。</p>
 <a id="more"></a>
-<p><a href="http://colah.github.io/posts/2015-08-Understanding-LSTMs/" target="_blank" rel="noopener">英文参考文章</a></p>
-<p><a href="https://zhuanlan.zhihu.com/p/33113729" target="_blank" rel="noopener">中文参考文章</a></p>
-<h3 id="LSTM的应用领域"><a href="#LSTM的应用领域" class="headerlink" title="LSTM的应用领域"></a>LSTM的应用领域</h3><ul>
-<li>one to many: 如给出一个图片，生成描述语句；由一个单词写出一篇诗</li>
-<li>many to one : 如 视频分类</li>
-<li>many to many: 结构对应如手写识别 或 不对应 如给一个视频生成描述</li>
-</ul>
-<p>总之，与<strong>序列</strong>有关的都可以用该模型来处理，特别是上下文有关的情况</p>
-<p>在实践中，一般<strong>先用CNN抽取特征，再用LSTM进行序列学习</strong></p>
-<blockquote>
-<p>神经网络是一个工具，很多库都已经实现了，不用多度担心其中的数学问题和实现难度，更应该关心的是你的问题到底适应什么样的网络结构，训练数据多大，能承受多深的神经网络。这考验的其实是工程能力</p>
-</blockquote>
-<h3 id="实现"><a href="#实现" class="headerlink" title="实现"></a>实现</h3><p>LSTM的训练对内存要求较高，训练一般就是10~20 的序列长度, 预测的长度没有太大限制。参数设置就是炼丹…</p>
-<p>了解一种DL框架，如<strong>TensorFlow</strong> , PyTorch,  内部都已经集成了LSTM，知道如何调用就行</p>
+<h3 id="响应式应用"><a href="#响应式应用" class="headerlink" title="响应式应用"></a>响应式应用</h3><p>媒体查询，即@media规则，可以指定某种屏幕尺寸或者媒体类型（比如，打印机或者屏幕）下的样式。这是响应式设计的关键部分。</p>
+<p>只需要改一行代码就能改变整体的字号<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932407446713.png" alt=""></p>
+<p>实现字体平滑地缩放<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932413589031.png" alt=""><br>calc()函数支持的运算包括：加（+）、减（−）、乘（×）、除（÷）。加号和减号<strong>两边必须有空白</strong></p>
+<h3 id="自定义属性（即CSS变量）"><a href="#自定义属性（即CSS变量）" class="headerlink" title="自定义属性（即CSS变量）"></a>自定义属性（即CSS变量）</h3><p>声明一个变量，为它赋一个值，然后在样式表的其他地方引用这个值。</p>
+<p>变量名前面必须有两个连字符（–），用来跟CSS属性区分。调用函数var()就能使用该变量。</p>
+<p>这种方式特别适合反复出现的值，比如颜色值。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932421645271.png" alt=""></p>
+<p>定义属性的声明能够层叠和继承：可以在多个选择器中定义相同的变量，这个变量在网页的不同地方有不同的值。</p>
+<p>例如，可以定义一个变量为黑色，然后在某个容器中重新将其定义为白色。那么基于该变量的任何样式，在容器外部会动态解析为黑色，在容器内部会动态解析为白色。</p>
+<p>可以结合js用来切换主题颜色</p>
 
       
     </div>
@@ -458,9 +456,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/CNN/" rel="tag"><i class="fa fa-tag"></i> CNN</a>
-          
-            <a href="/tags/LSTM/" rel="tag"><i class="fa fa-tag"></i> LSTM</a>
+            <a href="/tags/CSS/" rel="tag"><i class="fa fa-tag"></i> CSS</a>
           
         </div>
       
@@ -488,8 +484,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/posts/NLP/2019-10-28-KBQA中的一些问题.html" rel="next" title="KBQA中的一些问题">
-                <i class="fa fa-chevron-left"></i> KBQA中的一些问题
+              <a href="/posts/network/2020-06-26-XSS和CSRF.html" rel="next" title="XSS和CSRF">
+                <i class="fa fa-chevron-left"></i> XSS和CSRF
               </a>
             
           </div>
@@ -498,8 +494,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/posts/NLP/2019-10-30-KG子任务划分.html" rel="prev" title="KG子任务划分">
-                KG子任务划分 <i class="fa fa-chevron-right"></i>
+              <a href="/posts/NLP/2020-06-28-NLP基础梳理.html" rel="prev" title="NLP基础梳理">
+                NLP基础梳理 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -666,7 +662,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#历史模型的局限"><span class="nav-number">1.</span> <span class="nav-text">历史模型的局限</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LSTM的应用领域"><span class="nav-number">2.</span> <span class="nav-text">LSTM的应用领域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现"><span class="nav-number">3.</span> <span class="nav-text">实现</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#em"><span class="nav-number">1.</span> <span class="nav-text">em</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rem"><span class="nav-number">2.</span> <span class="nav-text">rem</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#视口的相对单位"><span class="nav-number">3.</span> <span class="nav-text">视口的相对单位</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#响应式应用"><span class="nav-number">4.</span> <span class="nav-text">响应式应用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义属性（即CSS变量）"><span class="nav-number">5.</span> <span class="nav-text">自定义属性（即CSS变量）</span></a></li></ol></div>
             
 
           </div>
@@ -906,26 +902,6 @@
   
 
   
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
   
 
 

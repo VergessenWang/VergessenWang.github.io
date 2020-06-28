@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next gemini use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+  
+  
+  
+  
+
+  
+    
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+      
+    
+
+    
+  
+
+  
+    
+    
+    <link href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|Lobster Two:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&subset=latin,latin-ext" rel="stylesheet" type="text/css">
+  
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/bitbug_favicon.ico?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/bitbug_favicon.ico?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Anonymous World" />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="学习自：基于深度学习的NLP 文本预处理文本预处理思想是这样的：机器不需要语料库中的无关部分。它只需要执行手头任务所需的重要单词和短语。文本预处理基本上是告诉机器什么需要考虑、哪些可以忽略。 常用的文本预处理技术：❏小写/大写转换❏去噪：正则❏文本规范化：错误拼写和缩写规范。最常见的方法是使用字典映射❏词干提取❏词形还原❏标记化：分词❏删除停止词 词嵌入当提供数值数据作为输入时，模型执行效率最高，">
+<meta property="og:type" content="article">
+<meta property="og:title" content="NLP基础梳理">
+<meta property="og:url" content="http://vergessenwang.github.io/posts/NLP/2020-06-28-NLP基础梳理.html">
+<meta property="og:site_name" content="Anonymous World">
+<meta property="og:description" content="学习自：基于深度学习的NLP 文本预处理文本预处理思想是这样的：机器不需要语料库中的无关部分。它只需要执行手头任务所需的重要单词和短语。文本预处理基本上是告诉机器什么需要考虑、哪些可以忽略。 常用的文本预处理技术：❏小写/大写转换❏去噪：正则❏文本规范化：错误拼写和缩写规范。最常见的方法是使用字典映射❏词干提取❏词形还原❏标记化：分词❏删除停止词 词嵌入当提供数值数据作为输入时，模型执行效率最高，">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932480776371.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932481661484.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932522947586.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932620458171.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932623604822.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932635714209.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932636355395.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932644451630.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932647185141.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932647630989.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932649849924.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932650009786.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932667364643.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932690534263.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932693674926.jpg">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932695888850.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932702885152.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932703203959.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932703587765.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932703982243.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932704765024.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932704908613.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932769175402.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932769644273.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932771418209.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932778558352.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932781936659.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932784150187.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932785810336.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932787487726.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15933325081507.png">
+<meta property="og:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15933341865264.png">
+<meta property="og:updated_time" content="2020-06-28T15:06:46.131Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="NLP基础梳理">
+<meta name="twitter:description" content="学习自：基于深度学习的NLP 文本预处理文本预处理思想是这样的：机器不需要语料库中的无关部分。它只需要执行手头任务所需的重要单词和短语。文本预处理基本上是告诉机器什么需要考虑、哪些可以忽略。 常用的文本预处理技术：❏小写/大写转换❏去噪：正则❏文本规范化：错误拼写和缩写规范。最常见的方法是使用字典映射❏词干提取❏词形还原❏标记化：分词❏删除停止词 词嵌入当提供数值数据作为输入时，模型执行效率最高，">
+<meta name="twitter:image" content="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932480776371.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Gemini',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://vergessenwang.github.io/posts/NLP/2020-06-28-NLP基础梳理.html"/>
+
+
+
+
+
+  <title>NLP基础梳理 | Anonymous World</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Anonymous World</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">迷失仙境</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/NLP/2020-06-28-NLP基础梳理.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">NLP基础梳理</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-28T23:05:28+08:00">
+                2020-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/" itemprop="url" rel="index">
+                    <span itemprop="name">NLP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5,922
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>学习自：基于深度学习的NLP</p>
+<h3 id="文本预处理"><a href="#文本预处理" class="headerlink" title="文本预处理"></a>文本预处理</h3><p>文本预处理思想是这样的：机器不需要语料库中的无关部分。它只需要执行手头任务所需的重要单词和短语。文本预处理基本上是告诉机器什么需要考虑、哪些可以忽略。</p>
+<p>常用的文本预处理技术：<br>❏小写/大写转换<br>❏去噪：正则<br>❏文本规范化：错误拼写和缩写规范。最常见的方法是使用字典映射<br>❏词干提取<br>❏词形还原<br>❏标记化：分词<br>❏删除停止词</p>
+<h3 id="词嵌入"><a href="#词嵌入" class="headerlink" title="词嵌入"></a>词嵌入</h3><p>当提供数值数据作为输入时，模型执行效率最高，因此自然语言处理的关键作用是<strong>将预处理的文本数据转换为数值数据</strong>，数值数据是文本数据的数字表示。</p>
+<p>词嵌入的含义：它们是文本实值向量形式的数值表示。具有相似含义的词映射到相似的向量，形成与具有相似含义的单词相对应的相似向量簇。</p>
+<p>词嵌入是映射到单个单词的向量，因此只有在语料库上执行了标记化后才能生成词嵌入</p>
+<h4 id="Word2Vec"><a href="#Word2Vec" class="headerlink" title="Word2Vec"></a>Word2Vec</h4><p><strong>Word2Vec是一个浅层神经网络</strong>，只有两层，因此不具备深度学习模型的资格。输入是一个文本语料库，它用来生成矢量作为输出。这些向量被称为输入语料库中单词的<strong>特征向量</strong>。它将语料库转换成可以被深层神经网络理解的数值数据。</p>
+<p>Word2Vec的目的是理解两个或更多单词一起出现的概率，从而将具有相似含义的单词组合在一起，在向量空间中形成一个聚类</p>
+<p>Word2Vec针对与输入语料库中的单词相邻的单词训练单词，有两种方法：</p>
+<p>❏连续单词袋（CBOW）<br>该方法基于上下文预测当前单词。因此，它将单词的周围单词作为输入来产生单词作为输出，并且它基于这个单词确实是句子的一部分的概率来选择这个单词。</p>
+<p>CBOW基于概率工作，因此选择在特定上下文中出现概率最高的单词。这意味着它通常只预测常见和频繁的单词，因为这些单词具有最高的概率，而罕见和不频繁的单词永远不会由CBOW产生。</p>
+<a id="more"></a>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932480776371.png" alt=""></p>
+<p>❏Skip-gram<br>这种方法通过将单词作为输入，理解单词的意思，并将其分配给上下文来预测单词周围的单词。<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932481661484.png" alt=""></p>
+<p>Skip-gram在小语料库中效果最好。CBOW比skip-gram更快，并且使用更频繁的单词具有更高的准确性。</p>
+<p>虽然这两种方法似乎以相反的方式工作，但它们本质上是基于本地（附近）单词的上下文来预测单词。它们使用上下文窗口来预测下一个单词。这个窗口是可配置的参数。</p>
+<h4 id="GloVe"><a href="#GloVe" class="headerlink" title="GloVe"></a>GloVe</h4><p>Word2Vec是一种预测模型，学习向量来提高预测能力，而GloVe是一种基于计数的模型。这意味着GloVe通过对共现计数矩阵（co-occurrence counts matrix）进行降维来学习向量。</p>
+<p>共现计数矩阵，它包含一个单词在语料库的特定上下文中出现了多少次的信息。行是单词，列是上下文。这个矩阵然后被分解以减少维数，且新矩阵对于每个单词以一个向量表示。</p>
+<h3 id="神经网络"><a href="#神经网络" class="headerlink" title="神经网络"></a>神经网络</h3><p>神经网络是存在于人脑中的生物神经网络的人工表示。</p>
+<h4 id="组成部分"><a href="#组成部分" class="headerlink" title="组成部分"></a>组成部分</h4><p>架构包括：<br>❏层<br>❏节点<br>❏边<br>❏偏置<br>❏激活函数</p>
+<p>深度学习模型的三个部分对模型产生的输出有影响：输入、连接权重和偏置以及激活函数</p>
+<h5 id="层"><a href="#层" class="headerlink" title="层"></a>层</h5><p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932522947586.png" alt=""></p>
+<p>❏输入层 ：在神经网络中只能出现一次。每个输入节点都连接到前一层中的每个节点。输入数据的变量或特性称为特征。</p>
+<p>❏隐藏层：进行实际计算的层。这是唯一一种可以出现多次的层。由被称为“<strong>激活节点</strong>”的节点组成。每个节点都有一个激活函数，这是一个对激活节点接收的输入执行的数学函数，以生成输出。隐藏层的每个激活节点生成的输出被发送到下一层的每个激活节点。</p>
+<p>❏输出层：神经网络的最后一层，由提供所有处理和计算最终结果的节点组成。</p>
+<h5 id="激活节点"><a href="#激活节点" class="headerlink" title="激活节点"></a>激活节点</h5><p>❏激活：这是节点的当前状态，无论它是否处于活动状态。<br>❏阈值（可选）：如果存在，这将根据加权和是高于还是低于该阈值来确定神经元是否被激活。<br>❏激活函数：这是根据输入和加权和为激活节点计算新激活的方法。<br>❏输出函数：这基于激活函数为特定激活节点生成输出。</p>
+<h5 id="边"><a href="#边" class="headerlink" title="边"></a>边</h5><p>来自两个不同层的两个节点之间的连接。连接被称为边。通向激活节点的每条边都有自己的权重，这可以被视为一个节点对另一个节点的某种影响。权重可以是正数，也可以是负数。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932620458171.png" alt=""></p>
+<h5 id="偏置"><a href="#偏置" class="headerlink" title="偏置"></a>偏置</h5><p>每层都有自己的偏置节点。偏置节点保存一个值，称为偏置。该值包含在计算加权和的过程中</p>
+<p>偏置是神经网络的一个重要方面，因为它允许激活函数向左或向右移动。这有助于模型更好地拟合数据，从而产生准确的输出。</p>
+<h5 id="激活函数"><a href="#激活函数" class="headerlink" title="激活函数"></a>激活函数</h5><p>目的是将<strong>非线性</strong>引入神经网络。激活函数也需要是<strong>可微分</strong>的，才能发生反向传播。</p>
+<p>激活节点计算它接收的输入的加权和，加上偏置，然后将激活函数应用于该值。这为该特定激活节点生成输出，然后由前进层用作输入。该输出被称为激活值。因此，下一层中正在进行的激活节点将从前面的激活节点接收多个激活值</p>
+<p>计算加权和、应用激活函数和产生激活值的过程称为前馈。</p>
+<p>激活函数有很多（Logistic、TanH、ReLU等）。sigmoid函数是目前最流行和简单的激活函数之一</p>
+<p>sigmoid函数的表达式<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932623604822.png" alt=""></p>
+<p>修正线性单元（Rectified Linear Unit，ReLU），它用零代替所有负值。</p>
+<h4 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h4><p>计算权重是通过使用两种算法来实现的——损失函数和梯度下降算法。</p>
+<p>损失函数有助于模型自我评估其性能，需要尽可能地最小化损失函数。为了得到最适合当前问题的模型系数，模型需要不断改进模型系数的值。一旦函数达到最小值，在该最小值点的模型系数被选为最终模型系数。</p>
+<p>有许多不同类型的损失函数，例如最小均方误差（用于回归问题）和对数损失（用于分类问题），交叉熵</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932635714209.png" alt=""><br>均方误差函数计算实际值和预测值之间的差值</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932636355395.png" alt=""><br>输出是0到1范围内的概率值。预测概率和实际类别之间的差异越大，对数损失就越高。</p>
+<h4 id="梯度下降算法"><a href="#梯度下降算法" class="headerlink" title="梯度下降算法"></a>梯度下降算法</h4><p>实际上是一个优化问题的一个分支</p>
+<p><strong>梯度就是求导求微分，是损失函数相对于权重和偏置的偏导数。</strong></p>
+<p>从模型系数的指定值开始，计算此点的梯度。这个梯度告诉模型应该向哪个方向移动来更新系数，以便更接近<strong>全局最小值，即最小化损失函数</strong>。到达了一个新的点，有了一个新的模型系数。它重复计算梯度、获得移动方向、更新系数和采取另一步骤的过程。它会检查此步是否为它提供了最陡的下降。重复这个过程，直到梯度值在多次试验中没有改变。这意味着该算法已达到全局最小值并已收敛。</p>
+<p>神经网络使用的激活函数用于将非线性引入到情况中。因此，神经网络的损失函数曲线不是碗形曲线，也不只有一个最小点。相反，它有几个最小值，其中只有一个是全局最小值。其余的被称为局部最小值。<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932644451630.jpg" alt=""><br>但实际上，梯度下降算法达到局部最小值并选择该点的权重值是可以的，因为<strong>大多数局部最小值通常非常接近全局最小值。</strong></p>
+<p>在设计神经网络时，也使用了梯度下降算法的修改版本：随机梯度下降和批量梯度下降</p>
+<p>假设我们的损失函数是均方误差：</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932647185141.png" alt=""></p>
+<p>求偏导<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932647630989.png" alt=""></p>
+<p>梯度告诉我们应该朝哪个方向前进，所采取的步骤的大小由一个称为学习率的参数来调整，并且在梯度下降算法中是一个非常敏感的参数。它用α表示。<strong>如果学习率太小，那么该算法将采取很多很微小的步骤，因此需要很长时间才能达到最小值。然而，如果学习率太大，那么算法可能会完全错过最小值。</strong></p>
+<p>梯度*步长更新权重(w)和偏置(b)：<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932649849924.png" alt=""></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932650009786.png" alt=""></p>
+<h4 id="反向传播"><a href="#反向传播" class="headerlink" title="反向传播"></a>反向传播</h4><p>计算出的损失通过网络返回每一层，然后再开始权重更新过程。损失向后传播，因此这被称为反向传播。</p>
+<p>反向传播使用损失函数的偏导数进行。反向传播可以看作是链式法则的一个应用，<strong>计算每个权重的偏导数</strong>。链式法则是用来计算复合函数偏导数的公式。</p>
+<p>它包括通过在神经网络中反向传播来计算每层中每个节点的损失。了解每个节点的损失，可以<strong>让网络了解哪些权重会对输出和损失产生严重的负面影响</strong>。因此，梯度下降算法能够降低这些具有高错误率的连接的权重，从而降低该节点对网络输出的影响。</p>
+<h5 id="随机失活"><a href="#随机失活" class="headerlink" title="随机失活"></a>随机失活</h5><p>当模型“记忆”了训练数据，并且在测试中不能用不同的例子概括时，就会出现<strong>过拟合</strong>。</p>
+<p>正则化可以概括为用于惩罚学习系数的技术，使得它们趋向于零。随机失活是一种常见的正则化技术，通过在前向和后向过程中随机“失活”一些神经元来应用。为了实现随机失活，我们将神经元被失活的概率指定为参数</p>
+<h3 id="卷积神经网络CNN"><a href="#卷积神经网络CNN" class="headerlink" title="卷积神经网络CNN"></a>卷积神经网络CNN</h3><p>CNN的灵感来自神经科学家D.H.Hubel与T.N.Wiesel。他们发现视觉皮层由多层神经元组成。他们还提出了“感受野”的概念，即特定刺激激活或激发神经元的空间，具有一定程度的<strong>空间不变性</strong>。空间或平移不变性允许动物检测物体，不管它们是旋转、缩放、变换还是部分模糊</p>
+<p>据此计算机视觉科学家建立了遵循相同的<strong>局部性、层次性和空间不变性</strong>原则的神经网络模型。</p>
+<p>卷积的意思是对图片的<strong>某一个区域</strong>进行处理，这样就保留了图片信息的完整性。</p>
+<p>典型的神经网络是全连接的，这意味着每个神经元都连接到下一层的每个神经元。当处理诸如图像、声音等高维数据时，典型的神经网络速度很慢，并且由于学习了太多的权重而倾向于溢出。卷积层通过将神经元连接到较低层的输入区域来解决这个问题。</p>
+<p>CNN的一次前向传播涉及两个部分的一系列操作：<br>❏特征提取<br>❏神经网络</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932667364643.png" alt=""></p>
+<p>由于NLP更多用的RNN，不再继续看这一部分了…</p>
+<h3 id="循环神经网络RNN"><a href="#循环神经网络RNN" class="headerlink" title="循环神经网络RNN"></a>循环神经网络RNN</h3><p>多层感知器和卷积神经网络等网络的每一个输入都是独立处理的，它们不存储来自过去输入的任何信息以分析当前输入，因为它们的结构中缺少内存。我们可以尝试让它们<strong>存储过去的有用信息</strong>，让它们检索过去的信息，从而帮助它们分析当前的输入。这确实是可能的，这种结构就叫作循环神经网络（Recurrent Neural Network，RNN）。</p>
+<p>RNN是通过输入序列而不是单个输入来训练的。RNN中的状态元素包含关于处理当前输入序列的过去输入的信息。对于输入序列中的每个输入，RNN获得一个状态，计算其输出，并将其状态发送到序列中的下一个输入。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932690534263.png" alt=""><br>Xt：输入序列中的当前输入向量。<br>Yt：输出序列中的当前输出向量。<br>St：当前状态向量。<br>Wx：连接输入向量和状态向量的权重矩阵。<br>Wy：连接状态向量和输出向量的权重矩阵。<br>Ws：将前一个时间步的状态向量连接到下一个时间步的权重矩阵。</p>
+<p>St状态向量从上一个时间步反馈到网络中。<strong>RNN在不同的时间步之间共享相同的权重矩阵。通过增加时间步长，我们不是在学习更多的参数，而是在看一个更大的序列。</strong></p>
+<p>在时间t+1、yt+1的输出取决于时间t+1的输入、权重矩阵及其之前的所有输入<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932693674926.jpg" alt=""></p>
+<p>RNN可以有多种形式<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932695888850.png" alt=""></p>
+<ul>
+<li>一对多：例如图像字幕，其中输入是单个图像，输出是解释图像的一系列单词。</li>
+<li>多对一：例如给定先前的时间步，对任何时间序列预测，其中序列中的下一个时间步需要被预测。</li>
+<li>多对多：例如，在机器翻译中，整个句子需要在网络开始翻译之前输入。有时，输入和输出不同步。例如，在语音增强的情况下，其中音频帧被作为输入给出，并且输入帧的更干净版本是期望的输出。在这种情况下，输入和输出是同步的。</li>
+</ul>
+<h4 id="BPTT"><a href="#BPTT" class="headerlink" title="BPTT"></a>BPTT</h4><p>在循环网络中，由于存在与这些单元相关联的存储单元和权重，因此需要在反向传播期间学习它们。因为这些梯度也是随时间反向传播的，我们称之为随时间反向传播（Back Propagation Through Time，BPTT）。</p>
+<p>这样做有三个部分：</p>
+<p>❏通过计算相对于Wy的误差偏导数来更新权重Wy。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932702885152.png" alt=""></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932703203959.png" alt=""></p>
+<p>❏通过计算相对于Ws的误差偏导数来更新权重Ws。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932703587765.png" alt=""></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932703982243.png" alt=""></p>
+<p>❏通过计算相对于Wx的误差偏导数来更新权重Wx。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932704765024.png" alt=""></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932704908613.png" alt=""></p>
+<h4 id="梯度问题"><a href="#梯度问题" class="headerlink" title="梯度问题"></a>梯度问题</h4><p><strong>由于具有较长时间步长的连续相乘，总导数变得更小或更大。这造成的问题要么是梯度消失，要么是梯度爆炸</strong></p>
+<p>梯度爆炸：较大的梯度值会导致权重值在每次使用反向传播进行调整时发生剧烈变化，从而导致网络不能很好地学习。<br>有一些技术可以缓解这个问题，例如<strong>梯度裁剪</strong>，应用该技术后，梯度一旦超过设定的阈值就被归一化。</p>
+<p>梯度消失：损失必须一路返回到初始层，这些激活通常在它们到达初始层时稀释它们，这意味着初始层几乎没有权重更新，从而导致欠拟合。几乎不可能捕捉超过20个时间步长的时间相关性。</p>
+<p>为了解决梯度消失问题，必须有一个更好的机制来知道前一个时间步的哪些部分要记住，哪些要忘记。于是引入了一种称为长短期记忆模型（Long short-Term Memory，LSTM）的结构。这里的关键思想是保持一些单元状态不变，并在未来的时间步骤中根据需要引入它们。这些决定是由门做出的，包括遗忘门和输出门。LSTM的另一个常用变体叫作门控循环单元（Goted Recurrent Unit，GRU）。</p>
+<h3 id="LSTM"><a href="#LSTM" class="headerlink" title="LSTM"></a>LSTM</h3><p>LSTM通过在网络中引入“记忆”来解决这个问题，这导致了文本结构中长期依赖关系的保留。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932769175402.png" alt=""></p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932769644273.png" alt=""></p>
+<p>LSTM最基本的组成部分是单元状态，此后用字母“C”表示。通常把这条线想象成一条穿过不同时间实例并携带一些信息的传送带。允许修改单元状态的组件被称为“门”。</p>
+<h4 id="遗忘门"><a href="#遗忘门" class="headerlink" title="遗忘门"></a>遗忘门</h4><p>遗忘门负责确定应在前一个时间步长中遗忘的单元状态的内容。<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932771418209.png" alt=""></p>
+<p>时间步长t的输入乘以一组新的权重W_f，其维度为（n_h，n_x）。<br>前一个时间步（h[t-1]）的激活乘以另一个新的权重集U_f，其维度为（n_h，n_h）。注意，乘法是矩阵乘法。<br>然后将这两项相加，并通过sigmoid函数将输出f[t]压缩在[0,1]内。<br>输出的维度与单元状态向量C（n_h，1）中的维度相同。<br>遗忘门为每个维数输出“1”或“0”。值“1”表示该维度的前一个单元状态的所有信息都应该通过并保留，而值“0”表示该维度的前一个单元状态的所有信息都应该被忘记。</p>
+<h4 id="输入门和候选单元状态"><a href="#输入门和候选单元状态" class="headerlink" title="输入门和候选单元状态"></a>输入门和候选单元状态</h4><p>在每个时间步，计算新的候选单元状态<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932778558352.png" alt=""></p>
+<p>？是不是写反了<br>时间步长t的输入乘以一组新的权重W_c，其维度为（n_h，n_x）。前一个时间步（h[t-1]的激活乘以另一个新的权重集U_c，其维度为（n_h，n_h）。注意，乘法是矩阵乘法。然后将这两项相加，并通过双曲正切函数将输出f[t]压缩在[–1，1]内。输出C_candidate具有维度（n_h，1）。候选单元状态由C波浪号表示。</p>
+<p>输入门确定候选单元状态的哪些值被传递到下一个单元状态。<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932781936659.png" alt=""><br>时间步长t的输入乘以一组新的权重W_i，其维度为（n_h，n_x）。前一个时间步长（h[t-1]）的激活乘以另一个新的权重集U_i，其维度为（n_h，n_h）。注意，乘法是矩阵乘法。然后将这两项相加，并通过sigmoid函数将输出i[t]压缩在[0，1]内。输出的维度与单元状态向量C(n_h，1)中的维度相同。</p>
+<p>当前时间步长的单元状态<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932784150187.png" alt=""></p>
+<p>“hadamard”代表按元素乘</p>
+<h4 id="输出门和当前激活"><a href="#输出门和当前激活" class="headerlink" title="输出门和当前激活"></a>输出门和当前激活</h4><p>输出门负责调节当前单元状态允许影响时间步长的激活值的数量。</p>
+<p>还需要为当前状态生成激活h[t]，输出门的计算<br><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932785810336.png" alt=""><br>时间步长t的输入乘以一组新的权重W_o，其维度为（n_h，n_x）。前一个时间步长（h[t-1]）的激活乘以另一个新的权重集U_o，其维度为（n_h，n_h）。注意，乘法是矩阵乘法。然后将这两项相加，并通过sigmoid函数将输出o[t]压缩到[0,1]内。输出的维度与单元状态向量h（n_h，1）中的维度相同。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15932787487726.png" alt=""><br>首先，双曲正切函数应用于当前单元状态。这将向量中的值限制在-1和1之间。然后，用刚刚计算的输出门值进行该值的按元素积。就可以计算下一次激活的值</p>
+<h3 id="注意力机制"><a href="#注意力机制" class="headerlink" title="注意力机制"></a>注意力机制</h3><p>在简单的编码器-解码器机制中，只有一个向量（thought vector）包含整个句子的表示。句子越长，单个思维向量就越难保持长期依赖性。LSTM装置的使用只是在一定程度上减少了问题。近来发展了一个新概念来进一步缓解梯度消失问题，这个概念被称为注意力机制。</p>
+<p>注意力机制的基本概念依赖于在到达输出时能够访问输入句子的所有部分。这允许模型<strong>对句子的不同部分赋予不同的权重（注意力）</strong>，从而可以推导出依赖关系。这种模式允许输入句子的整个部分在确定输出的每一点上始终可用。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15933325081507.png" alt=""></p>
+<p>对于第二个字，除了来自前一个字的输入和前一个解码器时间步长的隐藏状态之外，另一个向量作为输入被馈送到单元。这个向量通常被认为是“上下文向量”，是所有编码器隐藏状态的函数。它是<strong>所有时间步长编码器隐藏状态的加权总和</strong>。</p>
+<p>注意，在训练和推断期间，我们不会将先前的时间步长解码器输出字符作为输入馈送到当前的时间步长解码器单元。</p>
+<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/28/15933341865264.png" alt=""></p>
+<p>运算是一种点积运算，它将所有时间步长的权重（由a表示）与相应的隐藏状态向量相乘，并对它们求和。</p>
+<p>a封装了注意力机制的本质，即决定对输入的哪一部分给予多少“注意力”，该向量的维数等于编码器输入的时间步长数（因为需要为每个编码器输入时间步长计算权重）。</p>
+<p>隐藏状态向量的维数说明了双向编码器LSTM的正向向量和反向分量。对于给定的时间步长，我们将前向隐藏状态和反向隐藏状态组合成一个向量。因此，如果前向隐藏状态和反向隐藏状态的维数各为32，我们将它们放在一个64维的向量[h_forward,h_backward]中。这是一个简单的串联函数。我们称之为编码器隐藏状态向量。</p>
+<p>权重可以由多层感知器（MLP）建模，MLP是一个由多个隐藏层组成的简单神经网络。我们选择有两个softmax输出的稠密层。稠密层和单元的数量可以视为超参数。MLP的输入由两部分组成：编码器双向LSTM的所有时间步长的隐藏状态向量（如最后一点所解释的）以及解码器先前时间步长的隐藏状态。这些连接起来形成一个向量。所以，对MLP的输入是：[encoder hidden state vector,previous state vector from decoder]。这是张量[H，S_prev]的串联运算。S_prev指解码器在前一个时间步长的隐藏状态输出。如果S_prev的维数是64（表示解码器LSTM的隐藏状态维数是64），编码器的隐藏状态向量的维数是64（从最后一点开始），这两个向量的串联产生大小为128的向量。</p>
+<h3 id="transformer"><a href="#transformer" class="headerlink" title="transformer"></a>transformer</h3><p>transformer架构利用一种特殊的<strong>多头注意力机制来产生不同级别的注意力。</strong>此外，它还使用<strong>剩余连接</strong>来进一步确保梯度消失问题对学习的影响最小。transformer的特殊架构也允许大规模加速训练阶段，同时提供更好的质量结果。</p>
+<p>还有BERT，GPT2也是基于transformer的模型</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+      
+        <div class="post-widgets">
+        
+
+        
+
+        
+          
+          <div id="needsharebutton-postbottom">
+            <span class="btn">
+              <i class="fa fa-share-alt" aria-hidden="true"></i>
+            </span>
+          </div>
+        
+        </div>
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/posts/frontend/2020-06-28-CSS进阶：相对单位.html" rel="next" title="CSS进阶：相对单位">
+                <i class="fa fa-chevron-left"></i> CSS进阶：相对单位
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/cat.jpg"
+                alt="Liana_Wang" />
+            
+              <p class="site-author-name" itemprop="name">Liana_Wang</p>
+              <p class="site-description motion-element" itemprop="description">虚己以游世，乘物以游心</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">125</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">22</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">94</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+            <div class="links-of-author motion-element">
+                
+                  <span class="links-of-author-item">
+                    <a href="https://github.com/vergessenwang" target="_blank" title="GitHub">
+                      
+                        <i class="fa fa-fw fa-github"></i>GitHub</a>
+                  </span>
+                
+                  <span class="links-of-author-item">
+                    <a href="mailto:vergessenwang@foxmail.com" target="_blank" title="E-Mail">
+                      
+                        <i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+                  </span>
+                
+            </div>
+          
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友链
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.wangyinrui.com/" title="瑞哥上班又开始划水看书了" target="_blank">瑞哥上班又开始划水看书了</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#文本预处理"><span class="nav-number">1.</span> <span class="nav-text">文本预处理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#词嵌入"><span class="nav-number">2.</span> <span class="nav-text">词嵌入</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Word2Vec"><span class="nav-number">2.1.</span> <span class="nav-text">Word2Vec</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GloVe"><span class="nav-number">2.2.</span> <span class="nav-text">GloVe</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#神经网络"><span class="nav-number">3.</span> <span class="nav-text">神经网络</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#组成部分"><span class="nav-number">3.1.</span> <span class="nav-text">组成部分</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#层"><span class="nav-number">3.1.1.</span> <span class="nav-text">层</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#激活节点"><span class="nav-number">3.1.2.</span> <span class="nav-text">激活节点</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#边"><span class="nav-number">3.1.3.</span> <span class="nav-text">边</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#偏置"><span class="nav-number">3.1.4.</span> <span class="nav-text">偏置</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#激活函数"><span class="nav-number">3.1.5.</span> <span class="nav-text">激活函数</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#损失函数"><span class="nav-number">3.2.</span> <span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度下降算法"><span class="nav-number">3.3.</span> <span class="nav-text">梯度下降算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#反向传播"><span class="nav-number">3.4.</span> <span class="nav-text">反向传播</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#随机失活"><span class="nav-number">3.4.1.</span> <span class="nav-text">随机失活</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卷积神经网络CNN"><span class="nav-number">4.</span> <span class="nav-text">卷积神经网络CNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环神经网络RNN"><span class="nav-number">5.</span> <span class="nav-text">循环神经网络RNN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#BPTT"><span class="nav-number">5.1.</span> <span class="nav-text">BPTT</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度问题"><span class="nav-number">5.2.</span> <span class="nav-text">梯度问题</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#LSTM"><span class="nav-number">6.</span> <span class="nav-text">LSTM</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#遗忘门"><span class="nav-number">6.1.</span> <span class="nav-text">遗忘门</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输入门和候选单元状态"><span class="nav-number">6.2.</span> <span class="nav-text">输入门和候选单元状态</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#输出门和当前激活"><span class="nav-number">6.3.</span> <span class="nav-text">输出门和当前激活</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#注意力机制"><span class="nav-number">7.</span> <span class="nav-text">注意力机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#transformer"><span class="nav-number">8.</span> <span class="nav-text">transformer</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; 2018 &mdash; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Liana_Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a> 强力驱动</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Gemini</a> v5.1.4</div>
+
+
+
+
+
+  <script src='https://unpkg.com/mermaid@7.1.2/dist/mermaid.min.js'></script>
+  <script>
+    if (window.mermaid) {
+      mermaid.initialize({theme: 'forest'});
+    }
+  </script>
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+
+  <script type="text/javascript" src="/js/src/affix.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/schemes/pisces.js?v=5.1.4"></script>
+
+
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/needsharebutton/needsharebutton.css">
+
+  
+  
+  <script src="/lib/needsharebutton/needsharebutton.js"></script>
+
+  <script>
+    
+      pbOptions = {};
+      
+          pbOptions.iconStyle = "box";
+      
+          pbOptions.boxForm = "horizontal";
+      
+          pbOptions.position = "bottomCenter";
+      
+          pbOptions.networks = "Weibo,Wechat,Douban,QQZone,Twitter,Facebook";
+      
+      new needShareButton('#needsharebutton-postbottom', pbOptions);
+    
+    
+  </script>
+
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

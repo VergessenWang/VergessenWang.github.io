@@ -303,6 +303,357 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/NLP/2020-06-28-NLP基础梳理.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/NLP/2020-06-28-NLP基础梳理.html" itemprop="url">NLP基础梳理</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-28T23:05:28+08:00">
+                2020-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/NLP/" itemprop="url" rel="index">
+                    <span itemprop="name">NLP</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5,922
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>学习自：基于深度学习的NLP</p>
+<h3 id="文本预处理"><a href="#文本预处理" class="headerlink" title="文本预处理"></a>文本预处理</h3><p>文本预处理思想是这样的：机器不需要语料库中的无关部分。它只需要执行手头任务所需的重要单词和短语。文本预处理基本上是告诉机器什么需要考虑、哪些可以忽略。</p>
+<p>常用的文本预处理技术：<br>❏小写/大写转换<br>❏去噪：正则<br>❏文本规范化：错误拼写和缩写规范。最常见的方法是使用字典映射<br>❏词干提取<br>❏词形还原<br>❏标记化：分词<br>❏删除停止词</p>
+<h3 id="词嵌入"><a href="#词嵌入" class="headerlink" title="词嵌入"></a>词嵌入</h3><p>当提供数值数据作为输入时，模型执行效率最高，因此自然语言处理的关键作用是<strong>将预处理的文本数据转换为数值数据</strong>，数值数据是文本数据的数字表示。</p>
+<p>词嵌入的含义：它们是文本实值向量形式的数值表示。具有相似含义的词映射到相似的向量，形成与具有相似含义的单词相对应的相似向量簇。</p>
+<p>词嵌入是映射到单个单词的向量，因此只有在语料库上执行了标记化后才能生成词嵌入</p>
+<h4 id="Word2Vec"><a href="#Word2Vec" class="headerlink" title="Word2Vec"></a>Word2Vec</h4><p><strong>Word2Vec是一个浅层神经网络</strong>，只有两层，因此不具备深度学习模型的资格。输入是一个文本语料库，它用来生成矢量作为输出。这些向量被称为输入语料库中单词的<strong>特征向量</strong>。它将语料库转换成可以被深层神经网络理解的数值数据。</p>
+<p>Word2Vec的目的是理解两个或更多单词一起出现的概率，从而将具有相似含义的单词组合在一起，在向量空间中形成一个聚类</p>
+<p>Word2Vec针对与输入语料库中的单词相邻的单词训练单词，有两种方法：</p>
+<p>❏连续单词袋（CBOW）<br>该方法基于上下文预测当前单词。因此，它将单词的周围单词作为输入来产生单词作为输出，并且它基于这个单词确实是句子的一部分的概率来选择这个单词。</p>
+<p>CBOW基于概率工作，因此选择在特定上下文中出现概率最高的单词。这意味着它通常只预测常见和频繁的单词，因为这些单词具有最高的概率，而罕见和不频繁的单词永远不会由CBOW产生。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/NLP/2020-06-28-NLP基础梳理.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-06-28-CSS进阶：相对单位.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Liana_Wang">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/cat.jpg">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Anonymous World">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                <a class="post-title-link" href="/posts/frontend/2020-06-28-CSS进阶：相对单位.html" itemprop="url">CSS进阶：相对单位</a></h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-28T23:03:27+08:00">
+                2020-06-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/frontend/" itemprop="url" rel="index">
+                    <span itemprop="name">frontend</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  912
+                </span>
+              
+
+              
+
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          <p>学习自：深入解析CSS</p>
+<p>一种使用经验是：用rem设置字号，用px设置边框，用em设置其他大部分属性，尤其是内边距、外边距和圆角（用百分比设置容器宽度）使用无单位的值设置行高。使用自定义属性定义颜色</p>
+<h3 id="em"><a href="#em" class="headerlink" title="em"></a>em</h3><p>em是最常见的相对长度单位，适合基于特定的字号进行排版。在CSS中，1em等于当前元素的<strong>字号</strong></p>
+<p>当设置padding、height、width、border-radius等属性时，使用em会很方便。这是因为当元素继承了不同的字号，或者用户改变了字体设置时，这些属性会跟着元素均匀地缩放。</p>
+<p>如果声明font-size: 1.2em，会发生什么呢？一个字号当然不能等于自己的1.2倍。实际上，这个font-size是根据继承的字号来计算的。</p>
+<p>同时用它指定一个元素的字号和其他属性。这时，浏览器<strong>必须先计算字号，然后使用这个计算值去算出其余的属性值</strong>。</p>
+<p>可能会出现嵌套列表的文字缩小的问题。于是，更好的选择是用rem设置字号</p>
+<h3 id="rem"><a href="#rem" class="headerlink" title="rem"></a>rem</h3><p>rem是root em的缩写。rem不是相对于当前元素，而是<strong>相对于根元素的单位</strong>。不管在文档的什么位置使用rem,1.2rem都会有相同的计算值：1.2乘以根元素的字号。</p>
+<p>根节点有一个伪类选择器（:root），可以用来选中它自己。这等价于类型选择器html，但是<strong>html的优先级相当于一个类名，而不是一个标签</strong>。</p>
+<h3 id="视口的相对单位"><a href="#视口的相对单位" class="headerlink" title="视口的相对单位"></a>视口的相对单位</h3><p>视口——浏览器窗口里网页可见部分的边框区域。它不包括浏览器的地址栏、工具栏、状态栏。</p>
+<p>❑ vh：视口高度的1/100。<br>❑ vw：视口宽度的1/100。<br>❑ vmin：视口宽、高中较小的一方的1/100（IE9中叫vm，而不是vmin）。<br>❑ vmax：视口宽、高中较大的一方的1/100</p>
+<p>比如，50vw等于视口宽度的一半，25vh等于视口高度的25%。vmin取决于宽和高中较小的一方，这可以<strong>保证元素在屏幕方向变化时适应屏幕</strong>。在横屏时，vmin取决于高度；在竖屏时，则取决于宽度。</p>
+          <!--noindex-->
+          <div class="post-button text-center">
+            <a class="btn" href="/posts/frontend/2020-06-28-CSS进阶：相对单位.html#more" rel="contents">
+              阅读全文 &raquo;
+            </a>
+          </div>
+          <!--/noindex-->
+        
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/network/2020-06-26-XSS和CSRF.html">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1685,358 +2036,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/Nodejs/2020-06-19-Nodejs连接到Mongodb.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liana_Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Anonymous World">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/Nodejs/2020-06-19-Nodejs连接到Mongodb.html" itemprop="url">Nodejs连接到Mongodb</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-19T23:59:42+08:00">
-                2020-06-19
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Nodejs/" itemprop="url" rel="index">
-                    <span itemprop="name">Nodejs</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  467
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <h3 id="后端"><a href="#后端" class="headerlink" title="后端"></a>后端</h3><p><code>npm init</code>  初始化生成 package.json 配置文件</p>
-<p><code>code .</code> 在 IDE 打开 <code>ctrl + ～</code> 快捷键也可以打开终端</p>
-<p><code>npm install express</code> 安装express框架</p>
-<p><code>npm install nodemon -g</code> 监听代码文件的变动，当代码改变之后，自动重启。</p>
-<p>在package.json中配置启动命令</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="string">"scripts"</span>: &#123;</span><br><span class="line">    <span class="string">"start"</span>: <span class="string">"node server.js"</span>,</span><br><span class="line">    <span class="string">"server"</span>: <span class="string">"nodemon server.js"</span></span><br><span class="line">  &#125;</span><br></pre></td></tr></table></figure>
-<p>引入 , 这里还是用的 CommonJS 语法</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> express = <span class="built_in">require</span>(<span class="string">"express"</span>);</span><br><span class="line"><span class="keyword">const</span> app = express();</span><br></pre></td></tr></table></figure>
-<p>配置路由和端口号并监听</p>
-<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">app.get(<span class="string">"/"</span>,(req,res) =&gt; &#123;</span><br><span class="line">    res.send(<span class="string">"Hello World!"</span>);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> port = process.env.PORT || <span class="number">5005</span>;</span><br><span class="line">app.listen(port,() =&gt; &#123;</span><br><span class="line">    <span class="built_in">console</span>.log(<span class="string">`Server running on port <span class="subst">$&#123;port&#125;</span>`</span>);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p><code>npm run server</code>  以nodemon模式运行</p>
-<h3 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h3><p>使用MongoDB在线数据库,太慢了太慢了…IP白名单设为0.0.0.0</p>
-<p>选择驱动连接</p>
-<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/19/深度截图_选择区域_20200619221417.png" alt=""></p>
-<p><code>npm install mongoose</code>  Mongoose是在node.js异步环境下对mongodb进行便捷操作的对象模型工具</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/Nodejs/2020-06-19-Nodejs连接到Mongodb.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://vergessenwang.github.io/posts/frontend/2020-06-17-JS进阶：事件循环与代理.html">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Liana_Wang">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/cat.jpg">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Anonymous World">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/posts/frontend/2020-06-17-JS进阶：事件循环与代理.html" itemprop="url">JS进阶：事件循环与代理</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2020-06-17T23:03:06+08:00">
-                2020-06-17
-              </time>
-            
-
-            
-
-            
-          </span>
-
-          
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/frontend/" itemprop="url" rel="index">
-                    <span itemprop="name">frontend</span>
-                  </a>
-                </span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-          
-
-          
-          
-
-          
-
-          
-            <div class="post-wordcount">
-              
-                
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-file-word-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">字数统计&#58;</span>
-                
-                <span title="字数统计">
-                  1,455
-                </span>
-              
-
-              
-
-              
-            </div>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>学习自：JS忍者秘籍</p>
-<h3 id="事件循环"><a href="#事件循环" class="headerlink" title="事件循环"></a>事件循环</h3><p>除了事件，还要保持浏览器执行的其他操作。这些操作被称为任务，并且分为两类：宏任务（或通常称为任务）和微任务。事件循环的实现至少应该含有一个用于宏任务的队列和至少一个用于微任务的队列。两种队列在同一时刻都只执行一个任务</p>
-<p>事件循环基于两个基本原则：<br>● 一次处理一个任务。<br>● 一个任务开始后直到运行完成，不会被其他任务中断。</p>
-<p>宏任务的例子很多，包括<strong>创建主文档对象、解析HTML、执行主线（或全局）JavaScript代码</strong>，更改当前URL以及各种事件，如<strong>页面加载、输入、网络事件和定时器事件</strong>。从浏览器的角度来看，宏任务代表一个个离散的、独立工作单元。运行完任务后，浏览器可以继续其他调度，如重新渲染页面的UI或执行垃圾回收。</p>
-<p>而微任务是更小的任务。微任务更新应用程序的状态，但必须在浏览器任务继续执行其他任务之前执行，浏览器任务包括重新渲染页面的UI。微任务的案例包括<strong>promise回调函数、DOM发生变化</strong>等。微任务需要尽可能快地、通过<strong>异步</strong>方式执行，同时不能产生全新的微任务。微任务使得我们能够在重新渲染UI之前执行指定的行为，避免不必要的UI重绘，UI重绘会使应用程序的状态不连续。</p>
-<p><img src="https://blog-picture-wallen.oss-cn-hangzhou.aliyuncs.com/2020/06/17/15923758236468.png" alt=""></p>
-<p><strong>注意处理宏任务和微任务队列之间的区别：单次循环迭代中，最多处理一个宏任务（其余的在队列中等待），而队列中的所有微任务都会被处理。</strong>所有微任务会在下一次渲染之前执行完成，因为它们的目标是在渲染前更新应用程序状态。</p>
-<p>如果要达到每秒60帧（60 fps）的速度，理想情况下，单个任务和该任务附属的所有微任务，都应在16ms内完成。</p>
-<p>事件监测和添加任务是独立于事件循环的，尽管主线程仍在执行，仍然可以向队列添加任务。</p>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/posts/frontend/2020-06-17-JS进阶：事件循环与代理.html#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
-      
-    </div>
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2091,7 +2090,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">123</span>
+                  <span class="site-state-item-count">125</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
